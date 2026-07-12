@@ -1,12 +1,18 @@
 # Master-Thesis · KlassenHub
 
-Private Arbeitsdokumentation für die Master-Thesis über narrative Gamification
-(Nudging, Storytelling, Quests) in der Schulklassen-App **KlassenHub**.
-KlassenHub selbst ist der Untersuchungsgegenstand der Arbeit; die empirische
-Forschung beginnt mit dem ersten Schulsemester ab September 2026.
+Öffentliche Arbeitsdokumentation für die Master-Thesis „Digitale Schulkommunikation
+als Entwicklungsfeld schulischer Leadership" (Hochschullehrgang Schulmanagement &
+Leadership, PH NÖ) — eine qualitative Untersuchung zur Erprobung der selbst
+entwickelten Schulklassen-App **KlassenHub**. KlassenHub selbst ist Untersuchungs­
+gegenstand der Studie; die empirische Erprobung beginnt mit dem ersten
+Schulsemester ab September 2026.
 
 Gedacht vor allem als vorzeigbare, versionierte Grundlage für die
 Betreuungsgespräche — die Git-Historie ist zugleich Fortschritts-Nachweis.
+
+Bewusst kuratiert: Rohnotizen, Quellenbewertungen und private Vorbereitungen
+liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
+übernommen — hier stehen nur präsentable, abgeschlossene Inhalte.
 
 ## Struktur
 
