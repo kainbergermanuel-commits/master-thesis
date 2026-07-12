@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KlassenHub · Abenteuer, Quests & Nudging — Umsetzungsplan</title>
+<meta name="description" content="Vollständiger Gamification-Umsetzungsplan für KlassenHub: Quest-Maschine, Story-Kosmos, Held:innen-Ebene, kosmetische Basis, Nudging, Phasen-Fahrplan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<style>
+  :root {
+    --paper: #F1ECE1;
+    --paper-2: #E9E3D6;
+    --card: #FBF9F3;
+    --card-2: #F4F0E7;
+    --ink: #16292E;
+    --ink-soft: #35494D;
+    --muted: #6E7E80;
+    --line: rgba(20,40,45,.12);
+    --line-soft: rgba(20,40,45,.07);
+    --teal: #0F8A82;
+    --teal-2: #3DB5AC;
+    --amber: #B8721E;
+    --amber-2: #E0A94B;
+    --violet: #5965B8;
+    --rose: #C15B76;
+    --good: #2E9C6E;
+    --shadow: 0 10px 24px rgba(20,40,45,.10);
+    --shadow-sm: 0 4px 12px rgba(20,40,45,.07);
+    --r: 18px;
+
+    --display: "Bricolage Grotesque", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+    --body: "Hanken Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0F1E1D;
+      --paper-2: #142624;
+      --card: #172A28;
+      --card-2: #1D322F;
+      --ink: #E9F1EE;
+      --ink-soft: #C4D2CE;
+      --muted: #8FA5A1;
+      --line: rgba(255,255,255,.12);
+      --line-soft: rgba(255,255,255,.06);
+      --teal: #45C3B8;
+      --teal-2: #6BD8CD;
+      --amber: #E0A94B;
+      --amber-2: #F0C574;
+      --violet: #8A94E0;
+      --rose: #E285A0;
+      --good: #57C892;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --shadow-sm: 0 4px 14px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #F1ECE1; --paper-2: #E9E3D6; --card: #FBF9F3; --card-2: #F4F0E7;
+    --ink: #16292E; --ink-soft: #35494D; --muted: #6E7E80;
+    --line: rgba(20,40,45,.12); --line-soft: rgba(20,40,45,.07);
+    --teal: #0F8A82; --teal-2: #3DB5AC; --amber: #B8721E; --amber-2: #E0A94B;
+    --violet: #5965B8; --rose: #C15B76; --good: #2E9C6E;
+    --shadow: 0 10px 24px rgba(20,40,45,.10); --shadow-sm: 0 4px 12px rgba(20,40,45,.07);
+  }
+  :root[data-theme="dark"] {
+    --paper: #0F1E1D; --paper-2: #142624; --card: #172A28; --card-2: #1D322F;
+    --ink: #E9F1EE; --ink-soft: #C4D2CE; --muted: #8FA5A1;
+    --line: rgba(255,255,255,.12); --line-soft: rgba(255,255,255,.06);
+    --teal: #45C3B8; --teal-2: #6BD8CD; --amber: #E0A94B; --amber-2: #F0C574;
+    --violet: #8A94E0; --rose: #E285A0; --good: #57C892;
+    --shadow: 0 12px 30px rgba(0,0,0,.35); --shadow-sm: 0 4px 14px rgba(0,0,0,.28);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(circle at 15% -5%, color-mix(in srgb, var(--teal) 8%, transparent), transparent 45%),
+                      radial-gradient(circle at 100% 8%, color-mix(in srgb, var(--amber) 9%, transparent), transparent 40%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--teal); }
+  ::selection { background: color-mix(in srgb, var(--teal) 30%, transparent); }
+
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 22px 120px; }
+
+  /* ---- top bar ---- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--paper) 82%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-in { max-width: 960px; margin: 0 auto; padding: 11px 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 9px; font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: -.01em; }
+  .brand .glyph { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(135deg, var(--teal), var(--teal-2)); display: grid; place-items: center; color: #fff; flex: none; }
+  .legend { display: flex; gap: 12px; margin-left: auto; flex-wrap: wrap; align-items: center; }
+  .legend .lg { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; color: var(--muted); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .dot.low { background: var(--teal); } .dot.mid { background: var(--amber); } .dot.high { background: var(--rose); }
+
+  /* ---- hero ---- */
+  .hero { padding: 62px 0 12px; }
+  .eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+  .hero h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.02; margin: 16px 0 0; }
+  .hero .lede { font-size: clamp(17px, 2.4vw, 20px); color: var(--ink-soft); max-width: 62ch; margin-top: 20px; }
+  .thesis { margin-top: 26px; padding: 20px 22px; border-radius: var(--r); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-sm); border-left: 4px solid var(--teal); }
+  .thesis strong { color: var(--ink); }
+
+  /* ---- section scaffolding ---- */
+  section { margin-top: 66px; scroll-margin-top: 70px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+  .sec-num { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .04em; padding-top: 6px; }
+  .sec-head h2 { font-size: clamp(24px, 3.6vw, 34px); line-height: 1.08; }
+  .sec-sub { color: var(--ink-soft); max-width: 66ch; margin: 10px 0 26px; font-size: 16.5px; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow-sm); }
+
+  /* ---- chips ---- */
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 800; letter-spacing: .02em; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+  .chip.low { color: var(--teal); background: color-mix(in srgb, var(--teal) 13%, transparent); }
+  .chip.mid { color: var(--amber); background: color-mix(in srgb, var(--amber) 15%, transparent); }
+  .chip.high { color: var(--rose); background: color-mix(in srgb, var(--rose) 15%, transparent); }
+  .chip.phase { color: var(--ink); background: var(--paper-2); border: 1px solid var(--line); }
+  .chip.new { color: var(--violet); background: color-mix(in srgb, var(--violet) 14%, transparent); }
+  .chip.reuse { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+
+  /* ---- two perspectives ---- */
+  .persp { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px) { .persp { grid-template-columns: 1fr; } }
+  .persp-card { padding: 20px; }
+  .persp-card h3 { font-size: 19px; display: flex; align-items: center; gap: 10px; }
+  .persp-card .role-ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; flex: none; }
+  .persp-card p.small { font-size: 14.5px; color: var(--ink-soft); margin-top: 8px; }
+
+  /* ---- mock (wireframe of app) ---- */
+  .mock { margin-top: 16px; border-radius: 14px; background: var(--card-2); border: 1px solid var(--line); padding: 12px; font-size: 12.5px; }
+  .mock .mrow { display: flex; align-items: center; gap: 9px; }
+  .mock .mlabel { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .mock .bar { height: 8px; border-radius: 999px; background: var(--paper-2); overflow: hidden; flex: 1; }
+  .mock .bar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--amber), var(--amber-2)); }
+  .qmini { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 11px; background: var(--card); border: 1px solid var(--line); margin-top: 8px; }
+  .qmini .ic { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; flex: none; color: #fff; }
+  .qmini .t { font-weight: 700; font-size: 12.5px; color: var(--ink); }
+  .qmini .s { font-size: 11px; color: var(--muted); }
+  .ring { width: 34px; height: 34px; flex: none; }
+  .swatch-teal { background: linear-gradient(135deg, var(--teal), var(--teal-2)); }
+  .swatch-amber { background: linear-gradient(135deg, var(--amber), var(--amber-2)); }
+  .swatch-violet { background: linear-gradient(135deg, var(--violet), #8791dd); }
+  .swatch-rose { background: linear-gradient(135deg, var(--rose), #d98aa0); }
+
+  /* ---- matrix table ---- */
+  .tablewrap { overflow-x: auto; border-radius: var(--r); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; background: var(--card); font-size: 14px; }
+  th, td { text-align: left; padding: 13px 15px; vertical-align: top; border-bottom: 1px solid var(--line-soft); }
+  thead th { font-family: var(--display); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); background: var(--card-2); position: sticky; top: 0; }
+  tbody tr:last-child td { border-bottom: none; }
+  td .src { font-family: var(--mono); font-size: 12px; color: var(--teal); font-weight: 600; }
+  td.qname { font-weight: 700; color: var(--ink); }
+
+  /* ---- story layers ---- */
+  .layers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 760px) { .layers { grid-template-columns: 1fr; } }
+  .layer { padding: 16px; }
+  .layer .n { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .layer h4 { font-family: var(--display); font-size: 15.5px; margin: 6px 0 6px; }
+  .layer p { font-size: 13.5px; color: var(--ink-soft); }
+
+  .journey { margin-top: 18px; padding: 18px 18px 22px; border-radius: var(--r); background: linear-gradient(135deg, var(--card-2), var(--card)); border: 1px solid var(--line); overflow: hidden; }
+  .journey .jlabel { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .stages { display: flex; align-items: center; margin-top: 16px; position: relative; }
+  .stages .track { position: absolute; left: 0; right: 0; height: 3px; background: var(--paper-2); top: 15px; border-radius: 2px; }
+  .stages .fill { position: absolute; left: 0; height: 3px; background: linear-gradient(90deg, var(--amber), var(--amber-2)); top: 15px; border-radius: 2px; width: 55%; }
+  .stage { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; z-index: 1; }
+  .stage .node { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--card); border: 2px solid var(--line); color: var(--muted); }
+  .stage.on .node { background: linear-gradient(135deg, var(--amber), var(--amber-2)); border: none; color: #fff; box-shadow: 0 4px 10px color-mix(in srgb, var(--amber) 45%, transparent); }
+  .stage .cap { font-size: 10.5px; font-weight: 700; color: var(--muted); text-align: center; }
+  .stage.on .cap { color: var(--ink); }
+  .story-quote { margin-top: 14px; font-size: 14px; color: var(--ink-soft); font-style: italic; border-left: 3px solid var(--amber); padding-left: 12px; }
+
+  /* ---- pipeline ---- */
+  .pipe { display: flex; gap: 0; align-items: stretch; overflow-x: auto; padding-bottom: 6px; }
+  .pstep { flex: 1 0 190px; padding: 16px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); position: relative; }
+  .pstep + .pstep { margin-left: 26px; }
+  .pstep + .pstep::before { content: "→"; position: absolute; left: -22px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 18px; }
+  .pstep .pk { font-family: var(--mono); font-size: 11px; color: var(--teal); font-weight: 600; letter-spacing: .04em; }
+  .pstep h4 { font-family: var(--display); font-size: 15px; margin: 7px 0 6px; }
+  .pstep p { font-size: 12.5px; color: var(--ink-soft); }
+  .pstep .who { margin-top: 10px; font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .who.auto { color: var(--teal); } .who.teach { color: var(--violet); }
+
+  .vault { margin-top: 18px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .vault { grid-template-columns: 1fr; } }
+  .vault .card { padding: 18px; }
+  .vault h4 { font-family: var(--display); font-size: 16px; display: flex; align-items: center; gap: 8px; }
+  .vault ul { margin: 12px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .vault li { font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 9px; align-items: flex-start; }
+  .vault li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 8px; flex: none; }
+
+  /* ---- nudge table ---- */
+  .nudge-row td:first-child { font-weight: 700; color: var(--ink); }
+  .auto-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 800; color: var(--teal); background: color-mix(in srgb, var(--teal) 12%, transparent); padding: 2px 8px; border-radius: 999px; }
+
+  /* ---- roadmap ---- */
+  .phase { padding: 20px 22px; margin-top: 14px; position: relative; }
+  .phase-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .phase-num { font-family: var(--display); font-weight: 800; font-size: 15px; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; color: #fff; flex: none; background: linear-gradient(135deg, var(--teal), var(--teal-2)); }
+  .phase h3 { font-size: 19px; }
+  .phase .goal { color: var(--ink-soft); font-size: 14.5px; margin: 10px 0 14px; }
+  .phase ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .phase li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+  .phase li .chip { margin-top: 1px; }
+  .phase li b { color: var(--ink); font-weight: 700; }
+  .phase.p3 .phase-num, .phase.p4 .phase-num { background: linear-gradient(135deg, var(--rose), #d98aa0); }
+  .phase.p2 .phase-num { background: linear-gradient(135deg, var(--amber), var(--amber-2)); }
+
+  /* ---- decisions ---- */
+  .decisions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 760px) { .decisions { grid-template-columns: 1fr; } }
+  .dec { padding: 17px; }
+  .dec .q { font-family: var(--display); font-weight: 800; font-size: 15px; margin-bottom: 8px; }
+  .dec p { font-size: 13px; color: var(--ink-soft); }
+  .dec .rec { margin-top: 10px; font-size: 12.5px; color: var(--teal); font-weight: 700; }
+
+  .tabu { margin-top: 22px; padding: 18px 20px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--rose) 35%, var(--line)); background: color-mix(in srgb, var(--rose) 7%, var(--card)); }
+  .tabu h4 { font-family: var(--display); font-size: 15px; color: var(--rose); display: flex; align-items: center; gap: 8px; }
+  .tabu ul { margin: 10px 0 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-soft); }
+  .tabu li { margin-top: 4px; }
+
+  .foot { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  svg.i { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  svg.i.big { width: 18px; height: 18px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(16px); animation: rise .6s cubic-bezier(.22,1,.36,1) forwards; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+  }
+
+  /* ---- Teil II ---- */
+  .part { margin-top: 92px; padding: 44px 26px 34px; border-radius: 26px; background: linear-gradient(135deg, color-mix(in srgb, var(--teal) 12%, var(--card)), var(--card)); border: 1px solid var(--line); box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .part::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--amber) 22%, transparent), transparent 68%); pointer-events: none; }
+  .part .pk { font-family: var(--mono); font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); font-weight: 700; }
+  .part h2 { font-size: clamp(28px, 5vw, 44px); margin-top: 12px; line-height: 1.04; }
+  .part p { color: var(--ink-soft); max-width: 66ch; margin-top: 14px; font-size: 16.5px; }
+  .part .map { margin-top: 16px; font-size: 12.5px; color: var(--muted); font-family: var(--mono); }
+
+  .sec-eff { margin-left: auto; display: flex; gap: 7px; align-items: center; }
+
+  /* ---- arcs ---- */
+  .arcs { display: grid; grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); gap: 14px; }
+  .arc { padding: 15px 16px 16px 19px; position: relative; overflow: hidden; }
+  .arc::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--stripe, var(--teal)); }
+  .arc .guide { font-size: 11px; color: var(--muted); font-weight: 800; letter-spacing: .02em; display: flex; align-items: center; gap: 6px; }
+  .arc .live { font-size: 9.5px; font-weight: 800; letter-spacing: .05em; color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); padding: 1px 6px; border-radius: 999px; }
+  .arc h4 { font-family: var(--display); font-size: 17px; margin: 5px 0 4px; }
+  .arc .world { font-size: 12.5px; color: var(--ink-soft); }
+  .arc .path { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
+  .arc .step { font-size: 10px; font-weight: 700; color: var(--ink-soft); background: var(--paper-2); padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+  .arc .focus { margin-top: 11px; font-size: 11.5px; color: var(--muted); }
+  .arc .focus b { color: var(--stripe, var(--teal)); font-weight: 800; }
+
+  /* ---- base scene ---- */
+  .scene-wrap { margin-top: 18px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; align-items: stretch; }
+  @media (max-width: 760px) { .scene-wrap { grid-template-columns: 1fr; } }
+  .scene { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-sm); position: relative; min-height: 220px; }
+  .scene svg { display: block; width: 100%; height: 100%; }
+  .scene .cap { position: absolute; left: 14px; bottom: 12px; font-size: 11px; font-weight: 800; letter-spacing: .04em; color: #fff; background: rgba(20,40,45,.45); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 999px; }
+  .scene .stagepill { position: absolute; right: 14px; top: 13px; font-size: 10.5px; font-weight: 800; color: var(--ink); background: rgba(255,255,255,.85); padding: 3px 9px; border-radius: 999px; }
+
+  /* ---- funken ---- */
+  .funken { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .funk { padding: 16px 17px; position: relative; }
+  .funk .fh { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+  .funk .fi { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; color: #fff; flex: none; }
+  .funk h4 { font-family: var(--display); font-size: 15.5px; }
+  .funk p { font-size: 13px; color: var(--ink-soft); }
+  .funk .eff { margin-top: 10px; }
+
+  .note { margin-top: 18px; padding: 16px 19px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--teal) 32%, var(--line)); background: color-mix(in srgb, var(--teal) 7%, var(--card)); }
+  .note h4 { font-family: var(--display); font-size: 14.5px; color: var(--teal); display: flex; align-items: center; gap: 8px; }
+  .note p { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .before-after { grid-template-columns: 1fr; } }
+  .ba-label { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 9px; }
+  .ba-label.old { color: var(--muted); } .ba-label.new { color: var(--teal); }
+  .killcard { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 11px; background: var(--card-2); border: 1px dashed var(--line); margin-top: 8px; opacity: .6; }
+  .killcard .t { font-weight: 700; font-size: 12.5px; text-decoration: line-through; color: var(--muted); }
+  .killcard .ic { width: 26px; height: 26px; border-radius: 7px; background: var(--paper-2); display: grid; place-items: center; color: var(--muted); flex: none; }
+
+  /* ---- Anhang A · Arc-Blaupause ---- */
+  .part.anhang::after { background: radial-gradient(circle, color-mix(in srgb, var(--good) 22%, transparent), transparent 68%); }
+  .guidecard { display: flex; gap: 16px; align-items: center; margin-top: 22px; padding: 16px 18px; border-radius: var(--r); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .guidecard .portrait { width: 74px; height: 74px; border-radius: 20px; flex: none; background: linear-gradient(135deg, #8FD3C8, #DFF0E7); display: grid; place-items: center; box-shadow: inset 0 -6px 14px rgba(20,40,45,.08); }
+  .guidecard h3 { font-family: var(--display); font-size: 18px; }
+  .guidecard .tone { font-size: 13px; color: var(--ink-soft); margin-top: 5px; }
+  .guidecard .tone b { color: var(--teal); }
+
+  .app-head { display: flex; align-items: baseline; gap: 12px; margin: 42px 0 6px; }
+  .app-head .ae { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--good); font-weight: 700; }
+  .app-head h2 { font-size: clamp(21px, 3.2vw, 28px); }
+
+  .chapters { margin-top: 18px; display: flex; flex-direction: column; }
+  .chapter { display: grid; grid-template-columns: 40px 1fr; gap: 15px; position: relative; padding-bottom: 20px; }
+  .chapter:not(:last-child)::before { content: ""; position: absolute; left: 19px; top: 40px; bottom: 0; width: 2px; background: var(--line); }
+  .chapter .cn { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-family: var(--display); font-weight: 800; font-size: 15px; background: linear-gradient(135deg, var(--good), #7FD3A6); z-index: 1; }
+  .chapter.locked .cn { background: var(--paper-2); color: var(--muted); }
+  .chapter .thr { font-size: 10.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .chapter h4 { font-family: var(--display); font-size: 16.5px; margin: 2px 0; }
+  .chapter p.prose { font-size: 14px; color: var(--ink-soft); font-style: italic; border-left: 3px solid color-mix(in srgb, var(--good) 55%, transparent); padding-left: 12px; margin-top: 6px; }
+  .chapter .unlock { margin-top: 8px; font-size: 11.5px; color: var(--teal); font-weight: 700; display: inline-flex; gap: 6px; align-items: center; }
+
+  .weekblock { margin-top: 15px; padding: 18px; }
+  .weekhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .weeknum { font-family: var(--mono); font-size: 12px; color: var(--muted); font-weight: 600; }
+  .weekhead h3 { font-family: var(--display); font-size: 18px; }
+  .focuspill { font-size: 11px; font-weight: 800; color: var(--violet); background: color-mix(in srgb, var(--violet) 13%, transparent); padding: 3px 10px; border-radius: 999px; margin-left: auto; }
+  .quests { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  @media (max-width: 700px) { .quests { grid-template-columns: 1fr; } .focuspill { margin-left: 0; } }
+  .quest { padding: 13px 14px 14px 17px; border-radius: 13px; background: var(--card-2); border: 1px solid var(--line); position: relative; overflow: hidden; }
+  .quest::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--qc, var(--teal)); }
+  .quest.wide { grid-column: 1 / -1; }
+  .qhead { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .qtype { font-size: 9.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--qc, var(--teal)); background: color-mix(in srgb, var(--qc, var(--teal)) 15%, transparent); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .quest h4 { font-family: var(--display); font-size: 15px; }
+  .measures { font-size: 12px; color: var(--ink-soft); margin-top: 8px; }
+  .measures code { font-family: var(--mono); font-size: 11px; color: var(--teal); background: color-mix(in srgb, var(--teal) 10%, transparent); padding: 1px 5px; border-radius: 5px; }
+  .gnudge { font-size: 12.5px; color: var(--muted); font-style: italic; margin-top: 9px; border-left: 2px solid var(--qc, var(--teal)); padding-left: 10px; }
+  .branch { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .branch .b { display: flex; gap: 9px; align-items: flex-start; font-size: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+  .branch .bk { font-weight: 800; color: var(--rose); font-size: 10.5px; letter-spacing: .03em; white-space: nowrap; padding-top: 1px; }
+  .branch .b em { color: var(--ink-soft); font-style: normal; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" style="display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--muted);text-decoration:none;flex-shrink:0" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--muted)'">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand"><span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span> KlassenHub · Spielplan</div>
+    <div class="legend">
+      <span class="lg"><span class="dot low"></span>Low&nbsp;Effort</span>
+      <span class="lg"><span class="dot mid"></span>Mid</span>
+      <span class="lg"><span class="dot high"></span>High</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Umsetzungsplan · Nudging · Story · Quests</div>
+    <h1>Vom Streak‑Druck<br>zum Klassen‑Abenteuer.</h1>
+    <p class="lede">Ein pädagogisch fundierter Ausbau des bestehenden Streak‑ &amp; Klassenziel‑Systems. Quests entstehen aus dem, was ohnehin passiert — Hausübungen, Erinnerungen, Termine, Dienste — und werden in eine Geschichte gehüllt, die die Klasse gemeinsam durchspielt.</p>
+    <div class="thesis">
+      <strong>Leitgedanke:</strong> Jedes Element zahlt auf <strong>Autonomie</strong> (Wahlpfade), <strong>Kompetenz</strong> (sichtbares Wachstum statt Rang) und <strong>Zugehörigkeit</strong> (gemeinsames Ziel, Gilden) ein — die drei Grundbedürfnisse der Selbstbestimmungstheorie. Suchtmechaniken sind ausdrücklich <strong>tabu</strong>; jeder Regler ist auf pädagogischen Wert kalibriert, nicht auf Verweildauer.
+    </div>
+  </header>
+
+  <!-- ===================== 1 · WAS ES SCHON GIBT ===================== -->
+  <section id="basis">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Das Fundament steht schon</h2></div>
+    <p class="sec-sub">Der Plan baut nicht auf der grünen Wiese. Vieles ist im Streak‑System bereits angelegt — wir <span class="chip reuse">wiederverwenden</span> und ergänzen gezielt <span class="chip new">neu</span>.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Idee</th><th>Bereits vorhanden</th><th>Was fehlt</th></tr></thead>
+        <tbody>
+          <tr><td class="qname">Narrative Reise</td><td><span class="src">lib/seasonTheme.ts</span> + <span class="src">SeasonJourney.tsx</span> — 5 Etappen, rotiert monatlich</td><td>Story‑<em>Text</em>, Kapitel‑Freischaltung, Quest‑Anbindung</td></tr>
+          <tr><td class="qname">Gemeinsames Ziel</td><td><span class="src">class_goals</span>, <span class="src">setClassGoal.ts</span>, <span class="src">ClassGoalCard</span></td><td>Wochen‑Fokus, Beitrag jedes Kindes sichtbar</td></tr>
+          <tr><td class="qname">Fortschritt statt Rang</td><td><span class="src">ProgressRing</span>, Meilensteine 5/10/15/20</td><td>Zeigarnik‑Balken auf der Quest‑Ebene</td></tr>
+          <tr><td class="qname">Verlust‑Nudge</td><td><span class="src">streak_freezes</span> (Joker), <span class="src">findBreakingHomework()</span></td><td>Narrative Verpackung, Automatisierung</td></tr>
+          <tr><td class="qname">Gegen Novelty‑Effekt</td><td>Season‑Theme‑Rotation pro Monat</td><td>Wöchentlich wechselnder Fokus</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===================== 2 · ZWEI PERSPEKTIVEN ===================== -->
+  <section id="perspektiven">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Zwei Perspektiven, ein System</h2></div>
+    <p class="sec-sub">Der Schüler erlebt ein Abenteuer. Der Lehrer führt Regie — sichtbar nur, wenn er will. Beide teilen sich dieselben Daten, sehen aber verschiedene Oberflächen.</p>
+
+    <div class="persp">
+      <div class="persp-card card">
+        <h3><span class="role-ic swatch-amber"><svg class="i big" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span>Der Abenteurer <span style="font-weight:600;color:var(--muted);font-size:13px">· Schüler</span></h3>
+        <p class="small">Sieht seine Wochen‑Quest als Erzähl‑Streifen, wählt seinen Pfad, sieht seinen Beitrag zur Klasse wachsen. <b>Nie</b> als „Platz 9 von 15“.</p>
+        <div class="mock">
+          <div class="mlabel">Startseite — neuer Streifen über den offenen HÜ</div>
+          <div class="qmini" style="margin-top:0">
+            <div class="ic swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div style="flex:1">
+              <div class="t">Der Alchemist wartet auf deine Formel</div>
+              <div class="s">Mathe‑HÜ bis morgen · Etappe „Steiler Aufstieg“</div>
+            </div>
+          </div>
+          <div class="mrow" style="margin-top:12px"><span class="s" style="font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--muted)">WOCHEN‑QUEST</span></div>
+          <div class="mrow" style="margin-top:6px"><div class="bar"><i style="width:80%"></i></div><span style="font-size:11px;font-weight:800;color:var(--amber)">80%</span></div>
+          <div class="qmini">
+            <div class="ic swatch-teal"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1"/></svg></div>
+            <div style="flex:1"><div class="t">85 % deiner Klasse sind schon startklar</div><div class="s">Schließ dich an — anonym, keine Namen</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="persp-card card">
+        <h3><span class="role-ic swatch-violet"><svg class="i big" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>Der Spielleiter <span style="font-weight:600;color:var(--muted);font-size:13px">· Lehrer</span></h3>
+        <p class="small">Steht <b>nicht</b> im Mittelpunkt. Standard: alles läuft automatisch. Bei Bedarf: Wochen‑Quests kuratieren, Belohnung setzen, korrigieren.</p>
+        <div class="mock">
+          <div class="mlabel">/streaks (Lehrer‑Ansicht) — Regie‑Leiste</div>
+          <div class="qmini" style="margin-top:0">
+            <div class="ic swatch-violet"><svg class="i" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+            <div style="flex:1"><div class="t">Diese Woche: „Materialpakete“ · 3 Quests aktiv</div><div class="s">Automatisch aus dem Vorrat gewählt · antippen zum Ändern</div></div>
+          </div>
+          <div class="qmini">
+            <div class="ic swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><path d="M14 3h7v7"/><path d="M10 14 21 3"/></svg></div>
+            <div style="flex:1"><div class="t">Monats‑Story: „Die Chroniken der Zeit“</div><div class="s">Belohnung bei Etappe 5: Filmnachmittag</div></div>
+          </div>
+          <div class="qmini">
+            <div class="ic swatch-teal"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <div style="flex:1"><div class="t">Korrektur: Quest für Lea gutschreiben</div><div class="s">War krank — manueller Eingriff, protokolliert</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3 · QUEST-MASCHINE ===================== -->
+  <section id="quests">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Die Quest‑Maschine</h2></div>
+    <p class="sec-sub">Kern‑Idee: Eine Quest ist kein neues Datensilo, sondern eine <b>Auswertung über vorhandene Signale</b> — nach demselben Muster wie <span class="src">computeStreak()</span>. Der Fortschritt wird berechnet, nicht händisch gepflegt. Das macht Quests fast vollständig automatisch.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Vorhandenes Signal</th><th>Wird zur Quest</th><th>Typ</th></tr></thead>
+        <tbody>
+          <tr><td><span class="src">homework_completions</span><br><span class="s" style="color:var(--muted);font-size:12px">+ confirmed_by_parent_at</span></td><td class="qname">„Sammle 4 Formeln“ (4 HÜ erledigt)<br>„Pünktlich abgegeben ×3“</td><td><span class="chip low">Solo</span></td></tr>
+          <tr><td><span class="src">reminder_views</span></td><td class="qname">„Lies die Botschaft des Boten“ (Erinnerung gesehen)</td><td><span class="chip low">Info</span></td></tr>
+          <tr><td><span class="src">events</span> · target_student_ids</td><td class="qname">„Rüste dich aus“ (an Material zum Termin denken)</td><td><span class="chip low">Solo</span></td></tr>
+          <tr><td><span class="src">duties</span></td><td class="qname">„Halte die Basis sauber“ (Dienst der Woche erfüllt)</td><td><span class="chip mid">Solo</span></td></tr>
+          <tr><td><span class="src">streak_freezes</span> / Streak</td><td class="qname">„Bewahre die Flamme“ (Streak über die Woche halten)</td><td><span class="chip low">Solo</span></td></tr>
+          <tr><td>Eltern‑Bestätigung<br><span class="s" style="color:var(--muted);font-size:12px">homework parent‑confirm / message‑ack</span></td><td class="qname">„Verbündete rufen“ (Eltern bestätigen mit)</td><td><span class="chip mid">Koop</span></td></tr>
+          <tr><td><b>Kombination</b> mehrerer Signale</td><td class="qname">„Wochenpaket“: 3 HÜ + Dienst + Termin‑Material</td><td><span class="chip mid">Solo</span></td></tr>
+          <tr><td>Aggregiert über <span class="src">guild_members</span></td><td class="qname">„Alle Gildenmitglieder haben Material dabei“</td><td><span class="chip high">Gilde</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:24px" class="persp">
+      <div class="persp-card card">
+        <h3 style="font-size:16px">Wahlpfade — das Autonomie‑Herzstück</h3>
+        <p class="small">Quests mit gleichem <span class="src">choice_group</span> sind Alternativen. Der Schüler wählt <b>einen</b> Weg zum selben Ziel — z. B. zur Prüfungsvorbereitung. Das steigert die Tiefenbeschäftigung.</p>
+        <div class="mock">
+          <div class="mlabel">Quest „Vorbereitung“ — wähle deinen Pfad</div>
+          <div class="qmini" style="margin-top:0;border-color:var(--amber)">
+            <div class="ic swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div style="flex:1"><div class="t">Pfad des Chronisten</div><div class="s">Schreib eine Zusammenfassung</div></div>
+          </div>
+          <div class="qmini">
+            <div class="ic swatch-teal"><svg class="i" viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-6 0v4"/><rect x="2" y="9" width="20" height="12" rx="2"/></svg></div>
+            <div style="flex:1"><div class="t">Pfad des Mentors</div><div class="s">Hilf einem Mitschüler (Kanal nötig — s. u.)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="persp-card card">
+        <h3 style="font-size:16px">Datenmodell — schlank gehalten</h3>
+        <p class="small">Weil der Fortschritt <b>berechnet</b> wird, braucht es kaum neue Schreib‑Tabellen. Migration im gewohnten Stil (<span class="src">feature-quests.sql</span>, idempotent, RLS via <span class="src">my_class_ids()</span>).</p>
+        <div class="mock" style="font-family:var(--mono);font-size:11.5px;line-height:1.9">
+          <div><span style="color:var(--teal)">quest_templates</span> — der Vorrat (Bibliothek)</div>
+          <div><span style="color:var(--teal)">quests</span> — ausgerollte Instanz (Woche/Season)</div>
+          <div><span style="color:var(--teal)">quest_choices</span> — gewählter Pfad je Schüler</div>
+          <div style="color:var(--muted)">guilds / guild_members — erst Phase 3</div>
+          <div style="color:var(--muted)">→ Fortschritt aus homework_completions &amp; Co.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · STORY NIEDERSCHWELLIG ===================== -->
+  <section id="story">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Story — niederschwellig eingewoben</h2></div>
+    <p class="sec-sub">Keine neue Bilderwelt, keine Illustrations‑Pipeline. Die Geschichte legt sich als <b>Textschicht und Icon‑Skin</b> über bestehende Bausteine. Drei Ebenen, alle grafisch schon vorhanden:</p>
+
+    <div class="layers">
+      <div class="layer card"><div class="n">Ebene A</div><h4>Reise‑Etappen mit Text</h4><p>Die vorhandene <span class="src">SeasonJourney</span> bekommt pro Etappe 2–3 Sätze. Kein neues UI — nur ein <span class="src">story</span>‑Feld in <span class="src">seasonTheme.ts</span>.</p></div>
+      <div class="layer card"><div class="n">Ebene B</div><h4>Quest‑Skin</h4><p>Jede Quest trägt Titel + einen Erzählsatz. „HÜ erledigen“ wird zu „Sammle die Formel des Alchemisten“ — reine Datenfelder, Material‑Icons.</p></div>
+      <div class="layer card"><div class="n">Ebene C</div><h4>Kapitel‑Reveal</h4><p>Überquert die Klasse eine Etappe, klappt ein kurzes Kapitel auf — mit der schon existierenden <span class="src">pop-shake</span>/<span class="src">card-enter</span>‑Animation.</p></div>
+    </div>
+
+    <div class="journey reveal">
+      <div class="jlabel">Die Chroniken der Zeit · Etappe 3 von 5</div>
+      <div class="stages">
+        <div class="track"></div><div class="fill"></div>
+        <div class="stage on"><div class="node"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/></svg></div><div class="cap">Basislager</div></div>
+        <div class="stage on"><div class="node"><svg class="i" viewBox="0 0 24 24"><path d="M8 3v18M16 3v18M3 8h18M3 16h18"/></svg></div><div class="cap">Waldpfad</div></div>
+        <div class="stage on"><div class="node"><svg class="i" viewBox="0 0 24 24"><path d="m8 21 4-14 4 14M6 14h12"/></svg></div><div class="cap">Aufstieg</div></div>
+        <div class="stage"><div class="node"><svg class="i" viewBox="0 0 24 24"><path d="m2 20 6-14 5 8 3-4 6 10z"/></svg></div><div class="cap">Fels &amp; Grat</div></div>
+        <div class="stage"><div class="node"><svg class="i" viewBox="0 0 24 24"><path d="M4 22V4l10 3-3 3 3 3-10 3"/></svg></div><div class="cap">Gipfel</div></div>
+      </div>
+      <div class="story-quote">„Der Aufstieg wird steiler. Doch jede erledigte Aufgabe treibt die Expedition höher — noch zwei Etappen bis zum Gipfel.“ — automatisch aus dem Klassenziel‑Fortschritt.</div>
+    </div>
+    <p class="sec-sub" style="margin-top:18px"><b>Verortung:</b> Der Erzähl‑Streifen erscheint auf der <span class="src">Startseite</span> (statt/über <span class="src">StreakBanner</span>), das volle Abenteuer‑Hub lebt auf <span class="src">/streaks</span> (Reise + Quests + Kapitel), die narrativen Nudges reiten auf den bestehenden <span class="src">Erinnerungen</span>.</p>
+  </section>
+
+  <!-- ===================== 5 · VORRAT & ROLLOUT ===================== -->
+  <section id="vorrat">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Der Vorrat &amp; der Wochen‑Rollout</h2></div>
+    <p class="sec-sub">Damit nicht jede Woche neu erfunden werden muss: ein <b>Vorrat</b> aus wiederverwendbaren Quest‑ und Story‑Vorlagen, aus dem die App wöchentlich automatisch schöpft. Der Lehrer kuratiert nur bei Bedarf.</p>
+
+    <div class="pipe">
+      <div class="pstep"><div class="pk">1 · VORRAT</div><h4>Bibliothek</h4><p>Kuratierte Standard‑Vorlagen (mitgeliefert) + eigene. Nach Fokus &amp; Schwierigkeit getaggt.</p><div class="who auto">mitgeliefert</div></div>
+      <div class="pstep"><div class="pk">2 · KURATIEREN</div><h4>Auto‑Auswahl</h4><p>App wählt passende Quests je Woche — anhand echter HÜ, Termine, Dienste. Lehrer kann tauschen.</p><div class="who teach">Lehrer optional</div></div>
+      <div class="pstep"><div class="pk">3 · LIVE</div><h4>Woche X</h4><p>Quests sind aktiv, Wochen‑Fokus wechselt (Pünktlichkeit → Hilfe → …) gegen den Novelty‑Effekt.</p><div class="who auto">automatisch</div></div>
+      <div class="pstep"><div class="pk">4 · AUSWERTUNG</div><h4>Selbst‑Lauf</h4><p>Fortschritt aus vorhandenen Daten berechnet, Story rückt vor, nächste Woche wird geladen.</p><div class="who auto">automatisch</div></div>
+    </div>
+
+    <div class="vault">
+      <div class="card">
+        <h4><svg class="i big" viewBox="0 0 24 24" style="color:var(--teal)"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg> Woraus der Vorrat besteht</h4>
+        <ul>
+          <li><b>Story‑Arcs</b> (Monatsbögen): „Chroniken der Zeit“, „Mission Öko‑Basis“ … je 5 Etappen mit Text.</li>
+          <li><b>Quest‑Vorlagen</b>: Signal‑Typ + Zielzahl + Erzähl‑Skin + Fokus‑Tag. Frei kombinierbar.</li>
+          <li><b>Wochen‑Fokus</b>: Pünktlichkeit, gegenseitige Hilfe, Material, Selbstorganisation.</li>
+          <li>Start ohne Aufwand: Vorrat als <b>geseedete JSON im Code</b> (Low‑Effort) — später Editor‑UI.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4><svg class="i big" viewBox="0 0 24 24" style="color:var(--violet)"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Wie ausgerollt wird</h4>
+        <ul>
+          <li><b>Season = Monat</b> trägt den Story‑Arc (existiert schon als „season“ ‘YYYY‑MM’).</li>
+          <li><b>Woche = Ableitung</b> daraus (<span class="src">week_key</span> in <span class="src">lib/date.ts</span>) zieht 2–3 Quests.</li>
+          <li><b>Default automatisch</b>, damit der Lehrer nicht im Mittelpunkt steht — Eingriff jederzeit möglich.</li>
+          <li>⚠️ Achtung: bestehender <b>Season‑Test‑Hack</b> in <span class="src">classGoal.ts</span> &amp; <span class="src">streaks/page.tsx</span> vor Live zurücksetzen.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 6 · NUDGING AUTOMATISIERT ===================== -->
+  <section id="nudging">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Nudging — elegant &amp; automatisch</h2></div>
+    <p class="sec-sub">Nudges brauchen keinen Lehrer‑Klick. Jeder Trigger ist ein <b>Zustand vorhandener Daten</b>, der beim Seitenaufbau (Server‑Component) berechnet wird — in‑App zuerst, PWA‑Push später.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Trigger (aus Daten)</th><th>Nudge</th><th>Prinzip</th><th></th></tr></thead>
+        <tbody>
+          <tr class="nudge-row"><td>HÜ morgen fällig &amp; offen</td><td>Narrativer Erinnerungs‑Streifen: „Der Alchemist wartet …“</td><td>Verlustaversion, reaktanzarm</td><td><span class="auto-pill">auto</span></td></tr>
+          <tr class="nudge-row"><td>Quest bei ~80 %, Woche endet</td><td>Zeigarnik‑Balken hebt sich hervor</td><td>Abschluss‑Bedürfnis, kein Vergleich</td><td><span class="auto-pill">auto</span></td></tr>
+          <tr class="nudge-row"><td>X % der Klasse fertig</td><td>„85 % sind startklar“ (anonym, keine Namen)</td><td>Social Proof, Zugehörigkeit</td><td><span class="auto-pill">auto</span></td></tr>
+          <tr class="nudge-row"><td>Streak droht zu reißen</td><td>Joker‑Angebot, narrativ verpackt</td><td>schon vorhanden — nur reskin</td><td><span class="auto-pill">auto</span></td></tr>
+          <tr class="nudge-row"><td>Klasse überquert Etappe</td><td>Kapitel‑Reveal mit Feier‑Animation</td><td>Kompetenz sichtbar, gemeinsam</td><td><span class="auto-pill">auto</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tabu">
+      <h4><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg> Bewusst ausgeschlossen (Sucht‑Tabu)</h4>
+      <ul>
+        <li>Keine variablen Belohnungen / „Lootboxen“, keine Login‑Streaks, die zum täglichen Öffnen zwingen.</li>
+        <li>Keine öffentliche Rangliste als Dauer‑Vergleich — der Vormonats‑Race bleibt sekundär &amp; rücksetzbar.</li>
+        <li>Kein Verlust‑Nudge, der bestraft: der Joker <b>schützt</b>, statt Angst zu erzeugen.</li>
+        <li>Keine Push‑Frequenz‑Spiralen — höchstens ein narrativer Nudge pro Tag.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== TEIL II · VERTIEFUNG ===================== -->
+  <div class="part reveal">
+    <div class="pk">Teil II · Vertiefung</div>
+    <h2>Der Erzähl‑Kosmos, ausgemalt.</h2>
+    <p>Teil I steht — nichts davon wird verworfen. Hier gehen wir tiefer: welche Welten es zu bereisen gibt, wie aus jedem Kind eine Held:in wird, wie die gemeinsame Basis wächst, und wie Quest‑Hub und Startseite konkret aussehen. Alles bleibt in der Abenteuer‑Haltung — und alles bleibt sucht‑frei.</p>
+    <div class="map">Einordnung → Arc‑Katalog &amp; Guide‑Stimme: P0–P1 · Held:innen &amp; Basis‑Morph: P2 · volle Basis, Quest‑Hub‑Umbau, Startseiten‑Karten: P1→P4</div>
+  </div>
+
+  <!-- ===================== 7 · STORY-KOSMOS ===================== -->
+  <section id="kosmos">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Story‑Kosmos: die Welten</h2><span class="sec-eff"><span class="chip low">P0/P1 Inhalt</span></span></div>
+    <p class="sec-sub">Über die drei bestehenden Themen hinaus ein Vorrat an Monats‑Arcs — jeder mit eigener Welt, 5 Etappen (an den Klassenziel‑Fortschritt gekoppelt) und einer <b>Guide‑Figur</b>, die zugleich die Stimme aller Nudges ist. So klingt die App nie wie ein Automat, sondern wie eine Erzählerin.</p>
+
+    <div class="arcs">
+      <div class="arc card" style="--stripe:#0F8A82"><div class="guide">Bergführerin Vala <span class="live">LIVE</span></div><h4>Bergexpedition</h4><div class="world">Schroffe Gipfelwelt, dünne Luft, weiter Blick.</div><div class="path"><span class="step">Basislager</span><span class="step">Waldpfad</span><span class="step">Aufstieg</span><span class="step">Fels &amp; Grat</span><span class="step">Gipfel</span></div><div class="focus"><b>Fokus:</b> Durchhalten &amp; die Flamme (Streak)</div></div>
+
+      <div class="arc card" style="--stripe:#5965B8"><div class="guide">Bordcomputer ARI <span class="live">LIVE</span></div><h4>Weltraummission</h4><div class="world">Raumschiff, Funkstille, ferne Planeten.</div><div class="path"><span class="step">Startrampe</span><span class="step">Orbit</span><span class="step">Mondflug</span><span class="step">Asteroiden</span><span class="step">Zielplanet</span></div><div class="focus"><b>Fokus:</b> Präzision &amp; Pünktlichkeit</div></div>
+
+      <div class="arc card" style="--stripe:#B8721E"><div class="guide">Kartografin Isla <span class="live">LIVE</span></div><h4>Schatzsuche</h4><div class="world">Dschungel, Ruinen, vergilbte Karten.</div><div class="path"><span class="step">Landkarte</span><span class="step">Dschungel</span><span class="step">Höhle</span><span class="step">Letzte Spur</span><span class="step">Schatz</span></div><div class="focus"><b>Fokus:</b> Neugier &amp; Rätsel</div></div>
+
+      <div class="arc card" style="--stripe:#2E9C6E"><div class="guide">Ranger‑Drohne „Sprout“</div><h4>Terra Nova · Öko‑Basis</h4><div class="world">Ödland, das die Klasse gemeinsam begrünt.</div><div class="path"><span class="step">Ödland</span><span class="step">Setzlinge</span><span class="step">Wasser</span><span class="step">Solarfeld</span><span class="step">Oase</span></div><div class="focus"><b>Fokus:</b> Gemeinsam aufbauen</div></div>
+
+      <div class="arc card" style="--stripe:#2F86C5"><div class="guide">Dr. Coralie &amp; Tintenfisch Nauto</div><h4>Tiefsee‑Expedition</h4><div class="world">Ein U‑Boot sinkt Schicht um Schicht ins Blau.</div><div class="path"><span class="step">Küste</span><span class="step">Riff</span><span class="step">Dämmerzone</span><span class="step">Abgrund</span><span class="step">Leuchtstadt</span></div><div class="focus"><b>Fokus:</b> Mut &amp; Erkundung</div></div>
+
+      <div class="arc card" style="--stripe:#C15B76"><div class="guide">Der Chronist</div><h4>Chroniken der Zeit</h4><div class="world">Zeitreise durch die Epochen.</div><div class="path"><span class="step">Steinzeit</span><span class="step">Antike</span><span class="step">Mittelalter</span><span class="step">Dampfzeit</span><span class="step">Zukunft</span></div><div class="focus"><b>Fokus:</b> Wissen sammeln</div></div>
+
+      <div class="arc card" style="--stripe:#C98A2B"><div class="guide">Hafenmeister Finn</div><h4>Inselreich</h4><div class="world">Aus einer Sandbank wächst ein Reich.</div><div class="path"><span class="step">Sandbank</span><span class="step">Hafen</span><span class="step">Marktplatz</span><span class="step">Leuchtturm</span><span class="step">Festinsel</span></div><div class="focus"><b>Fokus:</b> Dienste &amp; Aufbau</div></div>
+
+      <div class="arc card" style="--stripe:#7C6BD6"><div class="guide">Astronomin Nox</div><h4>Sternenkarte</h4><div class="world">Ein leerer Nachthimmel füllt sich mit Licht.</div><div class="path"><span class="step">Leere Karte</span><span class="step">Erste Sterne</span><span class="step">Sternbilder</span><span class="step">Nebel</span><span class="step">Komet</span></div><div class="focus"><b>Fokus:</b> Aufmerksamkeit (Erinnerungen)</div></div>
+
+      <div class="arc card" style="--stripe:#6E7E80"><div class="guide">Meisterin Tüftel</div><h4>Werkstatt der Erfinder</h4><div class="world">Zahnrad um Zahnrad erwacht eine Maschine.</div><div class="path"><span class="step">Skizze</span><span class="step">Prototyp</span><span class="step">Getriebe</span><span class="step">Antrieb</span><span class="step">Sie läuft!</span></div><div class="focus"><b>Fokus:</b> Aufgaben kombinieren</div></div>
+    </div>
+    <p class="sec-sub" style="margin-top:14px;font-size:14.5px">Im Vorrat außerdem angelegt: <b>Polarstation &amp; Nordlicht</b>, <b>Karawane der Seidenstraße</b>, <b>Der Weltenbaum</b>. So reicht die Rotation über ein Schuljahr, ohne sich zu wiederholen.</p>
+
+    <div class="persp" style="margin-top:22px">
+      <div class="persp-card card">
+        <h3 style="font-size:16px"><span class="role-ic swatch-teal" style="width:30px;height:30px"><svg class="i" viewBox="0 0 24 24"><path d="M12 3a4 4 0 0 0-4 4v3a4 4 0 0 0 8 0V7a4 4 0 0 0-4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>Die Guide‑Stimme = der Nudge‑Kanal</h3>
+        <p class="small">Alle Nudges, Kapitel und Quest‑Intros sprechen in der Stimme des Monats‑Guides. Das gibt dem ganzen System eine Persönlichkeit statt System‑Meldungen — und macht Erinnerungen reaktanzarm, weil eine Figur bittet, nicht die App befiehlt.</p>
+      </div>
+      <div class="persp-card card">
+        <h3 style="font-size:16px"><span class="role-ic swatch-amber" style="width:30px;height:30px"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></span>Wochen‑Zeremonie</h3>
+        <p class="small"><b>Montag:</b> ein Kapitel klappt auf (2–3 Sätze, rahmt den Wochen‑Fokus als Story‑Beat). <b>Freitag:</b> ein Rückblick würdigt, was die Klasse erreicht hat. Rhythmus ohne täglichen Druck — bewusst wöchentlich, nicht stündlich.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 8 · HELD:INNEN ===================== -->
+  <section id="heldinnen">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Die Held:innen‑Ebene</h2><span class="sec-eff"><span class="chip mid">P2</span></span></div>
+    <p class="sec-sub">Jedes Kind ist Held:in der <b>eigenen</b> Reise — nicht Zeile in einer Rangliste. Diese Ebene stärkt das Selbstbild über Identität und Rückschau statt Vergleich. Alles ist mehrfach erreichbar, nichts ist knapp, nichts beschämt.</p>
+
+    <div class="layers">
+      <div class="layer card"><div class="n">Identität</div><h4>Rollen &amp; Titel</h4><p>Verdient durch <b>wiederholte Pfad‑Wahl</b>, nicht durch Platzierung: <em>Chronist</em>, <em>Späher</em>, <em>Baumeister</em>, <em>Hüter der Flamme</em>, <em>Verbündete:r</em>. Man trägt sie am Avatar — mehrere möglich, keine Knappheit.</p></div>
+      <div class="layer card"><div class="n">Bindung</div><h4>Der Begleiter</h4><p>Ein kleines Wesen (z. B. Sprout, Nauto) lebt in der Basis und wächst mit dem <b>Klassen</b>‑Fortschritt — nie mit dem einzelnen Kind. So kann es niemanden beschämen, nur alle mitnehmen.</p></div>
+      <div class="layer card"><div class="n">Rückschau</div><h4>Das Heldenbuch</h4><p>Eine private Chronik der eigenen Reise („12 Formeln gesammelt, 3× der Gilde geholfen“). Nimmt Streak &amp; Meilensteine auf. Der Spiegel des <b>eigenen</b> Wachstums — genau das, was das Dashboard leisten soll.</p></div>
+      <div class="layer card"><div class="n">Ausdruck</div><h4>Das Wappen</h4><p>Aus verdienten Wert‑Symbolen (Pünktlichkeit, Hilfsbereitschaft, Ausdauer …) stellt jede:r ein persönliches Emblem zusammen. Kosmetik als Selbstausdruck, nicht als Statusanzeige.</p></div>
+      <div class="layer card"><div class="n">Gerechtigkeit</div><h4>Stille Anerkennung</h4><p>Der Guide bemerkt leise Beiträge privat („Du hast diese Woche 3× still deinen Dienst gemacht — notiert.“). Würdigt die Unauffälligen, die eine Rangliste nie sieht.</p></div>
+      <div class="layer card"><div class="n">Richtung</div><h4>Der Kompass</h4><p>Statt „Platz 9“ schlägt der Guide den <b>einen</b> nächsten sinnvollen Schritt vor. Orientierung ersetzt Vergleich — und nimmt Überforderung.</p></div>
+    </div>
+
+    <div class="note">
+      <h4><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Warum keine Rangliste?</h4>
+      <p>Titel, Begleiter und Heldenbuch bedienen Kompetenz &amp; Zugehörigkeit, <b>ohne</b> sozialen Abwärtsvergleich. Der bestehende Vormonats‑Race bleibt als optionaler Rückblick erhalten, wird aber nie zur Dauer‑Bühne — leistungsschwächere Kinder sollen sich zugehörig fühlen, nicht abgehängt.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 9 · DIE BASIS ===================== -->
+  <section id="basis-kosmetik">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Die Basis — kosmetisch &amp; kollektiv</h2><span class="sec-eff"><span class="chip mid">P2 minimal</span><span class="chip high">P4 voll</span></span></div>
+    <p class="sec-sub">Die sichtbare Heimat des Abenteuers: eine Szene, die die Klasse <b>gemeinsam</b> aufbaut und schmückt. Sie ist der Held der Quest‑Hub‑Seite und macht kollektiven Fortschritt greifbar — jeder Beitrag legt einen Baustein, kein Versäumnis ist sichtbar.</p>
+
+    <div class="scene-wrap">
+      <div class="scene reveal">
+        <svg viewBox="0 0 420 240" role="img" aria-label="Öko-Basis Terra Nova, Etappe 3 von 5">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FD3C8"/><stop offset="1" stop-color="#DFF0E7"/></linearGradient>
+            <linearGradient id="grd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FB77E"/><stop offset="1" stop-color="#5E9B63"/></linearGradient>
+          </defs>
+          <rect width="420" height="240" fill="url(#sky)"/>
+          <circle cx="350" cy="52" r="26" fill="#F5D67A"/>
+          <circle cx="350" cy="52" r="26" fill="none" stroke="#F0C574" stroke-width="6" opacity=".4"/>
+          <path d="M0 168 Q110 140 210 160 T420 152 V240 H0 Z" fill="url(#grd)"/>
+          <path d="M0 190 Q140 172 260 188 T420 182 V240 H0 Z" fill="#4E8A57" opacity=".55"/>
+          <!-- Wasserkanal (Etappe 3) -->
+          <path d="M40 214 Q150 200 250 214 T410 210" fill="none" stroke="#5AB4D6" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+          <!-- junger Baum -->
+          <g transform="translate(120 132)"><rect x="-4" y="0" width="8" height="34" rx="3" fill="#7A5A3A"/><circle cx="0" cy="-6" r="22" fill="#4E8A57"/><circle cx="-14" cy="4" r="14" fill="#5E9B63"/><circle cx="14" cy="4" r="14" fill="#5E9B63"/></g>
+          <!-- Setzlinge -->
+          <g stroke="#4E8A57" stroke-width="3" stroke-linecap="round" fill="none"><path d="M200 176 v-12"/><path d="M200 170 q-7 -4 -10 -1"/><path d="M200 172 q7 -4 10 -1"/><path d="M228 180 v-10"/><path d="M228 174 q6 -3 9 -1"/></g>
+          <!-- Klassen-Wimpel -->
+          <g transform="translate(300 118)"><rect x="-2" y="0" width="4" height="52" rx="2" fill="#B8AF9C"/><path d="M2 2 H34 L26 12 L34 22 H2 Z" fill="#0F8A82"/></g>
+          <!-- Begleiter: Ranger-Drohne Sprout -->
+          <g transform="translate(258 132)"><ellipse cx="0" cy="26" rx="14" ry="4" fill="#3a5a4a" opacity=".18"/><circle cx="0" cy="8" r="15" fill="#EFE9DE" stroke="#0F8A82" stroke-width="2.5"/><circle cx="-5" cy="6" r="3.4" fill="#16292E"/><circle cx="5" cy="6" r="3.4" fill="#16292E"/><path d="M-4 13 q4 3 8 0" stroke="#16292E" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M0 -7 q3 -8 10 -9 q-3 7 -10 9" fill="#4E8A57"/></g>
+          <!-- gesperrter Slot (Solarfeld, Etappe 4) -->
+          <g opacity=".5"><rect x="60" y="150" width="34" height="22" rx="4" fill="none" stroke="#3a5a4a" stroke-width="2" stroke-dasharray="4 4"/><path d="M77 156 l-6 8 h5 l-2 6" stroke="#3a5a4a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+        </svg>
+        <span class="stagepill">Etappe 3 / 5</span>
+        <span class="cap">Terra Nova · Wasserkreislauf steht</span>
+      </div>
+      <div class="card" style="padding:18px">
+        <h3 style="font-family:var(--display);font-size:16px;margin-bottom:6px">So baut die Klasse</h3>
+        <p style="font-size:13.5px;color:var(--ink-soft)">Die <b>Kulisse</b> verwandelt sich automatisch über die 5 Etappen (aus dem Klassenziel). <b>Bausteine</b> — abgeleitet aus erledigten Quests der ganzen Klasse — schalten Deko‑Props frei (Wimpel, Bänke, Garten, Teleskop). Der <b>Begleiter</b> wächst mit. Seltene <b>Easter‑Eggs</b> (z. B. „alle HÜ an einem Tag“) geben eine goldene Laterne — Freude, nicht Grind.</p>
+        <div class="mock" style="margin-top:14px">
+          <div class="mlabel">Wer gestaltet?</div>
+          <div class="qmini" style="margin-top:0"><div class="ic swatch-violet"><svg class="i" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4L8 14 2 9.4h7.6z"/></svg></div><div style="flex:1"><div class="t">Klassensprecher:in platziert Props</div><div class="s">nutzt bestehende Rolle <span class="src">special_role</span></div></div></div>
+          <div class="qmini"><div class="ic swatch-teal"><svg class="i" viewBox="0 0 24 24"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><path d="M2 20a6 6 0 0 1 8-5.6M22 20a6 6 0 0 0-8-5.6"/></svg></div><div style="flex:1"><div class="t">Optional: Klasse stimmt ab</div><div class="s">nächstes Prop per kleiner Abstimmung</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layers" style="margin-top:16px">
+      <div class="layer card"><div class="n">Technik</div><h4>Ohne Asset‑Pipeline</h4><p>Die Szene ist ein <b>geschichtetes SVG</b> (Kulisse + Prop‑Slots), aufgebaut aus einfachen Vektorformen — wie oben. Tageslicht‑Tönung folgt der echten Uhrzeit. Kein Game‑Engine, passt zur bestehenden Icon‑Welt.</p></div>
+      <div class="layer card"><div class="n">Abschluss</div><h4>Chronik‑Regal</h4><p>Am Monatsende wird die fertige Basis zur <b>Postkarte/Trophäe</b> und wandert ins „Regal der Abenteuer“. Neuer Monat = neue Welt. Das gesunde Sammel‑Element ist monatlich/jährlich — nie ein täglicher Zwang.</p></div>
+      <div class="layer card"><div class="n">Datenmodell</div><h4>Schlank</h4><p><span class="src">class_cosmetics</span> (class_id, season, item_key, slot, unlocked_at). Bausteine = <b>berechnet</b> aus Quests, Schwellen im Code. RLS: Klasse liest, Klassensprecher:in/Lehrkraft platziert.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== 10 · QUEST-HUB ===================== -->
+  <section id="quest-hub">
+    <div class="sec-head"><span class="sec-num">10</span><h2>Der Quest‑Hub ersetzt „Streaks“</h2><span class="sec-eff"><span class="chip mid">P2</span>→<span class="chip high">P4</span></span></div>
+    <p class="sec-sub">Mittelfristig wird aus der Streaks‑Unterseite das Zuhause des Abenteuers. Die Flamme lebt weiter — aber als <b>ein</b> Held:innen‑Element, nicht als Identität der Seite.</p>
+
+    <div class="persp">
+      <div class="persp-card card">
+        <h3 style="font-size:16px">Namens‑Strategie</h3>
+        <p class="small">Der <b>Navigations‑Name bleibt stabil</b> („Abenteuer“ oder „Basis“) — Kinder finden die Seite verlässlich. Nur die <b>Überschrift reskint</b> pro Arc: „Basislager“, „Terra Nova“, „Tiefsee‑Deck“. Route bleibt intern <span class="src">/streaks</span> (Alias <span class="src">/abenteuer</span>), damit nichts bricht.</p>
+        <div class="note" style="margin-top:14px"><h4><svg class="i" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg> Was aus /streaks aufgeht</h4><p><span class="src">SeasonJourney</span> → in die Basis‑Szene. <span class="src">MyStreakPanel</span> → ins Heldenbuch. <span class="src">ClassGoalCard</span> → Kollektiv‑Beitrag. Vormonats‑Race → optionaler Rückblick.</p></div>
+      </div>
+      <div class="persp-card card">
+        <h3 style="font-size:16px">Aufbau der Seite</h3>
+        <div class="mock" style="margin-top:8px">
+          <div class="mlabel">Quest‑Hub · Schüler</div>
+          <div class="qmini" style="margin-top:0"><div class="ic swatch-teal"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg></div><div style="flex:1"><div class="t">Die Basis + Reise + Guide‑Gruß</div><div class="s">Hero der Seite</div></div></div>
+          <div class="qmini"><div class="ic swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div style="flex:1"><div class="t">Aktive Quests · mit Wahlpfaden</div><div class="s">diese Woche</div></div></div>
+          <div class="qmini"><div class="ic swatch-rose"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-8.5A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6.5C19 16.65 12 21 12 21z"/></svg></div><div style="flex:1"><div class="t">Heldenbuch · deine Reise</div><div class="s">Flamme, Meilensteine, Titel</div></div></div>
+          <div class="qmini"><div class="ic swatch-violet"><svg class="i" viewBox="0 0 24 24"><path d="M18 20a6 6 0 0 0-12 0M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div><div style="flex:1"><div class="t">Kollektiv‑Beitrag &amp; Chronik‑Regal</div><div class="s">Gilde folgt in P3</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 11 · STARTSEITE NEU ===================== -->
+  <section id="startseite">
+    <div class="sec-head"><span class="sec-num">11</span><h2>Startseite: Minicards → Abenteuer</h2><span class="sec-eff"><span class="chip low">P1</span></span></div>
+    <p class="sec-sub">Die drei Feature‑Minicards (Hausübungen / Dienste / Termine) doppeln, was die Listen darunter ohnehin zeigen — überschaubarer Mehrwert. Wir ersetzen sie durch narrative Karten und retten die wirklich nützliche Info (offene HÜ, heutiger Dienst) in den Erzähl‑Rahmen.</p>
+
+    <div class="before-after">
+      <div>
+        <div class="ba-label old">Vorher · redundant</div>
+        <div class="killcard"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div class="t">Hausübungen</div></div>
+        <div class="killcard"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 3h18v4H3zM6 7v14M18 7v14M6 12h12"/></svg></div><div class="t">Dienste</div></div>
+        <div class="killcard"><div class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="t">Termine</div></div>
+      </div>
+      <div>
+        <div class="ba-label new">Nachher · narrativ</div>
+        <div class="mock" style="margin-top:0">
+          <div class="qmini" style="margin-top:0;border-color:var(--amber)"><div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--paper-2)" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="var(--amber)" stroke-width="4" stroke-linecap="round" stroke-dasharray="94" stroke-dashoffset="19" transform="rotate(-90 18 18)"/></svg></div><div style="flex:1"><div class="t">Wochen‑Quest · 80 %</div><div class="s">Mathe‑HÜ bis morgen offen ← rettet HÜ‑Info</div></div></div>
+          <div class="qmini"><div class="ic swatch-teal"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg></div><div style="flex:1"><div class="t">Basis · Etappe 3/5</div><div class="s">nächster Baustein bei 2 Quests</div></div></div>
+          <div class="qmini"><div class="ic swatch-violet"><svg class="i" viewBox="0 0 24 24"><path d="M18 20a6 6 0 0 0-12 0M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div><div style="flex:1"><div class="t">Dein Beitrag · 6 Bausteine</div><div class="s">Klassenziel 18/30</div></div></div>
+          <div class="qmini" style="border-color:var(--teal)"><div class="ic swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M12 3a4 4 0 0 0-4 4v3a4 4 0 0 0 8 0V7a4 4 0 0 0-4-4zM5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div style="flex:1"><div class="t">Guide: „Heute dein Dienst — Tafel.“</div><div class="s">dynamischer Nudge ← rettet Dienst‑Info</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layers" style="margin-top:18px">
+      <div class="layer card"><div class="n">Schüler</div><h4>Abenteuer voran</h4><p>Quest · Basis · Beitrag · dynamische Guide‑Karte. Die offene‑HÜ‑Liste &amp; Agenda bleiben unter‑/daneben — Funktion erhalten, Rahmen neu.</p></div>
+      <div class="layer card"><div class="n">Lehrer</div><h4>Spielleiter‑Vorschau</h4><p>„3 Quests aktiv (auto)“, „Basis 3/5“, „Klasse 18/30 Bausteine“ — plus die bestehende Liste „Demnächst fällig“. Steuern statt selbst spielen.</p></div>
+      <div class="layer card"><div class="n">Eltern &amp; Mobile</div><h4>Ruhig &amp; kompakt</h4><p>Eltern: sanfter „So weit ist die Klasse“ + Bestätigungen. Mobile (PWA‑Primärfall): Karten als kompakter Stapel statt drei Spalten — schließt die offene <span class="src">Minicards‑Mobile</span>‑Frage.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== 12 · FUNKEN ===================== -->
+  <section id="funken">
+    <div class="sec-head"><span class="sec-num">12</span><h2>Weitere Funken</h2><span class="sec-eff"><span class="chip low">gemischt</span></span></div>
+    <p class="sec-sub">Kreative Ergänzungen, die in der Haltung bleiben und pädagogischen Wert schaffen — jeweils mit Aufwands‑Einordnung.</p>
+
+    <div class="funken">
+      <div class="funk card"><div class="fh"><div class="fi swatch-teal"><svg class="i" viewBox="0 0 24 24"><path d="M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 6c0 7-12 4-12 9"/></svg></div><h4>Story‑Gabelung</h4></div><p>Die Klasse stimmt ab, welchen Weg die Reise nimmt („Wald‑ oder Flusspfad?“). Beide führen weiter — die Wahl schafft Eigentümerschaft.</p><div class="eff"><span class="chip mid">Mid · P2</span></div></div>
+
+      <div class="funk card"><div class="fh"><div class="fi swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M12 2v6M12 2a5 5 0 0 0-5 5c0 3 5 9 5 9s5-6 5-9a5 5 0 0 0-5-5zM5 20h14"/></svg></div><h4>Sanfte Saison‑Ereignisse</h4></div><p>Selten &amp; positiv, an den echten Kalender geknüpft („vor den Ferien braucht die Basis alle Hände“). <b>Kein FOMO</b> — höchstens ein Ereignis pro Monat.</p><div class="eff"><span class="chip mid">Mid · P2/P3</span></div></div>
+
+      <div class="funk card"><div class="fh"><div class="fi swatch-violet"><svg class="i" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-8 0M2 21a10 10 0 0 1 20 0"/></svg></div><h4>Eltern als Verbündete</h4></div><p>Die bestehende Eltern‑Bestätigung wird zum Bündnis: „Deine Verbündeten haben 3 Formeln bestätigt.“ Stärkt Kollaboration narrativ, ohne neue Technik.</p><div class="eff"><span class="chip low">Low · P1</span></div></div>
+
+      <div class="funk card"><div class="fh"><div class="fi swatch-rose"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div><h4>Sachlich‑Modus</h4></div><p>Ein Schalter dämpft die Erzählung für Kinder, denen sie zu kindlich ist (Sek 1 spannt 10–14 J.). Zeigt schlichten Fortschritt. <b>Inklusion &amp; Autonomie.</b></p><div class="eff"><span class="chip low">Low · P1</span></div></div>
+
+      <div class="funk card"><div class="fh"><div class="fi swatch-teal"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg></div><h4>Weltkarte &amp; Jahres‑Chronik</h4></div><p>Übers Schuljahr reihen sich abgeschlossene Arcs zu einer Reiselinie. Zum Abschluss: eine generierte, druckbare <b>Klassen‑Chronik</b> als echtes Erinnerungsstück.</p><div class="eff"><span class="chip high">High · P4</span></div></div>
+
+      <div class="funk card"><div class="fh"><div class="fi swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M12 8v8M8 12h8M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg></div><h4>Willkommen für Nachzügler</h4></div><p>Neuzugänge (<span class="src">joined_class_at</span>) &amp; Kranke bekommen einen narrativen „Zeitsprung“ — sie starten mittendrin, ohne Rückstand. Fairness eingebaut.</p><div class="eff"><span class="chip low">Low · P1/P2</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 13 · FAHRPLAN ===================== -->
+  <section id="fahrplan">
+    <div class="sec-head"><span class="sec-num">13</span><h2>Fahrplan: Phasen × Aufwand</h2></div>
+    <p class="sec-sub">In Reihenfolge steigenden Aufwands und Risikos. Phase 0 ist in Tagen machbar und nutzt nur vorhandene Daten; Gilden sind bewusst der letzte, größte Brocken.</p>
+
+    <div class="phase card p0 reveal">
+      <div class="phase-head"><span class="phase-num">0</span><h3>Story‑Skin &amp; erste Nudges</h3><span class="chip low">Low</span><span class="chip reuse">ohne Migration</span></div>
+      <p class="goal">Sofort spürbar, minimales Risiko — rein auf vorhandenen Daten.</p>
+      <ul>
+        <li><span class="chip low">Low</span><span><b>Story‑Text</b> je Etappe in <span class="src">seasonTheme.ts</span> + Kapitel‑Reveal in <span class="src">SeasonJourney</span>.</span></li>
+        <li><span class="chip low">Low</span><span><b>Narrative Erinnerungs‑Nudges</b> als Textschicht über <span class="src">StreakBanner</span>/Erinnerungen.</span></li>
+        <li><span class="chip low">Low</span><span><b>Zeigarnik‑Balken</b> auf dem bestehenden Klassenziel prominenter platzieren.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase card p1 reveal">
+      <div class="phase-head"><span class="phase-num">1</span><h3>Quest‑Maschine (berechnet)</h3><span class="chip low">Low</span>–<span class="chip mid">Mid</span></div>
+      <p class="goal">Solo‑Quests als Auswertung über HÜ, Dienste, Termine, Erinnerungen. Auto‑Wochen‑Rollout.</p>
+      <ul>
+        <li><span class="chip low">Low</span><span><b>Quest‑Logik</b> als reine Funktionen in <span class="src">lib/quests.ts</span> (Muster: <span class="src">computeStreak</span>).</span></li>
+        <li><span class="chip mid">Mid</span><span><b>Schema</b> <span class="src">quest_templates</span> + <span class="src">quests</span>; Vorrat als geseedete JSON.</span></li>
+        <li><span class="chip mid">Mid</span><span><b>Wochen‑Streifen</b> auf Startseite + Quest‑Liste im Abenteuer‑Hub.</span></li>
+        <li><span class="chip low">Low</span><span><b>Social‑Proof‑Nudge</b> (anonymer Prozentwert).</span></li>
+      </ul>
+    </div>
+
+    <div class="phase card p2 reveal">
+      <div class="phase-head"><span class="phase-num">2</span><h3>Autonomie &amp; Regie</h3><span class="chip mid">Mid</span></div>
+      <p class="goal">Wahlpfade für Schüler, Spielleiter‑Cockpit für Lehrer, dynamischer Wochen‑Fokus.</p>
+      <ul>
+        <li><span class="chip mid">Mid</span><span><b>Wahlpfade</b> (<span class="src">choice_group</span> + <span class="src">quest_choices</span>) — ohne Mentor‑Pfad bis Kanal existiert.</span></li>
+        <li><span class="chip mid">Mid</span><span><b>Spielleiter‑Leiste</b>: Wochen‑Quests tauschen, Story‑Arc + Belohnung setzen, Quest korrigieren/gutschreiben.</span></li>
+        <li><span class="chip mid">Mid</span><span><b>Wochen‑Fokus‑Rotation</b> via <span class="src">week_key</span> in <span class="src">lib/date.ts</span>.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase card p3 reveal">
+      <div class="phase-head"><span class="phase-num">3</span><h3>Gilden (Kleingruppen)</h3><span class="chip high">High</span></div>
+      <p class="goal">Kooperation innen, Wettbewerb zwischen Gruppen — der stärkste, aber aufwändigste Hebel.</p>
+      <ul>
+        <li><span class="chip high">High</span><span><b>Schema</b> <span class="src">guilds</span> + <span class="src">guild_members</span>, wöchentliches Neu‑Mischen.</span></li>
+        <li><span class="chip high">High</span><span><b>Gilden‑Quest‑Aggregation</b> („alle Mitglieder …“) + Gilden‑Ansicht.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase card p4 reveal">
+      <div class="phase-head"><span class="phase-num">4</span><h3>Ausbau (optional)</h3><span class="chip high">High</span></div>
+      <p class="goal">Belohnung sichtbar machen, Vorrat editierbar, echte Push‑Nudges.</p>
+      <ul>
+        <li><span class="chip high">High</span><span><b>Kosmetische Klassen‑Basis</b> (<span class="src">class_cosmetics</span>) — freigeschaltete Deko fürs Dashboard.</span></li>
+        <li><span class="chip mid">Mid</span><span><b>Vorrat‑Editor</b> für Lehrer (eigene Vorlagen erstellen).</span></li>
+        <li><span class="chip mid">Mid</span><span><b>PWA‑Push</b> für narrative Nudges (PWA‑Fundament existiert).</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== 8 · ENTSCHEIDUNGEN ===================== -->
+  <section id="entscheidungen">
+    <div class="sec-head"><span class="sec-num">14</span><h2>Drei offene Weichen</h2></div>
+    <p class="sec-sub">Bevor Phase 0/1 gebaut wird, drei Richtungsfragen — mit meiner Empfehlung.</p>
+    <div class="decisions">
+      <div class="dec card"><div class="q">„Pfad des Mentors“?</div><p>Braucht einen Kanal für Schüler‑Hilfe, der noch fehlt.</p><div class="rec">→ Empf.: vorerst weglassen, Pfade nur aus HÜ/Material/Pünktlichkeit; Mentor später (evtl. via Mitteilungsheft).</div></div>
+      <div class="dec card"><div class="q">Gilden‑Einteilung?</div><p>Manuell durch Lehrer vs. App mischt automatisch.</p><div class="rec">→ Empf.: erst in Phase 3 festlegen; Tendenz Auto‑Mischung mit Lehrer‑Korrektur.</div></div>
+      <div class="dec card"><div class="q">Startpunkt?</div><p>Wo soll gebaut werden?</p><div class="rec">→ Empf.: Phase 0 zuerst — größter Effekt pro Aufwand, kein Schema‑Risiko.</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== ANHANG A · ARC-BLAUPAUSE ===================== -->
+  <div class="part anhang reveal">
+    <div class="pk">Anhang A · Arc‑Blaupause</div>
+    <h2>Terra Nova — ein Arc, voll ausgeschrieben.</h2>
+    <p>Ein exemplarischer Monat: Guide, alle fünf Kapitel‑Texte, die Basis‑Freischaltungen und ein kompletter 4‑Wochen‑Quest‑Rollout. Jede Quest zeigt auf ein <b>echtes vorhandenes Signal</b> — nichts hier braucht neue Tracking‑Logik, außer der einen ehrlich markierten Lücke. Dieselbe Schablone gilt für jeden Arc; es wechselt nur der Skin.</p>
+
+    <div class="guidecard">
+      <div class="portrait">
+        <svg viewBox="0 0 60 60" width="52" height="52" aria-hidden="true"><circle cx="30" cy="34" r="20" fill="#EFE9DE" stroke="#0F8A82" stroke-width="3"/><circle cx="23" cy="31" r="4.5" fill="#16292E"/><circle cx="37" cy="31" r="4.5" fill="#16292E"/><path d="M24 41 q6 5 12 0" stroke="#16292E" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M30 14 q4 -11 14 -12 q-4 10 -14 12" fill="#4E8A57"/></svg>
+      </div>
+      <div>
+        <h3>Guide: Ranger‑Drohne „Sprout“</h3>
+        <p class="tone">Neugierig, warmherzig, wächst mit der Klasse. Spricht in kurzen Zeilen, nie befehlend — <b>„Magst du…?“</b>, <b>„Schau mal…“</b>, <b>„Gemeinsam schaffen wir das.“</b> Nutzt Wachstums‑ und Wasser‑Bilder. Sprouts Stimme trägt alle Kapitel, Quests und Nudges dieses Monats.</p>
+      </div>
+    </div>
+    <p class="map" style="color:var(--ink-soft);margin-top:16px"><b>Prämisse:</b> Bruchlandung auf einem kargen Planetenabschnitt. Auftrag der Klasse: das Ödland Etappe für Etappe in eine blühende, sich selbst versorgende Öko‑Basis verwandeln. Jede erledigte Schulaufgabe ist Energie, Wasser oder Pflege für die Basis.</p>
+  </div>
+
+  <!-- Etappen / Kapitel -->
+  <div class="app-head"><span class="ae">Erzählung</span><h2>Die fünf Kapitel</h2></div>
+  <p class="sec-sub">Gekoppelt an den <b>Klassenziel‑Fortschritt</b> (eltern‑bestätigte Erledigungen, wie heute schon). Erreicht die Klasse gemeinsam eine Schwelle, klappt das nächste Kapitel auf — für alle zugleich.</p>
+
+  <div class="chapters">
+    <div class="chapter">
+      <div class="cn">1</div>
+      <div>
+        <div class="thr">ab Start · 0 %</div><h4>Ödland</h4>
+        <p class="prose">„Puh — Bruchlandung! Um uns herum nur staubiges Ödland. Aber siehst du das schwache Grün dort unten? Unter dem Staub schlummert Leben. Jede Aufgabe, die ihr erledigt, ist ein Tropfen Energie. Fangen wir an.“</p>
+        <span class="unlock"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M20 6 9 17l-5-5"/></svg> Basis‑Kulisse: staubiges Ödland, Sprout landet</span>
+      </div>
+    </div>
+    <div class="chapter">
+      <div class="cn">2</div>
+      <div>
+        <div class="thr">Klassenziel 25 %</div><h4>Erste Setzlinge</h4>
+        <p class="prose">„Ihr habt es geschafft — die ersten Setzlinge strecken sich aus dem Boden! Zart noch, aber sie halten. Der Boden erinnert sich, wie man Leben trägt. Weiter so, das Grün breitet sich aus.“</p>
+        <span class="unlock"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M20 6 9 17l-5-5"/></svg> Kulisse: Setzlinge sprießen · Sprout wächst eine Stufe</span>
+      </div>
+    </div>
+    <div class="chapter">
+      <div class="cn">3</div>
+      <div>
+        <div class="thr">Klassenziel 50 %</div><h4>Wasserkreislauf</h4>
+        <p class="prose">„Wasser! Der alte Kanal füllt sich und beginnt zu fließen — jetzt versorgt sich die Basis fast von selbst. Ich höre es plätschern. Die halbe Reise ist geschafft, und der Planet atmet wieder.“</p>
+        <span class="unlock"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M20 6 9 17l-5-5"/></svg> Kulisse: Wasserkanal fließt (wie in der Szene oben)</span>
+      </div>
+    </div>
+    <div class="chapter">
+      <div class="cn">4</div>
+      <div>
+        <div class="thr">Klassenziel 75 %</div><h4>Solarfeld</h4>
+        <p class="prose">„Die Sonnenkollektoren stehen und fangen das erste Licht ein — Energie im Überfluss. Nachts leuchtet die Basis jetzt sanft. Nur noch ein Stück, dann blüht hier alles.“</p>
+        <span class="unlock"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M20 6 9 17l-5-5"/></svg> Kulisse: Solarpaneele + Nachtlicht‑Tönung</span>
+      </div>
+    </div>
+    <div class="chapter locked">
+      <div class="cn">5</div>
+      <div>
+        <div class="thr">Klassenziel 100 % · Finale</div><h4>Blühende Oase</h4>
+        <p class="prose">„Seht euch das an: aus dem Ödland ist eine blühende Oase geworden — euer Werk, gemeinsam. Terra Nova lebt. Ich pflanze eure Klassenfahne in die Mitte. Diese Basis wandert jetzt ins Chronik‑Regal, als Beweis, was ihr zusammen könnt.“</p>
+        <span class="unlock"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M20 6 9 17l-5-5"/></svg> Kulisse: Oase blüht · Basis wird zur Trophäe archiviert</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h4><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/></svg> Bausteine → Deko (parallel, individuell)</h4>
+    <p>Unabhängig von den Etappen sammelt die Klasse <b>Bausteine</b> = Summe erledigter Quests. Schwellen (im Code): <b>10</b> → Klassen‑Wimpel · <b>20</b> → Ruhebank &amp; Garten · <b>30</b> → Teleskop. Platziert von der Klassensprecher:in. Kein Zwang, rein additiv.</p>
+  </div>
+
+  <!-- Wochen-Rollout -->
+  <div class="app-head"><span class="ae">Rollout</span><h2>Vier Wochen, konkret</h2></div>
+  <p class="sec-sub">Pro Woche ein wechselnder Fokus (gegen den Novelty‑Effekt) und 2–3 Quests. <span class="chip low" style="margin:0 2px">Solo</span> individuell · <span class="chip new" style="margin:0 2px">Info/Kombi</span> · <span class="chip mid" style="margin:0 2px">Koop</span> mit Eltern · <span class="chip high" style="margin:0 2px">Wahlpfad</span> · <span class="chip reuse" style="margin:0 2px">Kollektiv</span> für die ganze Klasse.</p>
+
+  <div class="weekblock card">
+    <div class="weekhead"><span class="weeknum">Woche 1</span><h3>Landung &amp; Dranbleiben</h3><span class="focuspill">Fokus: Pünktlichkeit</span></div>
+    <div class="quests">
+      <div class="quest" style="--qc:var(--teal)"><div class="qhead"><span class="qtype">Solo</span><h4>Erste Energiezellen</h4></div><p class="measures"><b>Misst:</b> 3× <code>homework_completions</code> mit Fälligkeit in dieser Woche.</p><p class="gnudge">„3 Energiezellen für die Basis — die erste liegt schon bereit, magst du sie einsammeln?“</p></div>
+      <div class="quest" style="--qc:var(--violet)"><div class="qhead"><span class="qtype">Info</span><h4>Sprouts Funkspruch</h4></div><p class="measures"><b>Misst:</b> <code>reminder_views</code>‑Eintrag für die Wochen‑Erinnerung.</p><p class="gnudge">„Ich hab dir gefunkt! Schau kurz rein — es ist wichtig für die Landung.“</p></div>
+      <div class="quest wide" style="--qc:var(--good)"><div class="qhead"><span class="qtype">Kollektiv</span><h4>Boden vorbereiten</h4></div><p class="measures"><b>Misst:</b> Klasse erreicht gemeinsam <b>25 %</b> des <code>class_goals</code>‑Ziels → Kapitel 2 „Erste Setzlinge“. Aggregiert aus eltern‑bestätigten Erledigungen (exakt die heutige Klassenziel‑Logik).</p><p class="gnudge">„Zusammen lockern wir den Boden — jede Aufgabe zählt für die ganze Basis.“</p></div>
+    </div>
+  </div>
+
+  <div class="weekblock card">
+    <div class="weekhead"><span class="weeknum">Woche 2</span><h3>Wurzeln schlagen</h3><span class="focuspill">Fokus: Ausdauer</span></div>
+    <div class="quests">
+      <div class="quest" style="--qc:var(--teal)"><div class="qhead"><span class="qtype">Solo</span><h4>Halte das Grün am Leben</h4></div><p class="measures"><b>Misst:</b> Streak ungebrochen über die Wochen‑HÜ (<code>computeStreak</code> / kein <code>findBreakingHomework</code>).</p><p class="gnudge">„Dein Setzling darf nicht vertrocknen — eine erledigte HÜ gießt ihn.“</p></div>
+      <div class="quest" style="--qc:var(--amber)"><div class="qhead"><span class="qtype">Koop · Eltern</span><h4>Verbündete rufen</h4></div><p class="measures"><b>Misst:</b> 2× <code>confirmed_by_parent_at</code> diese Woche.</p><p class="gnudge">„Deine Verbündeten auf der Erde helfen mit — zwei Bestätigungen geben Extra‑Wasser.“</p></div>
+      <div class="quest wide" style="--qc:var(--rose)"><div class="qhead"><span class="qtype">Wahlpfad · Autonomie</span><h4>Pflege‑Einsatz — wähle deinen Weg</h4></div><p class="measures"><b>Misst:</b> ein <code>choice_group</code> — genau ein Pfad zählt, beide führen gleich weit.</p>
+        <div class="branch">
+          <div class="b"><span class="bk">Pfad A · Gärtner:in</span><em>Reiche eine HÜ <b>vor</b> dem Fälligkeitstag ein — <code>completed_at &lt; due_date</code>.</em></div>
+          <div class="b"><span class="bk">Pfad B · Bote</span><em>Denk ans Material zum nächsten Termin — du stehst in <code>events.target_student_ids</code> <b>und</b> hast die Termin‑Erinnerung gesehen.</em></div>
+        </div>
+        <p class="gnudge">„Zwei Wege, die Basis zu pflegen — welcher ist heute deiner?“</p></div>
+    </div>
+  </div>
+
+  <div class="weekblock card">
+    <div class="weekhead"><span class="weeknum">Woche 3</span><h3>Der Wasserkreislauf</h3><span class="focuspill">Fokus: Verantwortung</span></div>
+    <div class="quests">
+      <div class="quest" style="--qc:var(--teal)"><div class="qhead"><span class="qtype">Solo</span><h4>Halte die Leitungen frei</h4></div><p class="measures"><b>Misst:</b> dein Dienst der Woche erfüllt — du stehst in <code>duties.assignee_ids</code>.</p><p class="gnudge">„Die Ventile brauchen dich — dein Dienst hält das Wasser im Fluss.“</p></div>
+      <div class="quest" style="--qc:var(--violet)"><div class="qhead"><span class="qtype">Kombi</span><h4>Voller Tank</h4></div><p class="measures"><b>Misst:</b> 3× <code>homework_completions</code> <b>und</b> <code>reminder_views</code> in derselben Woche.</p><p class="gnudge">„Energie und Information — beides zusammen füllt den Tank ganz.“</p></div>
+      <div class="quest wide" style="--qc:var(--good)"><div class="qhead"><span class="qtype">Kollektiv</span><h4>Wasser marsch</h4></div><p class="measures"><b>Misst:</b> Klasse erreicht <b>50 %</b> des Ziels → Kapitel 3, Wasserkanal fließt (Basis‑Freischaltung).</p><p class="gnudge">„Hört ihr das Plätschern? Gemeinsam habt ihr den Kreislauf geschlossen.“</p></div>
+    </div>
+    <div class="note" style="margin-top:14px">
+      <h4><svg class="i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> Ehrliche Datenlücke: „Dienst erledigt“</h4>
+      <p><code>duties</code> speichert <b>wer</b> zugeteilt ist (<code>assignee_ids</code>, <code>week_start</code>), aber kein „erledigt“‑Feld. Diese Quest zählt vorerst nur die <b>Zuteilung</b>. Für echte Erledigung bräuchte es einen kleinen „Erledigt“‑Tap (Schüler) oder einen Lehrer‑Haken — bewusst als kleiner Zusatz markiert, nicht stillschweigend angenommen.</p>
+    </div>
+  </div>
+
+  <div class="weekblock card">
+    <div class="weekhead"><span class="weeknum">Woche 4</span><h3>Gemeinsam zur Oase</h3><span class="focuspill">Fokus: Zusammenhalt</span></div>
+    <div class="quests">
+      <div class="quest" style="--qc:var(--teal)"><div class="qhead"><span class="qtype">Solo · Titel</span><h4>Hüter der Flamme</h4></div><p class="measures"><b>Misst:</b> Streak‑Meilenstein erreicht (<code>currentMilestone</code> / <code>streak_confirmations</code>) → verleiht den Titel „Hüter:in der Flamme“.</p><p class="gnudge">„Du hast die Flamme durch den ganzen Monat getragen — trag den Titel mit Stolz.“</p></div>
+      <div class="quest" style="--qc:var(--good)"><div class="qhead"><span class="qtype">Kollektiv · Social Proof</span><h4>Alle Hände</h4></div><p class="measures"><b>Misst:</b> ≥ <b>80 %</b> der Klasse mit mind. 1 <code>homework_completion</code> diese Woche (anonymer Prozentwert).</p><p class="gnudge">„85 % sind schon dabei — kommst du auch an Deck?“</p></div>
+      <div class="quest wide" style="--qc:var(--good)"><div class="qhead"><span class="qtype">Kollektiv · Finale</span><h4>Terra Nova blüht</h4></div><p class="measures"><b>Misst:</b> Klasse erreicht <b>100 %</b> → Kapitel 5, die Oase blüht, die Basis wird ins <b>Chronik‑Regal</b> archiviert.</p><p class="gnudge">„Ihr habt einen toten Fleck zum Leben erweckt. Ruht euch aus, Held:innen — die nächste Welt wartet schon.“</p></div>
+    </div>
+  </div>
+
+  <!-- Zeremonie + Transfer -->
+  <div class="app-head"><span class="ae">Rhythmus &amp; Transfer</span><h2>Zeremonie &amp; Übertragbarkeit</h2></div>
+  <div class="persp">
+    <div class="persp-card card">
+      <h3 style="font-size:16px">Wochen‑Zeremonie · Beispiel Woche 3</h3>
+      <div class="mock" style="margin-top:10px">
+        <div class="qmini" style="margin-top:0;border-color:var(--good)"><div class="ic swatch-teal"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div style="flex:1"><div class="t">Montag · Kapitel öffnet</div><div class="s">„Neue Woche, Team! Diese Woche kümmern wir uns um den Wasserkreislauf — eure Dienste halten die Leitungen frei. Ich hab die Ventile schon geölt.“</div></div></div>
+        <div class="qmini"><div class="ic swatch-amber"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div><div style="flex:1"><div class="t">Freitag · Rückblick</div><div class="s">„Geschafft — die Leitungen fließen! 22 Aufgaben diese Woche, der Kanal ist voll. Ruht euch aus, nächste Woche greifen wir nach der Oase.“</div></div></div>
+      </div>
+    </div>
+    <div class="persp-card card">
+      <h3 style="font-size:16px">Dieselbe Schablone für jeden Arc</h3>
+      <p class="small">Das Skelett ist immer gleich — <b>5 Kapitel an Klassenziel‑% gekoppelt</b>, <b>4 Wochen‑Fokusse</b>, Quests über <b>dieselben Signale</b> (HÜ, Erinnerungen, Termine, Dienste, Streak, Eltern). Es wechselt nur der Skin: Guide, Prosa, Prop‑Grafik. Einen neuen Arc zu bauen heißt <b>eine Vorlage ausfüllen, nicht programmieren</b> — genau dafür ist der Vorrat da.</p>
+      <div class="note" style="margin-top:12px"><h4><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Guardrails gehalten</h4><p>Wöchentlicher Takt statt täglichem Zwang · Etappen kollektiv (kein Kind bloßgestellt) · Wahlpfad statt Vorgabe · Titel statt Rang · Nudges bitten, befehlen nicht.</p></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>KlassenHub · Umsetzungsplan Gamification — v3 · Teil I + II + Anhang A</span>
+    <span>Alle Migrationen idempotent, RLS via my_class_ids(); nichts wird ohne dein „push“ ausgerollt.</span>
+  </div>
+</div>
+
+<script>
+  // Sanfter Reveal beim Scrollen (respektiert reduced-motion via CSS).
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { e.target.style.animationDelay = '0ms'; io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  }
+</script>
+</body>
+</html>
