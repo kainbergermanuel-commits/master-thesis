@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App-Systemüberblick — Master-Thesis KlassenHub</title>
+<meta name="description" content="Code-basierte Analyse von KlassenHub: technischer Aufbau, Rollen- und Berechtigungsmodell, Funktionsmodule — sauber getrennt in belegte und interpretierte Aussagen.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  .ev { display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; white-space: nowrap; margin-bottom: 6px; }
+  .ev.belegt { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .ev.interpretiert { color: var(--violet); background: color-mix(in srgb, var(--violet) 15%, transparent); }
+  .mod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  @media (max-width: 760px) { .mod-grid { grid-template-columns: 1fr; } }
+  .mod { padding: 16px 17px; }
+  .mod h4 { font-family: var(--display); font-size: 15px; margin-bottom: 6px; }
+  .mod p { font-size: 12.5px; color: var(--ink-soft); }
+  .mod p + p { margin-top: 8px; }
+  .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+  @media (max-width: 760px) { .role-grid { grid-template-columns: 1fr; } }
+  .role { padding: 14px 16px; text-align: center; }
+  .role .ric { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #fff; margin: 0 auto 8px; }
+  .role h5 { font-family: var(--display); font-size: 14px; }
+  .role p { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M8 21h8M12 17v4"/></svg></span>
+      App-Systemüberblick
+    </div>
+    <div class="legend">
+      <span class="ev belegt">Belegt</span>
+      <span class="ev interpretiert">Interpretiert</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Beschreibung der App · code-basierte Analyse</div>
+    <h1>Was KlassenHub<br>technisch ist.</h1>
+    <p class="lede">Direkt aus dem Code erhoben, nicht aus Erinnerung rekonstruiert. Jede Aussage ist markiert: <span class="ev belegt" style="margin:0">Belegt</span> = direkt aus Code/Schema ablesbar, <span class="ev interpretiert" style="margin:0">Interpretiert</span> = Deutung der Motivation, nicht durch Primärbeleg gedeckt.</p>
+    <div class="thesis">
+      <strong>Wichtig für die Studie:</strong> Diese Analyse erlaubt validere technische Aussagen als reine Motivations-Rekonstruktion — sie ersetzt aber <strong>nicht</strong> die noch ausstehende Nutzer-Evaluation. Aussagen zu tatsächlicher Wirkung oder Akzeptanz stammen ausschließlich aus der empirischen Untersuchung, nicht aus dieser Code-Analyse.
+    </div>
+  </header>
+
+  <section id="aufbau">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Technischer Aufbau</h2></div>
+    <span class="ev belegt">Belegt</span>
+    <p class="sec-sub">Next.js (App Router) + Supabase (Postgres, Auth, Row-Level-Security), Tailwind CSS, PWA-Manifest (standalone, portrait, eigenes Icon/Theme). Auth/Datenzugriff läuft über deduplizierte Helper — ein Datenbank-Request pro Anfrage statt pro Komponente.</p>
+
+    <div class="role-grid">
+      <div class="role card"><div class="ric" style="background:linear-gradient(135deg,var(--teal),var(--teal-2))"><svg class="i" viewBox="0 0 24 24" style="stroke:#fff"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h5>Lehrperson</h5><p>Postet Hausübungen, Erinnerungen, Termine; sieht Aggregatzahlen der Klasse.</p></div>
+      <div class="role card"><div class="ric" style="background:linear-gradient(135deg,var(--amber),var(--amber-2))"><svg class="i" viewBox="0 0 24 24" style="stroke:#fff"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h5>Schüler:in</h5><p>Sieht eigene offene HÜ, Streak, Dienst — persönliche, nicht aggregierte Sicht.</p></div>
+      <div class="role card"><div class="ric" style="background:linear-gradient(135deg,var(--violet),#8791dd)"><svg class="i" viewBox="0 0 24 24" style="stroke:#fff"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/></svg></div><h5>Elternteil</h5><p>Kind-Banner mit Streak, offene Bestätigungen, eigenes Mitteilungsheft.</p></div>
+    </div>
+    <p class="sec-sub" style="margin-top:14px"><span class="ev interpretiert">Interpretiert</span> Statt einer generischen App mit Rollen-Toggle wurde für jede Zielgruppe eine eigene, auf ihre Bedürfnisse zugeschnittene Informationsarchitektur gebaut.</p>
+  </section>
+
+  <section id="rls">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Rollen- &amp; Berechtigungsmodell</h2></div>
+    <span class="ev belegt">Belegt</span>
+    <p class="sec-sub">Durchgehend serverseitig über Postgres-RLS-Policies abgesichert, nicht nur im Frontend verborgen. Granulares Modell jenseits von „Lehrer vs. Rest": Schüler:innen mit Sonderrolle dürfen selbst Hausübungen im Entwurfsstatus anlegen, Klassensprecher:innen analog bei Erinnerungen.</p>
+    <div class="note">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> <span class="ev interpretiert" style="margin:0">Interpretiert</span></h4>
+      <p>Das ist ein Beteiligungsmechanismus, der Schüler:innen aktiv Mitgestaltung ermöglicht, nicht nur Konsum. Das digitale Mitteilungsheft läuft bewusst ausschließlich zwischen Lehrperson und Eltern — Schüler:innen haben explizit keinen Zugriff, was die reale Schulkommunikation 1:1 nachbildet.</p>
+    </div>
+  </section>
+
+  <section id="module">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Funktionsmodule</h2></div>
+    <p class="sec-sub">Die Bausteine, die in der empirischen Erprobung tatsächlich genutzt werden.</p>
+
+    <div class="mod-grid">
+      <div class="mod card">
+        <h4>Hausübungen</h4>
+        <p><span class="ev belegt">Belegt</span> Klassenweite Liste mit Fälligkeitsdatum, Fach, Abgabestatus pro Schüler:in. Lehrer-Ansicht zeigt aggregierten Fortschritt, Namen erst nach bewusstem Klick sichtbar.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Diese Transparenz macht Verantwortung sichtbar, ohne einzelne Schüler:innen bloßzustellen.</p>
+      </div>
+      <div class="mod card">
+        <h4>Streaks / Gamification</h4>
+        <p><span class="ev belegt">Belegt</span> Serie aufeinanderfolgender erledigter Hausübungen; Meilensteine bei 5/10/15/20. Muss von einem Elternteil bestätigt werden, bevor sie im Leaderboard sichtbar zählt.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die Eltern-Bestätigung koppelt Gamification an echte soziale Anerkennung statt reiner Selbstoptimierung — siehe auch <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a> und <a href="2026-07-risiken-gamifizierung.html">Risiken &amp; Grenzen</a>.</p>
+      </div>
+      <div class="mod card">
+        <h4>Digitales Mitteilungsheft</h4>
+        <p><span class="ev belegt">Belegt</span> Ein Heft pro Elternteil, Fan-out für Sammelnachrichten (gleiche Nachricht in mehrere Hefte, verknüpft, aber individueller 1:1-Thread).</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Digitalisiert Fan-out und Lesebestätigung, was der Lehrperson Verwaltungsaufwand erspart und Verbindlichkeit erzeugt.</p>
+      </div>
+      <div class="mod card">
+        <h4>Erinnerungen vs. Termine</h4>
+        <p><span class="ev belegt">Belegt</span> Bewusst getrennte Datenstrukturen: Erinnerungen mit Gesehen/Nicht-gesehen-Tracking pro Schüler:in, Termine als klassenweiter Kalender mit typisierten Kategorien.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Bildet zwei unterschiedliche reale Kommunikationsbedürfnisse ab: Zielgruppen-Tracking vs. gemeinsame Kalenderlogik.</p>
+      </div>
+      <div class="mod card">
+        <h4>Dienste</h4>
+        <p><span class="ev belegt">Belegt</span> Automatische, zufällige Zuweisung per wöchentlichem Cron-Job, je 2 Schüler:innen pro Dienst.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Entlastet die Lehrperson von manueller Diensteinteilung und sorgt für wahrgenommene Fairness durch Zufallsprinzip.</p>
+      </div>
+      <div class="mod card">
+        <h4>Gegenderte Sprache</h4>
+        <p><span class="ev belegt">Belegt</span> Ein Helper erzeugt automatisch die korrekte Form je nach gespeichertem Geschlecht im Profil.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Zeigt, dass geschlechtergerechte Sprache als Code-Funktion mitgedacht wurde — spiegelt denselben Anspruch wie die Genderleitlinie der PH NÖ für die Arbeit selbst.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="historie">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Entwicklungs-Historie &amp; Robustheit</h2></div>
+    <span class="ev belegt">Belegt</span>
+    <p class="sec-sub">Viele einzelne, benannte Migrationsdateien statt eines einzigen Schemas — zeigt iterative, inkrementelle Entwicklung mit Rückbau-Option. Mehrfache RLS-Härtungen deuten auf schrittweises Schließen von Sicherheitslücken hin, wie es bei echten Entwicklungsprojekten typisch ist — nicht „einmal richtig geplant", sondern kontinuierlich abgesichert.</p>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — App-Systemüberblick (code-basiert, Stand Juli 2026)</span>
+    <span><a href="2026-07-gamification-konzept.html">Zum Gamification-Konzept →</a></span>
+  </div>
+</div>
+</body>
+</html>

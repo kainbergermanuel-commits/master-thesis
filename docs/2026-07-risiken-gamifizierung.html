@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risiken & Grenzen der Gamifizierung — Master-Thesis KlassenHub</title>
+<meta name="description" content="Kritische Gegenperspektive zum Gamification-Konzept: Neuheitseffekt, Ranglisten-Demotivation, Lehrkräfte-Mehrbelastung, digitale Kapital- und Altersgaps, Learning-Analytics-Risiken.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  @media (max-width: 760px) { .risk-grid { grid-template-columns: 1fr; } }
+  .risk-card { padding: 18px 19px; position: relative; overflow: hidden; border-left: 4px solid var(--rose); }
+  .risk-card .rk-eyebrow { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--rose); }
+  .risk-card h3 { font-family: var(--display); font-size: 16.5px; margin: 6px 0 10px; }
+  .risk-item { margin-top: 10px; }
+  .risk-item h5 { font-family: var(--display); font-size: 13.5px; color: var(--ink); }
+  .risk-item p { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; }
+  .response { margin-top: 22px; }
+  .resp-row { display: grid; grid-template-columns: 1fr 28px 1fr; gap: 10px; align-items: center; margin-top: 12px; }
+  @media (max-width: 700px) { .resp-row { grid-template-columns: 1fr; } .resp-arrow { display: none; } }
+  .resp-risk, .resp-answer { padding: 12px 14px; border-radius: 12px; font-size: 12.5px; }
+  .resp-risk { background: color-mix(in srgb, var(--rose) 8%, var(--card)); border: 1px solid color-mix(in srgb, var(--rose) 25%, var(--line)); color: var(--ink-soft); }
+  .resp-answer { background: color-mix(in srgb, var(--good) 8%, var(--card)); border: 1px solid color-mix(in srgb, var(--good) 25%, var(--line)); color: var(--ink-soft); }
+  .resp-arrow { text-align: center; color: var(--muted); }
+  .resp-answer b, .resp-risk b { color: var(--ink); }
+  .src-note { margin-top: 20px; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+      Risiken &amp; Grenzen
+    </div>
+    <div class="legend">
+      <span class="chip high">Kritische Perspektive</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Kritische Gegenperspektive · Digitale Transformation an Schulen</div>
+    <h1>Was gegen unreflektierte<br>Gamifizierung spricht.</h1>
+    <p class="lede">Digitale Transformation im Bildungswesen ist keine rein technologische Aufrüstung — sie berührt pädagogische, psychologische und strukturelle Fragen. Diese Seite sammelt bewusst die Gegenargumente und offenen Risiken, bevor das <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a> als Antwort darauf gelesen wird.</p>
+    <div class="thesis">
+      <strong>Warum diese Seite existiert:</strong> Eine Masterarbeit, die die eigene App unkritisch feiert, ist wissenschaftlich nicht tragfähig. Die vier Risikofelder unten stammen aus der Literaturrecherche und einer strukturierten Quellensynthese — sie sind der Prüfstein, an dem sich Design-Entscheidungen in KlassenHub messen lassen müssen.
+    </div>
+  </header>
+
+  <section id="risiken">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Vier Risikofelder</h2></div>
+    <p class="sec-sub">Pädagogische, psychologische und strukturelle Hürden bei der Einführung digitaler Medien und Gamifizierung im Unterricht.</p>
+
+    <div class="risk-grid">
+      <div class="risk-card card">
+        <div class="rk-eyebrow">01 · Risiken der Gamifizierung</div>
+        <h3>Neuheitseffekt &amp; Ranglisten</h3>
+        <div class="risk-item"><h5>Der „Neuheitseffekt"</h5><p>Die anfängliche Begeisterung für Spielelemente sinkt oft langfristig ab, was die dauerhafte Motivationssteigerung erschwert.</p></div>
+        <div class="risk-item"><h5>Demotivation durch Wettbewerb</h5><p>Bestenlisten motivieren zunächst, führen bei leistungsschwächeren Schüler:innen aber häufig zu Frustration und sinkendem Engagement.</p></div>
+      </div>
+
+      <div class="risk-card card">
+        <div class="rk-eyebrow">02 · Belastung &amp; Stress für Lehrkräfte</div>
+        <h3>Erosion der Work-Life-Balance</h3>
+        <div class="risk-item"><h5>Verschwimmende Grenzen</h5><p>Die Nutzung von Messengern/digitalen Kanälen führt zum Verschwimmen der Grenzen zwischen Arbeits- und Privatleben.</p></div>
+        <div class="risk-item"><h5>Korrelation Kommunikation ↔ Stress</h5><p>Mehr digitale Elternkommunikation steigert zwar die Selbstwirksamkeit, ist aber mit einem höheren Stresslevel der Lehrkräfte verbunden. Auch sozialer Druck im Kollegium spielt eine Rolle.</p></div>
+      </div>
+
+      <div class="risk-card card">
+        <div class="rk-eyebrow">03 · Soziale &amp; strukturelle Hürden</div>
+        <h3>Digitaler Kapital- &amp; Altersgap</h3>
+        <div class="risk-item"><h5>Die Kluft beim digitalen Kapital</h5><p>Eltern mit niedrigerem sozioökonomischem Status verfügen oft über weniger digitales Kapital — das kann Chancengerechtigkeit gefährden.</p></div>
+        <div class="risk-item"><h5>Der digitale „Altersgap"</h5><p>Lehrkräfte über 50 Jahre zeigen tendenziell geringere Akzeptanz gegenüber digitalen Plattformen als jüngere Kolleg:innen — plus fehlende Ressourcen/Unterstützung durch Schulträger.</p></div>
+      </div>
+
+      <div class="risk-card card">
+        <div class="rk-eyebrow">04 · Paradoxien des Schüler-Engagements</div>
+        <h3>Learning-Analytics-Risiken</h3>
+        <div class="risk-item"><h5>Gleichzeitigkeit von En- und Desengagement</h5><p>Schüler:innen können Aufgaben digital bearbeiten und dabei emotional völlig unbeteiligt oder durch soziale Unsicherheit gehemmt sein.</p></div>
+        <div class="risk-item"><h5>Dashboards &amp; sozialer Vergleich</h5><p>Dashboards, die soziale Vergleiche erzwingen, können die intrinsische Motivation negativ beeinflussen, wenn Autonomie fehlt.</p></div>
+      </div>
+    </div>
+
+    <p class="src-note">Quellensynthese basierend auf der Literaturrecherche (vertiefte Einzelnachweise siehe <a href="2026-07-literaturkarte.html">Literaturkarte</a>) sowie einer strukturierten KI-gestützten Aufbereitung als Diskussionsgrundlage — Einzelbelege werden im Theoriekapitel der Arbeit ausgewiesen.</p>
+  </section>
+
+  <!-- ===================== WIE DAS KONZEPT REAGIERT ===================== -->
+  <section id="antworten">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Wie das Konzept darauf reagiert</h2></div>
+    <p class="sec-sub">Das <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a> ist als Antwort auf genau diese Risiken entstanden, nicht unabhängig davon. Ausgewählte Gegenüberstellungen:</p>
+
+    <div class="response">
+      <div class="resp-row">
+        <div class="resp-risk"><b>Risiko:</b> Ranglisten demotivieren Leistungsschwächere.</div>
+        <div class="resp-arrow"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="resp-answer"><b>Konzept:</b> Streak-Ranglisten werden abgebaut; Fortschritt statt Rang, individuelles Heldenbuch statt Dauer-Vergleich.</div>
+      </div>
+      <div class="resp-row">
+        <div class="resp-risk"><b>Risiko:</b> Neuheitseffekt lässt Motivation nach Wochen abflachen.</div>
+        <div class="resp-arrow"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="resp-answer"><b>Konzept:</b> Monatlich rotierende Story-Arcs und wöchentlich wechselnder Fokus (Pünktlichkeit → Hilfe → …) statt eines statischen Systems.</div>
+      </div>
+      <div class="resp-row">
+        <div class="resp-risk"><b>Risiko:</b> Dashboards erzwingen sozialen Vergleich, untergraben Autonomie.</div>
+        <div class="resp-arrow"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="resp-answer"><b>Konzept:</b> Wahlpfade (choice_group) statt Vorgabe; Social-Proof-Nudges bewusst anonymisiert, ohne Namen.</div>
+      </div>
+      <div class="resp-row">
+        <div class="resp-risk"><b>Risiko:</b> Zusätzliche digitale Kanäle erhöhen die Arbeitsbelastung der Lehrperson.</div>
+        <div class="resp-arrow"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="resp-answer"><b>Konzept:</b> Quests laufen standardmäßig automatisch aus vorhandenen Daten — die Lehrperson ist Spielleiter:in, nicht Vollzeit-Kuratorin.</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:22px">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Was offen bleibt</h4>
+      <p>Der digitale Kapital- und Altersgap (Risikofeld 3) ist durch App-Design allein nicht lösbar — das ist ein struktureller, kein technischer Befund. Er gehört in die Diskussion der Erprobungsstudie, nicht ins Gamification-Konzept: Wer nutzt die App tatsächlich, und wer bleibt außen vor?</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — kritische Perspektive (Diskussionsgrundlage, Juli 2026)</span>
+    <span><a href="2026-07-gamification-konzept.html">Zum Gamification-Konzept →</a></span>
+  </div>
+</div>
+</body>
+</html>

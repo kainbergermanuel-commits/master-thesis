@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forschungsdesign & Untersuchungsdesign — Master-Thesis KlassenHub</title>
+<meta name="description" content="Forschungsfrage, vierphasiges Forschungsdesign und sechsstufiges Untersuchungsdesign der qualitativen Erprobungsstudie zu KlassenHub.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  .delim { margin-top: 22px; padding: 18px 20px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--amber) 35%, var(--line)); background: color-mix(in srgb, var(--amber) 7%, var(--card)); }
+  .delim h4 { font-family: var(--display); font-size: 14.5px; color: var(--amber); display: flex; align-items: center; gap: 8px; }
+  .delim p { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+  .subq { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+  @media (max-width: 760px) { .subq { grid-template-columns: 1fr; } }
+  .subq .sq { padding: 14px 16px; }
+  .subq .sq .num { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--teal-2)); color: #fff; font-family: var(--display); font-weight: 800; font-size: 12px; display: grid; place-items: center; margin-bottom: 8px; }
+  .subq .sq h4 { font-family: var(--display); font-size: 14px; }
+  .subq .sq p { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
+  .method-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .refl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  @media (max-width: 760px) { .refl-grid { grid-template-columns: 1fr; } }
+  .refl-card { padding: 18px; }
+  .refl-card h4 { font-family: var(--display); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+  .refl-card.risk h4 { color: var(--rose); }
+  .refl-card.ethics h4 { color: var(--violet); }
+  .refl-card ul { margin: 10px 0 0; padding-left: 18px; font-size: 13px; color: var(--ink-soft); }
+  .refl-card li { margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      Forschungsdesign
+    </div>
+    <div class="legend">
+      <span class="chip phase">Kern-Dokument</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Forschungsdesign · Untersuchungsdesign</div>
+    <h1>Wie die Untersuchung<br>aufgebaut ist.</h1>
+    <p class="lede">Qualitativ, hermeneutisch, theoriegeleitet, explorativ, praxisnah — keine Allgemeingültigkeit, sondern vertiefte Einsicht in einen konkreten Schulkontext.</p>
+    <div class="thesis">
+      <strong>Zentrale Forschungsfrage:</strong> Inwiefern kann eine selbst entwickelte Kommunikations- und Organisations-App schulische Informationsprozesse, Motivation, Verlässlichkeit und Beteiligung von Lehrpersonen, Schülerinnen, Schülern und Eltern unterstützen?
+    </div>
+    <div class="subq">
+      <div class="sq card"><div class="num">1</div><h4>Nutzung &amp; Wahrnehmung</h4><p>Wie erleben Lehrpersonen, Schüler:innen &amp; Eltern die App im Alltag?</p></div>
+      <div class="sq card"><div class="num">2</div><h4>Motivation &amp; Verlässlichkeit</h4><p>Welche Bedeutung hat die App für Engagement &amp; Organisation?</p></div>
+      <div class="sq card"><div class="num">3</div><h4>Akzeptanz &amp; Vergleich</h4><p>Verbesserung gegenüber bestehenden Systemen (z. B. SchoolFox)?</p></div>
+    </div>
+    <div class="delim">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> Wichtige Abgrenzung</h4>
+      <p>Keine Lern-App, keine quantitative Wirkungsstudie — untersucht werden Nutzung, Akzeptanz und Beteiligung, nicht Lernertrag. Die App wird als Kommunikations-, Organisations- und Beteiligungssystem betrachtet, nicht als isoliertes Motivationsinstrument.</p>
+    </div>
+  </header>
+
+  <!-- ===================== FORSCHUNGSDESIGN ===================== -->
+  <section id="forschungsdesign">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Forschungsdesign — theoretische Phasen</h2></div>
+    <p class="sec-sub">Vier Phasen führen von der Theorie zur Erprobung im konkreten Schulkontext und zurück zur Einordnung.</p>
+
+    <div class="phase card">
+      <div class="phase-head"><span class="phase-num">1</span><h3>Erkenntnisinteresse</h3></div>
+      <p class="goal">Die App als Werkzeug für Kommunikation, Organisation und Motivation im Schulalltag — Hausübungen, Termine, Mitteilungsheft, Streaks/Gamification.</p>
+    </div>
+    <div class="phase card">
+      <div class="phase-head"><span class="phase-num">2</span><h3>Literaturanalyse</h3></div>
+      <p class="goal">Hermeneutische Klärung: Was lässt sich durch Theorie und aktuellen Forschungsstand bereits beantworten? Begriffe, Modelle und Kategorien für Leitfäden und Auswertung ableiten.</p>
+    </div>
+    <div class="phase card">
+      <div class="phase-head"><span class="phase-num">3</span><h3>Empirische Erprobung</h3></div>
+      <p class="goal">Qualitative Untersuchung im konkreten Schulkontext — keine Repräsentativität, sondern vertiefte Einsicht in Nutzung und Akzeptanz.</p>
+    </div>
+    <div class="phase card">
+      <div class="phase-head"><span class="phase-num">4</span><h3>Diskussion &amp; Transfer</h3></div>
+      <p class="goal">Rückbindung an Theorie; Konsequenzen für App-Weiterentwicklung, Schulleitung und digitale Schulentwicklung.</p>
+    </div>
+
+    <div class="method-row">
+      <span class="chip phase">qualitativ</span>
+      <span class="chip phase">hermeneutisch</span>
+      <span class="chip phase">theoriegeleitet</span>
+      <span class="chip phase">explorativ</span>
+      <span class="chip phase">praxisnah</span>
+      <span class="chip phase">keine Allgemeingültigkeit</span>
+    </div>
+
+    <div class="note" style="margin-top:20px">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Theoretische Bezugspunkte</h4>
+      <p>Digitalität im Schulkontext · Digitale Schulkommunikation &amp; Elternbeteiligung · Motivation &amp; Selbstorganisation (Selbstbestimmungstheorie) · Gamification &amp; Streaks · Akzeptanz digitaler Systeme (TAM) · Leadership &amp; Schulentwicklung — vertieft in der <a href="2026-07-literaturkarte.html">Literaturkarte</a>.</p>
+    </div>
+  </section>
+
+  <!-- ===================== UNTERSUCHUNGSDESIGN ===================== -->
+  <section id="untersuchungsdesign">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Untersuchungsdesign — empirische Schritte</h2></div>
+    <p class="sec-sub">Die rechte Spalte der Forschungsarchitektur: wie die empirische Erprobung konkret abläuft.</p>
+
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg></div>
+        <div><div class="tw">Schritt 1</div><h4>Setting &amp; Fall</h4><p>Eine Klasse Sekundarstufe I, ca. 20 Schüler:innen + Eltern + 1–2 Lehrpersonen; Erprobung ca. 4–6 Wochen (vorläufig, mit Betreuung abzustimmen).</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/></svg></div>
+        <div><div class="tw">Schritt 2</div><h4>Nutzerrollen &amp; Rechte</h4><p>Lehrpersonen posten; Schüler:innen &amp; Eltern lesen/handeln; Eltern nutzen zusätzlich das digitale Mitteilungsheft. Rollenrechte klar getrennt.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <div><div class="tw">Schritt 3</div><h4>Nutzungsszenarien</h4><p>Hausübungen, Erinnerungen, Termine, Mitteilungen und Streaks werden im echten Schulalltag genutzt — nicht in einer künstlichen Testsituation.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="tw">Schritt 4</div><h4>Datenerhebung</h4><p>Leitfadeninterviews mit Lehrpersonen, Gruppengespräche mit Schüler:innen, offene Elternbefragung; optional Expertengespräch.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></div>
+        <div><div class="tw">Schritt 5</div><h4>Auswertung</h4><p>Qualitative Inhaltsanalyse nach Kuckartz — kombiniert deduktive (theoriegeleitete) mit induktiver (materialgeleiteter) Kategorienbildung.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div><div class="tw">Schritt 6</div><h4>Ergebnisdimensionen</h4><p>Informationsklarheit, Motivation, Verlässlichkeit, Elternbeteiligung, Lehrerakzeptanz, Vergleich zu SchoolFox, Weiterentwicklungsbedarf.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REFLEXIVITÄT & ETHIK ===================== -->
+  <section id="reflexivitaet">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Forscherrolle &amp; Forschungsethik</h2></div>
+    <p class="sec-sub">Zwei methodische Sorgfaltspflichten, die sich aus der Doppelrolle als App-Entwickler und Forscher sowie aus der minderjährigen Zielgruppe ergeben.</p>
+
+    <div class="refl-grid">
+      <div class="refl-card card risk">
+        <h4><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Reflexivität</h4>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:6px">Ich bin zugleich App-Entwickler und Forscher — Gefahr der Bestätigungstendenz. Gegenmaßnahmen:</p>
+        <ul>
+          <li>Offene, nicht-suggestive Leitfragen in Interviews und Fragebögen</li>
+          <li>Kategorienbildung im Austausch mit der Betreuung, nicht allein</li>
+          <li>Explizite Reflexion eigener Vorannahmen im Methodenkapitel</li>
+        </ul>
+      </div>
+      <div class="refl-card card ethics">
+        <h4><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 2 3 7v10l9 5 9-5V7z"/></svg> Forschungsethik &amp; Datenschutz</h4>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:6px">Zielgruppe umfasst Minderjährige — daher zentral für die Erprobung:</p>
+        <ul>
+          <li>Genehmigung der Bildungsdirektion NÖ (Antragstellung über die Betreuung)</li>
+          <li>Informiertes Einverständnis der Eltern; Freiwilligkeit &amp; Rücktrittsrecht</li>
+          <li>Anonymisierung / Pseudonymisierung aller erhobenen Daten</li>
+          <li>Getrennte Rolle: App-Nutzung im Alltag vs. Forschungsteilnahme</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — Forschungsdesign (Stand: Vorentwurf, Juli 2026)</span>
+    <span><a href="2026-07-literaturkarte.html">Weiter zur Literaturkarte →</a></span>
+  </div>
+</div>
+</body>
+</html>
