@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balance, Alltag & Vertrauen — Master-Thesis KlassenHub</title>
+<meta name="description" content="Das Gamification-System aus Schülersicht: die richtige Balance zwischen Schwierigkeit und Zeitaufwand, Quests im echten Schulalltag, Gilden mit echter Kooperation, Items die etwas können — plus ein Fahrplan und die pädagogischen Fallen im laufenden Schuljahr.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  /* ---- Befund-Zeilen (System → Problem) ---- */
+  .finding { display: grid; grid-template-columns: 44px 1fr; gap: 15px; padding: 18px 20px; margin-top: 12px; }
+  .finding .fic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #fff; flex: none; background: linear-gradient(135deg, var(--teal), var(--teal-2)); }
+  .finding h4 { font-family: var(--display); font-size: 16.5px; margin-bottom: 5px; }
+  .finding p { font-size: 14px; color: var(--ink-soft); }
+  .finding .flag { margin-top: 9px; font-size: 12.5px; color: var(--ink-soft); border-left: 2px solid color-mix(in srgb, var(--rose) 45%, var(--line)); padding-left: 11px; }
+  .finding .flag b { color: var(--rose); font-weight: 700; }
+
+  /* ---- Quadrant: Schwierigkeit × Zeit ---- */
+  .quad-wrap { margin-top: 18px; display: grid; grid-template-columns: 26px 1fr; gap: 10px; }
+  .quad-yaxis { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-family: var(--display); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  .quad { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; }
+  .qcell { padding: 16px 17px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); position: relative; min-height: 112px; }
+  .qcell.good { border-color: color-mix(in srgb, var(--good) 45%, var(--line)); background: color-mix(in srgb, var(--good) 7%, var(--card)); }
+  .qcell.bad  { border-style: dashed; border-color: color-mix(in srgb, var(--rose) 40%, var(--line)); }
+  .qcell .qt { font-family: var(--display); font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 7px; }
+  .qcell .qd { font-size: 12.5px; color: var(--ink-soft); margin-top: 6px; }
+  .qcell .qex { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 9px; display: block; }
+  .qtag { position: absolute; top: 12px; right: 12px; font-size: 9.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+  .qtag.y { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .qtag.n { color: var(--rose); background: color-mix(in srgb, var(--rose) 14%, transparent); }
+  .quad-xaxis { grid-column: 2; display: flex; justify-content: space-between; font-family: var(--display); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin-top: 4px; padding: 0 4px; }
+
+  /* ---- Item-Taxonomie ---- */
+  .itax { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 16px; }
+  @media (max-width: 760px) { .itax { grid-template-columns: 1fr; } }
+  .itax .it { padding: 18px 19px; position: relative; overflow: hidden; }
+  .itax .it::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--stripe, var(--teal)); }
+  .itax .it .k { font-family: var(--mono); font-size: 11.5px; color: var(--muted); letter-spacing: .04em; }
+  .itax .it h4 { font-family: var(--display); font-size: 16px; margin: 3px 0 7px; }
+  .itax .it p { font-size: 13px; color: var(--ink-soft); }
+  .itax .it .ex { margin-top: 10px; font-size: 12px; color: var(--ink); font-weight: 600; }
+
+  /* ---- Gütekriterien-Checkliste ---- */
+  .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin-top: 16px; }
+  @media (max-width: 620px) { .checklist { grid-template-columns: 1fr; } }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--ink-soft); }
+  .check .cm { width: 20px; height: 20px; border-radius: 6px; background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); display: grid; place-items: center; flex: none; margin-top: 1px; }
+  .check b { color: var(--ink); font-weight: 700; }
+
+  /* ---- Risiko-Karten ---- */
+  .risk { padding: 19px 20px; margin-top: 14px; border-left: 4px solid var(--rose); }
+  .risk .rh { font-family: var(--display); font-weight: 800; font-size: 16.5px; display: flex; align-items: center; gap: 10px; }
+  .risk .rh .ric { width: 28px; height: 28px; border-radius: 8px; background: color-mix(in srgb, var(--rose) 15%, transparent); color: var(--rose); display: grid; place-items: center; flex: none; }
+  .risk .sig { font-size: 13.5px; color: var(--ink-soft); margin-top: 9px; }
+  .risk .mit { margin-top: 11px; font-size: 13px; color: var(--ink-soft); display: flex; gap: 8px; align-items: flex-start; border-top: 1px solid var(--line-soft); padding-top: 11px; }
+  .risk .mit .ml { font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); padding: 2px 8px; border-radius: 999px; flex: none; margin-top: 1px; }
+  .risk .mit b { color: var(--ink); font-weight: 700; }
+
+  .lead-q { font-size: 14px; color: var(--ink-soft); }
+  .lead-q b { color: var(--ink); }
+
+  /* ---- Entscheidungs-/Ritual-Karte (aus Prinzipien-Doc übernommen) ---- */
+  .dec { padding: 19px 20px; margin-top: 14px; border-left: 4px solid var(--amber); }
+  .dec .q { font-family: var(--display); font-weight: 800; font-size: 16px; display: flex; align-items: center; gap: 9px; }
+  .dec .q .qic { width: 26px; height: 26px; border-radius: 8px; background: color-mix(in srgb, var(--amber) 16%, transparent); color: var(--amber); display: grid; place-items: center; flex: none; }
+  .dec p { font-size: 13.5px; color: var(--ink-soft); margin-top: 9px; }
+  .dec .rec { margin-top: 11px; font-size: 13px; color: var(--good); font-weight: 700; display: flex; gap: 7px; align-items: flex-start; }
+  .dec .rec .rl { font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); padding: 2px 7px; border-radius: 999px; flex: none; margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      Balance, Alltag &amp; Vertrauen
+    </div>
+    <div class="legend">
+      <span class="lg"><span class="dot low"></span>Standard</span>
+      <span class="lg"><span class="dot mid"></span>Meister</span>
+      <span class="status-pill"><span class="pulse"></span>Fahrplan-Entwurf</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">App-Weiterentwicklung · Schülerperspektive</div>
+    <h1>Schaffbar,<br>aber nicht geschenkt.</h1>
+    <p class="lede">Ein Durchgang durch das Gamification-System mit den Augen eines Kindes im laufenden Schuljahr. Die Leitfrage: Wie findet man überall die richtige Balance zwischen <strong>Schwierigkeit</strong> — dem Gefühl „ich habe etwas geschafft" — und <strong>angemessenem Zeitaufwand</strong> — nicht alles am ersten Tag erledigt, aber auch keine Dauerpflicht? Und wie bleibt das System dabei fest mit dem echten Schulalltag verbunden, ohne in die bekannten Fallen zu tappen.</p>
+    <div class="thesis">
+      <strong>Der rote Faden:</strong> Ein Erfolgserlebnis braucht eine echte Hürde; „nicht an Tag 1 fertig" braucht Streckung über mehrere Tage. Beides zusammen ergibt die Balance — und beides muss aus <em>echten Ereignissen des Schulalltags</em> entstehen, nicht aus einer parallelen Spielwelt. Jede Entscheidung in diesem Dokument wird gegen die festgeschriebenen <a href="2026-07-gamification-prinzipien.html">Gütekriterien</a> geprüft: kein FOMO, kein Grinding, keine Videospiel-Suchtmechanik.
+    </div>
+  </header>
+
+  <!-- ===================== 1 · BEFUND ===================== -->
+  <section id="befund">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Der Schülerblick: was heute nicht rund ist</h2></div>
+    <p class="sec-sub">Der ehrliche Ist-Stand aus Kindersicht. Das Fundament stimmt — jede Quest misst ein echtes Schulsignal. Aber an drei Stellen kippt die Balance.</p>
+
+    <div class="finding card">
+      <div class="fic"><svg class="i big" viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7z"/></svg></div>
+      <div>
+        <h4>Quests sind teils an Tag 1 erledigt</h4>
+        <p>Mehrere Vorlagen im <span class="src">questVault.ts</span> sind in einer einzigen Handlung fertig: <span class="src">reminder_seen</span> (App öffnen, Erinnerung anschauen — 10 Sekunden), <span class="src">hw_early</span> allein, der Wahlpfad <span class="src">vorbereitung_wahlpfad</span>. Und <span class="src">hw_x3</span> zählt nur die <em>Anzahl</em> von 3 HÜ, nicht über verschiedene Tage — sind Montag drei HÜ fällig, ist die „Wochen"-Quest Montag durch.</p>
+        <p class="flag"><b>Bricht die Balance:</b> Kein Dranbleiben, kein echtes Erfolgserlebnis. Genuin mehrtägig sind heute nur <span class="src">duty_done</span>, <span class="src">streak_hold</span> und <span class="src">meister_ausdauer</span>.</p>
+      </div>
+    </div>
+
+    <div class="finding card">
+      <div class="fic"><svg class="i big" viewBox="0 0 24 24"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/></svg></div>
+      <div>
+        <h4>Gilden verlangen keine echte Kooperation</h4>
+        <p><span class="src">computeGuildQuestProgress</span> ist eine reine Aggregation von Solo-Arbeit: „Gilde geschafft, wenn <em>jedes</em> Mitglied für sich sein Signal erreicht." Niemand muss sich abstimmen, helfen oder koordinieren — jedes Kind macht seine eigene HÜ, und die Gilde „gewinnt", wenn alle es zufällig getan haben.</p>
+        <p class="flag"><b>Zwei Probleme:</b> keine gelebte Zusammenarbeit — und weil <em>alle</em> mitziehen müssen, blockiert ein einzelnes säumiges Kind die ganze Gilde (Sündenbock-Gefahr, verstößt gegen Prinzip 1).</p>
+      </div>
+    </div>
+
+    <div class="finding card">
+      <div class="fic"><svg class="i big" viewBox="0 0 24 24"><path d="M4 7h16M4 7l1.5 12a2 2 0 0 0 2 1.8h8.9a2 2 0 0 0 2-1.8L20 7M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg></div>
+      <div>
+        <h4>Die meisten Items kann man nur „haben", nicht „nutzen"</h4>
+        <p>Im <span class="src">RucksackItems.tsx</span> tut nur der <b>Schutzschild</b> wirklich etwas Interaktives (man klickt, setzt ihn ein). Das Meistersiegel ist eine echte Befugnis, aber passiv. Wappen-Fragment, Gildenbanner und Verbündeten-Amulett sind reine Anzeige-Abzeichen; Zeitkristall und Botenfeder sind ehrlich als „In Entwicklung" markiert.</p>
+        <p class="flag"><b>Dein Kritikpunkt bestätigt:</b> „Haben" allein motiviert nicht — ein Item soll mit dem System und dem Schulleben interagieren, nicht nur im Rucksack liegen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2 · FRAMEWORK ===================== -->
+  <section id="framework">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Das Steuerungs-Framework: Schwierigkeit × Zeit</h2></div>
+    <p class="sec-sub">Statt jede Quest einzeln zu erraten, ein Raster mit zwei Achsen — der rote Faden für „überall die richtige Balance". <b>Schwierigkeit</b> erzeugt das Erfolgserlebnis; <b>Streckung über verschiedene Tage</b> verhindert „an Tag 1 fertig". Entscheidend: Streckung entsteht nur, wenn wir <em>verschiedene Tage</em> verlangen, nicht bloß eine Anzahl.</p>
+
+    <div class="quad-wrap">
+      <div class="quad-yaxis">Schwierigkeit →</div>
+      <div>
+        <div class="quad">
+          <div class="qcell bad">
+            <span class="qtag n">meiden</span>
+            <div class="qt"><svg class="i" viewBox="0 0 24 24" style="color:var(--rose)"><path d="M13 2 3 14h7l-1 8 11-14h-7z"/></svg>Strohfeuer</div>
+            <div class="qd">Hohe Hürde, aber an einem Tag abzuhaken. Anstrengend, doch kein Dranbleiben — der Effekt verpufft.</div>
+          </div>
+          <div class="qcell good">
+            <span class="qtag y">Meister-Zone</span>
+            <div class="qt"><svg class="i" viewBox="0 0 24 24" style="color:var(--good)"><path d="M8 21h8m-4-4v4M7 4h10v4a5 5 0 0 1-10 0z"/></svg>Echte Leistung</div>
+            <div class="qd">Hohe Hürde über mehrere Tage. Das seltene, optionale Meister-Ziel — hier lebt „ich habe wirklich etwas geschafft".</div>
+            <span class="qex">z. B. 5 Tage Flamme halten</span>
+          </div>
+          <div class="qcell bad">
+            <span class="qtag n">meiden</span>
+            <div class="qt"><svg class="i" viewBox="0 0 24 24" style="color:var(--rose)"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Leerlauf</div>
+            <div class="qd">Niedrige Hürde, sofort erledigt. Kein Erfolgsgefühl, reines Abhaken.</div>
+            <span class="qex">z. B. reminder_seen allein</span>
+          </div>
+          <div class="qcell good">
+            <span class="qtag y">Standard-Zone</span>
+            <div class="qt"><svg class="i" viewBox="0 0 24 24" style="color:var(--good)"><path d="M20 6 9 17l-5-5"/></svg>Verlässliche Routine</div>
+            <div class="qd">Leichte Handlung, aber über mehrere Tage verteilt. Baut Gewohnheit &amp; Verlässlichkeit — das Brot-und-Butter der Wochen-Quests.</div>
+            <span class="qex">z. B. Dienst an 3 Tagen</span>
+          </div>
+        </div>
+        <div class="quad-xaxis"><span>Sofort erledigt</span><span>Über mehrere Tage →</span></div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:24px">
+      <h4><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Die Kern-Regel: „N von 5 Schultagen, mit Slack"</h4>
+      <p>Standard-Quests brauchen Aktivität an <b>2–3 verschiedenen Tagen</b> (realistisch Di–Fr schaffbar), Meister-Quests an <b>4–5</b>. Nie „jeden Tag" — die Lücke ist Absicht. Das hält die Balance <em>und</em> die Gütekriterien: 3 von 5 Tagen lässt Puffer, kein täglicher Leine-Zwang, kein Verfall, wenn man einen Tag auslässt (die Woche endet einfach). Nebeneffekt: verteiltes Üben ist auch pädagogisch das bessere Muster.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 3 · QUESTS IM ALLTAG ===================== -->
+  <section id="quests">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Quests, die in den Schulalltag passen</h2></div>
+    <p class="sec-sub">Die Signale sind schon echte Schulereignisse — das ist der Kern. Drei gezielte Ergänzungen bringen sie in die richtige Balance und stellen sicher, dass jede Quest im echten Wochenverlauf machbar ist.</p>
+
+    <div class="layers">
+      <div class="layer card">
+        <div class="n">A</div>
+        <h4>Tage-zählende Signale</h4>
+        <p>Ein „distinct-day"-Zusatz, der echte Streckung erzwingt: nicht „3 HÜ", sondern „an 3 verschiedenen Tagen aktiv". Kein Quest ist mehr in einer Handlung fertig.</p>
+      </div>
+      <div class="layer card">
+        <div class="n">B</div>
+        <h4>Machbarkeits-Filter</h4>
+        <p>Die Wochenauswahl bietet nur, was das Kind diese Woche auch erreichen <em>kann</em>: keine Dienst-Quest ohne Dienst, keine HÜ-Quest ohne fällige HÜ. Heute kann <span class="src">defaultWeeklyTemplateKeys</span> Unerfüllbares ausspielen.</p>
+      </div>
+      <div class="layer card">
+        <div class="n">C</div>
+        <h4>Neu kalibrieren</h4>
+        <p>Jede Vorlage bewusst ins Raster einordnen, Instant-Quests entschärfen (bündeln oder auf Wiederholung heben), Zielwerte an realistische Wochenmengen anpassen.</p>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <thead><tr><th>Quest heute</th><th>Problem</th><th>So wird sie ausbalanciert</th><th>Zone</th></tr></thead>
+        <tbody>
+          <tr><td class="qname">Funkspruch gelesen</td><td>1 Erinnerung sehen — sofort erledigt</td><td>In eine mehrteilige Wochen-Aufmerksamkeit bündeln oder als kleinen Zusatz einer größeren Quest führen</td><td><span class="chip low">Standard</span></td></tr>
+          <tr><td class="qname">Fleißige Woche</td><td>3 HÜ, evtl. alle an einem Tag</td><td>„an 3 verschiedenen Tagen je eine HÜ" statt bloßer Anzahl</td><td><span class="chip low">Standard</span></td></tr>
+          <tr><td class="qname">Vor der Zeit</td><td>1 HÜ vorzeitig — einmalige Handlung</td><td>Als Wahlpfad-Baustein behalten, aber nie als alleinige Wochen-Quest</td><td><span class="chip low">Standard</span></td></tr>
+          <tr><td class="qname">Dienst der Woche</td><td>gut — schon 3 Tage</td><td>bleibt; Vorbild für das distinct-day-Muster</td><td><span class="chip low">Standard</span></td></tr>
+          <tr><td class="qname">Meisterhafte Ausdauer</td><td>gut — 5 Tage in Folge</td><td>bleibt; genau die Meister-Zone, selten &amp; optional</td><td><span class="chip mid">Meister</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · GILDEN ===================== -->
+  <section id="gilden">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Gilden: länger, kooperativ, vertrauensbasiert — und fair</h2></div>
+    <p class="sec-sub">Der wunde Punkt. Gilden-Quests sollen etwas Besonderes sein: über 3–4 Tage oder die ganze Woche laufen und echte Zusammenarbeit verlangen. Die Frage „wie kann man Kooperation einfordern?" beantwortet sich nicht durch Zwang, sondern durch die <em>Form</em> des Ziels.</p>
+
+    <div class="persp">
+      <div class="persp-card card">
+        <h3 style="font-size:16.5px"><svg class="i big" viewBox="0 0 24 24" style="color:var(--teal)"><path d="M17 20h5v-2a4 4 0 0 0-3-3.87M9 20H2v-2a4 4 0 0 1 3-3.87m11-4.13a4 4 0 1 0-7 0M12 4a4 4 0 0 1 0 8"/></svg> Verteilter Kern (schummelsicher)</h3>
+        <p class="small">Das Gilden-Ziel wird ein <b>gemeinsamer Zähler, der Beiträge von verschiedenen Mitgliedern an verschiedenen Tagen verlangt</b> — z. B. „Die Gilde sammelt 5 erledigte HÜ, von mindestens 3 verschiedenen Mitgliedern". Ein Kind kann's nicht allein tragen → erzwingt Verteilung, braucht natürlicherweise mehrere Tage, basiert zu 100 % auf echten HÜ-Signalen. <b>Keine Schummel-Fläche.</b></p>
+      </div>
+      <div class="persp-card card">
+        <h3 style="font-size:16.5px"><svg class="i big" viewBox="0 0 24 24" style="color:var(--teal)"><path d="M20 6 9 17l-5-5"/></svg> „X von Y" statt „alle"</h3>
+        <p class="small">Nicht mehr „<em>jedes</em> Mitglied muss", sondern „<b>mindestens X von Y</b>". Kein einzelnes Kind blockiert oder beschämt die Gilde mehr — das entschärft die Sündenbock-Gefahr und bleibt trotzdem klar kooperativ (die Gruppe trägt gemeinsam).</p>
+      </div>
+    </div>
+
+    <div class="dec card" style="margin-top:16px">
+      <div class="q"><span class="qic"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/></svg></span>Das Vertrauens-Ritual — dein „wenn Anna sagt, sie hat's getan"</div>
+      <p>Ein optionales, <b>gegenseitiges</b> Zwei-Tipp-Bestätigen zweier Gildenmitglieder („Wir haben zusammengearbeitet") — rein als Bonus, nie als einziger Weg. Der entscheidende Fairness-Gedanke: <b>Selbstbericht ist hier gefahrlos, weil wir jeden Schummel-Anreiz entfernt haben.</b> Keine Rangliste, keine Knappheit, kein Einzel-Loot. Schummeln lohnt nur, wenn es etwas Knappes zu gewinnen gibt — genau das nehmen unsere Prinzipien weg. „Einfordern" heißt also: das Ziel so formen, dass Kooperation der natürliche Weg ist, und den Rest den Kindern vertrauen.</p>
+      <div class="rec"><span class="rl">Dauer</span><span>Der verteilte Kern zielt bewusst auf 3–4 Schultage, weil er Beiträge mehrerer Mitglieder über die Woche braucht — die Gilden-Quest fühlt sich damit spürbar „größer" an als eine Solo-Quest.</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== 5 · ITEMS ===================== -->
+  <section id="items">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Items, die etwas können — ohne FOMO</h2></div>
+    <p class="sec-sub">Items bleiben im System — sie sind eine gute Idee. Aber ein Item muss <em>wirken</em>, nicht nur besessen werden. Zwei Festlegungen: eine klare Taxonomie und feste Regeln fürs Verdienen, die FOMO und Grinding strukturell ausschließen.</p>
+
+    <p class="lead-q" style="margin-bottom:2px"><b>Wie verdient man Items ohne Suchtfalle?</b> Vier harte Regeln:</p>
+    <div class="checklist" style="margin-bottom:26px">
+      <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Kein Zeitverfall.</b> Items sind immer erreichbar — FOMO kommt aus „jetzt oder nie".</span></div>
+      <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Kein Zufalls-Loot.</b> Freischaltung an deterministischen, bedeutungsvollen Schwellen — variable Zufallsbelohnung ist der eigentliche Suchtkern.</span></div>
+      <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Kein endloses Sammeln.</b> Kleine, endliche Ziele — kein „sammle 100".</span></div>
+      <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Nebenprodukt, kein Selbstzweck.</b> Man grindet nicht <em>für</em> das Item — es entsteht aus echtem Schulengagement.</span></div>
+    </div>
+
+    <p class="lead-q" style="margin-bottom:2px"><b>Wie sollen Items funktionieren?</b> Drei Kategorien — Neue müssen Werkzeug oder Befugnis sein:</p>
+    <div class="itax">
+      <div class="it card" style="--stripe:#0F8A82">
+        <div class="k">Kategorie 1</div>
+        <h4>Werkzeug</h4>
+        <p>Man setzt es aktiv ein und es erzeugt ein echtes Ereignis im Schul-Workflow.</p>
+        <p class="ex">Schutzschild ✓ · Zeitkristall (HÜ-Frist verlängern, für Lehrer sichtbar) · Botenfeder (sanfter Eltern-Nudge)</p>
+      </div>
+      <div class="it card" style="--stripe:#5965B8">
+        <div class="k">Kategorie 2</div>
+        <h4>Befugnis</h4>
+        <p>Ändert eine Regel <em>für dich</em> — wirkt, ohne geklickt zu werden. Das stärkste „tut etwas"-Modell.</p>
+        <p class="ex">Meistersiegel ✓ (HÜ zählt ohne Eltern-Bestätigung) · Raum für 1 weitere</p>
+      </div>
+      <div class="it card" style="--stripe:#6E7E80">
+        <div class="k">Kategorie 3</div>
+        <h4>Ausdruck <span style="font-weight:400;color:var(--muted)">(Minderheit)</span></h4>
+        <p>Reine Zugehörigkeit/Identität. Ehrlich benannt — und diese Kategorie <b>wächst nicht</b> (respektiert den Streichungs-Beschluss zur Kosmetik-Basis).</p>
+        <p class="ex">Gildenbanner</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:20px">
+      <h4><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg> Die Interaktion mit der Schulwelt ist der Prüfstein</h4>
+      <p>Ein Item „interagiert", wenn sein Einsatz ein kleines, echtes, beobachtbares Ereignis im Schul-Ablauf auslöst: eine Frist verlängern (die Lehrkraft sieht es), einen Eltern-Nudge senden, eine HÜ ohne Extra-Bestätigung zählen lassen. Genau diese Kopplung an das reale Schulleben unterscheidet ein Werkzeug von einem Abzeichen.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 6 · FAHRPLAN ===================== -->
+  <section id="fahrplan">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Fahrplan</h2></div>
+    <p class="sec-sub">Drei Phasen, nach Abhängigkeit &amp; Risiko geordnet — jede für sich ausspielbar. Darüber liegt eine Checkliste, die jeder neue Baustein passieren muss.</p>
+
+    <div class="phase card">
+      <div class="phase-head"><span class="phase-num">1</span><h3>Quest-Kalibrierung</h3><span class="chip low">geringstes Risiko</span></div>
+      <p class="goal">Fundament: die alltägliche Quest-Erfahrung in Balance bringen.</p>
+      <ul>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--teal);flex:none"><path d="M20 6 9 17l-5-5"/></svg><span><b>Distinct-day-Signale</b> einführen, damit Zählen echt über Tage streckt.</span></li>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--teal);flex:none"><path d="M20 6 9 17l-5-5"/></svg><span><b>Machbarkeits-Filter</b> in der Wochenauswahl · Instant-Quests entschärfen · Zielwerte neu kalibrieren.</span></li>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--muted);flex:none"><path d="M4 7h16"/><path d="M7 7V5h10v2"/></svg><span>Fast nur <span class="src">questVault.ts</span> + <span class="src">quests.ts</span>.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase card">
+      <div class="phase-head"><span class="phase-num">2</span><h3>Gilden-Quest v2 (echte Kooperation)</h3><span class="chip mid">mittel</span></div>
+      <p class="goal">Aus paralleler Solo-Arbeit gelebte Zusammenarbeit machen.</p>
+      <ul>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--teal);flex:none"><path d="M20 6 9 17l-5-5"/></svg><span><b>Verteilter Zähler</b> statt Aggregation · <b>„X von Y"</b> gegen Sündenbock-Effekt.</span></li>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--teal);flex:none"><path d="M20 6 9 17l-5-5"/></svg><span>Optionales <b>Vertrauens-Ritual</b>, auf 3–4 Tage getunt.</span></li>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--muted);flex:none"><path d="M4 7h16"/><path d="M7 7V5h10v2"/></svg><span><span class="src">guilds.ts</span> + Gilden-Quest-UI.</span></li>
+      </ul>
+    </div>
+
+    <div class="phase card">
+      <div class="phase-head"><span class="phase-num">3</span><h3>Items als Werkzeuge</h3><span class="chip high">größter Umfang</span></div>
+      <p class="goal">Items, die etwas tun — mit Kopplung an die echte Schulwelt.</p>
+      <ul>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--teal);flex:none"><path d="M20 6 9 17l-5-5"/></svg><span><b>Zeitkristall</b> (Frist verlängern, Lehrer-sichtbar) + <b>Botenfeder</b> (Eltern-Nudge, mit Datenschutz-Sorgfalt) real bauen.</span></li>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--teal);flex:none"><path d="M20 6 9 17l-5-5"/></svg><span>Taxonomie festschreiben · evtl. 1 neue Befugnis.</span></li>
+        <li><svg class="i" viewBox="0 0 24 24" style="color:var(--muted);flex:none"><path d="M4 7h16"/><path d="M7 7V5h10v2"/></svg><span>Rucksack + neue Server-Actions + Schema. Zuletzt, da höchstes Risiko (Nachricht/Datenschutz).</span></li>
+      </ul>
+    </div>
+
+    <div class="note" style="margin-top:24px; border-color:color-mix(in srgb, var(--good) 34%, var(--line)); background:color-mix(in srgb, var(--good) 6%, var(--card))">
+      <h4 style="color:var(--good)"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Querschnitt: Gütekriterien-Checkliste (auf jede Phase angewandt)</h4>
+      <div class="checklist" style="margin-top:12px">
+        <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span>Kein Zeitdruck / kein Verfall <span style="color:var(--muted)">(kein FOMO)</span></span></div>
+        <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span>Kein Zufalls-Loot <span style="color:var(--muted)">(variable-ratio = Suchtkern)</span></span></div>
+        <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span>Kein Vergleich / keine Rangliste <span style="color:var(--muted)">(Prinzip 1)</span></span></div>
+        <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span>Kein täglicher Zwang <span style="color:var(--muted)">(N-von-5 mit Slack)</span></span></div>
+        <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span>Kein endloses Sammeln <span style="color:var(--muted)">(endliche Ziele)</span></span></div>
+        <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span>Belohnung feiert kollektiv, steuert nicht <span style="color:var(--muted)">(Overjustification)</span></span></div>
+        <div class="check"><span class="cm"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg></span><span>Selbstbericht nur ohne Schummel-Anreiz <span style="color:var(--muted)">(keine Knappheit)</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7 · RISIKEN ===================== -->
+  <section id="risiken">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Risiken &amp; pädagogische Fallen im laufenden Schuljahr</h2></div>
+    <p class="sec-sub">Ehrliche Gegenperspektive für den realen Einsatz — was im Klassenalltag über ein Schuljahr schiefgehen kann. Ergänzt die grundsätzliche <a href="2026-07-risiken-gamifizierung.html">kritische Einordnung</a> um die konkreten Betriebs-Fallen. Jede Falle steht neben ihrer Gegenmaßnahme.</p>
+
+    <div class="risk card">
+      <div class="rh"><span class="ric"><svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><path d="m4 4 16 16"/></svg></span>Mogeln &amp; Selbstbestätigung ohne Deckung</div>
+      <p class="sig">Die App vertraut Kindern bewusst (Dienste selbst bestätigen, evtl. Kooperations-Ritual). Ohne Gegengewicht könnte man Dinge als erledigt markieren, die nicht passiert sind — und wenn daran etwas Begehrtes hinge, entstünde ein echter Schummel-Anreiz.</p>
+      <p class="mit"><span class="ml">Gegen</span><span><b>Anreiz entziehen statt kontrollieren:</b> keine Rangliste, keine Knappheit, kein Einzel-Loot → Lügen bringt nichts ein. Selbstbericht nur dort, wo er folgenlos für Vergleiche ist; die harten Signale (HÜ, Eltern-Bestätigung) bleiben die Basis. Vertrauen als pädagogischer Wert, nicht als Sicherheitslücke.</span></p>
+    </div>
+
+    <div class="risk card">
+      <div class="rh"><span class="ric"><svg class="i" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg></span>Neuheitseffekt &amp; nachlassendes Interesse</div>
+      <p class="sig">Gamification-Effekte sind klein und oft ein Strohfeuer: der Reiz verfliegt, wenn immer dieselben Quests kommen. Über ein Schuljahr ist Abnutzung die realistischste Bedrohung — Kinder klicken irgendwann gelangweilt weg.</p>
+      <p class="mit"><span class="ml">Gegen</span><span><b>Varietät &amp; Rhythmus:</b> Wochen-Fokus-Rotation, wechselnde Season-Welten &amp; Guides, durchblätterbare Story als Einladung statt Pflicht. Bewusst niedrige Grundfrequenz (Wochentakt), damit nichts abstumpft — lieber selten &amp; bedeutsam als täglich &amp; beliebig.</span></p>
+    </div>
+
+    <div class="risk card">
+      <div class="rh"><span class="ric"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Unübersichtlichkeit &amp; Überfrachtung</div>
+      <p class="sig">In den letzten Bauphasen sind viele Karten dazugekommen (Quests, Gilden, Heldenbuch, Rucksack, Story-Hero …). Für ein Kind — gerade jüngere oder leseschwächere — kann die Startseite zur Reizüberflutung werden; der Kern (was ist heute zu tun?) verschwindet im Zierrat.</p>
+      <p class="mit"><span class="ml">Gegen</span><span><b>Ein bewusster UI/UX-Politur-Pass</b> (bereits vorgemerkt): Karten-Hierarchie neu ordnen, „was ist heute dran" nach oben, Erklär-/Info-Boxen dezent ergänzen (was ist eine Gilde? wie funktionieren Quests?). Weniger gleichzeitig sichtbar, mehr auf Unterseiten holbar.</span></p>
+    </div>
+
+    <div class="risk card">
+      <div class="rh"><span class="ric"><svg class="i" viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7z"/><path d="m4 4 16 16" opacity=".5"/></svg></span>Bruch zwischen App und realer Schulwelt</div>
+      <p class="sig">Die größte konzeptionelle Falle: Wenn die App-Welt neben dem Unterricht herläuft, statt in ihn verwoben zu sein, wird Gamification zum folgenlosen Nebenschauplatz — Kinder „spielen" die App, ohne dass es das echte Lernen/Verhalten berührt. Items, die nur im Rucksack liegen, sind genau dieser Bruch in klein.</p>
+      <p class="mit"><span class="ml">Gegen</span><span><b>Jedes Element an ein echtes Schulsignal koppeln</b> — das ist bereits das Fundament (Quests = berechnete Sicht auf reale Ereignisse) und wird konsequent durchgezogen: Items werden Werkzeuge mit realer Wirkung, Gilden-Ziele an echte HÜ gebunden, die Lehrkraft bleibt Bindeglied. Die App spiegelt den Schulalltag, sie ersetzt ihn nicht.</span></p>
+    </div>
+
+    <div class="risk card">
+      <div class="rh"><span class="ric"><svg class="i" viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3z"/><path d="M12 9v5M12 17v.5"/></svg></span>Fairness: unterschiedliche Voraussetzungen</div>
+      <p class="sig">Nicht alle Kinder haben dieselben Bedingungen: manche bekommen zu Hause zuverlässig Eltern-Bestätigungen, andere nie; manche haben ein Gerät griffbereit, andere nicht. Quests, die an solche ungleichen Voraussetzungen hängen, benachteiligen systematisch — und beschämen womöglich.</p>
+      <p class="mit"><span class="ml">Gegen</span><span><b>Alternative Wege &amp; kein Vergleich:</b> Wahlpfade, damit niemand an <em>einer</em> Voraussetzung hängt; Meistersiegel als Ausweg aus der Eltern-Abhängigkeit; keine öffentliche Sichtbarkeit, wer wie weit ist. Die Lehrkraft kann Quests kuratieren, wenn eine Klasse besondere Bedingungen hat.</span></p>
+    </div>
+
+    <div class="risk card">
+      <div class="rh"><span class="ric"><svg class="i" viewBox="0 0 24 24"><path d="M20 7h-9M14 17H5M17 3l3 4-3 4M7 21l-3-4 3-4"/></svg></span>Mehrbelastung der Lehrkraft</div>
+      <p class="sig">Wenn das System ständige Pflege verlangt (Quests setzen, Fortschritt prüfen, Gilden verwalten), scheitert es im Alltag an fehlender Zeit — ein gut dokumentiertes Gamification-Risiko. Die schönste Mechanik nützt nichts, wenn sie die Lehrperson überlastet.</p>
+      <p class="mit"><span class="ml">Gegen</span><span><b>Automatik als Default</b> (Prinzip 5): Quests &amp; Gilden rollen von selbst aus, die Lehrkraft <em>kann</em> kuratieren, muss aber nicht. Für Erwachsene gibt es Klarheit, keine Gamifizierung — kein zusätzlicher Spiel-Pflege-Aufwand.</span></p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — Schülerperspektive · begleitend zu <a href="2026-07-gamification-prinzipien.html">Prinzipien</a> &amp; <a href="2026-07-gamification-konzept.html">Konzept</a></span>
+    <span>Juli 2026 · v1</span>
+  </div>
+</div>
+
+<script>
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { e.target.style.animationDelay = '0ms'; io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  }
+</script>
+</body>
+</html>
