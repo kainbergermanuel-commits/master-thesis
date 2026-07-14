@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technischer Umsetzungsplan — Master-Thesis KlassenHub</title>
+<meta name="description" content="Der file-genaue technische Fahrplan zur Schülerperspektive-Balance: QuestContext-Extraktion, Phase 1 (Quest-Kalibrierung), Phase 2 (Gilden-Kooperation), Phase 3 (Items als Werkzeuge) — mit Datenmodell, Risiken und Reihenfolge.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  /* ---- Warnkarte (Doppelungs-Befund) ---- */
+  .warn { padding: 20px 22px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--rose) 32%, var(--line)); background: color-mix(in srgb, var(--rose) 6%, var(--card)); border-left: 4px solid var(--rose); }
+  .warn h4 { font-family: var(--display); font-size: 15px; color: var(--rose); display: flex; align-items: center; gap: 8px; }
+  .warn p { font-size: 13.5px; color: var(--ink-soft); margin-top: 8px; }
+
+  /* ---- Datei-Karten ---- */
+  .filecard { padding: 16px 18px; }
+  .filecard .fp { font-family: var(--mono); font-size: 12.5px; color: var(--teal); font-weight: 700; word-break: break-all; }
+  .filecard .fd { font-size: 13px; color: var(--ink-soft); margin-top: 7px; }
+  .filegrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  @media (max-width: 700px) { .filegrid { grid-template-columns: 1fr; } }
+
+  /* ---- Entscheidungs-/Ritual-Karte (aus Prinzipien-Doc übernommen) ---- */
+  .dec { padding: 19px 20px; margin-top: 14px; border-left: 4px solid var(--amber); }
+  .dec .q { font-family: var(--display); font-weight: 800; font-size: 16px; display: flex; align-items: center; gap: 9px; }
+  .dec .q .qic { width: 26px; height: 26px; border-radius: 8px; background: color-mix(in srgb, var(--amber) 16%, transparent); color: var(--amber); display: grid; place-items: center; flex: none; }
+  .dec p { font-size: 13.5px; color: var(--ink-soft); margin-top: 9px; }
+  .dec .rec { margin-top: 11px; font-size: 13px; color: var(--good); font-weight: 700; display: flex; gap: 7px; align-items: flex-start; }
+  .dec .rec .rl { font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good); padding: 2px 7px; border-radius: 999px; flex: none; margin-top: 1px; }
+
+  /* ---- Risiko-Ampel je Phase ---- */
+  .risk-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
+  .risk-row .rdot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+
+  /* ---- Sequenz / Baureihenfolge ---- */
+  .seq { display: flex; flex-direction: column; margin-top: 16px; }
+  .seq-item { display: grid; grid-template-columns: 30px 1fr; gap: 14px; position: relative; padding-bottom: 20px; }
+  .seq-item:not(:last-child)::before { content: ""; position: absolute; left: 14px; top: 30px; bottom: 0; width: 2px; background: var(--line); }
+  .seq-item .sn { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--teal), var(--teal-2)); z-index: 1; flex: none; font-family: var(--display); font-weight: 800; font-size: 13px; }
+  .seq-item h4 { font-family: var(--display); font-size: 15.5px; margin-bottom: 3px; }
+  .seq-item p { font-size: 13.5px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      Technischer Umsetzungsplan
+    </div>
+    <div class="legend">
+      <span class="lg"><span class="dot low"></span>gering</span>
+      <span class="lg"><span class="dot mid"></span>mittel</span>
+      <span class="lg"><span class="dot high"></span>hoch</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">App-Weiterentwicklung · Technischer Fahrplan</div>
+    <h1>Vom Prinzip<br>zum Code.</h1>
+    <p class="lede">Die file-genaue Umsetzung der in <a href="2026-07-gamification-balance.html">„Balance, Alltag &amp; Vertrauen"</a> entworfenen Änderungen: Datenmodell, betroffene Dateien, Reihenfolge und Risiko pro Baustein. Jede Phase respektiert die dort festgeschriebenen Gütekriterien — nichts hier führt Ranglisten, Zufalls-Loot oder Zeitverfall ein.</p>
+    <div class="thesis">
+      <strong>Zentraler Befund vor allem anderen:</strong> Der <span class="src">QuestContext</span> wird heute an <b>zwei Stellen identisch</b> gebaut — Startseite und Abenteuerseite (<span class="src">app/(app)/page.tsx</span> &amp; <span class="src">app/(app)/streaks/page.tsx</span>). Jede Signal-Änderung müsste sonst doppelt gepflegt werden; genau dieses Muster hat in der Vergangenheit schon einen Bug erzeugt (<span class="src">getAuth()</span> statt <span class="src">getEffectiveAuth()</span>, kopiert von einer Stelle zur anderen). Erster Schritt: extrahieren.
+    </div>
+  </header>
+
+  <!-- ===================== 0 · EXTRAKTION ===================== -->
+  <section id="extraktion">
+    <div class="sec-head"><span class="sec-num">00</span><h2>Vorarbeit: QuestContext-Extraktion</h2></div>
+    <p class="sec-sub">Bevor neue Signale dazukommen, wird der bestehende Aufbau einmalig konsolidiert — das ist die Grundlage, die jede folgende Phase günstiger macht.</p>
+
+    <div class="warn">
+      <h4><svg class="i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.71 3.86a2 2 0 0 0-3.42 0z"/></svg> Doppelter Aufbau, heute</h4>
+      <p>Beide Server-Components laden dieselben Wochen-Daten (Reminders, Events, Duty-Completions, HÜ-Completions) und bauen daraus manuell denselben <span class="src">QuestContext</span> — Zeile für Zeile identisch. Eine neue Signalquelle (z. B. „verschiedene Tage") muss sonst an beiden Stellen ergänzt werden, mit dem Risiko, eine zu vergessen.</p>
+    </div>
+
+    <div class="filegrid">
+      <div class="filecard card">
+        <div class="fp">lib/questContext.ts <span style="color:var(--violet)">· neu</span></div>
+        <div class="fd">Eine Funktion <span class="src">buildQuestContext(supabase, activeClassId, profile, weekStart, weekEnd, allHwDesc, doneByStudent, confirmedDoneByStudent)</span> — lädt Reminders/Events/Duty-Completions, baut <span class="src">QuestContext</span> exakt wie bisher. Beide Seiten rufen nur noch diese eine Funktion.</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">app/(app)/page.tsx &amp; streaks/page.tsx <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd">Der komplette <span class="src">questCtx</span>-Aufbau-Block wird durch einen Aufruf von <span class="src">buildQuestContext()</span> ersetzt. Reines Refactoring, keine Verhaltensänderung — Regressionstest: Quest-Fortschritt auf beiden Seiten muss identisch bleiben.</div>
+      </div>
+    </div>
+    <div class="risk-row"><span class="rdot" style="background:var(--teal)"></span>Risiko: gering — reines Refactoring ohne neues Verhalten</div>
+  </section>
+
+  <!-- ===================== 1 · QUEST-KALIBRIERUNG ===================== -->
+  <section id="phase1">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Phase 1 — Quest-Kalibrierung</h2></div>
+    <p class="sec-sub">Größter Alltagsnutzen, kleinstes Risiko. Kein Schema nötig — alle Signale sind aus bereits geladenen Daten ableitbar (<span class="src">completed_at</span> liegt in <span class="src">homework_completions</span> schon vor).</p>
+
+    <div class="filegrid">
+      <div class="filecard card">
+        <div class="fp">lib/quests.ts <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd">Neuer Signaltyp <span class="src">homework_days</span> — zählt verschiedene Kalendertage mit HÜ-Erledigung statt roher Anzahl. Neues Context-Feld <span class="src">doneDatesThisWeek: Set&lt;string&gt;</span>, aus <span class="src">completed_at</span> der Woche abgeleitet (keine neue Query). <span class="src">signalLabel()</span> bekommt „an X Tagen erledigt".</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">lib/questVault.ts <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd"><span class="src">hw_x3</span> von <span class="src">{homework, targetCount:3}</span> auf <span class="src">{homework_days, targetCount:3}</span>. Neues Flag <span class="src">soloEligible?: false</span> für Templates wie <span class="src">reminder_seen</span>/<span class="src">hw_early</span> — dürfen nicht mehr allein als Wochen-Quest gezogen werden, nur noch in Kombi-Quests wie <span class="src">weekly_bundle</span>.</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">lib/quests.ts → defaultWeeklyTemplateKeys <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd">Machbarkeits-Filter: Signatur erweitert um <span class="src">Feasibility {hasDuty, hasWeekHw, hasWeekEvent}</span>, aus schon geladenen Wochen-Daten. Templates mit unerfüllbarem Signal werden aus dem Pool gefiltert, <b>bevor</b> gezogen wird. Fallback auf ungefilterten Pool, falls &lt;3 Quests übrig bleiben (Determinismus + Mindestanzahl bleiben garantiert).</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">components/home/WeeklyQuestCard.tsx <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd">Nur Label-Anpassung für <span class="src">homework_days</span> — keine strukturelle Änderung.</div>
+      </div>
+    </div>
+
+    <div class="risk-row"><span class="rdot" style="background:var(--teal)"></span>Risiko: gering — verifizierbar mit Testdaten (Annas Klasse). Der LCG/<span class="src">Math.imul</span>-Fix in <span class="src">defaultWeeklyTemplateKeys</span> darf nicht brechen: Auswahl nach der Änderung erneut über viele simulierte Wochen prüfen (wie beim ursprünglichen 12.000-Kombinationen-Test).</div>
+  </section>
+
+  <!-- ===================== 2 · GILDEN-QUEST V2 ===================== -->
+  <section id="phase2">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Phase 2 — Gilden-Quest v2</h2></div>
+    <p class="sec-sub">Aus paralleler Solo-Arbeit gelebte Zusammenarbeit machen. Verteilter Kern bleibt rein berechnet (kein Schema); nur das optionale Vertrauens-Ritual braucht eine kleine Tabelle.</p>
+
+    <div class="filegrid">
+      <div class="filecard card">
+        <div class="fp">lib/guilds.ts <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd">Neuer <span class="src">GuildQuestSignal</span>: <span class="src">{type:'distributed_homework', totalCount, minContributors}</span>. <span class="src">computeGuildQuestProgress</span> zählt Gesamt-HÜ der Gilde <b>und</b> Anzahl beitragender Mitglieder aus bereits vorhandenem <span class="src">doneByStudent</span>. Bestehende „alle-Mitglieder"-Quests: <span class="src">done</span>-Bedingung von <span class="src">membersMet === total</span> auf <span class="src">membersMet ≥ ceil(total × minShare)</span> (Default 0.75) umgestellt.</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">supabase/feature-guild-coop.sql <span style="color:var(--violet)">· neu, nur bei Ja</span></div>
+        <div class="fd">Tabelle <span class="src">guild_coop_confirms (class_id, season, week_start, student_a, student_b, created_at)</span>. RLS: Insert nur wenn <span class="src">auth.uid() ∈ {a,b}</span> und beide in derselben Gilde. Gegenseitigkeit = zwei Zeilen oder Zwei-Schritt-Flow. Idempotent, RLS über <span class="src">my_class_ids()</span>.</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">app/actions/confirmGuildCoop.ts <span style="color:var(--violet)">· neu, nur bei Ja</span></div>
+        <div class="fd"><b>Muss <span class="src">getEffectiveAuth()</span> nutzen</b>, nicht <span class="src">getAuth()</span> — sonst bricht die Lehrer-Vorschau-als-Schüler-Funktion (bekanntes Muster). Reines Bonus-Signal, gate nichts Knappes dahinter.</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">components/home/WeeklyQuestCard.tsx (Gilden-Block) <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd">Zeigt Sammel-Fortschritt „3 von 5 HÜ · 2 Mitglieder dabei" statt nur binärem Haken; optional die Ritual-Bestätigung als kleine Zwei-Tipp-UI.</div>
+      </div>
+    </div>
+
+    <div class="risk-row"><span class="rdot" style="background:var(--amber)"></span>Risiko: mittel — verteilter Zähler ist schummelsicher (nur echte HÜ-Signale), aber bei kleinen Gilden (3er) muss <span class="src">minContributors</span> erreichbar bleiben (Simulation vor Rollout).</div>
+  </section>
+
+  <!-- ===================== 3 · ITEMS ALS WERKZEUGE ===================== -->
+  <section id="phase3">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Phase 3 — Items als Werkzeuge</h2></div>
+    <p class="sec-sub">Größter Umfang, höchstes Risiko — deshalb zuletzt. Zeitkristall vor Botenfeder (weniger Datenschutz-Fläche).</p>
+
+    <div class="warn" style="border-color:color-mix(in srgb, var(--amber) 35%, var(--line)); background:color-mix(in srgb, var(--amber) 6%, var(--card)); border-left-color:var(--amber)">
+      <h4 style="color:var(--amber)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Der eigentliche Aufwand: effectiveDueDate</h4>
+      <p><span class="src">due_date</span> fließt in drei getrennte Berechnungen ein: <span class="src">computeStreak</span> &amp; <span class="src">findBreakingHomework</span> (<span class="src">lib/streak.ts</span>) und <span class="src">classGoal</span> (<span class="src">lib/classGoal.ts</span>). Eine per-Schüler-Verlängerung muss an <b>allen drei</b> Stellen berücksichtigt werden — sonst hält die Streak eine „verlängerte" HÜ trotzdem für überfällig. Das ist die eigentliche Arbeit dieser Phase, nicht die UI.</p>
+    </div>
+
+    <div class="filegrid" style="margin-top:16px">
+      <div class="filecard card">
+        <div class="fp">supabase/feature-hw-extension.sql <span style="color:var(--violet)">· neu</span></div>
+        <div class="fd"><span class="src">homework_extensions (student_id, homework_id, extra_days smallint, created_at)</span>. 1×/Season pro Kind, analog <span class="src">streak_freezes</span>. RLS wie <span class="src">duty_completions</span> (eigene Zeile, Lehrer-Read der Klasse).</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">lib/streak.ts <span style="color:var(--rose)">· ändern, zentral</span></div>
+        <div class="fd">Neue Helper-Funktion <span class="src">effectiveDueDate(hwId, studentId, extensions)</span> — wird überall statt des rohen <span class="src">hw.due_date</span> verwendet. <span class="src">computeStreak</span>/<span class="src">findBreakingHomework</span> nehmen zusätzlich <span class="src">extensions</span> als Parameter.</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">lib/classGoal.ts <span style="color:var(--rose)">· ändern</span></div>
+        <div class="fd">Gleiches Prinzip: Klassenziel-Fortschritt muss die individuelle Verlängerung eines Kindes respektieren, ohne das Klassenziel selbst zu verschieben (Verlängerung ist personenbezogen, nicht klassenweit).</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">app/actions/useTimeCrystal.ts <span style="color:var(--violet)">· neu</span></div>
+        <div class="fd"><span class="src">getEffectiveAuth()</span>, Insert + <span class="src">revalidatePath</span>. Lehrer-Sichtbarkeit: Verlängerungen in der Lehreransicht der HÜ anzeigen (Transparenz, Prinzip 5 — nicht heimlich).</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">supabase/feature-parent-nudge.sql <span style="color:var(--violet)">· neu</span></div>
+        <div class="fd"><span class="src">parent_nudges (student_id, parent_id, homework_id, created_at)</span>, rate-limited (z. B. 1×/Tag via Check-Constraint oder Action-seitig). <b>Kein Freitext</b> — vordefinierter Text, kein vom Kind verfasster Inhalt (bleibt innerhalb der Sicherheitsregeln, kein „Nachricht senden" im eigentlichen Sinn).</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">app/actions/sendParentNudge.ts <span style="color:var(--violet)">· neu</span></div>
+        <div class="fd">Eltern sehen „Dein Kind bittet um Bestätigung von HÜ X" als kanonischen Hinweis (z. B. im Mitteilungsheft-Kontext oder als eigener Reminder-Typ) — kein neues Freitext-Messaging-Feature.</div>
+      </div>
+      <div class="filecard card">
+        <div class="fp">components/streaks/RucksackItems.tsx <span style="color:var(--amber)">· ändern</span></div>
+        <div class="fd">Zeitkristall &amp; Botenfeder von „In Entwicklung" auf echte Werkzeug-Items umgestellt (Klick löst Action aus, wie beim Schutzschild-Muster). Optional: Feld <span class="src">kind: 'werkzeug'|'befugnis'|'ausdruck'</span> pro Item, damit die „Ausdruck wächst nicht"-Regel im Code sichtbar bleibt.</div>
+      </div>
+    </div>
+
+    <div class="risk-row"><span class="rdot" style="background:var(--rose)"></span>Risiko: hoch — v. a. <span class="src">effectiveDueDate</span> korrekt an allen drei Stellen einzuziehen. Braucht gründliche Streak-Regressionstests, bevor es live geht.</div>
+  </section>
+
+  <!-- ===================== 4 · OFFENE WEICHEN ===================== -->
+  <section id="weichen">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Drei offene Weichen</h2></div>
+    <p class="sec-sub">Details, die vor bzw. während der jeweiligen Phase zu entscheiden sind.</p>
+
+    <div class="dec card">
+      <div class="q"><span class="qic"><svg class="i" viewBox="0 0 24 24"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/></svg></span>Gilden-Kern: verteilt oder nur „X von Y"?</div>
+      <p>Der verteilte Zähler (<span class="src">distributed_homework</span>) erzwingt Kooperation strukturell und ist der stärkere Hebel — aber auch der komplexere Code. Die reine „X-von-Y statt alle"-Umstellung ist ein kleinerer, risikoärmerer erster Schritt.</p>
+      <div class="rec"><span class="rl">Empf.</span><span>Beides bauen, aber nacheinander: erst „X von Y" (klein, sofort das Sündenbock-Problem behoben), dann den verteilten Zähler als eigentliche Kooperations-Mechanik obendrauf.</span></div>
+    </div>
+
+    <div class="dec card">
+      <div class="q"><span class="qic"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/></svg></span>Vertrauens-Ritual bauen?</div>
+      <p>Der einzige neue Selbstbericht-Baustein — gefahrlos, weil kein Schummel-Anreiz existiert, aber zusätzliches Schema + Action.</p>
+      <div class="rec"><span class="rl">Empf.</span><span>Erst nach dem verteilten Zähler bewerten, ob er die Kooperation schon spürbar genug macht — das Ritual als optionalen Bonus nachziehen, falls noch „mehr Gefühl von Zusammenarbeit" gewünscht ist.</span></div>
+    </div>
+
+    <div class="dec card">
+      <div class="q"><span class="qic"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 8l9 6 9-6"/><path d="M21 8v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/></svg></span>Botenfeder: Nudge-Flag oder echtes Messaging?</div>
+      <p>Ein kanonischer, vordefinierter Hinweis ist datenschutzarm und schnell gebaut. Freies Formulieren würde eine echte Send-Message-Fläche öffnen.</p>
+      <div class="rec"><span class="rl">Empf.</span><span>Kanonischer Nudge-Flag (kein Freitext) — deckt den Zweck („Eltern erinnern") ohne die Sicherheits-/Zustimmungsschwelle für freies Senden zu berühren.</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== 5 · REIHENFOLGE ===================== -->
+  <section id="reihenfolge">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Baureihenfolge</h2></div>
+    <div class="seq">
+      <div class="seq-item"><div class="sn">0</div><div><h4>QuestContext-Extraktion</h4><p><span class="src">lib/questContext.ts</span> — Vorarbeit, entfernt die Doppelung zwischen Start- und Abenteuerseite.</p></div></div>
+      <div class="seq-item"><div class="sn">1</div><div><h4>Phase 1 — Quest-Kalibrierung</h4><p>Distinct-day-Signale, Machbarkeits-Filter, Instant-Quests entschärft. Größter Alltagsnutzen, kleinstes Risiko.</p></div></div>
+      <div class="seq-item"><div class="sn">2</div><div><h4>Phase 2 — Gilden-Quest v2</h4><p>„X von Y" zuerst, dann der verteilte Zähler; Vertrauens-Ritual optional obendrauf.</p></div></div>
+      <div class="seq-item"><div class="sn">3</div><div><h4>Phase 3 — Items als Werkzeuge</h4><p>Zeitkristall vor Botenfeder. Größter Umfang, höchstes Risiko — <span class="src">effectiveDueDate</span> braucht Sorgfalt.</p></div></div>
+    </div>
+
+    <div class="note" style="margin-top:22px">
+      <h4><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Querschnitt, gilt für jeden Schritt</h4>
+      <p><span class="src">getEffectiveAuth()</span> in jeder neuen Action, nie <span class="src">getAuth()</span> · Migrationen idempotent (<span class="src">drop policy if exists</span>, <span class="src">create table if not exists</span>) + RLS über <span class="src">my_class_ids()</span> · Test-Hack (<span class="src">monthEnd</span>-Verlängerung) bleibt unberührt, vor Live zurücksetzen · nichts pushen ohne explizites „push".</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — Technischer Plan · begleitend zu <a href="2026-07-gamification-balance.html">Balance, Alltag &amp; Vertrauen</a></span>
+    <span>Juli 2026 · v1</span>
+  </div>
+</div>
+
+<script>
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { e.target.style.animationDelay = '0ms'; io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  }
+</script>
+</body>
+</html>
