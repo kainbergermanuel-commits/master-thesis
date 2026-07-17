@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juli-Update — Master-Thesis KlassenHub</title>
+<meta name="description" content="Anwesenheit vom Konzept zur lauffähigen App, ein gezielter Fehler-Audit im Abenteuer-System und die Vertiefung von Story-Welt und Quests: Splitter-Zeichen, Guide-Stimmen, Wochensiegel, neue Wahlpfade.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  .ev { display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+  .ev.done { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .ev.fix { color: var(--rose); background: color-mix(in srgb, var(--rose) 15%, transparent); }
+  .ev.cut { color: var(--muted); background: var(--paper-2); }
+
+  .impl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  @media (max-width: 760px) { .impl-grid { grid-template-columns: 1fr; } }
+  .impl { padding: 18px; }
+  .impl .ih { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+  .impl .ic { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; color: #fff; flex: none; }
+  .impl h4 { font-family: var(--display); font-size: 15.5px; }
+  .impl p { font-size: 13px; color: var(--ink-soft); }
+  .impl .why { margin-top: 10px; font-size: 12px; color: var(--ink-soft); border-left: 2px solid var(--line); padding-left: 10px; }
+  .impl .why b { color: var(--ink); }
+
+  .bug { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; margin-top: 10px; }
+  .bug .bn { width: 26px; height: 26px; border-radius: 50%; background: color-mix(in srgb, var(--rose) 15%, transparent); color: var(--rose); display: grid; place-items: center; font-family: var(--mono); font-size: 12px; font-weight: 700; }
+  .bug h4 { font-family: var(--display); font-size: 14.5px; margin-bottom: 4px; }
+  .bug p { font-size: 13px; color: var(--ink-soft); }
+  .bug .fixnote { margin-top: 6px; font-size: 12.5px; color: var(--good); font-weight: 600; }
+
+  .cutcard { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 16px; margin-top: 10px; }
+  .cutcard .bn { width: 26px; height: 26px; border-radius: 50%; background: var(--paper-2); color: var(--muted); display: grid; place-items: center; }
+  .cutcard h4 { font-family: var(--display); font-size: 14.5px; margin-bottom: 4px; }
+  .cutcard p { font-size: 13px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      Juli-Update
+    </div>
+    <div class="legend">
+      <span class="ev done">Umgesetzt</span>
+      <span class="ev fix">Bugfix</span>
+      <span class="ev cut">Bewusst gekappt</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">App-Weiterentwicklung · Sammel-Update</div>
+    <h1>Anwesenheit live,<br>Abenteuer vertieft.</h1>
+    <p class="lede">Zwei parallele Arbeitsstränge: Das <a href="2026-07-anwesenheit-konzept.html">Anwesenheits-Konzept</a> wurde vollständig gebaut und ist jetzt lauffähig. Parallel dazu wurde das bestehende Abenteuer-System (Quests, Streaks, Story-Welt) einem gezielten Fehler-Audit unterzogen und anschließend inhaltlich vertieft — mit einer bewussten Entscheidung, den Gilden-Baustein noch nicht anzufassen.</p>
+    <div class="thesis">
+      <strong>Für die Thesis interessant:</strong> Dieses Update zeigt beide Seiten iterativer Entwicklung nebeneinander — reines Feature-Bauen (Anwesenheit) und ein separater, gezielter Qualitäts-Durchgang an bereits laufendem Code (Abenteuer-Audit). Die Entscheidung, Gilden bewusst zurückzustellen statt aus Zeitdruck grob mitzuändern, ist selbst ein kleines Beispiel für Scope-Disziplin.
+    </div>
+  </header>
+
+  <!-- ===================== 1 · ANWESENHEIT ===================== -->
+  <section id="anwesenheit">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Anwesenheit: vom Konzept zur App</h2></div>
+    <p class="sec-sub">Das <a href="2026-07-anwesenheit-konzept.html">Konzeptdokument</a> beschreibt Forschungsbezug, Datenmodell und Abgrenzung vom amtlichen Klassenbuch. Hier der kurze Umsetzungs-Stand: alles davon ist gebaut und live.</p>
+
+    <div class="impl-grid">
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#2E9C6E,#5BC392)"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h4>Lehrer-Tagesabgleich &amp; Übersicht</h4></div>
+        <p>Tagesansicht mit Statuswechsel pro Kind, plus eine zweite Ansicht mit Fehltage-Statistik: Monatsverlauf, Wochentags-Muster und Auffälligkeits-Hinweise (z. B. Häufung an Montagen/Freitagen) — aufklappbar pro Kind, ohne zusätzliche Abfragen.</p>
+        <div class="why"><b>Warum aufklappbar statt permanent sichtbar:</b> Die Detail-Statistik ist für die meisten Kinder die meiste Zeit irrelevant — sie liegt bereit, drängt sich aber nicht auf.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#3DB5AC,#0F8A82)"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><h4>Eltern-Abmeldung mit Bestätigungs-Loop</h4></div>
+        <p>Eltern melden ihr Kind für einen Tag oder Zeitraum ab; die Meldung erscheint sofort bei der Lehrperson zur Bestätigung mit einem Tap. Ein Ein-Tap-Schnellweg für den häufigsten Fall ("heute krank") landet direkt auf der Startseite.</p>
+        <div class="why"><b>Warum ein Bestätigungs-Loop:</b> Verschiebt Eltern vom reinen Empfänger zum handelnden Akteur — die im Konzeptdokument benannte Grenze zwischen <em>Involvement</em> und <em>Engagement</em>.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#5965B8,#8791dd)"><svg class="i" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></span><h4>Startseiten-Karten statt Extra-Klick</h4></div>
+        <p>Sowohl Lehrperson als auch Eltern sehen den für sie relevanten Anwesenheits-Ausschnitt direkt auf der Startseite, in der rechten Seitenspalte neben Terminen/Erinnerungen — die Karte bleibt unsichtbar, wenn es nichts zu tun gibt.</p>
+        <div class="why"><b>Warum:</b> Reduziert Klickwege für den Alltagsfall, ohne die Startseite mit leeren Kacheln zu überladen.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#E0A94B,#B8721E)"><svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span><h4>Aufgeräumte Lehrer-Navigation</h4></div>
+        <p>Nebeneffekt: Die Lehrer-Seitenleiste war über die Zeit auf elf flache Einträge gewachsen. Im Zuge der Anwesenheits-Integration in Gruppen sortiert (Unterricht / Kommunikation / Verwaltung).</p>
+        <div class="why"><b>Warum jetzt:</b> Anwesenheit war der Anlass, aber das Problem war unabhängig davon längst fällig.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2 · ABENTEUER-AUDIT ===================== -->
+  <section id="abenteuer-audit">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Abenteuer-Audit: sechs echte Fehler</h2></div>
+    <p class="sec-sub">Ein systematischer Durchgang durch die gesamte Quest-/Streak-/Gilden-Logik (nicht nur den jüngsten Diff) — mit Live-Abgleich gegen die Datenbank. Sechs Befunde waren keine Stilfragen, sondern änderten tatsächliches Spielverhalten.</p>
+
+    <div class="bug card">
+      <div class="bn">1</div>
+      <div>
+        <h4>Rettungs-Gegenstände konnten wirkungslos verpuffen</h4>
+        <p>Zwei Werkzeuge gegen eine gerissene Streak (Schutzschild, Zeitkristall) ließen sich einmal pro Season einsetzen — auch dann, wenn die Rettung rechnerisch gar nichts mehr bewirkte. Per Datenbank-Abgleich bestätigt: Ein Kind hatte an einem Tag beide Werkzeuge auf dieselbe Hausübung verbraucht, ohne dass die Streak gerettet wurde.</p>
+        <p class="fixnote">Behoben: Ein Wirkungs-Check verbraucht das Werkzeug nur noch, wenn es die Streak wirklich rettet — serverseitig geprüft, nicht nur in der Oberfläche.</p>
+      </div>
+    </div>
+
+    <div class="bug card">
+      <div class="bn">2</div>
+      <div>
+        <h4>Eine Gruppen-Aufgabe war für die meisten Gruppen unmöglich</h4>
+        <p>Die kooperative Dienst-Aufgabe einer Gilde verlangte, dass drei Viertel <em>aller</em> Gildenmitglieder einen Dienst erfüllen — obwohl pro Dienst nur zwei Kinder überhaupt zugeteilt sind. Bei den üblichen Gildengrößen war das rechnerisch nie erreichbar.</p>
+        <p class="fixnote">Behoben: Nur die Kinder mit tatsächlichem Dienst zählen als Bezugsgröße, nicht die ganze Gilde.</p>
+      </div>
+    </div>
+
+    <div class="bug card">
+      <div class="bn">3</div>
+      <div>
+        <h4>Ein Lehrer-Feature ohne echten Nutzen — entfernt statt repariert</h4>
+        <p>Lehrpersonen konnten einzelne Wochen-Quests manuell gegen andere tauschen. Der eingebaute Machbarkeits-Filter (der z. B. verhindert, dass ein Kind ohne Dienst eine Dienst-Aufgabe bekommt) griff dabei aber nicht — nach jedem Tausch bekam die ganze Klasse denselben, ungefilterten Satz, wodurch einzelne Kinder dauerhaft unerfüllbare Aufgaben sehen konnten.</p>
+        <p class="fixnote">Nach Rücksprache entfernt statt geflickt: Es gab keinen echten Anwendungsfall für manuelles Eingreifen, die automatische, machbarkeitsgeprüfte Auswahl reicht aus.</p>
+      </div>
+    </div>
+
+    <div class="bug card">
+      <div class="bn">4</div>
+      <div>
+        <h4>Eine Streak-Aufgabe war ohne jedes Zutun sofort erfüllt</h4>
+        <p>Die Aufgabe "halte deine Streak", maß die <em>gesamte</em> bisherige Streak-Länge statt des Beitrags der laufenden Woche — ein Kind mit einer bereits langen Streak hatte die Wochenaufgabe am Montagmorgen erledigt, ohne an diesem Tag irgendetwas getan zu haben.</p>
+        <p class="fixnote">Behoben: Der Fortschritt zählt jetzt nur noch echte Beiträge der laufenden Woche.</p>
+      </div>
+    </div>
+
+    <div class="bug card">
+      <div class="bn">5</div>
+      <div>
+        <h4>Zwei Seiten zeigten unterschiedliche Werte für denselben Dienst</h4>
+        <p>Bei zwei zugeteilten Diensten wählten Startseite und Abenteuer-Seite unterschiedliche Kriterien ("erster Dienst" vs. "bester Dienst") — ein Kind konnte auf der einen Seite 1 von 3, auf der anderen 2 von 3 sehen. Sogar innerhalb derselben Seite passte der genannte Dienst-Name nicht immer zum gezeigten Fortschritt.</p>
+        <p class="fixnote">Behoben: Beide Seiten wählen jetzt denselben, eindeutig bestimmten Dienst.</p>
+      </div>
+    </div>
+
+    <div class="bug card">
+      <div class="bn">6</div>
+      <div>
+        <h4>Kleinere Unstimmigkeiten</h4>
+        <p>Zusätzlich behoben: eine Datumsberechnung, die nahe Mitternacht kurzzeitig den falschen Tag zeigte; zukünftige Diensttage ließen sich per direktem Systemzugriff vorab abhaken (Umgehung des eigentlich vorhandenen Schutzes); ein Fortschrittsbalken bei Gilden-Aufgaben suggerierte "alle nötig", obwohl schon ein Teil reichte; sowie eine wiederkehrende Wortlaut-Ungenauigkeit ("Tage in Folge" statt korrekt "Hausübungen in Folge").</p>
+        <p class="fixnote">Alle sechs Punkte einzeln behoben, mit Typ- und Baukontrolle nach jedem Schritt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3 · STORY & QUESTS VERTIEFT ===================== -->
+  <section id="vertiefung">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Story-Welt &amp; Quests vertieft</h2></div>
+    <p class="sec-sub">Nach dem Aufräumen: vier Bausteine, die die bestehende Story-Welt (siehe <a href="2026-07-story-welten.html">Story-Bibel</a>) fester mit der Quest-Mechanik verweben.</p>
+
+    <div class="impl-grid">
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#F5C842,#B8721E)"><svg class="i" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/></svg></span><h4>Der Splitter wird greifbar</h4></div>
+        <p>Der geheimnisvolle, zeichentragende Splitter aus der Story-Bibel ist jetzt ein echtes Sammelobjekt im Ausrüstungs-Inventar. Seine sieben Zeichen erwachen automatisch, sobald die zugehörige Welt im Fahrplan gebaut und durchlaufen ist — für noch nicht geschriebene Welten bleibt das jeweilige Zeichen einfach ungeöffnet.</p>
+        <div class="why"><b>Warum ohne neuen Datenbank-Zustand:</b> Der Erwach-Status wird rein aus dem bestehenden Welten-Fahrplan abgeleitet — kein zusätzlicher Speicherort, kein Synchronisationsrisiko.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#0F8A82,#3DB5AC)"><svg class="i" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg></span><h4>Jede Figur spricht jetzt in ihrer Stimme</h4></div>
+        <p>Wochen-Aufgaben nutzten bisher einen einzigen Textbaustein mit eingesetztem Namen. Die drei bereits gebauten Guide-Figuren (Bergführerin, Bordcomputer, Kartografin) haben jetzt für jede Aufgabe eine eigene, zu ihrem Charakter passende Formulierung.</p>
+        <div class="why"><b>Warum:</b> Konsequente Fortsetzung des bereits an anderer Stelle etablierten Musters (persönliche Anmerkungen im Logbuch) — Story-Konsistenz statt eines einzigen austauschbaren Sprechers.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#5965B8,#8791dd)"><svg class="i" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span><h4>Drei neue Wahlpfad-Aufgaben</h4></div>
+        <p>Bisher gab es nur eine einzige Aufgabe mit echter Wahl zwischen zwei Wegen. Jetzt kommen drei weitere dazu — Kinder entscheiden selbst, welchen von zwei möglichen Wegen sie gehen, statt nur einen vorgegebenen Pfad abzuarbeiten.</p>
+        <div class="why"><b>Warum:</b> Echte Wahlmöglichkeit ist ein direkter Hebel für Autonomie-Erleben (Selbstbestimmungstheorie) und war mit nur einer Vorlage stark unterrepräsentiert.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#C98A2B,#E0A94B)"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span><h4>Wochensiegel: stille Anerkennung im Logbuch</h4></div>
+        <p>Schafft ein Kind alle Wochen-Aufgaben einer Woche, erscheint dafür ein eigener Eintrag im privaten Logbuch — inklusive Zähler, in welcher Woche in Folge das gelingt.</p>
+        <div class="why"><b>Warum kein neuer Rang:</b> Bewusst nur eine leise Würdigung, kein neues Privileg — die Grundsatzfrage, welches Set an Spezialrängen die App langfristig haben soll, ist noch offen und wird nicht durch ein Nebenprodukt vorweggenommen.</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:20px">
+      <h4><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Bewusst nicht angefasst: Gilden</h4>
+      <p>Der Gilden-Baustein (monatlich gemischte Kleingruppen mit kooperativer Wochen-Aufgabe) stand ebenfalls zur Vertiefung an, wurde aber auf ausdrücklichen Wunsch zurückgestellt — die konkrete Ausgestaltung (wie viel Wettbewerb zwischen Gilden erlaubt sein soll, siehe die offene Grundsatzfrage im <a href="2026-07-gamification-prinzipien.html">Prinzipien-Dokument</a>) braucht noch Bedenkzeit, bevor daran weitergebaut wird.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · VORGEMERKT ===================== -->
+  <section id="vorgemerkt">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Vorgemerkt für die nächste Runde</h2></div>
+    <p class="sec-sub">Zwei Ideen für interaktivere, anspruchsvollere Aufgaben — noch nicht geplant oder umgesetzt, absichtlich nicht in dieses Update gemischt.</p>
+    <div class="layers">
+      <div class="layer card"><div class="n">Idee</div><h4>Lösungswort aus der Story</h4><p>Eine Aufgabe verlangt ein Lösungswort, das sich aus Fragmenten in bereits durchlebten Kapiteln der Klassenreise zusammensetzt — verlangt echtes (Wieder-)Lesen statt reinem Abhaken.</p></div>
+      <div class="layer card"><div class="n">Idee</div><h4>Rätsel-Gegenstand im Inventar</h4><p>Eine Aufgabe schaltet vorübergehend einen neuen Gegenstand frei; ein Klick darauf öffnet ein kleines Rätsel (z. B. Multiple Choice), dessen Lösung die Aufgabe abschließt.</p></div>
+      <div class="layer card"><div class="n">Voraussetzung</div><h4>Braucht neue Datenmodellierung</h4><p>Beide Ideen brauchen vermutlich einen gespeicherten Rätsel-Zustand pro Kind und Aufgabe — bewusst als eigener, späterer Baustein vorgesehen.</p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — Sammel-Update zu <a href="2026-07-anwesenheit-konzept.html">Anwesenheit</a> und <a href="2026-07-gamification-prinzipien.html">Gamification</a></span>
+    <span>Juli 2026</span>
+  </div>
+</div>
+
+<script>
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { e.target.style.animationDelay = '0ms'; io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  }
+</script>
+</body>
+</html>
