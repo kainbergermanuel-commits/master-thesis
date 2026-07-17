@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soziale Normen richtig einsetzen — Master-Thesis KlassenHub</title>
+<meta name="description" content="Eine Design-Rationale-Fallstudie: warum der statische Prozent-Banner ('X % deiner Klasse sind schon dabei') aus Sicht der Norm-Forschung ins Gegenteil kippt und wie er zu einem kollektiven, dynamischen Wochen-Puls neugestaltet wurde.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  /* ---- Vorher/Nachher-Kontrast ---- */
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  @media (max-width: 760px) { .ba { grid-template-columns: 1fr; } }
+  .ba .side { padding: 19px 20px; position: relative; overflow: hidden; }
+  .ba .side::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--stripe); }
+  .ba .side.old { --stripe: color-mix(in srgb, var(--amber) 75%, #c0392b); }
+  .ba .side.new { --stripe: var(--good); }
+  .ba .tag { font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em; color: var(--muted); text-transform: uppercase; }
+  .ba h3 { font-family: var(--display); font-size: 16.5px; margin: 4px 0 8px; }
+  .ba .banner { border-radius: 12px; padding: 12px 14px; font-size: 13px; font-weight: 600; margin: 10px 0 12px; display: flex; gap: 9px; align-items: center; }
+  .ba .banner.old { background: color-mix(in srgb, var(--amber) 12%, transparent); color: var(--ink); }
+  .ba .banner.new { background: #F0FAF9; color: var(--ink); border: 1px solid color-mix(in srgb, var(--teal) 22%, transparent); }
+  .ba .side p { font-size: 12.5px; color: var(--ink-soft); }
+  .ba .side p + p { margin-top: 7px; }
+  .ba .side b { color: var(--ink); font-weight: 700; }
+
+  /* ---- Evidenz-Zeilen ---- */
+  .finding { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 17px 20px; margin-top: 12px; }
+  @media (max-width: 620px) { .finding { grid-template-columns: 1fr; gap: 6px; } }
+  .finding .src { font-family: var(--display); font-weight: 800; font-size: 14px; color: var(--teal); }
+  .finding .src span { display: block; font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--muted); margin-top: 3px; letter-spacing: .03em; }
+  .finding .txt { font-size: 13.5px; color: var(--ink-soft); }
+  .finding .txt b { color: var(--ink); font-weight: 700; }
+
+  /* ---- Copy-Leiter ---- */
+  .ladder { margin-top: 16px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+  .ladder .row { display: grid; grid-template-columns: 190px 1fr; gap: 0; border-top: 1px solid var(--line); }
+  .ladder .row:first-child { border-top: none; }
+  .ladder .st { padding: 14px 16px; background: color-mix(in srgb, var(--teal) 5%, transparent); font-size: 12.5px; color: var(--ink-soft); }
+  .ladder .st b { display: block; color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 13px; margin-bottom: 3px; }
+  .ladder .msg { padding: 14px 16px; font-size: 13.5px; color: var(--ink); display: flex; align-items: center; }
+  @media (max-width: 620px) { .ladder .row { grid-template-columns: 1fr; } .ladder .msg { border-top: 1px dashed var(--line); } }
+
+  .redline { margin-top: 16px; padding: 15px 18px; border-left: 4px solid var(--amber); }
+  .redline p { font-size: 13.5px; color: var(--ink-soft); }
+  .redline b { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M17 20a6 6 0 0 0-10-4.5M7 4a6 6 0 0 1 10 4.5"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+      Soziale Normen
+    </div>
+    <div class="legend">
+      <span class="status-pill"><span class="pulse"></span>umgesetzt &amp; live</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">App-Weiterentwicklung · Design-Rationale</div>
+    <h1>Vom Prozent-Vergleich<br>zum gemeinsamen Puls.</h1>
+    <p class="lede">Eine kleine Komponente, ein großer Lehrsatz: Der bisherige Motivations-Banner auf der Schüler-Startseite zeigte einen <strong>statischen Prozentwert</strong> — „X&nbsp;% deiner Klasse sind diese Woche schon dabei". Aus Sicht der Norm-Forschung ist das die schwächste und rückschlaggefährdetste Form sozialer Beeinflussung. Dieses Dokument hält die Diagnose, den literaturgestützten Neuentwurf und die Umsetzung fest — als exemplarische Design-Entscheidung des Untersuchungsgegenstands.</p>
+    <div class="thesis">
+      <strong>Kernentscheidung:</strong> Eine <em>statische deskriptive Norm</em> (wie viele machen mit, als Prozentzahl) wird ersetzt durch eine <em>kollektive</em> Norm ohne Nenner (was hat die Klasse gemeinsam geschafft) plus eine <em>dynamische</em> Norm (es kommt Bewegung rein). Damit verschwindet der Bumerang bei niedrigem Stand, und der Banner deckt sich mit den bereits festgeschriebenen Prinzipien 1 &amp; 2.
+    </div>
+  </header>
+
+  <!-- ===================== 1 · DIAGNOSE ===================== -->
+  <section id="diagnose">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Warum der alte Banner scheitert</h2></div>
+    <p class="sec-sub">Nicht nur „0&nbsp;% sieht doof aus". Das Problem ist strukturell — und der Auslöser war real: In der Praxis stand der Banner auf <em>0&nbsp;% deiner Klasse sind diese Woche schon dabei — schließ dich an!</em></p>
+
+    <div class="ba">
+      <div class="side old card reveal">
+        <div class="tag">vorher</div>
+        <h3>Statische deskriptive Norm</h3>
+        <div class="banner old">
+          <svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px;flex:none;color:var(--teal)"><circle cx="9" cy="7" r="3"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="M16 3.13a4 4 0 0 1 0 7.75M22 21a7 7 0 0 0-5-6.7"/></svg>
+          0&nbsp;% deiner Klasse sind diese Woche schon dabei — schließ dich an!
+        </div>
+        <p>Ein <b>fixer Anteilswert</b>, der die halbe Woche niedrig steht (Montagfrüh ist er strukturell null). Eine niedrige deskriptive Norm sagt implizit: „das macht hier eh kaum jemand".</p>
+        <p>Dazu <b>kontrollierende Sprache</b> („schließ dich an!") und ein <b>Einzel-Vergleich</b> gegen die Klasse.</p>
+      </div>
+      <div class="side new card reveal">
+        <div class="tag">nachher · Wochen-Puls</div>
+        <h3>Kollektiv + dynamisch</h3>
+        <div class="banner new">
+          <svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px;flex:none;color:var(--teal)"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1.5.5-2.8 1.2-3.8"/></svg>
+          Eure Klasse hat diese Woche schon <b style="margin:0 3px">14</b> Hausübungen gemeinsam geschafft — und heute kommen laufend welche dazu.
+        </div>
+        <p>Ein <b>Sammel-Wert ohne Nenner</b> (kann nie „keiner macht mit" sagen) plus ein <b>Momentum-Signal</b>. Wir-Sprache statt Aufforderung.</p>
+        <p>Beim Wochenstart eine <b>Einladung</b> statt einer beschämenden Null (siehe Copy-Leiter unten).</p>
+      </div>
+    </div>
+
+    <p class="sec-sub" style="margin-top:26px">Drei Befunde aus der Norm-Forschung, die den alten Banner als Fehlkonstruktion ausweisen:</p>
+
+    <div class="finding card reveal">
+      <div class="src">Schultz et al.<span>Psychological Science, 2007</span></div>
+      <div class="txt">Der klassische Stromverbrauchs-Versuch: Eine deskriptive Norm zieht Verhalten <b>zum Durchschnitt hin — auch nach unten</b> („Bumerang-Effekt"). Übersetzt: Ein niedriger Anteilswert normalisiert das Nicht-Mitmachen, statt es zu bekämpfen.</div>
+    </div>
+    <div class="finding card reveal">
+      <div class="src">Cialdini et al.<span>Petrified-Forest-Studie, 2006</span></div>
+      <div class="txt">Ein Schild „viele Besucher nehmen Holz mit" (negative deskriptive Norm) <b>verdreifachte</b> den Diebstahl gegenüber einer rein normativen Bitte. „0&nbsp;% sind dabei" sendet exakt dieselbe Botschaft: „das lässt hier jeder liegen".</div>
+    </div>
+    <div class="finding card reveal">
+      <div class="src">SDT<span>Deci &amp; Ryan</span></div>
+      <div class="txt"><b>„Schließ dich an!"</b> ist kontrollierende Sprache. Kontroll-Framing untergräbt autonome Motivation und kann intrinsisches Interesse verdrängen — genau die Overjustification-Sorge aus <b>Prinzip&nbsp;2</b>. Der Einzel-%-Vergleich streift zudem <b>Prinzip&nbsp;1</b> („kein Vergleich, der beschämt").</div>
+    </div>
+  </section>
+
+  <!-- ===================== 2 · DER HEBEL ===================== -->
+  <section id="hebel">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Der Hebel aus der Literatur</h2></div>
+    <p class="sec-sub">Die Forschung liefert nicht nur die Kritik, sondern auch die Lösung — und sie passt exakt zu einem System, das ohnehin auf Kooperation statt Vergleich setzt.</p>
+
+    <div class="finding card reveal">
+      <div class="src">Sparkman &amp; Walton<span>Psychological Science, 2017</span></div>
+      <div class="txt"><b>Dynamische Normen.</b> Ist ein Verhalten aktuell noch Minderheit, motiviert es trotzdem, wenn man zeigt, dass es <b>zunimmt</b> („immer mehr fangen an …"). Es wirkt <em>gerade dort</em>, wo die statische Norm versagt — über „Präkonformität" und das Signal „das ist wichtig und machbar". Genau das löst den 0-Prozent-Fall auf.</div>
+    </div>
+    <div class="finding card reveal">
+      <div class="src">Goldstein et al.<span>Journal of Consumer Research, 2008</span></div>
+      <div class="txt"><b>Lokale Normen wirken stärker.</b> Je gruppenspezifischer die Norm („<em>deine</em> Klasse"), desto größer der Effekt. Ein kollektiver „wir gemeinsam"-Rahmen ist stärker als ein Prozent-Benchmark — und bedient die dritte SDT-Grundbedürfnis-Säule, <b>Zugehörigkeit</b>.</div>
+    </div>
+    <div class="finding card reveal">
+      <div class="src">Eigene Evidenzbasis<span>Hebel 1 · Prinzip 1</span></div>
+      <div class="txt">Der stärkste belegte Hebel des Projekts ist <b>Kooperation über Konkurrenz</b> (Ranglisten wurden bewusst entfernt: g&nbsp;=&nbsp;.77 ohne vs. .36 mit Leaderboard). Ein kollektiver Sammel-Wert ist die konsequente Fortsetzung dieser Linie, kein Fremdkörper.</div>
+    </div>
+  </section>
+
+  <!-- ===================== 3 · DIE UMSETZUNG ===================== -->
+  <section id="umsetzung">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Der Wochen-Puls</h2></div>
+    <p class="sec-sub">Zwei nicht-vergleichende Signale, beide aus bereits vorhandenen Daten — kein neues Schema, ein einziges zusätzliches Datenfeld.</p>
+
+    <div class="persp" style="margin-top:16px">
+      <div class="persp-card card reveal">
+        <h3 style="font-size:16px">Signal 1 · Kollektiver Sammel-Wert</h3>
+        <p class="small">Anzahl der diese Woche <b>gemeinsam</b> erledigten Hausübungen — nicht Köpfe, sondern Output. Ein Zähler ohne Nenner kann strukturell nie „keiner macht mit" sagen und lädt nicht zum stillen Kopf-durch-Klassengröße-Rechnen ein. Dockt sprachlich an die „Schritte"-Logik der Klassenreise an (monoton, wie das Klassenziel).</p>
+      </div>
+      <div class="persp-card card reveal">
+        <h3 style="font-size:16px">Signal 2 · Momentum</h3>
+        <p class="small">Wie viele davon <b>heute</b> dazugekommen sind — ein ehrliches Liveness-Signal, getragen von den vorhandenen Zeitstempeln. Es realisiert die dynamische Norm aus Sparkman &amp; Walton, ohne Wochen-Historie zu brauchen. Ist heute Bewegung drin, sagt der Text es; wenn nicht, bleibt der Sammel-Wert für sich.</p>
+      </div>
+    </div>
+
+    <p class="sec-sub" style="margin-top:24px">Die Copy-Leiter — drei Zustände, nie ein beschämender Nenner, nie ein Imperativ:</p>
+    <div class="ladder reveal">
+      <div class="row">
+        <div class="st"><b>Wochenstart / leer</b>Sammel-Wert = 0</div>
+        <div class="msg">„Eine neue Woche beginnt — die ersten Schritte zählen." <span style="color:var(--muted);margin-left:6px">(Einladung, First-Mover)</span></div>
+      </div>
+      <div class="row">
+        <div class="st"><b>Läuft an</b>Wert ≥ 1, heute = 0</div>
+        <div class="msg">„Eure Klasse hat diese Woche schon <b style="margin:0 3px">N</b> Hausübungen gemeinsam geschafft."</div>
+      </div>
+      <div class="row">
+        <div class="st"><b>In Fahrt</b>Wert ≥ 1, heute &gt; 0</div>
+        <div class="msg">„… schon <b style="margin:0 3px">N</b> gemeinsam geschafft — und heute kommen laufend welche dazu."</div>
+      </div>
+    </div>
+
+    <div class="redline card">
+      <p><b>Technisch schlank:</b> Der Sammel-Wert war praktisch geschenkt (die Wochen-Erledigungen wurden für den alten Banner ohnehin schon gefiltert). Fürs Momentum kam ein einziges Feld — der Erledigungs-Zeitstempel — zusätzlich in einen bestehenden Query. Keine neue Tabelle, keine neue Abfrage. Ein Kleinstklassen-Riegel (ab 3 Kindern) bleibt vorsichtshalber bestehen, obwohl ein reiner Output-Zähler ohnehin keine Einzelperson verrät.</p>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · EHRLICHKEIT ===================== -->
+  <section id="grenzen">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Was ehrlich dazugehört</h2></div>
+    <p class="sec-sub">Auch sauber gebaut bleibt das ein kleiner Hebel — die Arbeit soll das nicht überverkaufen.</p>
+
+    <div class="persp" style="margin-top:16px">
+      <div class="persp-card card reveal">
+        <h3 style="font-size:16px">Kleiner Effekt</h3>
+        <p class="small">Verhaltens-Outcomes sind das schwächste Feld (g&nbsp;≈&nbsp;.25). Der Wochen-Puls ist ein Verstärker, kein Selbstläufer — und sein Wert liegt auch darin, <em>keinen Schaden</em> anzurichten, den der alte Banner anrichtete.</p>
+      </div>
+      <div class="persp-card card reveal">
+        <h3 style="font-size:16px">Neuheit &amp; Beobachtung</h3>
+        <p class="small">Novelty-Effekt und der Learning-Analytics-Vorbehalt aus der <a href="2026-07-risiken-gamifizierung.html">kritischen Gegenperspektive</a>: Ein „wer war schon aktiv"-Signal darf nie in Beobachtungsdruck kippen. Die kollektive Aggregation (kein einzelner Name, kein Prozent) entschärft genau das.</p>
+      </div>
+    </div>
+
+    <p class="quiet-note" style="margin-top:18px;font-size:12.5px;color:var(--muted)">Die hier zitierten Norm-Quellen (Schultz et al. 2007; Cialdini et al. 2006; Goldstein et al. 2008; Sparkman &amp; Walton 2017) sind neu für dieses Projekt und gehören ins <a href="2026-07-literaturverzeichnis.html">Literaturverzeichnis</a> nachgetragen — sie erweitern die Fundierung um den Bereich <em>soziale Normen / Nudging</em>, der bislang nur implizit über die Gamification-Metaanalysen abgedeckt war.</p>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — Design-Rationale · begleitend zu <a href="2026-07-gamification-prinzipien.html">Prinzipien</a> &amp; <a href="2026-07-risiken-gamifizierung.html">Risiken</a></span>
+    <span>17.07.2026</span>
+  </div>
+</div>
+
+<script>
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { e.target.style.animationDelay = '0ms'; io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  }
+</script>
+</body>
+</html>
