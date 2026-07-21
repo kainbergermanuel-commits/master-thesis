@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Organisation vertieft — Master-Thesis KlassenHub</title>
+<meta name="description" content="Sechs Weiterentwicklungen für Lehrpersonen, Eltern und Schüler:innen — ein eigener Lehrer-Stundenplan, sichtbare Kennzahlen auf der Startseite, ein Sammel-Werkzeug für Abwesenheiten, neu gegliederte Navigation und ein tieferer Einblick pro Kind. Keine davon berührt die Gamification-Mechanik.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<style>
+  .ev { display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+  .ev.done { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .ev.fix { color: var(--rose); background: color-mix(in srgb, var(--rose) 15%, transparent); }
+  .ev.cut { color: var(--muted); background: var(--paper-2); }
+
+  .impl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  @media (max-width: 760px) { .impl-grid { grid-template-columns: 1fr; } }
+  .impl { padding: 18px; }
+  .impl .ih { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+  .impl .ic { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; color: #fff; flex: none; }
+  .impl h4 { font-family: var(--display); font-size: 15.5px; }
+  .impl p { font-size: 13px; color: var(--ink-soft); }
+  .impl .why { margin-top: 10px; font-size: 12px; color: var(--ink-soft); border-left: 2px solid var(--line); padding-left: 10px; }
+  .impl .why b { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      Organisation vertieft
+    </div>
+    <div class="legend">
+      <span class="ev done">Umgesetzt</span>
+      <span class="ev cut">Bewusst nicht angefasst</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">App-Weiterentwicklung · Sammel-Update</div>
+    <h1>Klarheit für zwei Rollen,<br>kein neues Spiel.</h1>
+    <p class="lede">Sechs Weiterentwicklungen seit dem <a href="2026-07-juli-update.html">Juli-Update</a>: ein eigener Stundenplan für Lehrpersonen, sichtbare Kennzahlen auf der Startseite, ein Sammel-Werkzeug für Abwesenheiten, neu gegliederte Navigation für Schüler:innen und Eltern, und ein tieferer statistischer Einblick pro Kind in der Klassenübersicht.</p>
+    <div class="thesis">
+      <strong>Für die Thesis interessant:</strong> Keiner dieser sechs Punkte ändert etwas an Quest-, Streak- oder Rätsel-Mechanik. Das ist kein Zufall, sondern die praktische Anwendung von <a href="2026-07-gamification-prinzipien.html">Prinzip&nbsp;5</a> der Design-Prinzipien: „Nur Schüler:innen werden bespielt — Lehrpersonen und Eltern bekommen Klarheit, keine Gamifizierung." Dieser gesamte Arbeitsblock ist dieses Prinzip in der Praxis, nicht nur auf dem Papier.
+    </div>
+  </header>
+
+  <!-- ===================== 1 · STUNDENPLAN ===================== -->
+  <section id="stundenplan">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Ein eigener Stundenplan für Lehrpersonen</h2></div>
+    <p class="sec-sub">Der bestehende Klassenplan beantwortet „was hat die Klasse diese Woche". Für eine Lehrperson, die mehrere Klassen unterrichtet, beantwortet das nicht die tägliche Frage „wo muss ich als Nächstes hin". Eine zweite, unabhängige Tabelle bildet jetzt genau diese Perspektive ab.</p>
+
+    <div class="impl-grid">
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,var(--violet),#8791dd)"><svg class="i" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span><h4>Zwei Pläne, zwei Fragen</h4></div>
+        <p>Der Klassenplan bleibt die Vorlage, die an die Kinder verteilt wird. Der neue persönliche Plan ist eine bewusst eigenständige Datentabelle für die eigene Woche der Lehrperson, mit einem freien Textfeld für die Klasse pro Stunde statt einer echten Datenbank-Verknüpfung — die Zuordnung ist absichtlich locker, weil auch Förderstunden oder Gruppen darin vorkommen, die keine „echte" Klasse sind.</p>
+        <div class="why"><b>Warum keine Erweiterung der bestehenden Tabelle:</b> Der Klassenplan beschreibt eine Klasse über alle Fächer, der persönliche Plan eine Person über mehrere Klassen — zwei verschiedene Achsen, die sich nicht in dasselbe Datenmodell zwingen lassen, ohne beide zu verkomplizieren.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,var(--amber),var(--amber-2))"><svg class="i" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg></span><h4>Farbe ohne Kollision</h4></div>
+        <p>Klassen-Kürzel im persönlichen Plan bekommen automatisch eine stabile, unterscheidbare Farbe. Ein einfacher Hash reichte dafür nachweislich nicht: Im ersten Testlauf bekamen „3a" und „4b" — zwei Klassen, die klar unterscheidbar sein sollen — denselben Farbton zugewiesen.</p>
+        <div class="why"><b>Warum das ein echter Befund ist, nicht nur ein Stilfehler:</b> Bei Klassenbezeichnungen wie „1a" bis „5d" auf eine begrenzte Farbpalette sind solche Kollisionen mathematisch nicht selten, sondern nach dem Schubfachprinzip zu erwarten. Der zweite Durchgang sondiert bei einer Kollision zur nächstgelegenen freien Farbe, statt einfach zu hoffen, dass es nicht vorkommt.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2 · STARTSEITE ===================== -->
+  <section id="startseite">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Startseite: mehr Kennzahlen, klareres Raster</h2></div>
+    <p class="sec-sub">Zwei unabhängige Verbesserungen an der Seite, die jede Rolle am häufigsten sieht — die zweite davon ausgelöst durch konkretes Feedback beim Testen, nicht durch Vorab-Planung.</p>
+
+    <div class="impl-grid">
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,var(--teal),var(--teal-2))"><svg class="i" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></span><h4>Kennzahlen statt Momentaufnahme</h4></div>
+        <p>Die „Auf einen Blick"-Kacheln für Lehrperson und Elternteil zeigen jetzt mehr als einen einzelnen Prozentwert: eine anonyme Verteilung der Reiselängen in der Klasse, eine Verlaufslinie der letzten Abgabequoten mit Trend, einen Pünktlichkeits-Anteil und eine Etappenkette fürs eigene Kind. Alles aus bereits geladenen Daten berechnet — keine zusätzliche Datenbankabfrage nötig.</p>
+        <div class="why"><b>Warum ein Verlauf, keine Einzelzahl:</b> „Wird es besser oder schlechter" lässt sich aus einer einzelnen Prozentzahl nicht ablesen — erst der Vergleich über mehrere Zeitpunkte macht eine Kennzahl zu einer Aussage.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,var(--rose),#d98098)"><svg class="i" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16l4-4 3 3 5-6"/></svg></span><h4>Vom unübersichtlichen Text zum echten Raster</h4></div>
+        <p>Die Wochenansicht der Tagesagenda zeigte anfangs jede Unterrichtsstunde als eigenen, kleinen Block mit wiederholter Stundennummer — bei fünf Stunden an einem Tag zehn einzelne Objekte ohne erkennbare Gruppierung. Direktes Feedback beim Testen führte zu einem echten Stundenraster: die Nummer steht jetzt einmal als Spaltenüberschrift, Fach und Klasse darunter, Freistunden als sichtbare Lücke in der Spalte statt als fehlende Information.</p>
+        <div class="why"><b>Warum das dokumentiert wird:</b> Ein Beispiel dafür, dass eine Oberfläche nicht im ersten Entwurf fertig ist — die Unübersichtlichkeit war erst am tatsächlich befüllten, realistischen Datensatz sichtbar, nicht am Reißbrett.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3 · ANWESENHEIT ===================== -->
+  <section id="anwesenheit-sammel">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Anwesenheit: ein Werkzeug für den Sammelfall</h2></div>
+    <p class="sec-sub">Das im <a href="2026-07-anwesenheit-konzept.html">Konzeptdokument</a> beschriebene und im Juli-Update fertiggestellte Modul deckte den Alltagsfall gut ab — ein Kind, ein Tag. Nicht abgedeckt war der Sammelfall: Skikurs, Wettbewerb, oder ein Kind zwei Wochen krank.</p>
+
+    <div class="impl-grid">
+      <div class="impl card" style="grid-column: 1 / -1">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#2E9C6E,#5BC392)"><svg class="i" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h4>Mehrere Kinder, mehrere Tage, ein Eintrag</h4></div>
+        <p>Ein neuer Dialog trägt eine frei wählbare Gruppe an Kindern für einen Zeitraum als entschuldigt ein. Technisch bewusst kein überschreibender Einzel-Befehl, sondern zwei Schritte: erst fehlende Tage ergänzen, dann bestätigen — damit eine bereits vorhandene, individuelle Eltern-Notiz zu einem Tag dabei nicht stillschweigend verloren geht.</p>
+        <div class="why"><b>Warum dieser Umweg über zwei Schritte:</b> Der naheliegende, einfachere Weg (ein einziger überschreibender Befehl) hätte im Zweifel echte, bereits erfasste Elterninformation ersatzlos gelöscht. Verlässlichkeit der Daten wog hier mehr als die kürzere Implementierung.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · NAVIGATION ===================== -->
+  <section id="navigation">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Navigation für alle drei Rollen einheitlich gegliedert</h2></div>
+    <p class="sec-sub">Die Lehrer-Navigation wurde bereits im Juli-Update in Gruppen sortiert (Unterricht / Kommunikation / Verwaltung), weil sie über die Zeit auf elf flache Einträge angewachsen war. Dasselbe Ordnungsprinzip — nicht dieselbe Gliederung — gilt jetzt auch für die anderen beiden Rollen.</p>
+
+    <div class="impl-grid">
+      <div class="impl card" style="grid-column: 1 / -1">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,var(--amber),var(--amber-2))"><svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span><h4>Gleiches Prinzip, andere Kategorien</h4></div>
+        <p>Schüler:innen sehen ihre Navigation jetzt gegliedert in Unterricht / Aktuelles / Klasse, Eltern in Mein Kind / Kommunikation — bewusst nicht dieselben Gruppennamen wie bei der Lehrperson, weil „Mein Kind" die Eltern-Perspektive trifft, während „Unterricht" aus Lehrer-Sicht formuliert ist.</p>
+        <div class="why"><b>Warum unterschiedliche Kategorien, kein einheitliches Schema:</b> Dieselbe Funktion (z. B. Hausübungen) steht für jede Rolle in einem anderen Sinnzusammenhang — eine Gliederung, die für alle drei Rollen identisch wäre, würde diesen Unterschied wegglätten statt ihn abzubilden.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5 · KLASSE-STATISTIK ===================== -->
+  <section id="klasse-statistik">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Tieferer Einblick pro Kind: die Klasse-Statistik</h2></div>
+    <p class="sec-sub">In der Klassenübersicht öffnet ein Klick auf ein Kind bereits dessen Hausübungsliste, filterbar nach Fach. Ergänzt um einen Statistik-Block direkt darüber, der auf denselben Filter reagiert.</p>
+
+    <div class="impl-grid">
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,var(--teal),var(--teal-2))"><svg class="i" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span><h4>Je Fach, nicht nur insgesamt</h4></div>
+        <p>Abgabequote, Pünktlichkeits-Anteil und ein nach schwächstem Fach sortiertes Balkendiagramm — reaktiv auf denselben Fach-Filter, den die Hausübungsliste in diesem Panel bereits hatte. Im „Alle"-Zustand macht die Sortierung selbst schon den Hinweis: das am weitesten oben stehende Fach braucht die meiste Aufmerksamkeit.</p>
+        <div class="why"><b>Warum keine zusätzliche Datenbankabfrage:</b> Alle Werte lassen sich aus den bereits für die Liste geladenen Hausübungsdaten desselben Kindes berechnen.</div>
+      </div>
+      <div class="impl card">
+        <div class="ih"><span class="ic" style="background:linear-gradient(135deg,var(--violet),#8791dd)"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h4>Abgegeben ist nicht bestätigt</h4></div>
+        <p>Ein Umschalter trennt „das Kind hat abgegeben" von „ein Elternteil hat es auch bestätigt" — dieselbe Unterscheidung, die im Hintergrund bereits über die Streak-Zählung entscheidet, war in dieser Übersicht bisher unsichtbar. Eine zusätzliche Zeile zeigt unabhängig vom gewählten Modus, wie viele Abgaben noch auf eine Bestätigung warten.</p>
+        <div class="why"><b>Warum der Unterschied für die Lehrperson real ist:</b> Ein „erledigt" ohne Bestätigung heißt in der Praxis oft nur, dass ein Elternteil es noch nicht gesehen hat — nicht, dass dem Kind etwas fehlt. Ohne den Umschalter waren beide Fälle optisch identisch.</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:20px">
+      <h4><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Bewusst nicht angefasst: der Schüler-Gamification-Kosmos</h4>
+      <p>Keiner der sechs Punkte in diesem Update ändert Quest-, Streak- oder Rätsel-Mechanik, Story-Texte oder die Gilden-Logik. Das ist der Kern der eingangs genannten Beobachtung: ein vollständiger Arbeitsblock, ausschließlich auf der Klarheits-Seite von <a href="2026-07-gamification-prinzipien.html">Prinzip&nbsp;5</a>, ohne dass die bespielte Schülerseite mitverändert wurde.</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — Fortsetzung des <a href="2026-07-juli-update.html">Juli-Updates</a></span>
+    <span>21.07.2026</span>
+  </div>
+</div>
+
+<script>
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { e.target.style.animationDelay = '0ms'; io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  }
+</script>
+</body>
+</html>
