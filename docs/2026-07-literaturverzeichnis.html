@@ -46,27 +46,7 @@
   .assess h4 { color: var(--ink-soft); }
   .assess h4 svg { color: var(--muted); }
 
-  /* ---- Kernaussagen / KlassenHub-Bezug ---- */
-  .findings { margin-top: 14px; padding: 14px 16px 13px; border-radius: 12px;
-    background: color-mix(in srgb, var(--teal) 6%, var(--card-2));
-    border-left: 3px solid var(--teal-2); }
-  .findings .fh { font-size: 10.5px; font-weight: 800; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--teal); display: flex; align-items: center;
-    gap: 6px; margin-bottom: 9px; }
-  /* block statt flex: sonst wird jedes <b>/<a> im Text zu einem eigenen Flex-Item
-     und der Fließtext bricht in Spalten um */
-  .finding { font-size: 13px; line-height: 1.58; color: var(--ink-soft);
-    display: block; position: relative; padding-left: 14px; }
-  .finding + .finding { margin-top: 8px; }
-  .finding::before { content: ""; width: 5px; height: 5px; border-radius: 50%;
-    background: var(--teal-2); position: absolute; left: 0; top: 7px; }
-  .finding b { color: var(--ink); font-weight: 700; }
-  .fdoc { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700;
-    color: var(--teal); text-decoration: none; white-space: nowrap; vertical-align: baseline;
-    padding: 1px 8px; border-radius: 999px; margin-left: 2px;
-    background: color-mix(in srgb, var(--teal) 12%, transparent); }
-  .fdoc:hover { background: color-mix(in srgb, var(--teal) 20%, transparent); }
-  .fdoc svg { width: 11px; height: 11px; stroke: currentColor; stroke-width: 2.4; fill: none; }
+  /* .findings / .finding / .fdoc liegen jetzt in assets/theme.css (geteilt) */
 </style>
 </head>
 <body>

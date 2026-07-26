@@ -88,9 +88,16 @@
     <div class="sec-head"><span class="sec-num">02</span><h2>Dokumente</h2></div>
     <p class="sec-sub">Jedes Dokument ist eigenständig lesbar und versioniert — die Git-Historie dieses Repos ist zugleich der Fortschritts-Nachweis für die Betreuungsgespräche.</p>
 
-    <h3 style="font-family:var(--display);font-size:16px;margin:26px 0 4px">Forschung</h3>
-    <p class="quiet-note" style="margin-top:0;margin-bottom:12px">Forschungsdesign, Theorie und kritische Einordnung der Studie.</p>
+    <div class="doc-level"><span class="lv">Ebene 1</span><h3>Die Arbeit</h3></div>
+    <p class="doc-level-sub">Forschungsfrage, Design, Theorie und kritische Einordnung — das, worauf die Betreuungsgespräche zielen.</p>
     <div class="doc-grid">
+      <a class="doc-card card reveal" href="docs/gespraechsvorbereitung.html">
+        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        <div class="dc-date">25.07.2026 · Arbeitsinstrument</div>
+        <h3>Vorbereitung erstes Fachgespräch</h3>
+        <p>Die 17 Leitfragen der „Dimension Zukunft" aus dem MA-Gesprächsleitfaden, jede mit Antwortstand und Belegverweis — offene Punkte ausdrücklich markiert.</p>
+        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Explikation · 10 %</span></div>
+      </a>
       <a class="doc-card card reveal" href="docs/2026-07-forschungsdesign.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.07.2026 · Kern-Dokument</div>
@@ -128,114 +135,36 @@
       </a>
     </div>
 
-    <h3 style="font-family:var(--display);font-size:16px;margin:30px 0 4px">App &amp; Konzept</h3>
-    <p class="quiet-note" style="margin-top:0;margin-bottom:12px">KlassenHub als Untersuchungsgegenstand — Systembeschreibung und laufende Weiterentwicklung.</p>
+    <div class="doc-level"><span class="lv">Ebene 2</span><h3>Der Gegenstand</h3></div>
+    <p class="doc-level-sub">Was KlassenHub ist. Grundlage für das Kapitel „Beschreibung der App" — code-basiert belegbar, aber ohne Aussagen über Wirkung oder Akzeptanz.</p>
     <div class="doc-grid">
       <a class="doc-card card reveal" href="docs/2026-07-app-systemueberblick.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.–21.07.2026 · laufend aktualisiert</div>
         <h3>App-Systemüberblick</h3>
-        <p>Code-basierte Analyse: Aufbau, Rollenmodell, Funktionsmodule — belegt vs. interpretiert getrennt.</p>
+        <p>Code-basierte Analyse: Aufbau, Rollenmodell, Berechtigungskonzept, Funktionsmodule — belegt vs. interpretiert sauber getrennt.</p>
         <div class="dc-tags"><span class="chip reuse">App-Beschreibung</span></div>
       </a>
-      <a class="doc-card card reveal" href="docs/2026-07-anwesenheit-konzept.html">
+    </div>
+
+    <div class="doc-level"><span class="lv">Ebene 3</span><h3>Entwicklungsdokumentation</h3></div>
+    <p class="doc-level-sub">Zehn Dokumente zum Entstehungsprozess der App — Umsetzungsberichte, Design-Rationale, technische Pläne. Bewusst nachgeordnet: Sie belegen den Prozess, tragen aber nicht die Forschungsargumentation.</p>
+    <div class="doc-grid single">
+      <a class="doc-card card reveal" href="docs/entwicklungsdokumentation.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">16.–17.07.2026 · gebaut &amp; live</div>
-        <h3>Anwesenheit — Konzept</h3>
-        <p>Leichtgewichtiges Anwesenheits-Modul mit Eltern-Abmeldung und Bestätigungs-Loop: Forschungsbezug, Abgrenzung vom amtlichen Klassenbuch, Datenschutz, Datenmodell, Umsetzungsplan.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip done">Gebaut &amp; live</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-juli-update.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">17.07.2026 · Sammel-Update</div>
-        <h3>Juli-Update: Anwesenheit &amp; Abenteuer</h3>
-        <p>Anwesenheit vom Konzept zur lauffähigen App, ein gezielter Fehler-Audit im Abenteuer-System (sechs echte Befunde) und die Vertiefung von Story-Welt und Quests: Splitter-Zeichen, Guide-Stimmen, Wochensiegel, neue Wahlpfade.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip done">Umsetzungsbericht</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-organisation-vertieft.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">21.07.2026 · Sammel-Update</div>
-        <h3>Organisation vertieft</h3>
-        <p>Sechs Weiterentwicklungen für Lehrpersonen, Eltern und Schüler:innen: eigener Lehrer-Stundenplan, sichtbare Kennzahlen und ein klareres Stundenraster auf der Startseite, Sammel-Werkzeug für Abwesenheiten, neu gegliederte Navigation, tieferer Statistik-Einblick pro Kind — keine davon berührt die Gamification-Mechanik.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip done">Umsetzungsbericht</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-gamification-konzept.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">12.07.2026</div>
-        <h3>Gamification-Konzept</h3>
-        <p>Teilbereich der App-Weiterentwicklung: Quest-Maschine, Story-Kosmos, Held:innen-Ebene, kosmetische Basis, Nudging-Automatisierung, Phasen-Fahrplan, exemplarischer Arc mit Wochen-Rollout.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip phase">v3 · Teil I+II+Anhang A</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-gamification-umsetzung.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">13.07.2026 · Umsetzungsbericht</div>
-        <h3>Gamification-Umsetzung</h3>
-        <p>Vom Konzept zur lauffähigen App: Streak-Redesign ohne Rangliste, Story-Hero-Karte, Rucksack-Item-System, Dienst-Selbstbestätigung — inkl. im Review gefundener und behobener Fehler.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip done">Umsetzungsbericht</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-gamification-prinzipien.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">13.07.2026 · Prinzipien-Refresh</div>
-        <h3>Gamification-Prinzipien</h3>
-        <p>Der Ansatz sauber aufbereitet: fünf Design-Prinzipien aus der Evidenz, der Ist-Stand des Systems, bewusst Gestrichenes (kosmetische Basis) und die geordneten offenen Threads mit Grundsatzentscheidungen.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip low">Design-Rationale</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-gamification-balance.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">14.07.2026 · Schülerperspektive</div>
-        <h3>Balance, Alltag &amp; Vertrauen</h3>
-        <p>Das System aus Schülersicht: die Balance zwischen Schwierigkeit und Zeitaufwand, Quests im echten Schulalltag, Gilden mit gelebter Kooperation, Items die etwas können — plus Fahrplan und die pädagogischen Fallen im laufenden Schuljahr.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip low">Fahrplan</span>
-          <span class="chip high">Risiken</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-gamification-technischer-plan.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">14.07.2026 · Technischer Plan</div>
-        <h3>Vom Prinzip zum Code</h3>
-        <p>Der file-genaue Umsetzungsplan: QuestContext-Extraktion, Quest-Kalibrierung, Gilden-Kooperation, Items als Werkzeuge — mit Datenmodell, betroffenen Dateien, Risiko-Einstufung und Baureihenfolge.</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip phase">Technisch</span>
-        </div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-soziale-normen.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">17.07.2026 · Design-Rationale</div>
-        <h3>Soziale Normen richtig einsetzen</h3>
-        <p>Fallstudie an einer Komponente: warum der statische Prozent-Banner („X&nbsp;% sind schon dabei") aus Sicht der Norm-Forschung ins Gegenteil kippt — und die Neugestaltung zum kollektiven, dynamischen Wochen-Puls (Schultz, Cialdini, Goldstein, Sparkman &amp; Walton).</p>
-        <div class="dc-tags">
-          <span class="chip reuse">App-Weiterentwicklung</span>
-          <span class="chip low">Design-Rationale</span>
-        </div>
+        <div class="dc-date">12.–21.07.2026 · 10 Dokumente</div>
+        <h3>Zur Entwicklungsdokumentation →</h3>
+        <p>Umsetzungsberichte (Anwesenheit, Organisation, Gamification), Design-Rationale (Prinzipien, soziale Normen, Story-Welten, Balance) und der technische Umsetzungsplan.</p>
+        <div class="dc-tags"><span class="chip phase">Sammelseite</span></div>
       </a>
     </div>
-    <p class="quiet-note">Neue Dokumente kommen als weitere Karten hier dazu, sobald sie entstehen — siehe README für den Ablauf.</p>
+
+    <p class="quiet-note">Neue Dokumente werden der passenden Ebene zugeordnet: Forschungsargumentation nach Ebene 1, Beschreibung des Gegenstands nach Ebene 2, alles zum Entstehungsprozess der App nach Ebene 3 — siehe README für den Ablauf.</p>
   </section>
 
   <div class="foot">
     <span>Master-Thesis · KlassenHub — Arbeitsdokumentation für Betreuungsgespräche</span>
-    <span>Zuletzt aktualisiert: 17.07.2026</span>
+    <span>Zuletzt aktualisiert: 25.07.2026</span>
   </div>
 </div>
 

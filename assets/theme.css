@@ -145,6 +145,68 @@ thead th { font-family: var(--display); font-size: 12px; letter-spacing: .04em; 
 tbody tr:last-child td { border-bottom: none; }
 td .src, .src { font-family: var(--mono); font-size: 12px; color: var(--teal); font-weight: 600; }
 td.qname { font-weight: 700; color: var(--ink); }
+/* Zebra + Hover: erhoeht die Lesbarkeit langer Zeilen deutlich (Kriterium 6.1
+   des MA-Gespraechsleitfadens: "Sind Tabellen gut lesbar gestaltet?") */
+tbody tr:nth-child(even) { background: color-mix(in srgb, var(--card-2) 55%, transparent); }
+tbody tr:hover { background: color-mix(in srgb, var(--teal) 7%, transparent); }
+td.num, th.num { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+caption { caption-side: bottom; padding: 11px 15px; font-size: 12.5px; color: var(--muted); text-align: left; }
+
+/* ---- Findings / Bezugsblock ----
+   display:block statt flex ist Absicht: als Flex-Container wuerde jedes <b> oder
+   <a> im Fliesstext zu einem eigenen Flex-Item und der Text in Spalten umbrechen. */
+.findings { margin-top: 14px; padding: 14px 16px 13px; border-radius: 12px;
+  background: color-mix(in srgb, var(--teal) 6%, var(--card-2));
+  border-left: 3px solid var(--teal-2); }
+.findings.alt { background: color-mix(in srgb, var(--violet) 6%, var(--card-2));
+  border-left-color: var(--violet); }
+.findings.gap { background: color-mix(in srgb, var(--amber) 7%, var(--card-2));
+  border-left-color: var(--amber); }
+.findings .fh { font-size: 10.5px; font-weight: 800; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--teal); display: flex; align-items: center;
+  gap: 6px; margin-bottom: 9px; }
+.findings.alt .fh { color: var(--violet); }
+.findings.gap .fh { color: var(--amber); }
+.finding { font-size: 13px; line-height: 1.58; color: var(--ink-soft);
+  display: block; position: relative; padding-left: 14px; }
+.finding + .finding { margin-top: 8px; }
+.finding::before { content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--teal-2); position: absolute; left: 0; top: 7px; }
+.findings.alt .finding::before { background: var(--violet); }
+.findings.gap .finding::before { background: var(--amber); }
+.finding b { color: var(--ink); font-weight: 700; }
+.fdoc { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700;
+  color: var(--teal); text-decoration: none; white-space: nowrap; vertical-align: baseline;
+  padding: 1px 8px; border-radius: 999px; margin-left: 2px;
+  background: color-mix(in srgb, var(--teal) 12%, transparent); }
+.fdoc:hover { background: color-mix(in srgb, var(--teal) 20%, transparent); }
+.fdoc svg { width: 11px; height: 11px; stroke: currentColor; stroke-width: 2.4; fill: none; }
+
+/* ---- Frage/Antwort-Karte (Gespraechsvorbereitung) ----
+   Feste Informationsreihenfolge: Frage -> Antwortstand -> Belegverweis. */
+.qa-list { display: flex; flex-direction: column; gap: 14px; }
+.qa { padding: 19px 21px; }
+.qa .q { font-family: var(--display); font-size: 15.5px; font-weight: 800;
+  color: var(--ink); line-height: 1.36; display: flex; gap: 11px; align-items: baseline; }
+.qa .q .qn { font-family: var(--mono); font-size: 12px; font-weight: 600;
+  color: var(--muted); flex: none; padding-top: 2px; }
+.qa .a { font-size: 14px; line-height: 1.62; color: var(--ink-soft); margin-top: 11px; padding-left: 27px; }
+.qa .a b { color: var(--ink); font-weight: 700; }
+.qa .qmeta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; padding-left: 27px; align-items: center; }
+@media (max-width: 620px) { .qa .a, .qa .qmeta { padding-left: 0; } }
+.qa.todo { border-left: 4px solid var(--amber); }
+.qa.strong { border-left: 4px solid var(--good); }
+.qa.open { border-left: 4px solid var(--rose); }
+.chip.todo { color: var(--amber); background: color-mix(in srgb, var(--amber) 15%, transparent); }
+.chip.gap { color: var(--rose); background: color-mix(in srgb, var(--rose) 14%, transparent); }
+
+/* ---- Ebenen-Ueberschrift im Dokumentenindex ---- */
+.doc-grid.single { grid-template-columns: 1fr; }
+.doc-level { margin: 34px 0 0; display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap; scroll-margin-top: 76px; }
+.doc-level .lv { font-family: var(--mono); font-size: 11.5px; font-weight: 600; color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 12%, transparent); padding: 2px 8px; border-radius: 999px; flex: none; }
+.doc-level h3 { font-family: var(--display); font-size: 17px; }
+.doc-level-sub { color: var(--muted); font-size: 13.5px; margin: 7px 0 14px; max-width: 70ch; }
 
 /* ---- note / callout ---- */
 .note { margin-top: 18px; padding: 16px 19px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--teal) 32%, var(--line)); background: color-mix(in srgb, var(--teal) 7%, var(--card)); }
