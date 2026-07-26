@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Literaturkarte — Master-Thesis KlassenHub</title>
-<meta name="description" content="Vier thematische Cluster der Literaturbasis: Gamification & Motivation, Akzeptanz im Kollegium, digitale Teilhabe, Kernliteratur für Sekundarstufe 1.">
+<meta name="description" content="Gesamttabelle aller 32 Quellen mit Beitrag und Leerstellen, sechs thematische Cluster und ein Gliederungsentwurf für das Theoriekapitel.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +22,33 @@
   .src-item .sy { font-family: var(--mono); font-size: 11px; color: var(--teal); font-weight: 700; flex: none; min-width: 40px; }
   .src-item .sd { font-size: 12.5px; color: var(--ink); font-weight: 600; }
   .src-item .sj { font-size: 11.5px; color: var(--muted); display: block; margin-top: 1px; }
+
+  /* ---- Gesamttabelle ---- */
+  .filters { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 14px; }
+  .fbtn { font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink-soft); font-family: var(--body); }
+  .fbtn:hover { border-color: var(--teal); color: var(--teal); }
+  .fbtn[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+  table.lit { min-width: 900px; font-size: 13px; }
+  table.lit td, table.lit th { padding: 11px 13px; }
+  table.lit td.who { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  table.lit td.who small { display: block; font-weight: 500; color: var(--muted); font-size: 11px; white-space: normal; margin-top: 2px; }
+  table.lit td.gapcell { color: var(--amber); font-size: 12.5px; }
+  table.lit tr[hidden] { display: none; }
+  .qbadge { font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .qbadge.vh { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .qbadge.h  { color: var(--teal); background: color-mix(in srgb, var(--teal) 13%, transparent); }
+  .qbadge.m  { color: var(--amber); background: color-mix(in srgb, var(--amber) 15%, transparent); }
+  .qbadge.l  { color: var(--rose); background: color-mix(in srgb, var(--rose) 15%, transparent); }
+
+  /* ---- Cluster -> Theoriekapitel ---- */
+  .kap { padding: 17px 20px; margin-top: 12px; }
+  .kap-head { display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap; }
+  .kap-num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: var(--teal); flex: none; }
+  .kap h4 { font-family: var(--display); font-size: 15.5px; margin: 0; }
+  .kap .kb { font-size: 13px; color: var(--ink-soft); margin-top: 7px; }
+  .kap .ksrc { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .kap .ksrc b { color: var(--ink-soft); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -47,6 +74,112 @@
     <h1>Sechs Themenfelder,<br>eine Literaturbasis.</h1>
     <p class="lede">Die aktuelle Literaturbasis (32 Quellen, überwiegend 2019–2025) gliedert sich in sechs Themenfelder, die direkt auf die theoretischen Bezugspunkte des <a href="2026-07-forschungsdesign.html">Forschungsdesigns</a> einzahlen. Die Einzelbewertung je Quelle steht im <a href="2026-07-literaturverzeichnis.html">Literaturverzeichnis</a>.</p>
   </header>
+
+  <!-- ===================== GESAMTTABELLE ===================== -->
+  <section id="gesamt">
+    <div class="sec-head"><h2>Alle Quellen auf einen Blick</h2></div>
+    <p class="sec-sub">Die vollständige Literaturbasis in einer Tabelle: was die Quelle beiträgt — und was sie <em>nicht</em> abdeckt. Die letzte Spalte ist die Vorarbeit für den Nachweis der Forschungslücke: Wo dieselbe Leerstelle bei allen Quellen wiederkehrt, liegt die Lücke.</p>
+
+    <div class="filters" role="group" aria-label="Nach Themenfeld filtern">
+      <button class="fbtn" data-f="all" aria-pressed="true">Alle 32</button>
+      <button class="fbtn" data-f="kern" aria-pressed="false">Kernliteratur Sek I</button>
+      <button class="fbtn" data-f="gam" aria-pressed="false">Gamification</button>
+      <button class="fbtn" data-f="akz" aria-pressed="false">Akzeptanz</button>
+      <button class="fbtn" data-f="teil" aria-pressed="false">Teilhabe &amp; Eltern</button>
+      <button class="fbtn" data-f="lead" aria-pressed="false">Digital Leadership</button>
+      <button class="fbtn" data-f="meth" aria-pressed="false">Methodisch</button>
+    </div>
+
+    <div class="tablewrap">
+      <table class="lit">
+        <thead>
+          <tr>
+            <th>Quelle</th>
+            <th>Typ &amp; Methode</th>
+            <th>Qual.</th>
+            <th>Beitrag zur Arbeit</th>
+            <th>Deckt nicht ab</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        <tr data-c="gam"><td class="who">Li, Hew &amp; Du<small>2024 · ETR&amp;D</small></td><td>Meta-Analyse + SLR, 35 Interventionen, N≈2500</td><td><span class="qbadge vh">sehr hoch</span></td><td>Trennt Gamification-Effekte nach den drei SDT-Grundbedürfnissen: Autonomie und Zugehörigkeit ja, Kompetenzerleben kaum. Leitquelle des Gamification-Kapitels.</td><td class="gapcell">Schulkommunikation · Eltern als Beteiligte · qualitative Tiefe</td></tr>
+
+        <tr data-c="gam"><td class="who">Sailer &amp; Homner<small>2019 · Educ. Psych. Review</small></td><td>Meta-Analyse, nach Outcome-Typen getrennt</td><td><span class="qbadge vh">sehr hoch</span></td><td>Grundlegender Wirknachweis, differenziert nach kognitiven, motivationalen und behavioralen Outcomes.</td><td class="gapcell">Schulkontext speziell · Eltern · Kommunikationsfunktionen</td></tr>
+
+        <tr data-c="gam"><td class="who">Huang, Ritzhaupt et al.<small>2020 · ETR&amp;D</small></td><td>Meta-Analyse, 30 Studien, N=3083</td><td><span class="qbadge vh">sehr hoch</span></td><td>Belastbare Gesamtevidenz: wirkt, aber mit klein-mittlerem Effekt. Dämpft Erwartungen.</td><td class="gapcell">Sekundarstufe I speziell · Eltern · Kommunikation</td></tr>
+
+        <tr data-c="gam"><td class="who">Vrcelj, Hoić-Božić &amp; Holenko Dlab<small>2023 · IJEM</small></td><td>systematisches Review, Fokus Primar-/Sekundarstufe</td><td><span class="qbadge h">hoch</span></td><td>Einzige Quelle, die exakt auf Schulstufe fokussiert statt auf Hochschule.</td><td class="gapcell">Eltern · Kommunikationsfunktionen · eigene Empirie</td></tr>
+
+        <tr data-c="gam"><td class="who">Ratinho &amp; Martins<small>2023 · Heliyon</small></td><td>PRISMA-Review, 40 Studien</td><td><span class="qbadge h">hoch</span></td><td>Novelty-Effekt: Motivationsgewinne flachen ab. Kernargument gegen ein kurzfristig gedachtes Streak-Design.</td><td class="gapcell">Sekundarstufe I (eher High School/Hochschule) · Eltern</td></tr>
+
+        <tr data-c="kern"><td class="who">See, Gorard et al.<small>2021 · Educ. Res. &amp; Evaluation</small></td><td>systematisches Review, 29 Studien</td><td><span class="qbadge vh">sehr hoch</span></td><td>Kritischer Befund: keine klare Evidenz für die Wirkung technologievermittelter Elternbeteiligung. Schützt vor euphorischer Rahmung.</td><td class="gapcell">eigene Erhebung · Sicht der Lernenden · DACH-Raum</td></tr>
+
+        <tr data-c="kern"><td class="who">Basatha, Prayoga et al.<small>2025 · E3S Web of Conf.</small></td><td>systematisches Literaturreview, 28 Studien</td><td><span class="qbadge m">mittel</span></td><td>Review zu ClassDojo — dem nächsten kommerziellen Analogon zu KlassenHub. Behandelt Elternbeteiligung und Motivation gemeinsam.</td><td class="gapcell">eigene Empirie · DACH-Raum · schulintern entwickelte Systeme</td></tr>
+
+        <tr data-c="kern"><td class="who">Chiu<small>2021a · Interactive Learning Env.</small></td><td>qualitativ, 36 Lernende + 18 Lehrpersonen</td><td><span class="qbadge h">hoch</span></td><td>SDT-Rahmen im Schulkontext; qualitative Methodik als Vorbild für das eigene Design.</td><td class="gapcell">Eltern · Kommunikationsplattform · Normalbetrieb (COVID-Kontext)</td></tr>
+
+        <tr data-c="kern"><td class="who">Chiu<small>2021b · Computers in Human Behavior</small></td><td>Mixed Methods, N=426, Grade 11</td><td><span class="qbadge h">hoch</span></td><td>SDT im Blended Learning, konkret auf Sekundarstufe bezogen.</td><td class="gapcell">Eltern · Sekundarstufe I (Sek II) · Kommunikationsfunktionen</td></tr>
+
+        <tr data-c="kern"><td class="who">Bergdahl &amp; Bond<small>2021 · Educ. and Inform. Technologies</small></td><td>qualitativ, 12 Klassen, Sek II Schweden</td><td><span class="qbadge h">hoch</span></td><td>(Dis-)Engagement-Konzept mit Fokus auf Chancengleichheit an einer benachteiligten Schule.</td><td class="gapcell">Eltern · Kommunikationsplattform · Sekundarstufe I</td></tr>
+
+        <tr data-c="kern"><td class="who">Bergdahl<small>2022 · Computers &amp; Education</small></td><td>Mixed Method Grounded Theory, 10 Lehrpersonen</td><td><span class="qbadge h">hoch</span></td><td>Lehrer:innenperspektive auf Engagement; das Interview-Tagebuch-Interview-Design ist methodisch übertragbar.</td><td class="gapcell">Eltern und Lernende (nur Lehrpersonen) · Kommunikationsplattform</td></tr>
+
+        <tr data-c="kern"><td class="who">Khoo, Osman et al.<small>2024 · HASSS</small></td><td>qualitativ, 6 Lehrpersonen, WhatsApp</td><td><span class="qbadge m">mittel</span></td><td>Fast deckungsgleich mit der Mitteilungsheft-Funktion: Erreichbarkeitserwartung, Arbeitszeitgrenzen.</td><td class="gapcell">Lernende · Elternsicht selbst · dediziertes Schulsystem (WhatsApp)</td></tr>
+
+        <tr data-c="kern"><td class="who">Aguilar, Karabenick et al.<small>2021 · Computers &amp; Education</small></td><td>quantitativ, College-Studierende</td><td><span class="qbadge h">hoch</span></td><td>Learning-Analytics-Dashboards und Motivation — nur lose mit der Streak-Anzeige verwandt.</td><td class="gapcell">Schulkontext (Hochschule) · Eltern · Kommunikation</td></tr>
+
+        <tr data-c="akz"><td class="who">Bauwens, Muylaert et al.<small>2020 · Computers in Human Behavior</small></td><td>quantitativ, N=288 Sekundarlehrpersonen</td><td><span class="qbadge vh">sehr hoch</span></td><td>TAM/UTAUT plus Work-Life-Balance bei Nutzung außerhalb der Schulzeit — trifft die Sorge „App als Mehrbelastung" direkt.</td><td class="gapcell">Lernende · Eltern · qualitative Tiefe</td></tr>
+
+        <tr data-c="akz"><td class="who">Wohlfart &amp; Wagner<small>2025 · Educ. and Inform. Technologies</small></td><td>längsschnittlich qualitativ, 13 Lehrpersonen, 3 Wellen</td><td><span class="qbadge vh">sehr hoch</span></td><td>Zyklisches TAM: Akzeptanz entsteht schrittweise. Methodisch das nächste Vorbild im Bestand.</td><td class="gapcell">Lernende · Eltern · Kommunikationsplattform</td></tr>
+
+        <tr data-c="akz"><td class="who">Antonietti, Cattaneo &amp; Amenduni<small>2022 · Computers in Human Behavior</small></td><td>quantitativ, N=2011, Berufsbildung Schweiz</td><td><span class="qbadge vh">sehr hoch</span></td><td>Starke TAM-Theoriequelle; die einzige Arbeit im Bestand aus dem deutschsprachigen Raum.</td><td class="gapcell">allgemeine Sekundarstufe I (Berufsbildung) · Eltern · Lernende</td></tr>
+
+        <tr data-c="akz"><td class="who">Maier<small>2024 · Educatia 21</small></td><td>TAM, Lehrpersonen post-Pandemie</td><td><span class="qbadge m">mittel</span></td><td>Sekundärbeleg für TAM bei Lehrpersonen; Methodik nicht klar ausgewiesen.</td><td class="gapcell">Lernende · Eltern · methodische Transparenz</td></tr>
+
+        <tr data-c="teil"><td class="who">Addi-Raccah<small>2024 · Educ. and Inform. Technologies</small></td><td>quantitativ, N=600 Eltern, SEM, Israel</td><td><span class="qbadge vh">sehr hoch</span></td><td>Digitales Kapital erklärt SES-Unterschiede in der Elternbeteiligung — zentral für die Frage, ob die App Teilhabe erleichtert oder Ungleichheit reproduziert.</td><td class="gapcell">Lernende · Lehrpersonen · qualitative Tiefe · konkretes System</td></tr>
+
+        <tr data-c="teil"><td class="who">Antony-Newman<small>2024 · Journal of Teacher Education</small></td><td>kritische Policy-Analyse, Kanada</td><td><span class="qbadge vh">sehr hoch</span></td><td>Elternbeteiligung als Leitungs- und Professionalisierungsaufgabe — die Brücke zum Leadership-Strang.</td><td class="gapcell">Eltern und Lernende selbst · empirische Nutzungsdaten · digitale Systeme</td></tr>
+
+        <tr data-c="teil"><td class="who">Jones, Banerjee &amp; Jackson<small>2025 · British Educ. Research Journal</small></td><td>Policy-Analyse nach Taylor et al., England</td><td><span class="qbadge vh">sehr hoch</span></td><td>Belegt die uneinheitliche Verwendung von „parental engagement" — begründet die eigene Begriffsarbeit.</td><td class="gapcell">Eltern und Lernende selbst · empirische Nutzung · digitale Systeme</td></tr>
+
+        <tr data-c="teil"><td class="who">Beilmann, Opermann et al.<small>2023 · J. of Media Literacy Education</small></td><td>qualitativ, Experteninterviews, 6 EU-Länder</td><td><span class="qbadge h">hoch</span></td><td>Explizit Schule-Eltern-Kommunikation im europäischen Kontext, inkl. Praxisempfehlungen.</td><td class="gapcell">Lernende · Eltern selbst (Expert:innen befragt) · konkretes System</td></tr>
+
+        <tr data-c="teil"><td class="who">Osorio-Saez, Eryilmaz &amp; Sandoval-Hernandez<small>2021 · Frontiers in Psychology</small></td><td>quantitativ + thematisch, N=4.600 Eltern, 19 Länder</td><td><span class="qbadge h">hoch</span></td><td>UTAUT aus Elternsicht mit sehr großer internationaler Stichprobe.</td><td class="gapcell">Lernende · Lehrpersonen · qualitative Tiefe · Normalbetrieb (COVID)</td></tr>
+
+        <tr data-c="teil"><td class="who">Kent, du Boulay &amp; Cukurova<small>2022 · Education Sciences</small></td><td>kritisches Review</td><td><span class="qbadge m">mittel–hoch</span></td><td>Unterscheidet <em>Involvement</em> von <em>Engagement</em> — theoretische Rahmung für die Frage, ob die App bloß informiert oder beteiligt.</td><td class="gapcell">eigene Empirie · Lernende · DACH-Raum</td></tr>
+
+        <tr data-c="teil"><td class="who">Dou &amp; Chen<small>2025 · Frontiers in Education</small></td><td>quantitativ, N=1.286, latente Klassenanalyse</td><td><span class="qbadge h">hoch</span></td><td>WeChat-Klassengruppen als Analogie zum Mitteilungsheft; zeigt heterogene Eltern-Engagement-Profile.</td><td class="gapcell">Lernende · Lehrpersonen · qualitative Tiefe · europäischer Kontext</td></tr>
+
+        <tr data-c="teil"><td class="who">Pöntinen, Räty-Záborszky &amp; Kontkanen<small>2023 · IJTIE</small></td><td>Aktionsforschung, Elternperspektive, Finnland</td><td><span class="qbadge m">mittel</span></td><td>Thematisch sehr nah: digitale Home-School-Cooperation aus Elternsicht, Flexibilität als Erfolgsfaktor.</td><td class="gapcell">Lernende · Lehrpersonensicht · Sekundarstufe I</td></tr>
+
+        <tr data-c="teil"><td class="who">Nakambale &amp; Shikalepo<small>2025 · kleines Journal, Namibia</small></td><td>qualitative Fallstudie</td><td><span class="qbadge l">niedrig–mittel</span></td><td>Epsteins sechs Beteiligungstypen als Ordnungsraster; empirisch nur Randbeleg.</td><td class="gapcell">Sekundarstufe I · europäischer Kontext · schulintern entwickelte Systeme</td></tr>
+
+        <tr data-c="lead"><td class="who">Wang, Chen et al.<small>2024 · Humanities and Soc. Sci. Comm.</small></td><td>bibliometrisch, PRISMA-Selektion 1.849→588</td><td><span class="qbadge vh">sehr hoch</span></td><td>Überblick über die Forschungslandschaft digitaler Transformation — für die einleitende Kontextualisierung.</td><td class="gapcell">Schulkommunikation · Eltern · empirische Tiefe</td></tr>
+
+        <tr data-c="lead"><td class="who">Wollscheid<small>2025 · noch zu prüfen</small></td><td><em>noch nicht im Detail geprüft</em></td><td><span class="qbadge m">offen</span></td><td>Angaben und Einordnung noch zu ergänzen.</td><td class="gapcell">noch nicht bestimmbar</td></tr>
+
+        <tr data-c="lead"><td class="who">Reis-Andersson<small>2023 · noch zu prüfen</small></td><td><em>noch nicht im Detail geprüft</em></td><td><span class="qbadge m">offen</span></td><td>Angaben und Einordnung noch zu ergänzen.</td><td class="gapcell">noch nicht bestimmbar</td></tr>
+
+        <tr data-c="lead"><td class="who">Mahaye<small>2025 · IJITSS</small></td><td>systematisches Review, Globaler Süden</td><td><span class="qbadge l">niedrig–mittel</span></td><td>Nur Randbeleg für die Anwendungsbreite der Selbstbestimmungstheorie.</td><td class="gapcell">Schulkommunikation · Eltern · europäischer Kontext</td></tr>
+
+        <tr data-c="meth"><td class="who">Yip<small>2024 · IJRME</small></td><td>methodologischer Beitrag</td><td><span class="qbadge h">hoch</span></td><td>Insider-Outsider-Positionalität — Rahmen für die Reflexion der Dreifachrolle Entwickler, Lehrperson, Forscher.</td><td class="gapcell">—</td></tr>
+
+        <tr data-c="meth"><td class="who">Page, McKenzie et al.<small>2021 · PLOS Medicine</small></td><td>Leitliniendokument (PRISMA 2020)</td><td><span class="qbadge vh">sehr hoch</span></td><td>Reportingstandard, falls die Literaturanalyse als strukturierte Recherche dokumentiert wird.</td><td class="gapcell">—</td></tr>
+
+        </tbody>
+        <caption>32 Quellen, Stand 25.07.2026. Die Spalte „Deckt nicht ab" ist aus Journalangaben, berichteter Methodik und der eigenen Quellenbewertung abgeleitet — sie benennt bewusst nur, was die jeweilige Studie nicht untersucht hat, nicht was ihr fehlt.</caption>
+      </table>
+    </div>
+
+    <div class="findings gap">
+      <div class="fh"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="8"/></svg>Was in der letzten Spalte immer wieder auftaucht</div>
+      <div class="finding"><b>Keine einzige Quelle</b> erhebt Lehrpersonen, Lernende und Eltern gleichzeitig zum selben System. Die Perspektiven liegen getrennt vor und werden nie gegeneinander gelesen.</div>
+      <div class="finding"><b>Der deutschsprachige Raum fehlt praktisch vollständig</b> — nur Antonietti et al. (2022), und dort im Kontext der Berufsbildung.</div>
+      <div class="finding"><b>Alle empirischen Studien untersuchen zugekaufte oder allgemein verfügbare Systeme</b> (ClassDojo, Seesaw, WhatsApp, WeChat). Ein schulintern entwickeltes System, bei dem Entwicklung und Anwendung zusammenfallen, kommt nicht vor.</div>
+      <div class="finding">Das sind drei Kandidaten für die Forschungslücke — <b>noch keine ausformulierte Lückenargumentation</b>. Die entsteht in einem eigenen Schritt und muss auch prüfen, ob die Lücke <em>relevant</em> ist und nicht nur unbesetzt.</div>
+    </div>
+  </section>
 
   <section id="cluster-gamification">
     <div class="cluster card">
@@ -158,16 +291,83 @@
     </div>
   </section>
 
+  <!-- ===================== CLUSTER -> THEORIEKAPITEL ===================== -->
+  <section id="theoriebezug">
+    <div class="sec-head"><h2>Vom Cluster zum Theoriekapitel</h2></div>
+    <p class="sec-sub">Die Cluster sind eine Ordnung der Literatur — kein Kapitelplan. Dieser Abschnitt übersetzt sie in einen Gliederungsvorschlag für „Theoretische Grundlagen" und zeigt, welche Quellen welches Unterkapitel tragen.</p>
+
+    <div class="note" style="margin-top:0;margin-bottom:18px">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg>Entwurf — noch nicht mit der Betreuung abgestimmt</h4>
+      <p>Die Kapitelstruktur der PH-NÖ-Vorlage nennt „Theoretische Grundlagen" als ein Kapitel ohne Untergliederung. Die folgende Gliederung ist aus den Literaturclustern und den vier Unterfragen abgeleitet — methodisch richtig herum, weil Theoriekapitel aus der Literatur wachsen sollen und nicht umgekehrt. Sie steht ausdrücklich zur Diskussion.</p>
+    </div>
+
+    <div class="kap card">
+      <div class="kap-head"><span class="kap-num">2.1</span><h4>Schulische Kommunikation zwischen Lehrpersonen, Eltern und Lernenden</h4></div>
+      <p class="kb">Begriffsklärung als Fundament: Was heißt Elternbeteiligung, und warum ist der Begriff uneinheitlich? Epsteins Typologie, die Unterscheidung von <em>Involvement</em> und <em>Engagement</em>, und der Nachweis widersprüchlicher Verwendung in Bildungspolitik.</p>
+      <p class="ksrc"><b>Trägt:</b> Kent et al. (2022) · Jones et al. (2025) · Nakambale &amp; Shikalepo (2025) · Beilmann et al. (2023)</p>
+    </div>
+
+    <div class="kap card">
+      <div class="kap-head"><span class="kap-num">2.2</span><h4>Digitalisierung schulischer Kommunikation — Praxis und Befundlage</h4></div>
+      <p class="kb">Was über digitale Kommunikationsplattformen im Schulkontext bekannt ist — einschließlich der ernüchternden Wirkungsevidenz. Dieses Unterkapitel begründet, warum die eigene Arbeit nicht auf Wirkung, sondern auf Wahrnehmung zielt.</p>
+      <p class="ksrc"><b>Trägt:</b> See et al. (2021) · Khoo et al. (2024) · Dou &amp; Chen (2025) · Osorio-Saez et al. (2021) · Basatha et al. (2025)</p>
+    </div>
+
+    <div class="kap card">
+      <div class="kap-head"><span class="kap-num">2.3</span><h4>Digitale Teilhabe und Ungleichheit</h4></div>
+      <p class="kb">Die kritische Kehrseite: Digitales Kapital, sozioökonomische Unterschiede und die Frage, ob niederschwellige Werkzeuge Teilhabe erleichtern oder bestehende Ungleichheit reproduzieren.</p>
+      <p class="ksrc"><b>Trägt:</b> Addi-Raccah (2024) · Pöntinen et al. (2023) · Osorio-Saez et al. (2021)</p>
+    </div>
+
+    <div class="kap card">
+      <div class="kap-head"><span class="kap-num">2.4</span><h4>Motivation und Engagement — Selbstbestimmungstheorie im Schulkontext</h4></div>
+      <p class="kb">Das theoretische Rückgrat: Autonomie, Kompetenz und Zugehörigkeit als Grundbedürfnisse, ihre Übertragung auf Gamification und die Befundlage zu Engagement und Disengagement in der Sekundarstufe.</p>
+      <p class="ksrc"><b>Trägt:</b> Li et al. (2024) · Sailer &amp; Homner (2019) · Huang et al. (2020) · Vrcelj et al. (2023) · Ratinho &amp; Martins (2023) · Chiu (2021a, 2021b) · Bergdahl &amp; Bond (2021) · Bergdahl (2022)</p>
+    </div>
+
+    <div class="kap card">
+      <div class="kap-head"><span class="kap-num">2.5</span><h4>Akzeptanz digitaler Werkzeuge bei Lehrpersonen</h4></div>
+      <p class="kb">Technologieakzeptanz als Prozess statt als Zustand — inklusive der Frage nach Mehrbelastung und Erreichbarkeitserwartung außerhalb der Dienstzeit.</p>
+      <p class="ksrc"><b>Trägt:</b> Bauwens et al. (2020) · Wohlfart &amp; Wagner (2025) · Antonietti et al. (2022) · Maier (2024)</p>
+    </div>
+
+    <div class="kap card">
+      <div class="kap-head"><span class="kap-num">2.6</span><h4>Digitale Schulentwicklung als Leadership-Aufgabe</h4></div>
+      <p class="kb">Die Rückbindung an den Lehrgang. <strong>Das schwächste Unterkapitel</strong> — hier trägt die vorhandene Journalliteratur nicht, und es braucht eine Abstimmung darüber, welche Fachbücher und deutschsprachige Schulentwicklungsliteratur ergänzt werden.</p>
+      <p class="ksrc"><b>Trägt:</b> Antony-Newman (2024) · Wang et al. (2024) · <em>Wollscheid (2025) und Reis-Andersson (2023) noch zu prüfen</em></p>
+    </div>
+
+    <div class="kap card" style="border-left:4px solid var(--amber)">
+      <div class="kap-head"><span class="kap-num">2.7</span><h4>Forschungslücke und Ableitung der Fragestellung</h4></div>
+      <p class="kb">Der Abschluss des Theorieteils: Was die Literatur beantwortet, was offenbleibt und warum daraus eine empirische Bearbeitung folgt. <strong>Noch nicht ausgearbeitet</strong> — die Vorarbeit dafür steht in der Spalte „Deckt nicht ab" der Gesamttabelle.</p>
+      <p class="ksrc"><b>Grundlage:</b> die drei wiederkehrenden Leerstellen (Mehrperspektivität · DACH-Raum · schulintern entwickelte Systeme)</p>
+    </div>
+  </section>
+
   <div class="note" style="margin-top:26px">
     <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Einordnung</h4>
     <p>Rund zwei Drittel der Quellen sind ohne Einschränkung stark (hohe Journalqualität und hohe thematische Passung). Der ehemals dünnste Block „Digitale Teilhabe" ist von einer auf neun Quellen gewachsen und trägt jetzt. Bewusst schwach bleibt „Digital Leadership" — hier gibt es derzeit wenig belastbar Publiziertes, das zugleich thematisch passt; das ist ein offener Punkt für das nächste Fachgespräch und keine Lücke, die sich durch mehr Recherche schließen lässt.</p>
     <p>Weiterhin offen ist außerdem die Beschaffung mehrerer bereits identifizierter Kernquellen — darunter ein qualitativer Mehrperspektiven-Zugang zu Plattformnutzung (Lehrpersonen, Schüler:innen und Eltern gemeinsam), eine kritische Arbeit zu ClassDojo als Gegengewicht zum affirmativen Review, sowie zwei aktuelle Übersichtsarbeiten zur technologievermittelten Eltern-Schule-Kommunikation.</p>
   </div>
 
-  <div class="foot">
+  <div class="foot" id="ende">
     <span>Master-Thesis · KlassenHub — Literaturkarte (vorläufig, Stand 25.07.2026)</span>
     <span><a href="2026-07-literaturverzeichnis.html">Vollständiges Literaturverzeichnis →</a></span>
   </div>
 </div>
+
+<script>
+  // Themenfeld-Filter der Gesamttabelle. Ohne JS bleiben alle Zeilen sichtbar —
+  // die Tabelle ist auch ungefiltert vollstaendig lesbar.
+  (function () {
+    const btns = document.querySelectorAll('.fbtn');
+    const rows = document.querySelectorAll('table.lit tbody tr');
+    btns.forEach((b) => b.addEventListener('click', () => {
+      const f = b.dataset.f;
+      btns.forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
+      rows.forEach((r) => { r.hidden = !(f === 'all' || r.dataset.c === f); });
+    }));
+  })();
+</script>
 </body>
 </html>
