@@ -246,6 +246,40 @@ caption { caption-side: bottom; padding: 11px 15px; font-size: 12.5px; color: va
 
 .foot { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
+/* ---- mitscrollendes Inhaltsverzeichnis (siehe assets/toc.js) ----
+   Zugeklappt nur eine Reihe Striche im rechten Seitenrand; aufgeklappt bei
+   Mouseover ODER Tastaturfokus (:focus-within), damit es nicht mausabhaengig ist.
+   Die Strich-Marker sitzen auf dem <li>, nicht auf dem <a> — hinge der Marker am
+   Link, wuerde er von dessen opacity:0 im zugeklappten Zustand mit ausgeblendet. */
+.toc { position: fixed; right: 14px; top: 50%; transform: translateY(-50%); z-index: 15;
+  max-width: 34px; padding: 10px 9px; border-radius: 14px; overflow: hidden;
+  background: transparent; border: 1px solid transparent;
+  transition: max-width .24s cubic-bezier(.22,1,.36,1), padding .24s,
+              background .2s, border-color .2s, box-shadow .2s; }
+.toc:hover, .toc:focus-within { max-width: 252px; padding: 14px 16px;
+  background: color-mix(in srgb, var(--card) 94%, transparent);
+  border-color: var(--line); box-shadow: var(--shadow); backdrop-filter: blur(9px); }
+.toc-h { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 9px; white-space: nowrap;
+  opacity: 0; transition: opacity .2s; }
+.toc:hover .toc-h, .toc:focus-within .toc-h { opacity: 1; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.toc li { position: relative; padding-left: 24px; }
+.toc li::before { content: ""; position: absolute; left: 0; top: 7px;
+  width: 14px; height: 2px; border-radius: 2px; background: var(--line);
+  transition: width .18s, background .18s; }
+.toc li.on::before { width: 20px; background: var(--teal); }
+.toc a { display: block; font-size: 12.5px; line-height: 1.32; font-weight: 600;
+  color: var(--muted); text-decoration: none; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+  opacity: 0; transition: opacity .2s, color .15s; }
+.toc:hover a, .toc:focus-within a { opacity: 1; }
+.toc li.on a { color: var(--teal); }
+.toc a:hover, .toc a:focus-visible { color: var(--ink); }
+@media (max-width: 1079px) { .toc { display: none; } }
+@media print { .toc { display: none; } }
+@media (prefers-reduced-motion: reduce) { .toc, .toc-h, .toc a, .toc li::before { transition: none; } }
+
 svg.i { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 svg.i.big { width: 18px; height: 18px; }
 @media (prefers-reduced-motion: no-preference) {
