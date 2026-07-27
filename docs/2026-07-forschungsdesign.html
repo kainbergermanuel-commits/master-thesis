@@ -54,6 +54,11 @@
   svg .tn-b { font-family: var(--mono); fill: var(--violet); font-size: 11px; font-weight: 700; }
   svg .arw { stroke: var(--muted); stroke-width: 1.6; fill: none; marker-end: url(#ah); }
   svg .arw-d { stroke: var(--muted); stroke-width: 1.4; fill: none; stroke-dasharray: 4 4; marker-end: url(#ah); }
+  /* Icons bewusst nur dort, wo sie eine Rolle kennzeichnen (Perspektiven, Ethik-Band) —
+     nicht auf den nummerierten Prozessschritten, das waere Dekoration. */
+  svg .ic { fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  svg .ic-e { stroke: var(--amber); opacity: .8; }
+  svg .ic-r { stroke: var(--muted); opacity: .85; }
 </style>
 </head>
 <body>
@@ -192,26 +197,39 @@
         <path class="arw" d="M570 327 L585 327"/>
         <path class="arw" d="M281 421 L295 421"/>
         <path class="arw" d="M570 421 L585 421"/>
-        <path class="arw-d" d="M723 366 L723 374 L145 374 L145 380"/>
 
-        <!-- ---------- Drei Perspektiven ---------- -->
-        <text class="tl" x="8" y="500">DREI PERSPEKTIVEN AUF DENSELBEN GEGENSTAND</text>
+        <!-- ---------- Drei Perspektiven ----------
+             Sammelleitung statt drei einzelner Pfeile: die drei Perspektiven
+             laufen auf einer gemeinsamen Linie zusammen, von der ein einziger
+             Pfeil in die Datenerhebung fuehrt. Label rechtsbuendig, damit der
+             Steigpfeil bei x=145 nicht durch die Schrift laeuft. -->
+        <text class="tl" x="860" y="474" text-anchor="end">DREI PERSPEKTIVEN AUF DENSELBEN GEGENSTAND</text>
 
-        <rect class="bx-e" x="8" y="510" width="273" height="60" rx="12"/>
-        <text class="th" x="24" y="537">Lehrpersonen</text>
-        <text class="t" x="24" y="556">Akzeptanz, Aufwand, Verbindlichkeit</text>
+        <path class="arw" d="M145 490 L145 464"/>
+        <path d="M145 490 H723" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
+        <path d="M145 490 V506 M434 490 V506 M723 490 V506" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
 
-        <rect class="bx-e" x="297" y="510" width="273" height="60" rx="12"/>
-        <text class="th" x="313" y="537">Schüler*innen</text>
-        <text class="t" x="313" y="556">Motivation, Autonomie, Zugehörigkeit</text>
+        <rect class="bx-e" x="8" y="506" width="273" height="64" rx="12"/>
+        <g class="ic ic-e" transform="translate(24,526)">
+          <path d="M3 3h18v12H3z"/><path d="M8 21h8"/><path d="M12 15v6"/>
+        </g>
+        <text class="th" x="60" y="533">Lehrpersonen</text>
+        <text class="t" x="60" y="552">Akzeptanz, Aufwand, Verbindlichkeit</text>
 
-        <rect class="bx-e" x="587" y="510" width="273" height="60" rx="12"/>
-        <text class="th" x="603" y="537">Eltern</text>
-        <text class="t" x="603" y="556">Teilhabe, Informiertheit, Beteiligung</text>
+        <rect class="bx-e" x="297" y="506" width="273" height="64" rx="12"/>
+        <g class="ic ic-e" transform="translate(313,526)">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </g>
+        <text class="th" x="349" y="533">Schüler*innen</text>
+        <text class="t" x="349" y="552">Motivation, Autonomie, Zugehörigkeit</text>
 
-        <path class="arw" d="M145 510 L145 464"/>
-        <path class="arw" d="M434 510 L434 470 L290 470 L290 464"/>
-        <path class="arw" d="M723 510 L723 470 L200 470 L200 464"/>
+        <rect class="bx-e" x="587" y="506" width="273" height="64" rx="12"/>
+        <g class="ic ic-e" transform="translate(603,526)">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </g>
+        <text class="th" x="639" y="533">Eltern</text>
+        <text class="t" x="639" y="552">Teilhabe, Informiertheit, Beteiligung</text>
 
         <text class="t" x="8" y="600" style="font-style:italic">Getrennt erhoben, in der Auswertung gegeneinander gelesen — die Mehrperspektivität ist der Kern des Designs.</text>
 
@@ -225,6 +243,9 @@
         <text class="th" x="948" y="34" transform="rotate(90 948 34)">Reflexivität &amp; Ethik</text>
         <text class="t" x="972" y="34" transform="rotate(90 972 34)">Doppelrolle · Freiwilligkeit</text>
         <text class="t" x="990" y="34" transform="rotate(90 990 34)">Anonymität · Datenschutz</text>
+        <g class="ic ic-r" transform="translate(944,516) scale(1.35)">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </g>
       </svg>
 
       <div class="fig-legend">
