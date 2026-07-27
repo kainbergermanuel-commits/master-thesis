@@ -29,10 +29,14 @@
     border: 1px solid var(--line); background: var(--card); color: var(--ink-soft); font-family: var(--body); }
   .fbtn:hover { border-color: var(--teal); color: var(--teal); }
   .fbtn[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
-  table.lit { min-width: 900px; font-size: 13px; }
-  table.lit td, table.lit th { padding: 11px 13px; }
-  table.lit td.who { font-weight: 700; color: var(--ink); white-space: nowrap; }
-  table.lit td.who small { display: block; font-weight: 500; color: var(--muted); font-size: 11px; white-space: normal; margin-top: 2px; }
+  /* min-width bewusst niedrig: die Tabelle soll auf dem Desktop ohne horizontales
+     Scrollen in die 914px des Inhaltsbereichs passen. Erst darunter scrollt sie
+     innerhalb von .tablewrap. Feste Spaltenbreiten via <col>, damit die langen
+     Autorenketten nicht die Quellen-Spalte aufblaehen. */
+  table.lit { min-width: 660px; font-size: 12.5px; table-layout: fixed; }
+  table.lit td, table.lit th { padding: 10px 12px; }
+  table.lit td.who { font-weight: 700; color: var(--ink); overflow-wrap: break-word; }
+  table.lit td.who small { display: block; font-weight: 500; color: var(--muted); font-size: 10.5px; margin-top: 2px; }
   table.lit td.gapcell { color: var(--amber); font-size: 12.5px; }
   table.lit tr[hidden] { display: none; }
   .qbadge { font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
@@ -92,6 +96,10 @@
 
     <div class="tablewrap">
       <table class="lit">
+        <colgroup>
+          <col style="width:16%"><col style="width:18%"><col style="width:9%">
+          <col style="width:32%"><col style="width:25%">
+        </colgroup>
         <thead>
           <tr>
             <th>Quelle</th>
