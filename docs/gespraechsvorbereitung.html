@@ -24,15 +24,40 @@
   .dec-num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: var(--violet); flex: none; }
   /* min-width:0 verhindert, dass ein langer Titel die Nummer auf eine eigene Zeile drueckt */
   .dec h4 { font-family: var(--display); font-size: 16.5px; margin: 0; line-height: 1.32; min-width: 0; }
-  .dec .row { margin-top: 12px; display: grid; grid-template-columns: 128px 1fr; gap: 6px 16px; align-items: baseline; }
-  @media (max-width: 620px) { .dec .row { grid-template-columns: 1fr; gap: 3px; } .dec .row + .row { margin-top: 12px; } }
-  .dec .rk { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-  .dec .rv2 { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); }
-  .dec .rv2 b { color: var(--ink); font-weight: 700; }
+  .dec .row, .deep .row { margin-top: 12px; display: grid; grid-template-columns: 128px 1fr; gap: 6px 16px; align-items: baseline; }
+  @media (max-width: 620px) { .dec .row, .deep .row { grid-template-columns: 1fr; gap: 3px; } .dec .row + .row, .deep .row + .row { margin-top: 12px; } }
+  .dec .rk, .deep .rk { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .dec .rv2, .deep .rv2 { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); }
+  .dec .rv2 b, .deep .rv2 b { color: var(--ink); font-weight: 700; }
   .dec .ask { color: var(--violet); font-weight: 600; }
   .qgroup { margin-top: 34px; }
   .qgroup > h3 { font-family: var(--display); font-size: 18px; margin-bottom: 4px; }
   .qgroup > p.gs { color: var(--muted); font-size: 13.5px; margin-bottom: 15px; max-width: 68ch; }
+
+  /* ---- Vertiefungsblock: eine Entscheidung ausfuehrlich hergeleitet ---- */
+  .deep { padding: 22px 24px; margin-top: 14px; border-left: 4px solid var(--teal); }
+  .deep-head { display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap; }
+  .deep-tag { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--teal); flex: none; }
+  .deep h4 { font-family: var(--display); font-size: 16.5px; margin: 0; line-height: 1.32; min-width: 0; }
+  .deep .lede2 { font-size: 13.5px; line-height: 1.62; color: var(--ink-soft); margin-top: 10px; max-width: 70ch; }
+  .ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 11px; margin-top: 16px; }
+  .way { padding: 14px 16px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .way .wn { font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--muted); }
+  .way h5 { font-family: var(--display); font-size: 14.5px; margin: 3px 0 7px; color: var(--ink); }
+  .way p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); }
+  .way .verdict { display: inline-block; margin-top: 9px; font-size: 11px; font-weight: 800;
+    padding: 2px 9px; border-radius: 999px; }
+  /* Die gewaehlte Variante hebt sich ab, ohne dass die anderen abgewertet aussehen —
+     sie sind ja der Beleg dafuer, dass geprueft wurde. */
+  .way.pick { border-color: var(--teal); background: color-mix(in srgb, var(--teal) 7%, var(--card-2)); }
+  .way.pick .verdict { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .way.drop .verdict { color: var(--muted); background: var(--paper-2); border: 1px solid var(--line); }
+  .say { margin-top: 18px; padding: 16px 18px; border-radius: 12px;
+    background: color-mix(in srgb, var(--teal) 6%, var(--card-2)); border: 1px dashed var(--teal); }
+  .say .sh { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--teal); display: flex; align-items: center; gap: 6px; }
+  .say p { font-size: 14px; line-height: 1.68; color: var(--ink); margin-top: 9px; font-style: italic; }
 </style>
 </head>
 <body>
@@ -61,9 +86,9 @@
       <strong>Zweck dieser Seite:</strong> Sie ist zuerst ein Arbeitsinstrument — sie zeigt, wo bereits belastbar geantwortet werden kann und wo noch nichts steht. Offene Punkte sind bewusst als solche markiert und <strong>nicht</strong> mit Vermutungen gefüllt. Eine ehrlich markierte Lücke ist im Gespräch besser als eine erfundene Antwort.
     </div>
     <div class="scorecard">
-      <div class="sc card ok"><div class="scn">8</div><div class="scl">belastbar beantwortet</div></div>
-      <div class="sc card part"><div class="scn">5</div><div class="scl">teilweise — Präzisierung nötig</div></div>
-      <div class="sc card open"><div class="scn">4</div><div class="scl">offen — nur du kannst sie füllen</div></div>
+      <div class="sc card ok"><div class="scn">10</div><div class="scl">belastbar beantwortet</div></div>
+      <div class="sc card part"><div class="scn">4</div><div class="scl">teilweise — Präzisierung nötig</div></div>
+      <div class="sc card open"><div class="scn">3</div><div class="scl">offen — nur du kannst sie füllen</div></div>
     </div>
   </header>
 
@@ -214,11 +239,57 @@
 
       <div class="qa card strong">
         <div class="q"><span class="qn">11</span><span>Welche Forschungsmethode bzw. welches Forschungsdesign scheint am geeignetsten? Wie passend ist es zur Beantwortung der Frage?</span></div>
-        <div class="a">Qualitativ, hermeneutisch, explorativ: Literaturanalyse plus Erprobungsstudie mit Interviews, Gruppengesprächen und offenen Fragebögen; Auswertung über qualitative Inhaltsanalyse nach Kuckartz. Die Passung ist <b>bewusst hergestellt</b>: Die Forschungsfrage wurde am 25.07.2026 von „Inwiefern kann die App … unterstützen?" auf die Ebene Wahrnehmung, Aneignung und Bedeutungszuschreibung umgestellt, weil ein qualitatives Design Wirkung nicht belegen kann. Erkenntnisanspruch und Instrument sind jetzt deckungsgleich.</div>
+        <div class="a">Qualitativ, hermeneutisch, explorativ: Literaturanalyse plus Erprobungsstudie mit Interviews, Gruppengesprächen und offenen Fragebögen; Auswertung über qualitative Inhaltsanalyse nach Kuckartz — konkret die <b>inhaltlich strukturierende</b> der drei Varianten; die Herleitung dieser Wahl steht direkt unter dieser Frage. Die Passung ist <b>bewusst hergestellt</b>: Die Forschungsfrage wurde am 25.07.2026 von „Inwiefern kann die App … unterstützen?" auf die Ebene Wahrnehmung, Aneignung und Bedeutungszuschreibung umgestellt, weil ein qualitatives Design Wirkung nicht belegen kann. Erkenntnisanspruch und Instrument sind jetzt deckungsgleich.</div>
         <div class="qmeta">
           <span class="chip reuse">belastbar</span>
           <span class="chip low">Trumpf im Gespräch</span>
           <a class="fdoc" href="2026-07-forschungsdesign.html">Präzisierung nachlesen <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+
+
+      <div class="deep card">
+        <div class="deep-head">
+          <span class="deep-tag">Vertiefung zu 11</span>
+          <h4>Welche der drei Kuckartz-Varianten — und warum nicht die anderen zwei?</h4>
+        </div>
+        <p class="lede2">Kuckartz beschreibt drei Wege, dieselben Interviews auszuwerten. Die Wahl ist zu begründen, und zwar so, dass erkennbar ist: Die anderen beiden wurden geprüft, nicht übersehen.</p>
+
+        <div class="ways">
+          <div class="way pick">
+            <div class="wn">Kapitel 5</div>
+            <h5>Sortieren</h5>
+            <p>Alles Gesagte wird nach Themen geordnet — alles zum Mitteilungsheft auf einen Stapel, alles zu den Streaks auf einen anderen. Ergebnis: Man kann sagen, <em>wie</em> Eltern über das Mitteilungsheft sprechen und wie Lehrpersonen darüber sprechen.</p>
+            <span class="verdict">gewählt</span>
+          </div>
+          <div class="way drop">
+            <div class="wn">Kapitel 6</div>
+            <h5>Einstufen</h5>
+            <p>Zusätzlich zum Sortieren bekommt jeder Fall eine Einstufung: hohe, mittlere oder geringe Akzeptanz. Ergebnis: eine Bewertung pro Person.</p>
+            <span class="verdict">verworfen</span>
+          </div>
+          <div class="way drop">
+            <div class="wn">Kapitel 7</div>
+            <h5>Typen bilden</h5>
+            <p>Aus wiederkehrenden Mustern werden Figuren geformt — etwa der begeisterte, der skeptische und der distanzierte Elternteil. Ergebnis: eine Typologie statt einer Themenübersicht.</p>
+            <span class="verdict">verworfen</span>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:16px"><span class="rk">Warum Kap. 5</span><span class="rv2">Er passt zur Fragestellung. Erhoben wird, <b>wie</b> drei Gruppen die App wahrnehmen und sich aneignen — dafür muss das Gesagte nach Themen geordnet werden.</span></div>
+        <div class="row"><span class="rk">Warum nicht Kap. 6</span><span class="rv2">Einstufen hieße bewerten, ob jemand die App gut oder schlecht annimmt. Das wäre <b>meine</b> Bewertung, nicht die Wahrnehmung der Befragten — und damit ein Rückfall auf die Wirkungsebene, die die Forschungsfrage am 25.07.2026 bewusst verlassen hat.</span></div>
+        <div class="row"><span class="rk">Warum nicht Kap. 7</span><span class="rv2">Reizvoll wäre es: Es gibt drei Rollengruppen, und Dou &amp; Chen (2025) finden bei Eltern genau solche Profile — aktiv, passiv, distanziert. Aber die Typenbildung ist <b>keine Alternative, sondern ein zusätzlicher Schritt obendrauf</b>: Sie setzt auf der strukturierenden Analyse auf und braucht mehr Fälle, damit die Typen tragen. Für den Umfang einer Masterarbeit ist das zu viel.</span></div>
+        <div class="row"><span class="rk">Offen gehalten</span><span class="rv2">Zeigen sich beim Auswerten deutliche Muster, lässt sich die Typenbildung als <b>Ausblick</b> im Schlusskapitel aufnehmen — ohne sie zugesagt zu haben.</span></div>
+
+        <div class="say">
+          <div class="sh"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>So lässt es sich im Gespräch sagen</div>
+          <p>„Ich werte inhaltlich strukturierend aus, also nach Themen. Die evaluative Variante scheidet aus, weil sie Fälle einstuft — das wäre meine Bewertung und nicht die Wahrnehmung der Befragten, und genau die will ich erheben. Die typenbildende habe ich mir angesehen; bei drei Rollengruppen wäre sie reizvoll, aber sie setzt auf der strukturierenden auf und braucht mehr Fälle, als eine Masterarbeit trägt. Falls sich beim Auswerten deutliche Muster zeigen, nehme ich sie als Ausblick auf."</p>
+        </div>
+
+        <div class="qmeta" style="margin-top:14px">
+          <span class="chip reuse">belastbar</span>
+          <span class="chip low">zeigt Urteilsfähigkeit</span>
+          <a class="fdoc" href="2026-07-literaturverzeichnis.html#methodik-analyse">Kuckartz &amp; Rädiker im Verzeichnis <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
         </div>
       </div>
 
