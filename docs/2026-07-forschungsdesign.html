@@ -37,6 +37,15 @@
      Masterarbeit uebernehmen. */
   .figwrap { margin-top: 20px; padding: 20px 18px 14px; overflow-x: auto; }
   .figwrap svg { display: block; width: 100%; min-width: 720px; height: auto; }
+  /* Abbildung 1 darf aus der 960px-Spalte ausbrechen: Die Grafik traegt sechs Ebenen,
+     die in Spaltenbreite nur noch mit Scrollbalken lesbar waeren. Gilt bewusst nur hier. */
+  .figwrap.wide { width: min(1340px, calc(100vw - 36px)); margin-left: 50%; transform: translateX(-50%); }
+  .figwrap.wide svg { min-width: 940px; }
+  svg .bx-open { fill: color-mix(in srgb, var(--amber) 8%, var(--card-2)); stroke: color-mix(in srgb, var(--amber) 55%, var(--line)); stroke-width: 1.3; stroke-dasharray: 5 4; }
+  svg .bx-k { fill: color-mix(in srgb, var(--violet) 8%, var(--card-2)); stroke: color-mix(in srgb, var(--violet) 38%, var(--line)); stroke-width: 1.2; }
+  svg .tsq2 { font-family: var(--display); fill: var(--ink); font-size: 12px; font-weight: 800; }
+  svg .th-b { font-family: var(--display); fill: var(--ink); font-size: 12px; font-weight: 800; }
+  svg .trail { font-family: var(--mono); fill: var(--teal); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
   .fig-cap { font-size: 12.5px; color: var(--muted); margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--line-soft); }
   .fig-cap b { color: var(--ink-soft); font-weight: 700; }
   .fig-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
@@ -90,17 +99,26 @@
     <h1>Wie die Untersuchung<br>aufgebaut ist.</h1>
     <p class="lede">Qualitativ, hermeneutisch, theoriegeleitet, explorativ, praxisnah — keine Allgemeingültigkeit, sondern vertiefte Einsicht in einen konkreten Schulkontext.</p>
     <div class="thesis">
-      <strong>Zentrale Forschungsfrage:</strong> Wie nehmen Lehrpersonen, Schüler*innen und Eltern die Erprobung einer schulintern entwickelten Kommunikations- und Organisations-App in der Sekundarstufe I wahr, wie eignen sie sich diese im schulischen Alltag an, und welche Bedeutung schreiben sie ihr für schulische Informations- und Beteiligungsprozesse zu?
+      <strong>Zentrale Forschungsfrage:</strong> Wie eignen sich Lehrpersonen, Schüler*innen und Eltern eine schulintern entwickelte Kommunikations- und Organisations-App im Rahmen einer Erprobung in der Sekundarstufe I an, und welche Bedeutung schreiben sie ihr für schulische Informations- und Beteiligungsprozesse zu?
     </div>
     <div class="subq">
-      <div class="sq card"><div class="num">1</div><h4>Nutzung &amp; Aneignung</h4><p>Wie wird die App tatsächlich genutzt — und wo weicht die gelebte Nutzung von der intendierten Funktionslogik ab?</p></div>
-      <div class="sq card"><div class="num">2</div><h4>Zugeschriebene Wirkung</h4><p>Welche Veränderungen in Informationsfluss, Verbindlichkeit und Beteiligung schreiben die Beteiligten der App zu — und welche Grenzen und unerwünschten Nebenwirkungen benennen sie?</p></div>
-      <div class="sq card"><div class="num">3</div><h4>Akzeptanz im Vergleich</h4><p>Worin unterscheidet sich die Akzeptanz gegenüber etablierten Systemen (z. B. SchoolFox), und welche Bedingungen machen den Unterschied?</p></div>
-      <div class="sq card"><div class="num">4</div><h4>Leadership-Ertrag</h4><p>Welche Anforderungen an schulische Leitungs- und Entwicklungsarbeit lassen sich aus den Befunden ableiten?</p></div>
+      <div class="sq card"><div class="num">1</div><h4>Nutzung &amp; Aneignung</h4><p>Wie nutzen die drei Gruppen die App im schulischen Alltag — und wo weicht die gelebte Nutzung von der intendierten Funktionslogik ab?</p></div>
+      <div class="sq card"><div class="num">2</div><h4>Zugeschriebene Wirkung</h4><p>Welche Veränderungen in Informationsfluss, Verbindlichkeit und Beteiligung schreiben die Beteiligten der App zu — und welche Grenzen, Belastungen und unerwünschten Nebenwirkungen benennen sie?</p></div>
+      <div class="sq card"><div class="num">3</div><h4>Vergleichshorizont &amp; Akzeptanz</h4><p>Welche Vergleiche ziehen die Beteiligten zu bereits genutzten Systemen (z. B. SchoolFox) — und woran machen sie Unterschiede in der Akzeptanz fest?</p></div>
+      <div class="sq card"><div class="num">4</div><h4>Ertrag für Leitungs- und Entwicklungsarbeit <span class="chip mid" style="margin-left:6px">Ableitung</span></h4><p>Welche Anforderungen an schulische Leitungs- und Entwicklungsarbeit lassen sich aus den Befunden ableiten? — Anders als 1–3 keine Erhebungs-, sondern eine Schlussfolgerungsfrage.</p></div>
     </div>
     <div class="delim">
       <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Präzisierung vom 25.07.2026</h4>
       <p>Die frühere Fassung fragte, <em>inwiefern die App Informationsprozesse, Motivation, Verlässlichkeit und Beteiligung „unterstützen kann"</em>. Daran wurde dreierlei geändert. Erstens ist „unterstützen" ein Wirkungsverb — eine qualitative Erhebung über Interviews und Gruppengespräche kann Wirkung nicht belegen, sondern nur Wahrnehmung, Aneignung und Bedeutungszuschreibung; die Frage verspricht jetzt genau das, was das Design einlösen kann. Zweitens setzte „kann … unterstützen" die Unterstützung bereits voraus und ließ ein Ausbleiben oder unerwünschte Nebenwirkungen nicht als Antwort zu — beides ist jetzt ausdrücklich Teil von Unterfrage 2. Drittens trug die Hauptfrage vier Konstrukte auf drei Ebenen gleichzeitig; Motivation ist in die Unterfragen verlagert, „Verlässlichkeit" durch den fachsprachlich etablierten Begriff <em>Verbindlichkeit</em> ersetzt. Neu ist Unterfrage 4, die den Leadership-Bezug aus dem Arbeitstitel in die Fragestellung selbst holt.</p>
+    </div>
+    <div class="delim">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Zweite Präzisierung vom 31.07.2026</h4>
+      <p>Die Fassung vom 25.07. hat die Erkenntnisebene korrigiert, war sprachlich aber noch eine Aufzählung: drei koordinierte Fragewörter in 47 Wörtern. Vier Eingriffe:</p>
+      <p style="margin-top:9px"><b>Erstens</b> ist <em>„wahrnehmen"</em> aus der Hauptfrage entfallen. Wahrnehmung und Bedeutungszuschreibung sind nicht trennscharf — Zuschreibung <em>ist</em> eine Form der Wahrnehmung, nur präziser gefasst. Wahrnehmung bleibt die <b>Erkenntnisebene</b> der Arbeit und ist als solche in der Abgrenzung unten und im Methodikteil verankert; als drittes Fragewort kostete sie nur Schärfe.</p>
+      <p style="margin-top:6px"><b>Zweitens</b> nimmt man nicht die <em>Erprobung</em> wahr, sondern nutzt die App. Die Erprobung ist der Rahmen, nicht der Gegenstand — daher jetzt „im Rahmen einer Erprobung".</p>
+      <p style="margin-top:6px"><b>Drittens</b> enthielt Unterfrage 3 weiterhin ein Wirkungsverb: <em>„welche Bedingungen machen den Unterschied"</em>. Das ist dieselbe Kausalbehauptung, wegen der „unterstützen" gestrichen wurde. Dazu kamen zwei Voraussetzungen: dass ein Unterschied besteht, und dass die Befragten Vergleichssysteme überhaupt kennen. Die Frage zielt jetzt auf den <b>Vergleichshorizont der Beteiligten</b> — also darauf, welche Vergleiche sie selbst ziehen. Damit bleibt sie auf der Wahrnehmungsebene und auch dann beantwortbar, wenn nur ein Teil der Befragten vergleichen kann.</p>
+      <p style="margin-top:6px"><b>Viertens</b> ist Unterfrage 4 als <em>Ableitungsfrage</em> gekennzeichnet. Sie fragt, anders als 1–3, nicht nach Aussagen der Beteiligten, sondern nach dem, was sich aus den Befunden schließen lässt. Diese Asymmetrie ist gewollt und wird ausgewiesen statt übergangen. Ob der Leadership-Bezug stattdessen in die Hauptfrage gehört, bleibt offener Punkt für die Betreuung.</p>
+      <p style="margin-top:6px">Ergänzt wurde außerdem <em>„Belastungen"</em> in Unterfrage 2 — der bei Lehrpersonen zu erwartende Befund (Yang et al., 2025: Elternkommunikation steigert Selbstwirksamkeit und Stress zugleich) war bisher unbenannt.</p>
     </div>
     <div class="delim">
       <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> Wichtige Abgrenzung</h4>
@@ -121,12 +139,12 @@
   <!-- ===================== INFOGRAFIK ===================== -->
   <section id="ueberblick">
     <div class="sec-head"><span class="sec-num">00</span><h2>Das Design auf einen Blick</h2></div>
-    <p class="sec-sub">Forschungs- und Untersuchungsdesign in einer Darstellung. Der zentrale Zusammenhang: Das Untersuchungsdesign ist keine zweite, parallele Struktur — es ist die <strong>Auffaltung von Phase 3</strong>. Reflexivität und Forschungsethik laufen nicht als eigener Schritt mit, sondern begleiten alle Phasen.</p>
+    <p class="sec-sub">Forschungs- und Untersuchungsdesign in einer Darstellung. Drei Zusammenhänge trägt die Grafik: Das Untersuchungsdesign ist keine zweite, parallele Struktur, sondern die <strong>Auffaltung von Phase 3</strong>. Die vier Unterfragen verschwinden nicht nach oben, sondern kehren im <strong>Kategoriensystem der Auswertung</strong> zurück — dort wird belegbar, womit welche Unterfrage beantwortet wird. Und Reflexivität, Ethik und Studiengüte laufen nicht als eigener Schritt mit, sondern begleiten alle Phasen. Was noch offen ist, ist als offen gekennzeichnet.</p>
 
-    <div class="card figwrap">
-      <svg viewBox="0 0 1020 796" role="img" aria-labelledby="figt figd">
+    <div class="card figwrap wide">
+      <svg viewBox="0 0 1240 920" role="img" aria-labelledby="figt figd">
         <title id="figt">Forschungs- und Untersuchungsdesign der Masterarbeit</title>
-        <desc id="figd">Aus der Forschungsfrage und ihren vier Unterfragen folgen vier theoretische Phasen. Phase 3, die empirische Erprobung, faltet sich in sechs Schritte des Untersuchungsdesigns auf. Die Datenerhebung speist sich aus drei Perspektiven: Lehrpersonen, Schuelerinnen und Schueler sowie Eltern. Reflexivitaet und Forschungsethik begleiten alle Phasen.</desc>
+        <desc id="figd">Aus der Forschungsfrage folgen vier Unterfragen und vier theoretische Phasen. Phase 3, die empirische Erprobung, faltet sich in sechs Schritte des Untersuchungsdesigns auf. Die vier Unterfragen strukturieren das Kategoriensystem der Auswertung deduktiv vor. Erhoben wird aus drei Perspektiven: Lehrpersonen, Schuelerinnen und Schueler sowie Eltern. Die zeitliche Anlage ist noch offen. Reflexivitaet, Ethik und Guetekriterien begleiten alle Phasen.</desc>
 
         <defs>
           <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -134,167 +152,194 @@
           </marker>
         </defs>
 
-        <!-- ---------- Forschungsfrage (ungekuerzt) ---------- -->
-        <rect class="bx-q" x="8" y="8" width="852" height="118" rx="14"/>
-        <text class="tl" x="26" y="32">FORSCHUNGSFRAGE</text>
-        <text class="tq" x="26" y="56">Wie nehmen Lehrpersonen, Sch&#252;ler*innen und Eltern die Erprobung einer schulintern entwickelten</text>
-        <text class="tq" x="26" y="74">Kommunikations- und Organisations-App in der Sekundarstufe I wahr, wie eignen sie sich diese im</text>
-        <text class="tq" x="26" y="92">schulischen Alltag an, und welche Bedeutung schreiben sie ihr f&#252;r schulische Informations- und</text>
-        <text class="tq" x="26" y="110">Beteiligungsprozesse zu?</text>
+        <!-- ========== Forschungsfrage ========== -->
+        <rect class="bx-q" x="44" y="8" width="1048" height="104" rx="14"/>
+        <text class="tl" x="64" y="32">FORSCHUNGSFRAGE &#183; STAND 31.07.2026</text>
+        <text class="tq" x="64" y="58">Wie eignen sich Lehrpersonen, Sch&#252;ler*innen und Eltern eine schulintern entwickelte Kommunikations-</text>
+        <text class="tq" x="64" y="78">und Organisations-App im Rahmen einer Erprobung in der Sekundarstufe I an, und welche Bedeutung</text>
+        <text class="tq" x="64" y="98">schreiben sie ihr f&#252;r schulische Informations- und Beteiligungsprozesse zu?</text>
 
-        <!-- ---------- Vier Unterfragen ---------- -->
-        <text class="tl" x="8" y="148">VIER UNTERFRAGEN</text>
+        <!-- ========== Vier Unterfragen ========== -->
+        <text class="tl" x="44" y="140">VIER UNTERFRAGEN &#8212; U4 IST EINE ABLEITUNGS-, KEINE ERHEBUNGSFRAGE</text>
 
-        <rect class="bx-u" x="8" y="158" width="204" height="62" rx="11"/>
-        <text class="tu" x="22" y="178">U1</text>
-        <text class="tsq" x="22" y="196">Nutzung &amp; Aneignung</text>
-        <text class="tsd" x="22" y="212">gelebt vs. intendiert</text>
+        <rect class="bx-u" x="44" y="150" width="250" height="74" rx="11"/>
+        <text class="tu" x="60" y="172">U1</text>
+        <text class="tsq2" x="60" y="192">Nutzung &amp; Aneignung</text>
+        <text class="tsd" x="60" y="210">gelebt vs. intendiert</text>
 
-        <rect class="bx-u" x="224" y="158" width="204" height="62" rx="11"/>
-        <text class="tu" x="238" y="178">U2</text>
-        <text class="tsq" x="238" y="196">Zugeschriebene Wirkung</text>
-        <text class="tsd" x="238" y="212">auch Grenzen &amp; Nebenwirkungen</text>
+        <rect class="bx-u" x="310" y="150" width="250" height="74" rx="11"/>
+        <text class="tu" x="326" y="172">U2</text>
+        <text class="tsq2" x="326" y="192">Zugeschriebene Wirkung</text>
+        <text class="tsd" x="326" y="210">auch Grenzen &amp; Belastungen</text>
 
-        <rect class="bx-u" x="440" y="158" width="204" height="62" rx="11"/>
-        <text class="tu" x="454" y="178">U3</text>
-        <text class="tsq" x="454" y="196">Akzeptanz im Vergleich</text>
-        <text class="tsd" x="454" y="212">vs. bestehende Systeme</text>
+        <rect class="bx-u" x="576" y="150" width="250" height="74" rx="11"/>
+        <text class="tu" x="592" y="172">U3</text>
+        <text class="tsq2" x="592" y="192">Vergleichshorizont &amp; Akzeptanz</text>
+        <text class="tsd" x="592" y="210">welche Vergleiche ziehen sie?</text>
 
-        <rect class="bx-u" x="656" y="158" width="204" height="62" rx="11"/>
-        <text class="tu" x="670" y="178">U4</text>
-        <text class="tsq" x="670" y="196">Leadership-Ertrag</text>
-        <text class="tsd" x="670" y="212">Ertrag f&#252;r die Schulleitung</text>
+        <rect class="bx-u" x="842" y="150" width="250" height="74" rx="11"/>
+        <text class="tu" x="858" y="172">U4</text>
+        <text class="tsq2" x="858" y="192">Ertrag f&#252;r Leitung</text>
+        <text class="tsd" x="858" y="210">Ableitung, keine Erhebungsfrage</text>
 
-        <path class="arw" d="M434 220 L434 244"/>
+        <path class="arw" d="M568 224 L568 250"/>
 
-        <!-- ---------- A: Forschungsdesign ---------- -->
-        <text class="tl" x="8" y="262">A &#183; FORSCHUNGSDESIGN &#8212; THEORETISCHE LOGIK</text>
+        <!-- ========== A: Forschungsdesign ========== -->
+        <text class="tl" x="44" y="272">A &#183; FORSCHUNGSDESIGN &#8212; DIE GESAMTANLAGE</text>
 
-        <rect class="bx-a" x="8" y="272" width="200" height="92" rx="12"/>
-        <text class="tn" x="24" y="294">1</text>
-        <text class="th" x="24" y="313">Erkenntnisinteresse</text>
-        <text class="t" x="24" y="332">Die App als Werkzeug f&#252;r</text>
-        <text class="t" x="24" y="348">Kommunikation &amp; Organisation</text>
+        <rect class="bx-a" x="44" y="282" width="250" height="92" rx="12"/>
+        <text class="tn" x="60" y="304">1</text>
+        <text class="th" x="60" y="323">Erkenntnisinteresse</text>
+        <text class="t" x="60" y="342">Die App als Werkzeug f&#252;r</text>
+        <text class="t" x="60" y="358">Kommunikation &amp; Organisation</text>
 
-        <rect class="bx-a" x="225" y="272" width="200" height="92" rx="12"/>
-        <text class="tn" x="241" y="294">2</text>
-        <text class="th" x="241" y="313">Literaturanalyse</text>
-        <text class="t" x="241" y="332">Was beantwortet die Theorie</text>
-        <text class="t" x="241" y="348">bereits? Begriffe, Modelle</text>
+        <rect class="bx-a" x="310" y="282" width="250" height="92" rx="12"/>
+        <text class="tn" x="326" y="304">2</text>
+        <text class="th" x="326" y="323">Literaturanalyse</text>
+        <text class="t" x="326" y="342">Was beantwortet die Theorie</text>
+        <text class="t" x="326" y="358">bereits? Begriffe, Modelle</text>
 
-        <rect class="bx-a" x="442" y="272" width="200" height="92" rx="12" stroke-width="2.4"/>
-        <text class="tn" x="458" y="294">3</text>
-        <text class="th" x="458" y="313">Empirische Erprobung</text>
-        <text class="t" x="458" y="332">Qualitative Untersuchung im</text>
-        <text class="t" x="458" y="348">konkreten Schulkontext</text>
+        <rect class="bx-a" x="576" y="282" width="250" height="92" rx="12" stroke-width="2.4"/>
+        <text class="tn" x="592" y="304">3</text>
+        <text class="th" x="592" y="323">Empirische Erprobung</text>
+        <text class="t" x="592" y="342">Qualitative Untersuchung im</text>
+        <text class="t" x="592" y="358">konkreten Schulkontext</text>
 
-        <rect class="bx-a" x="659" y="272" width="201" height="92" rx="12"/>
-        <text class="tn" x="675" y="294">4</text>
-        <text class="th" x="675" y="313">Diskussion &amp; Transfer</text>
-        <text class="t" x="675" y="332">R&#252;ckbindung an Theorie,</text>
-        <text class="t" x="675" y="348">Konsequenzen f&#252;r die Praxis</text>
+        <rect class="bx-a" x="842" y="282" width="250" height="92" rx="12"/>
+        <text class="tn" x="858" y="304">4</text>
+        <text class="th" x="858" y="323">Diskussion &amp; Transfer</text>
+        <text class="t" x="858" y="342">R&#252;ckbindung an Theorie,</text>
+        <text class="t" x="858" y="358">Konsequenzen f&#252;r die Praxis</text>
 
-        <path class="arw" d="M208 318 L223 318"/>
-        <path class="arw" d="M425 318 L440 318"/>
-        <path class="arw" d="M642 318 L657 318"/>
+        <path class="arw" d="M294 328 L308 328"/>
+        <path class="arw" d="M560 328 L574 328"/>
+        <path class="arw" d="M826 328 L840 328"/>
 
-        <!-- ---------- Auffaltung von Phase 3: Verteilerklammer ----------
-             Ersetzt den frueheren freistehenden Pfeil, der unter Box 3 endete und
-             dadurch faelschlich auf Schritt 2 statt auf den ganzen B-Block zeigte. -->
-        <path class="brk" d="M542 364 L542 388"/>
-        <path class="brk" d="M8 396 L8 388 L860 388 L860 396"/>
+        <!-- Auffaltung von Phase 3: Verteilerklammer auf den ganzen B-Block -->
+        <path class="brk" d="M701 374 L701 398"/>
+        <path class="brk" d="M44 406 L44 398 L1092 398 L1092 406"/>
 
-        <!-- ---------- B: Untersuchungsdesign ---------- -->
-        <text class="tl" x="8" y="416">B &#183; UNTERSUCHUNGSDESIGN &#8212; DIE AUFFALTUNG VON PHASE 3 IN SECHS SCHRITTE</text>
+        <!-- ========== B: Untersuchungsdesign ========== -->
+        <text class="tl" x="44" y="426">B &#183; UNTERSUCHUNGSDESIGN &#8212; DIE AUFFALTUNG VON PHASE 3 IN SECHS SCHRITTE</text>
 
-        <rect class="bx-b" x="8" y="426" width="273" height="78" rx="12"/>
-        <text class="tn-b" x="24" y="448">1</text>
-        <text class="th" x="24" y="467">Setting &amp; Fall</text>
-        <text class="t" x="24" y="487">Eine Klasse, ein Semester, Sek. I</text>
+        <rect class="bx-b" x="44" y="436" width="161" height="104" rx="12"/>
+        <text class="tn-b" x="58" y="458">1</text>
+        <text class="th-b" x="58" y="477">Setting &amp; Fall</text>
+        <text class="t" x="58" y="496">Eine Klasse,</text>
+        <text class="t" x="58" y="511">ein Semester,</text>
+        <text class="t" x="58" y="526">Sekundarstufe I</text>
 
-        <rect class="bx-b" x="297" y="426" width="273" height="78" rx="12"/>
-        <text class="tn-b" x="313" y="448">2</text>
-        <text class="th" x="313" y="467">Nutzerrollen &amp; Rechte</text>
-        <text class="t" x="313" y="487">Lehrperson, Sch&#252;ler*in, Elternteil</text>
+        <rect class="bx-b" x="221" y="436" width="161" height="104" rx="12"/>
+        <text class="tn-b" x="235" y="458">2</text>
+        <text class="th-b" x="235" y="477">Rollen &amp; Rechte</text>
+        <text class="t" x="235" y="496">Lehrperson,</text>
+        <text class="t" x="235" y="511">Sch&#252;ler*in,</text>
+        <text class="t" x="235" y="526">Elternteil</text>
 
-        <rect class="bx-b" x="587" y="426" width="273" height="78" rx="12"/>
-        <text class="tn-b" x="603" y="448">3</text>
-        <text class="th" x="603" y="467">Nutzungsszenarien</text>
-        <text class="t" x="603" y="487">Haus&#252;bungen, Termine, Mitteilungsheft &#8230;</text>
+        <rect class="bx-b" x="398" y="436" width="161" height="104" rx="12"/>
+        <text class="tn-b" x="412" y="458">3</text>
+        <text class="th-b" x="412" y="477">Nutzungsszenarien</text>
+        <text class="t" x="412" y="496">Haus&#252;bungen,</text>
+        <text class="t" x="412" y="511">Termine, Dienste,</text>
+        <text class="t" x="412" y="526">Mitteilungsheft &#8230;</text>
 
-        <rect class="bx-b" x="8" y="520" width="273" height="78" rx="12"/>
-        <text class="tn-b" x="24" y="542">4</text>
-        <text class="th" x="24" y="561">Datenerhebung</text>
-        <text class="t" x="24" y="581">Interviews, Gruppengespr&#228;che, Frageb&#246;gen</text>
+        <rect class="bx-b" x="575" y="436" width="161" height="104" rx="12"/>
+        <text class="tn-b" x="589" y="458">4</text>
+        <text class="th-b" x="589" y="477">Datenerhebung</text>
+        <text class="t" x="589" y="496">Interviews,</text>
+        <text class="t" x="589" y="511">Gruppeninterviews,</text>
+        <text class="t" x="589" y="526">offene Frageb&#246;gen</text>
 
-        <rect class="bx-b" x="297" y="520" width="273" height="78" rx="12"/>
-        <text class="tn-b" x="313" y="542">5</text>
-        <text class="th" x="313" y="561">Auswertung</text>
-        <text class="t" x="313" y="581">Qualitative Inhaltsanalyse (Kuckartz)</text>
+        <rect class="bx-b" x="752" y="436" width="161" height="104" rx="12"/>
+        <text class="tn-b" x="766" y="458">5</text>
+        <text class="th-b" x="766" y="477">Auswertung</text>
+        <text class="t" x="766" y="496">Qualitative Inhalts-</text>
+        <text class="t" x="766" y="511">analyse, inhaltlich</text>
+        <text class="t" x="766" y="526">strukturierend</text>
 
-        <rect class="bx-b" x="587" y="520" width="273" height="78" rx="12"/>
-        <text class="tn-b" x="603" y="542">6</text>
-        <text class="th" x="603" y="561">Ergebnisdimensionen</text>
-        <text class="t" x="603" y="581">Nutzung, Aneignung, Bedeutung</text>
+        <rect class="bx-b" x="929" y="436" width="161" height="104" rx="12"/>
+        <text class="tn-b" x="943" y="458">6</text>
+        <text class="th-b" x="943" y="477">Ergebnisdimensionen</text>
+        <text class="t" x="943" y="496">entlang U1&#8211;U4:</text>
+        <text class="t" x="943" y="511">Aneignung, Wirkung,</text>
+        <text class="t" x="943" y="526">Vergleich, Ertrag</text>
 
-        <path class="arw" d="M281 465 L295 465"/>
-        <path class="arw" d="M570 465 L585 465"/>
-        <path class="arw" d="M281 559 L295 559"/>
-        <path class="arw" d="M570 559 L585 559"/>
+        <path class="arw" d="M205 488 L219 488"/>
+        <path class="arw" d="M382 488 L396 488"/>
+        <path class="arw" d="M559 488 L573 488"/>
+        <path class="arw" d="M736 488 L750 488"/>
+        <path class="arw" d="M913 488 L927 488"/>
 
-        <!-- ---------- Drei Perspektiven: Sammelleitung ---------- -->
-        <text class="tl" x="8" y="618">C &#183; DREI PERSPEKTIVEN</text>
+        <!-- ========== C: Drei Perspektiven, speisen Schritt 4 ========== -->
+        <text class="tl" x="44" y="562">C &#183; DREI PERSPEKTIVEN</text>
+        <path class="arw" d="M655 576 L655 544"/>
+        <path d="M213 576 H921" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
+        <path d="M213 576 V592 M567 576 V592 M921 576 V592" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
 
-        <path class="arw" d="M210 638 L210 602"/>
-        <path d="M145 638 H723" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
-        <path d="M145 638 V654 M434 638 V654 M723 638 V654" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
-
-        <rect class="bx-e" x="8" y="654" width="273" height="64" rx="12"/>
-        <g class="ic ic-e" transform="translate(249,666) scale(.85)">
+        <rect class="bx-e" x="44" y="592" width="338" height="68" rx="12"/>
+        <g class="ic ic-e" transform="translate(342,606) scale(.85)">
           <path d="M3 3h18v12H3z"/><path d="M8 21h8"/><path d="M12 15v6"/>
         </g>
-        <text class="th" x="24" y="681">Lehrpersonen</text>
-        <text class="t" x="24" y="700">Akzeptanz, Aufwand, Verbindlichkeit</text>
+        <text class="th" x="60" y="620">Lehrpersonen</text>
+        <text class="t" x="60" y="640">Akzeptanz, Aufwand, Verbindlichkeit</text>
 
-        <rect class="bx-e" x="297" y="654" width="273" height="64" rx="12"/>
-        <g class="ic ic-e" transform="translate(538,666) scale(.85)">
+        <rect class="bx-e" x="398" y="592" width="338" height="68" rx="12"/>
+        <g class="ic ic-e" transform="translate(696,606) scale(.85)">
           <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
         </g>
-        <text class="th" x="313" y="681">Sch&#252;ler*innen</text>
-        <text class="t" x="313" y="700">Motivation, Autonomie, Zugeh&#246;rigkeit</text>
+        <text class="th" x="414" y="620">Sch&#252;ler*innen</text>
+        <text class="t" x="414" y="640">Motivation, Autonomie, Zugeh&#246;rigkeit</text>
 
-        <rect class="bx-e" x="587" y="654" width="273" height="64" rx="12"/>
-        <g class="ic ic-e" transform="translate(828,666) scale(.85)">
+        <rect class="bx-e" x="752" y="592" width="338" height="68" rx="12"/>
+        <g class="ic ic-e" transform="translate(1050,606) scale(.85)">
           <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/>
           <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
         </g>
-        <text class="th" x="603" y="681">Eltern</text>
-        <text class="t" x="603" y="700">Teilhabe, Informiertheit, Beteiligung</text>
+        <text class="th" x="768" y="620">Eltern</text>
+        <text class="t" x="768" y="640">Teilhabe, Informiertheit, Beteiligung</text>
 
-        <text class="t" x="8" y="748" style="font-style:italic">Getrennt erhoben, in der Auswertung gegeneinander gelesen &#8212; die Mehrperspektivit&#228;t ist der Kern des Designs.</text>
+        <!-- ========== D: Kategoriensystem &#8212; hier kehren die Unterfragen zurueck ========== -->
+        <text class="tl" x="44" y="692">D &#183; SCHRITT 5 IM DETAIL &#8212; DIE UNTERFRAGEN WERDEN ZUM KATEGORIENSYSTEM</text>
 
-        <!-- ---------- Rueckkopplung zu Phase 4 ---------- -->
-        <path class="arw-d" d="M860 559 L890 559 L890 318 L862 318"/>
-        <text class="t" x="8" y="770" style="font-style:italic">Die Ergebnisdimensionen flie&#223;en zur&#252;ck in Phase 4 (Diskussion &amp; Transfer) &#8212; gestrichelter Pfeil rechts.</text>
+        <rect class="bx-k" x="44" y="702" width="1048" height="76" rx="12"/>
+        <text class="th" x="64" y="726">Deduktiv vorstrukturiert aus U1&#8211;U4, am Material induktiv erg&#228;nzt</text>
+        <text class="t" x="64" y="748">Kuckartz &amp; R&#228;diker (2022), Kap. 3.3 &#8212; das Kategoriensystem entsteht nicht frei, sondern aus den vier Unterfragen; erg&#228;nzt wird,</text>
+        <text class="t" x="64" y="766">was im Material auftaucht und dort nicht vorgesehen war. Damit ist belegbar, womit welche Unterfrage beantwortet wird.</text>
 
-        <!-- ---------- Reflexivitaet als Band ---------- -->
-        <rect class="bx" x="904" y="8" width="108" height="710" rx="14"/>
-        <text class="tl" x="924" y="34" transform="rotate(90 924 34)">DURCHGEHEND</text>
-        <text class="th" x="948" y="34" transform="rotate(90 948 34)">Reflexivit&#228;t &amp; Ethik</text>
-        <text class="t" x="972" y="34" transform="rotate(90 972 34)">Doppelrolle &#183; Freiwilligkeit</text>
-        <text class="t" x="990" y="34" transform="rotate(90 990 34)">Anonymit&#228;t &#183; Datenschutz</text>
-        <g class="ic ic-r" transform="translate(944,664) scale(1.35)">
+        <!-- Rueckbindung U1-U4 -> Kategoriensystem: eigene Bahn links, kreuzungsfrei -->
+        <path class="arw-d" d="M22 224 L22 740 L40 740"/>
+        <text class="trail" x="10" y="430" transform="rotate(90 10 430)">U1&#8211;U4 STRUKTURIEREN DIE AUSWERTUNG VOR</text>
+
+        <!-- ========== E: Zeitliche Anlage &#8212; offen ========== -->
+        <text class="tl" x="44" y="812">E &#183; ZEITLICHE ANLAGE UND OFFENE FESTLEGUNGEN (MA-GUIDELINE 3.2 UND 3.3.1)</text>
+
+        <rect class="bx-open" x="44" y="822" width="1048" height="86" rx="12"/>
+        <text class="th" x="64" y="846">Ein Semester, eine Klasse &#8212; die Erhebungszeitpunkte sind noch nicht festgelegt</text>
+        <text class="t" x="64" y="868">Querschnitt mit einem oder L&#228;ngsschnitt mit mehreren Messzeitpunkten? Guideline 3.2 verlangt diese Angabe ausdr&#252;cklich.</text>
+        <text class="t" x="64" y="886">Ebenso dort verlangt und noch offen: wer erhebt (Doppelrolle) sowie die Stichprobenlogik nach Guideline 3.3.1.</text>
+
+        <!-- Rueckkopplung: Ergebnisdimensionen -> Phase 4 -->
+        <path class="arw-d" d="M1090 470 L1101 470 L1101 328 L1094 328"/>
+
+        <!-- ========== Durchgehendes Band ========== -->
+        <rect class="bx" x="1112" y="8" width="120" height="900" rx="14"/>
+        <text class="tl" x="1134" y="34" transform="rotate(90 1134 34)">DURCHGEHEND</text>
+        <text class="th" x="1158" y="34" transform="rotate(90 1158 34)">Reflexivit&#228;t, Ethik &amp; Studieng&#252;te</text>
+        <text class="t" x="1182" y="34" transform="rotate(90 1182 34)">Doppelrolle &#183; Freiwilligkeit &#183; Anonymit&#228;t</text>
+        <text class="t" x="1200" y="34" transform="rotate(90 1200 34)">Datenschutz &#183; G&#252;tekriterien (Kuckartz, Kap. 9)</text>
+        <g class="ic ic-r" transform="translate(1152,852) scale(1.35)">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </g>
       </svg>
 
       <div class="fig-legend">
-        <span><i style="background:color-mix(in srgb, var(--teal) 45%, transparent)"></i>Forschungsdesign (theoretische Logik)</span>
-        <span><i style="background:color-mix(in srgb, var(--violet) 45%, transparent)"></i>Untersuchungsdesign (empirische Umsetzung)</span>
+        <span><i style="background:color-mix(in srgb, var(--teal) 45%, transparent)"></i>Forschungsdesign (Gesamtanlage)</span>
+        <span><i style="background:color-mix(in srgb, var(--violet) 45%, transparent)"></i>Untersuchungsdesign (Erhebungsarchitektur)</span>
         <span><i style="background:color-mix(in srgb, var(--amber) 45%, transparent)"></i>Erhebungsperspektiven</span>
+        <span><i style="background:transparent;border:1.5px dashed color-mix(in srgb, var(--amber) 70%, transparent)"></i>noch offen</span>
       </div>
 
-      <p class="fig-cap"><b>Abbildung 1:</b> Forschungs- und Untersuchungsdesign der qualitativen Erprobungsstudie. Eigene Darstellung. — Die Grafik ist als SVG angelegt und kann verlustfrei als Abbildung in die Masterarbeit übernommen werden.</p>
+      <p class="fig-cap"><b>Abbildung 1:</b> Forschungs- und Untersuchungsdesign der qualitativen Erprobungsstudie. Eigene Darstellung. — Die Grafik ist als SVG angelegt und kann verlustfrei als Abbildung in die Masterarbeit übernommen werden. Gestrichelt dargestellt sind die beiden Rückkopplungen (Unterfragen ins Kategoriensystem, Ergebnisdimensionen in Phase 4) sowie die noch offene zeitliche Anlage.</p>
     </div>
   </section>
 
@@ -338,12 +383,12 @@
   <!-- ===================== UNTERSUCHUNGSDESIGN ===================== -->
   <section id="untersuchungsdesign">
     <div class="sec-head"><span class="sec-num">02</span><h2>Untersuchungsdesign — empirische Schritte</h2></div>
-    <p class="sec-sub">Die rechte Spalte der Forschungsarchitektur: wie die empirische Erprobung konkret abläuft.</p>
+    <p class="sec-sub">Die Auffaltung von Phase 3: wie die empirische Erprobung konkret abläuft. Die sechs Schritte entsprechen Block B der <a href="#ueberblick">Abbildung 1</a>.</p>
 
     <div class="tl">
       <div class="tl-item">
         <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg></div>
-        <div><div class="tw">Schritt 1</div><h4>Setting &amp; Fall</h4><p>Eine Klasse Sekundarstufe I, ca. 20 Schüler:innen + Eltern + 1–2 Lehrpersonen; Erprobung ca. 4–6 Wochen (vorläufig, mit Betreuung abzustimmen).</p></div>
+        <div><div class="tw">Schritt 1</div><h4>Setting &amp; Fall</h4><p>Eine Klasse Sekundarstufe I, ca. 20 Schüler:innen + Eltern + 1–2 Lehrpersonen; Erprobung über ein Semester. Ob daraus ein Querschnitt mit einem oder ein Längsschnitt mit mehreren Erhebungszeitpunkten wird, ist noch festzulegen — die MA-Guideline verlangt diese Angabe in Kap. 3.2 ausdrücklich.</p></div>
       </div>
       <div class="tl-item">
         <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/></svg></div>
@@ -355,15 +400,15 @@
       </div>
       <div class="tl-item">
         <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div><div class="tw">Schritt 4</div><h4>Datenerhebung</h4><p>Leitfadeninterviews mit Lehrpersonen, Gruppengespräche mit Schüler:innen, offene Elternbefragung; optional Expertengespräch.</p></div>
+        <div><div class="tw">Schritt 4</div><h4>Datenerhebung</h4><p>Leitfadeninterviews mit Lehrpersonen, <b>Gruppeninterviews</b> mit Schüler:innen, offene Elternbefragung; optional Expertengespräch. Bewusst nicht <em>Gruppendiskussion</em>: Das Gruppendiskussionsverfahren nach Bohnsack ist an die dokumentarische Methode gebunden und damit an eine andere Auswertungslogik als die hier gewählte.</p></div>
       </div>
       <div class="tl-item">
         <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></div>
-        <div><div class="tw">Schritt 5</div><h4>Auswertung</h4><p>Qualitative Inhaltsanalyse nach Kuckartz — kombiniert deduktive (theoriegeleitete) mit induktiver (materialgeleiteter) Kategorienbildung.</p></div>
+        <div><div class="tw">Schritt 5</div><h4>Auswertung</h4><p><b>Inhaltlich strukturierende</b> qualitative Inhaltsanalyse nach Kuckartz &amp; Rädiker (2022, Kap. 5) — mit deduktiv-induktiver Kategorienbildung (Kap. 3.3): Das Kategoriensystem wird aus den vier Unterfragen vorstrukturiert und am Material ergänzt. Die evaluative und die typenbildende Variante wurden geprüft und begründet verworfen.</p></div>
       </div>
       <div class="tl-item">
         <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <div><div class="tw">Schritt 6</div><h4>Ergebnisdimensionen</h4><p>Informationsklarheit, Motivation, Verlässlichkeit, Elternbeteiligung, Lehrerakzeptanz, Vergleich zu SchoolFox, Weiterentwicklungsbedarf.</p></div>
+        <div><div class="tw">Schritt 6</div><h4>Ergebnisdimensionen</h4><p>Berichtet wird entlang der vier Unterfragen: <b>Nutzung und Aneignung</b> (U1), <b>zugeschriebene Wirkung</b> samt Grenzen und Belastungen (U2), <b>Vergleichshorizont und Akzeptanz</b> (U3) sowie der <b>Ertrag für Leitungs- und Entwicklungsarbeit</b> (U4). Damit entsprechen die Ergebnisdimensionen dem Kategoriensystem — und nicht einer davon unabhängigen Themenliste.</p></div>
       </div>
     </div>
   </section>
