@@ -69,11 +69,17 @@
   svg .tn-b { font-family: var(--mono); fill: var(--violet); font-size: 11px; font-weight: 700; }
   svg .arw { stroke: var(--muted); stroke-width: 1.6; fill: none; marker-end: url(#ah); }
   svg .arw-d { stroke: var(--muted); stroke-width: 1.4; fill: none; stroke-dasharray: 4 4; marker-end: url(#ah); }
-  /* Icons bewusst nur dort, wo sie eine Rolle kennzeichnen (Perspektiven, Ethik-Band) —
-     nicht auf den nummerierten Prozessschritten, das waere Dekoration. */
+  /* Icons nur in zwei Rollen: (1) Rollenkennzeichnung (Perspektiven, Ethik-Band),
+     (2) Abschnittsmarken A-E als Orientierungshilfe beim Scannen. Bewusst NICHT auf
+     den nummerierten Prozessschritten — dort waeren sie reine Dekoration. */
   svg .ic { fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
   svg .ic-e { stroke: var(--amber); opacity: .8; }
   svg .ic-r { stroke: var(--muted); opacity: .85; }
+  /* Abschnittsmarken: nur Orientierung, deshalb zurueckgenommen. */
+  svg .ic-l { stroke: var(--muted); opacity: .6; }
+  svg .ic-k { stroke: var(--violet); opacity: .55; }
+  svg .ic-o { stroke: var(--amber); opacity: .6; }
+  svg .ic-q { stroke: var(--teal); opacity: .7; }
 </style>
 </head>
 <body>
@@ -144,7 +150,7 @@
     <div class="card figwrap wide">
       <svg viewBox="0 0 1240 920" role="img" aria-labelledby="figt figd">
         <title id="figt">Forschungs- und Untersuchungsdesign der Masterarbeit</title>
-        <desc id="figd">Aus der Forschungsfrage folgen vier Unterfragen und vier theoretische Phasen. Phase 3, die empirische Erprobung, faltet sich in sechs Schritte des Untersuchungsdesigns auf. Die vier Unterfragen strukturieren das Kategoriensystem der Auswertung deduktiv vor. Erhoben wird aus drei Perspektiven: Lehrpersonen, Schuelerinnen und Schueler sowie Eltern. Die zeitliche Anlage ist noch offen. Reflexivitaet, Ethik und Guetekriterien begleiten alle Phasen.</desc>
+        <desc id="figd">Aus der Forschungsfrage folgen vier Unterfragen und vier theoretische Phasen. Phase 3, die empirische Erprobung, faltet sich in sechs Schritte des Untersuchungsdesigns auf. Die vier Unterfragen strukturieren das Kategoriensystem der Auswertung deduktiv vor. Erhoben wird aus drei Perspektiven: Lehrpersonen, Schuelerinnen und Schueler sowie Eltern. Die zeitliche Anlage ist noch offen. Verteilerklammern zeigen, wie die Forschungsfrage in vier Unterfragen zerfaellt, wie diese in die Gesamtanlage einlaufen und wie Phase 3 den gesamten Block der sechs Schritte aufspannt. Reflexivitaet, Ethik und Guetekriterien begleiten alle Phasen.</desc>
 
         <defs>
           <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -154,13 +160,18 @@
 
         <!-- ========== Forschungsfrage ========== -->
         <rect class="bx-q" x="44" y="8" width="1048" height="104" rx="14"/>
-        <text class="tl" x="64" y="32">FORSCHUNGSFRAGE &#183; STAND 31.07.2026</text>
+        <g class="ic ic-q" transform="translate(64,21) scale(.55)"><circle cx="12" cy="12" r="10"/><path d="M9.2 9.2a3 3 0 0 1 5.7 1c0 2-2.9 2.6-2.9 4"/><path d="M12 17.5h.01"/></g>
+        <text class="tl" x="85" y="32">FORSCHUNGSFRAGE &#183; STAND 31.07.2026</text>
         <text class="tq" x="64" y="58">Wie eignen sich Lehrpersonen, Sch&#252;ler*innen und Eltern eine schulintern entwickelte Kommunikations-</text>
         <text class="tq" x="64" y="78">und Organisations-App im Rahmen einer Erprobung in der Sekundarstufe I an, und welche Bedeutung</text>
         <text class="tq" x="64" y="98">schreiben sie ihr f&#252;r schulische Informations- und Beteiligungsprozesse zu?</text>
 
         <!-- ========== Vier Unterfragen ========== -->
-        <text class="tl" x="44" y="140">VIER UNTERFRAGEN &#8212; U4 IST EINE ABLEITUNGS-, KEINE ERHEBUNGSFRAGE</text>
+        <path class="brk" d="M568 112 L568 138"/>
+        <path class="brk" d="M169 138 H967"/>
+        <path class="brk" d="M169 138 V150 M435 138 V150 M701 138 V150 M967 138 V150"/>
+        <g class="ic ic-l" transform="translate(44,119) scale(.56)"><circle cx="6" cy="5" r="2.4"/><circle cx="12" cy="5" r="2.4"/><circle cx="18" cy="5" r="2.4"/><path d="M6 7.4v4.2h12V7.4"/><path d="M12 7.4v11"/></g>
+        <text class="tl" x="65" y="130">VIER UNTERFRAGEN</text>
 
         <rect class="bx-u" x="44" y="150" width="250" height="74" rx="11"/>
         <text class="tu" x="60" y="172">U1</text>
@@ -182,10 +193,15 @@
         <text class="tsq2" x="858" y="192">Ertrag f&#252;r Leitung</text>
         <text class="tsd" x="858" y="210">Ableitung, keine Erhebungsfrage</text>
 
-        <path class="arw" d="M568 224 L568 250"/>
+        <path class="brk" d="M169 224 V240 M435 224 V240 M701 224 V240 M967 224 V240"/>
+        <path class="brk" d="M169 240 H967"/>
+        <path class="arw" d="M568 240 L568 272"/>
+        <path class="brk" d="M44 272 H1092"/>
+        <path class="brk" d="M169 272 V282 M435 272 V282 M701 272 V282 M967 272 V282"/>
 
         <!-- ========== A: Forschungsdesign ========== -->
-        <text class="tl" x="44" y="272">A &#183; FORSCHUNGSDESIGN &#8212; DIE GESAMTANLAGE</text>
+        <g class="ic ic-l" transform="translate(44,247) scale(.56)"><circle cx="12" cy="12" r="9.5"/><path d="m15.8 8.2-2.1 5.5-5.5 2.1 2.1-5.5z"/></g>
+        <text class="tl" x="65" y="258">A &#183; FORSCHUNGSDESIGN &#8212; DIE GESAMTANLAGE</text>
 
         <rect class="bx-a" x="44" y="282" width="250" height="92" rx="12"/>
         <text class="tn" x="60" y="304">1</text>
@@ -216,11 +232,18 @@
         <path class="arw" d="M826 328 L840 328"/>
 
         <!-- Auffaltung von Phase 3: Verteilerklammer auf den ganzen B-Block -->
-        <path class="brk" d="M701 374 L701 398"/>
-        <path class="brk" d="M44 406 L44 398 L1092 398 L1092 406"/>
+        <path class="brk" d="M701 374 L701 404"/>
+        <path class="brk" d="M124 404 H1010"/>
+        <path class="arw" d="M124 404 L124 430"/>
+        <path class="arw" d="M302 404 L302 430"/>
+        <path class="arw" d="M479 404 L479 430"/>
+        <path class="arw" d="M655 404 L655 430"/>
+        <path class="arw" d="M832 404 L832 430"/>
+        <path class="arw" d="M1010 404 L1010 430"/>
 
         <!-- ========== B: Untersuchungsdesign ========== -->
-        <text class="tl" x="44" y="426">B &#183; UNTERSUCHUNGSDESIGN &#8212; DIE AUFFALTUNG VON PHASE 3 IN SECHS SCHRITTE</text>
+        <g class="ic ic-l" transform="translate(44,381) scale(.56)"><path d="M12 2.5 2.5 7 12 11.5 21.5 7z"/><path d="m2.5 16.5 9.5 4.5 9.5-4.5"/><path d="m2.5 11.8 9.5 4.5 9.5-4.5"/></g>
+        <text class="tl" x="65" y="392">B &#183; UNTERSUCHUNGSDESIGN &#8212; DIE AUFFALTUNG VON PHASE 3 IN SECHS SCHRITTE</text>
 
         <rect class="bx-b" x="44" y="436" width="161" height="104" rx="12"/>
         <text class="tn-b" x="58" y="458">1</text>
@@ -271,7 +294,8 @@
         <path class="arw" d="M913 488 L927 488"/>
 
         <!-- ========== C: Drei Perspektiven, speisen Schritt 4 ========== -->
-        <text class="tl" x="44" y="562">C &#183; DREI PERSPEKTIVEN</text>
+        <g class="ic ic-l" transform="translate(44,551) scale(.56)"><path d="M16.5 20.5v-1.8a3.6 3.6 0 0 0-3.6-3.6H6.1a3.6 3.6 0 0 0-3.6 3.6v1.8"/><circle cx="9.5" cy="7.5" r="3.6"/><path d="M21.5 20.5v-1.8a3.6 3.6 0 0 0-2.7-3.5"/></g>
+        <text class="tl" x="65" y="562">C &#183; DREI PERSPEKTIVEN</text>
         <path class="arw" d="M655 576 L655 544"/>
         <path d="M213 576 H921" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
         <path d="M213 576 V592 M567 576 V592 M921 576 V592" stroke="var(--muted)" stroke-width="1.6" fill="none"/>
@@ -299,9 +323,12 @@
         <text class="t" x="768" y="640">Teilhabe, Informiertheit, Beteiligung</text>
 
         <!-- ========== D: Kategoriensystem &#8212; hier kehren die Unterfragen zurueck ========== -->
-        <text class="tl" x="44" y="692">D &#183; SCHRITT 5 IM DETAIL &#8212; DIE UNTERFRAGEN WERDEN ZUM KATEGORIENSYSTEM</text>
+        <g class="ic ic-l" transform="translate(44,681) scale(.56)"><path d="M8.5 6h13M8.5 12h13M8.5 18h13"/><path d="M3.2 6h.02M3.2 12h.02M3.2 18h.02"/></g>
+        <text class="tl" x="65" y="692">D &#183; SCHRITT 5 IM DETAIL &#8212; DIE UNTERFRAGEN WERDEN ZUM KATEGORIENSYSTEM</text>
 
         <rect class="bx-k" x="44" y="702" width="1048" height="76" rx="12"/>
+        <g class="ic ic-k" transform="translate(1036,726) scale(.9)"><path d="M8.5 6h13M8.5 12h13M8.5 18h13"/><path d="M3.2 6h.02M3.2 12h.02M3.2 18h.02"/></g>
+
         <text class="th" x="64" y="726">Deduktiv vorstrukturiert aus U1&#8211;U4, am Material induktiv erg&#228;nzt</text>
         <text class="t" x="64" y="748">Kuckartz &amp; R&#228;diker (2022), Kap. 3.3 &#8212; das Kategoriensystem entsteht nicht frei, sondern aus den vier Unterfragen; erg&#228;nzt wird,</text>
         <text class="t" x="64" y="766">was im Material auftaucht und dort nicht vorgesehen war. Damit ist belegbar, womit welche Unterfrage beantwortet wird.</text>
@@ -311,9 +338,12 @@
         <text class="trail" x="10" y="430" transform="rotate(90 10 430)">U1&#8211;U4 STRUKTURIEREN DIE AUSWERTUNG VOR</text>
 
         <!-- ========== E: Zeitliche Anlage &#8212; offen ========== -->
-        <text class="tl" x="44" y="812">E &#183; ZEITLICHE ANLAGE UND OFFENE FESTLEGUNGEN (MA-GUIDELINE 3.2 UND 3.3.1)</text>
+        <g class="ic ic-l" transform="translate(44,801) scale(.56)"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.8 1.9"/></g>
+        <text class="tl" x="65" y="812">E &#183; ZEITLICHE ANLAGE UND OFFENE FESTLEGUNGEN (MA-GUIDELINE 3.2 UND 3.3.1)</text>
 
         <rect class="bx-open" x="44" y="822" width="1048" height="86" rx="12"/>
+        <g class="ic ic-o" transform="translate(1036,850) scale(.9)"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5V12l3.8 1.9"/></g>
+
         <text class="th" x="64" y="846">Ein Semester, eine Klasse &#8212; die Erhebungszeitpunkte sind noch nicht festgelegt</text>
         <text class="t" x="64" y="868">Querschnitt mit einem oder L&#228;ngsschnitt mit mehreren Messzeitpunkten? Guideline 3.2 verlangt diese Angabe ausdr&#252;cklich.</text>
         <text class="t" x="64" y="886">Ebenso dort verlangt und noch offen: wer erhebt (Doppelrolle) sowie die Stichprobenlogik nach Guideline 3.3.1.</text>
@@ -339,7 +369,7 @@
         <span><i style="background:transparent;border:1.5px dashed color-mix(in srgb, var(--amber) 70%, transparent)"></i>noch offen</span>
       </div>
 
-      <p class="fig-cap"><b>Abbildung 1:</b> Forschungs- und Untersuchungsdesign der qualitativen Erprobungsstudie. Eigene Darstellung. — Die Grafik ist als SVG angelegt und kann verlustfrei als Abbildung in die Masterarbeit übernommen werden. Gestrichelt dargestellt sind die beiden Rückkopplungen (Unterfragen ins Kategoriensystem, Ergebnisdimensionen in Phase 4) sowie die noch offene zeitliche Anlage.</p>
+      <p class="fig-cap"><b>Abbildung 1:</b> Forschungs- und Untersuchungsdesign der qualitativen Erprobungsstudie. Eigene Darstellung. — Die Grafik ist als SVG angelegt und kann verlustfrei als Abbildung in die Masterarbeit übernommen werden. Durchgezogene Verteilerschienen zeigen, was sich in was auffaltet: die Forschungsfrage in vier Unterfragen, die Unterfragen in die Gesamtanlage, Phase 3 in alle sechs Schritte. Gestrichelt sind die beiden Rückkopplungen (Unterfragen ins Kategoriensystem, Ergebnisdimensionen in Phase 4) sowie die noch offene zeitliche Anlage.</p>
     </div>
   </section>
 
