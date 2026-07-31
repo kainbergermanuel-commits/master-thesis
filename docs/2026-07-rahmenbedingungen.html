@@ -27,6 +27,33 @@
   .gb-bar { height: 20px; border-radius: 999px; background: var(--paper-2); overflow: hidden; }
   .gb-bar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--teal), var(--teal-2)); }
   .gb-pct { text-align: right; font-weight: 700; color: var(--teal); font-family: var(--mono); }
+  /* Fahrplan: Meilensteine mit zwei Szenarien. Die PH-Termine sind fix, die eigenen
+     Etappen sind Entwurf — deshalb visuell unterschieden (fest / entwurf / offen). */
+  .mst { position: relative; margin-top: 18px; padding-left: 26px; }
+  .mst::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
+    width: 2px; background: var(--line); }
+  .ms { position: relative; padding: 14px 16px; border-radius: 12px; margin-top: 10px;
+    background: var(--card-2); border: 1px solid var(--line); }
+  .ms::before { content: ""; position: absolute; left: -23px; top: 20px; width: 10px; height: 10px;
+    border-radius: 50%; background: var(--card); border: 2px solid var(--muted); }
+  .ms.fest::before   { border-color: var(--good); background: var(--good); }
+  .ms.entwurf::before{ border-color: var(--teal); }
+  .ms.offen { border-style: dashed; border-color: color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .ms.offen::before  { border-color: var(--amber); }
+  .ms-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .ms-head h4 { font-family: var(--display); font-size: 14.5px; margin: 0; }
+  .ms-head .wann { margin-left: auto; font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal); white-space: nowrap; }
+  .ms.offen .ms-head .wann { color: var(--amber); }
+  .ms p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 6px; }
+  .ms p b { color: var(--ink); font-weight: 700; }
+  .szen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  @media (max-width: 760px) { .szen { grid-template-columns: 1fr; } }
+  .sz { padding: 15px 17px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .sz h4 { font-family: var(--display); font-size: 14.5px; }
+  .sz .sub { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+  .sz ul { margin: 10px 0 0 15px; }
+  .sz li { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 3px; }
+  .sz li b { color: var(--ink); font-weight: 700; }
   .dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
   @media (max-width: 700px) { .dl-grid { grid-template-columns: 1fr; } }
 </style>
@@ -113,8 +140,97 @@
     </div>
   </section>
 
+  <!-- ===================== FAHRPLAN ===================== -->
+  <section id="fahrplan">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Fahrplan — Meilensteine</h2></div>
+    <p class="sec-sub">Entwurf zur Abstimmung mit der Betreuung, Stand 31.07.2026. <b>Die Abgabe- und Defensiozeiträume oben sind fix</b> — alles dazwischen ist rückwärts von ihnen gerechnet und beruht auf Annahmen, die im Fachgespräch zu bestätigen sind. Grün markierte Punkte sind terminlich gesetzt, blaue sind eigene Planung, gestrichelte hängen an einer noch offenen Auskunft.</p>
+
+    <div class="mst">
+
+      <div class="ms fest">
+        <div class="ms-head"><h4>Fachgespräch 1 — Explikation</h4><span class="wann">Sommer 2026</span></div>
+        <p>Themenfindung, Forschungsdesign, Literaturstand. 10 % der Gesamtnote. Vorbereitung siehe <a href="gespraechsvorbereitung.html">Gesprächsvorbereitung</a>.</p>
+      </div>
+
+      <div class="ms entwurf">
+        <div class="ms-head"><h4>Exposé und Mastervereinbarung</h4><span class="wann">4–6 Wochen danach</span></div>
+        <p>5–7 Seiten nach der PH-Vorlage, dazu die Mastervereinbarung mit Zeitplan. <b>Noch nicht begonnen.</b> Der Termin ist die erste Frage, die im Fachgespräch zu klären ist — er bestimmt alles Folgende.</p>
+      </div>
+
+      <div class="ms offen">
+        <div class="ms-head"><h4>Genehmigung der empirischen Untersuchung</h4><span class="wann">Vorlaufzeit unbekannt</span></div>
+        <p>Antragstellung bei der Bildungsdirektion NÖ über die Betreuung. <b>Die kritische Unbekannte des gesamten Plans:</b> Ohne Kenntnis der Bearbeitungsdauer lässt sich der Erhebungsbeginn nicht festlegen. Zu klären ist außerdem, ob Schulleitung und Erziehungsberechtigte gesondert zustimmen müssen — siehe <a href="2026-07-forschungsethik.html">Ethik &amp; Einwilligung</a>.</p>
+      </div>
+
+      <div class="ms entwurf">
+        <div class="ms-head"><h4>Feature-Freeze der App</h4><span class="wann">vor Erhebungsbeginn</span></div>
+        <p>Funktionsstand einfrieren und dokumentieren, damit klar ist, worauf sich die Aussagen der Befragten beziehen. Nur noch Fehlerbehebung. Bis dahin läuft die Weiterentwicklung normal weiter.</p>
+      </div>
+
+      <div class="ms offen">
+        <div class="ms-head"><h4>Erhebung — ein Semester</h4><span class="wann">Semester noch offen</span></div>
+        <p>Nutzung im Alltag, dann Leitfadeninterviews, Gruppeninterviews und offene Fragebögen. <b>Ob ein oder mehrere Erhebungszeitpunkte</b>, ist noch nicht festgelegt — die MA-Guideline verlangt diese Angabe in Kap. 3.2 ausdrücklich.</p>
+      </div>
+
+      <div class="ms entwurf">
+        <div class="ms-head"><h4>Transkription und Auswertung</h4><span class="wann">ca. 3 Monate</span></div>
+        <p>Transkription, dann inhaltlich strukturierende Inhaltsanalyse. Das Kategoriensystem wird aus den vier Unterfragen vorstrukturiert und am Material ergänzt.</p>
+      </div>
+
+      <div class="ms fest">
+        <div class="ms-head"><h4>Fachgespräch 2 — Exploration</h4><span class="wann">nach Teiltextabgabe</span></div>
+        <p>Weitere 10 % der Note. Setzt voraus, dass Theorieteil und Methodikkapitel geschrieben sind.</p>
+      </div>
+
+      <div class="ms fest">
+        <div class="ms-head"><h4>Fachgespräch 3 — Applikation</h4><span class="wann">vor Abgabe</span></div>
+        <p>Nochmals 10 %. Danach folgt die Abgabe im jeweils geltenden Zeitraum.</p>
+      </div>
+
+      <div class="ms fest">
+        <div class="ms-head"><h4>Abgabe, Beurteilung, Defensio</h4><span class="wann">siehe Fristen oben</span></div>
+        <p>PDF im Studierendenakt, Word-Datei per Mail, gedrucktes Exemplar zur Bindung. Beurteilung 4 Wochen, Defensio im nächstmöglichen Zeitraum. Die Defensio zählt 20 %.</p>
+      </div>
+
+    </div>
+
+    <div class="sec-head" style="margin-top:34px"><h2 style="font-size:18px">Zwei Szenarien — der Unterschied sind sechs Monate</h2></div>
+    <p class="sec-sub">Welches Szenario gilt, entscheidet allein die Vorlaufzeit der Genehmigung. Das macht die Frage danach zur wichtigsten des Fachgesprächs.</p>
+
+    <div class="szen">
+      <div class="sz">
+        <h4>Szenario A — Erhebung im 1. Semester</h4>
+        <div class="sub">Genehmigung liegt bis Herbst 2026 vor</div>
+        <ul>
+          <li>Erhebung <b>Herbst 2026 bis Februar 2027</b></li>
+          <li>Auswertung Frühjahr 2027</li>
+          <li>Schreibphase bis Sommer 2027</li>
+          <li>Abgabe im Fenster <b>1.2.–31.8.2027</b></li>
+          <li>Defensio 15.9.–31.10.2027, Sponsion November 2027</li>
+        </ul>
+      </div>
+      <div class="sz">
+        <h4>Szenario B — Erhebung im 2. Semester</h4>
+        <div class="sub">Genehmigung kommt später oder das Exposé verzögert sich</div>
+        <ul>
+          <li>Erhebung <b>Februar bis Juni 2027</b></li>
+          <li>Auswertung Sommer und Herbst 2027</li>
+          <li>Schreibphase bis Jahresende 2027</li>
+          <li>Abgabe im Fenster <b>1.9.2027–31.1.2028</b></li>
+          <li>Defensio 15.2.–31.3.2028, Sponsion Frühjahr 2028</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:20px">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg>Was an diesem Plan Annahme ist</h4>
+      <p>Fix sind ausschließlich die Abgabe- und Defensiozeiträume der PH NÖ sowie die Abfolge der drei Fachgespräche. <b>Angenommen</b> sind dagegen: eine Erhebungsdauer von einem Semester, rund drei Monate für Transkription und Auswertung, und dass die Genehmigung vor Erhebungsbeginn vorliegt. Keine dieser Annahmen ist bisher mit der Betreuung abgestimmt — der Plan ist eine Diskussionsgrundlage, keine Zusage.</p>
+      <p style="margin-top:9px">Ein Risiko ist im Plan bewusst nicht abgebildet: Erhebungen im Schuljahr sind an dessen Rhythmus gebunden. Verschiebt sich der Start über den Semesterbeginn hinaus, ist die nächste realistische Gelegenheit nicht ein paar Wochen später, sondern ein halbes Jahr — deshalb die beiden Szenarien statt einer Bandbreite.</p>
+    </div>
+  </section>
+
   <div class="foot">
-    <span>Master-Thesis · KlassenHub — Rahmenbedingungen (PH NÖ Guideline, Stand 12.07.2026)</span>
+    <span>Master-Thesis · KlassenHub — Rahmenbedingungen und Fahrplan (PH-NÖ-Guideline; Fahrplan-Entwurf Stand 31.07.2026)</span>
     <span><a href="2026-07-forschungsdesign.html">Zum Forschungsdesign →</a></span>
   </div>
 </div>

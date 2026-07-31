@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forschungsethik &amp; Einwilligung — Master-Thesis KlassenHub</title>
+<meta name="description" content="Einwilligungsarchitektur, Freiwilligkeit im Abhängigkeitsverhältnis, Anonymisierung im Kleinfeld und die Trennung von App- und Forschungsdaten. Entwurf zur Abstimmung, Stand 31.07.2026.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<style>
+  .risk { padding: 20px 22px; margin-top: 13px; border-left: 4px solid var(--rose); }
+  .risk h3 { font-family: var(--display); font-size: 16.5px; margin: 0; }
+  .risk .warum { font-size: 13.5px; line-height: 1.6; color: var(--ink); margin-top: 9px; }
+  .risk .row3 { margin-top: 12px; display: grid; grid-template-columns: 128px 1fr; gap: 5px 16px; align-items: baseline; }
+  @media (max-width: 620px) { .risk .row3 { grid-template-columns: 1fr; gap: 2px; } .risk .row3 + .row3 { margin-top: 10px; } }
+  .risk .rk3 { font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .risk .rv4 { font-size: 13px; line-height: 1.58; color: var(--ink-soft); }
+  .risk .rv4 b { color: var(--ink); font-weight: 700; }
+  .risk .rv4.ask { color: var(--violet); font-weight: 600; }
+  table.ein { min-width: 620px; font-size: 12.5px; }
+  table.ein td, table.ein th { padding: 10px 12px; vertical-align: top; }
+  table.ein td:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .stat { font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .stat.klar { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .stat.frag { color: var(--amber); background: color-mix(in srgb, var(--amber) 15%, transparent); }
+  .stat.tbd  { color: var(--muted); background: var(--paper-2); border: 1px dashed var(--line); }
+  /* .delim gespiegelt von der Forschungsdesign-Seite, damit Hinweisblöcke überall gleich aussehen. */
+  .delim { margin-top: 22px; padding: 18px 20px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--amber) 35%, var(--line)); background: color-mix(in srgb, var(--amber) 7%, var(--card)); }
+  .delim h4 { font-family: var(--display); font-size: 14.5px; color: var(--amber); display: flex; align-items: center; gap: 8px; }
+  .delim p { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/></svg></span>
+      Forschungsethik
+    </div>
+    <div class="legend">
+      <span class="chip mid">Entwurf zur Abstimmung</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Forschungsethik · Einwilligung · Datenschutz</div>
+    <h1>Wer willigt worin ein —<br>und wie freiwillig ist das?</h1>
+    <p class="lede">Diese Seite ist bewusst als offene Baustelle angelegt. Sie benennt die vier ethischen Problemlagen dieser Untersuchung, macht je einen Vorschlag und markiert, was ohne Betreuung und Bildungsdirektion nicht entschieden werden kann.</p>
+    <div class="thesis">
+      <strong>Warum das nicht nebenbei läuft:</strong> Befragt werden <b>Minderjährige</b>, und zwar von der Person, die sie <b>unterrichtet</b> und die die untersuchte App <b>selbst entwickelt hat</b>. Jede dieser drei Rollen für sich ist unproblematisch. Zusammen erzeugen sie ein Abhängigkeitsverhältnis, das die Freiwilligkeit der Teilnahme aushöhlen kann, ohne dass es jemand bemerkt — am wenigsten die Beteiligten selbst.
+    </div>
+    <div class="delim">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg> Status dieser Seite</h4>
+      <p>Nichts hiervon ist entschieden. Die Vorschläge sind aus der Sachlage abgeleitet, nicht aus Ethikliteratur — der einschlägige Band (von Unger, Narimani &amp; M'Bayo, 2014) ist noch nicht im <a href="2026-07-literaturverzeichnis.html#methodik-analyse">Bestand</a>. Vor der Übernahme in den Methodikteil ist jeder Punkt zu belegen und mit der Betreuung abzustimmen.</p>
+    </div>
+  </header>
+
+  <!-- ===================== 01 PROBLEMLAGEN ===================== -->
+  <section id="problemlagen">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Vier Problemlagen</h2></div>
+    <p class="sec-sub">Jede mit dem eigenen Stand und einer konkreten Frage an die Betreuung.</p>
+
+    <div class="risk card">
+      <h3>1 · Freiwilligkeit im Abhängigkeitsverhältnis</h3>
+      <div class="warum">Schüler*innen werden von der Person befragt, die sie beurteilt. Eltern werden von der Lehrperson ihres Kindes befragt. Beide Gruppen könnten sich zu Teilnahme und zu positiven Aussagen verpflichtet fühlen — nicht weil Druck ausgeübt wird, sondern weil das Verhältnis ihn nahelegt.</div>
+      <div class="row3"><span class="rk3">Vorschlag</span><span class="rv4">Teilnahme und Nichtteilnahme dürfen <b>nicht sichtbar</b> sein. Widerruf jederzeit, ohne Begründung und ohne dass er auffällt. Ausdrückliche, schriftliche Zusicherung, dass weder Teilnahme noch Aussagen die Beurteilung berühren.</span></div>
+      <div class="row3"><span class="rk3">Grenze</span><span class="rv4">Zusicherungen lösen das Problem nicht, sie mildern es. Eine echte Trennung entstünde erst, wenn <b>eine dritte Person die Interviews führt</b> — was Feldzugang und Vertrautheit kostet.</span></div>
+      <div class="row3"><span class="rk3">Rückfrage</span><span class="rv4 ask">Reicht eine transparente Positionalitätsreflexion, oder erwarten Sie eine organisatorische Trennung von Unterricht und Erhebung?</span></div>
+    </div>
+
+    <div class="risk card">
+      <h3>2 · Einwilligung bei Minderjährigen</h3>
+      <div class="warum">Sekundarstufe I bedeutet Befragte zwischen etwa zehn und vierzehn Jahren. Rechtlich einwilligen können die Erziehungsberechtigten — ethisch tragfähig wird es erst, wenn auch das Kind selbst zustimmt und versteht, wozu.</div>
+      <div class="row3"><span class="rk3">Vorschlag</span><span class="rv4">Zweistufig: <b>Einwilligung der Erziehungsberechtigten</b> schriftlich, dazu eine altersgerechte <b>Zustimmung der Schüler*innen</b> in einfacher Sprache. Ein Kind kann die Teilnahme ablehnen, auch wenn die Eltern zugestimmt haben.</span></div>
+      <div class="row3"><span class="rk3">Offen</span><span class="rv4">Ob die Bildungsdirektion eine bestimmte Formularform vorgibt und ob die Schulleitung gesondert zustimmen muss.</span></div>
+      <div class="row3"><span class="rk3">Rückfrage</span><span class="rv4 ask">Gibt es Musterformulare der PH oder der Bildungsdirektion, die zu verwenden sind?</span></div>
+    </div>
+
+    <div class="risk card">
+      <h3>3 · Anonymität im Kleinfeld</h3>
+      <div class="warum">In einer Klasse kennen sich alle. Wer „ein Elternteil mit zwei Kindern an der Schule" oder „die Schülerin, die den Klassendienst organisiert" schreibt, hat nicht anonymisiert, sondern nur den Namen ersetzt. Bei einer Stichprobe dieser Größe ist Reidentifikation der Normalfall, nicht die Ausnahme.</div>
+      <div class="row3"><span class="rk3">Vorschlag</span><span class="rv4">Pseudonyme genügen nicht. Zusätzlich: <b>keine Einzelmerkmale</b> in Zitaten, Rollenbezeichnungen statt Beschreibungen, im Zweifel Zusammenfassung statt Zitat. Bei besonders heiklen Passagen Rücksprache mit der zitierten Person vor Verwendung.</span></div>
+      <div class="row3"><span class="rk3">Beachten</span><span class="rv4">Die MA-Guideline hält ausdrücklich fest, dass <b>Transkripte nicht in den Anhang</b> gehören, sondern anders einzubinden sind. Wie genau, ist mit der Betreuung zu klären — das ist zugleich eine Datenschutzfrage.</span></div>
+      <div class="row3"><span class="rk3">Rückfrage</span><span class="rv4 ask">In welcher Form werden die Transkripte eingebunden, wenn nicht im Anhang?</span></div>
+    </div>
+
+    <div class="risk card" style="border-left-color:var(--violet)">
+      <h3>4 · Zugriff auf die Nutzungsdaten der App</h3>
+      <div class="warum">Der bislang <b>ungeregelte</b> Punkt, und der heikelste. Als Entwickler der App besteht technischer Vollzugriff auf die Datenbank: wer wann was geöffnet, bestätigt oder ignoriert hat. Für eine Untersuchung über Nutzung ist das eine naheliegende Datenquelle — und genau deshalb gefährlich. Diese Daten sind für den <b>Betrieb</b> der App erhoben worden, nicht für Forschung. Sie ohne eigene Einwilligung auszuwerten, wäre eine Zweckentfremdung, die niemand bemerken würde.</div>
+      <div class="row3"><span class="rk3">Vorschlag</span><span class="rv4">Klare Trennung und ausdrückliche Erklärung im Methodikteil: <b>Es werden keine Nutzungs-, Log- oder Datenbankdaten ausgewertet.</b> Datengrundlage sind ausschließlich Interviews, Gruppeninterviews und Fragebögen. Das ist auch inhaltlich stimmig — die Arbeit fragt nach Wahrnehmung und Aneignung, nicht nach Klickzahlen.</span></div>
+      <div class="row3"><span class="rk3">Alternative</span><span class="rv4">Sollen Nutzungsdaten doch einbezogen werden, brauchen sie eine <b>eigene, gesonderte Einwilligung</b> und eine eigene Rechtsgrundlage — und die Arbeit würde methodisch zu einem Mixed-Methods-Design, mit allen Folgen für Umfang und Auswertung.</span></div>
+      <div class="row3"><span class="rk3">Rückfrage</span><span class="rv4 ask">Ist der ausdrückliche Verzicht auf Nutzungsdaten der richtige Weg — und genügt es, ihn im Methodikteil zu erklären?</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== 02 EINWILLIGUNGSARCHITEKTUR ===================== -->
+  <section id="architektur">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Wer willigt worin ein</h2></div>
+    <p class="sec-sub">Der Überblick, den Leitfrage 17 des Gesprächsleitfadens verlangt. Die Statusspalte zeigt, was geklärt ist und was nicht.</p>
+
+    <div class="tablewrap">
+      <table class="ein">
+        <colgroup><col style="width:20%"><col style="width:34%"><col style="width:28%"><col style="width:18%"></colgroup>
+        <thead><tr><th>Instanz</th><th>Wozu die Zustimmung</th><th>Form und Zeitpunkt</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Bildungsdirektion NÖ</td>
+            <td>Durchführung einer empirischen Untersuchung an einer Schule</td>
+            <td>Antrag über die Betreuung, vor Erhebungsbeginn</td>
+            <td><span class="stat frag">Vorlaufzeit offen</span></td>
+          </tr>
+          <tr>
+            <td>Schulleitung</td>
+            <td>Untersuchung am Standort, Nutzung von Unterrichtszeit</td>
+            <td>voraussichtlich schriftlich, vor Erhebungsbeginn</td>
+            <td><span class="stat tbd">zu klären</span></td>
+          </tr>
+          <tr>
+            <td>Erziehungsberechtigte</td>
+            <td>Teilnahme des Kindes, eigene Teilnahme, Aufzeichnung und Auswertung</td>
+            <td>schriftlich, informiert, jederzeit widerrufbar</td>
+            <td><span class="stat tbd">Formular fehlt</span></td>
+          </tr>
+          <tr>
+            <td>Schüler*innen</td>
+            <td>eigene Teilnahme am Gruppeninterview</td>
+            <td>altersgerecht, in einfacher Sprache, jederzeit widerrufbar</td>
+            <td><span class="stat tbd">Formular fehlt</span></td>
+          </tr>
+          <tr>
+            <td>Lehrpersonen</td>
+            <td>Teilnahme am Leitfadeninterview, Aufzeichnung</td>
+            <td>schriftlich, vor dem Interview</td>
+            <td><span class="stat tbd">Formular fehlt</span></td>
+          </tr>
+          <tr>
+            <td>— entfällt —</td>
+            <td>Auswertung von Nutzungsdaten der App</td>
+            <td>nicht vorgesehen, siehe Problemlage 4</td>
+            <td><span class="stat klar">bewusst nein</span></td>
+          </tr>
+        </tbody>
+        <caption>Entwurf, Stand 31.07.2026. Reihenfolge und Zuständigkeiten sind im Fachgespräch zu bestätigen; die Vorlaufzeit der Genehmigung bestimmt den gesamten <a href="2026-07-rahmenbedingungen.html#fahrplan">Zeitplan</a>.</caption>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===================== 03 DATENSCHUTZ ===================== -->
+  <section id="datenschutz">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Umgang mit den Daten</h2></div>
+    <p class="sec-sub">Was zwischen Aufnahme und Abgabe mit dem Material geschieht — ebenfalls Entwurf.</p>
+
+    <div class="findings">
+      <div class="fh"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M12 2 3 7v10l9 5 9-5V7z"/></svg>Vorgesehener Ablauf</div>
+      <div class="finding"><b>Aufnahme</b> nur mit vorheriger Zustimmung, lokal gespeichert, kein Cloud-Dienst.</div>
+      <div class="finding"><b>Transkription</b> mit festgelegtem Regelsystem; Namen und identifizierende Details werden bereits beim Transkribieren ersetzt, nicht erst danach.</div>
+      <div class="finding"><b>Auswertung</b> ausschließlich am pseudonymisierten Transkript. Die Zuordnungsliste wird getrennt aufbewahrt und nach Abschluss gelöscht.</div>
+      <div class="finding"><b>Aufnahmen</b> werden nach der Transkription gelöscht — der Zeitpunkt ist mit der Betreuung festzulegen.</div>
+      <div class="finding"><b>Keine Verknüpfung</b> von Interviewaussagen mit Daten aus der App. Siehe Problemlage 4.</div>
+    </div>
+
+    <div class="delim">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> Was hier noch fehlt</h4>
+      <p>Die Rechtsgrundlage nach DSGVO ist nicht benannt, es gibt keine Datenschutzinformation für die Beteiligten, und die Aufbewahrungsfristen sind nicht festgelegt. Das ist kein Versäumnis, sondern der Punkt, an dem ohne Auskunft von Betreuung und Bildungsdirektion nicht weitergearbeitet werden kann. Gehört zusammen mit der Ethikliteratur in <a href="2026-07-literaturverzeichnis.html#dach">Kategorie 07</a> und <a href="2026-07-literaturverzeichnis.html#methodik-analyse">Kategorie 10</a>.</p>
+    </div>
+  </section>
+
+  <div class="note" style="margin-top:26px">
+    <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Einordnung</h4>
+    <p>Von den vier Problemlagen ist keine gelöst, aber jede benannt und mit einem Vorschlag versehen. Das ist der Stand, den ein erstes Fachgespräch tragen kann — und mehr wäre auch nicht seriös, solange die Auskunft der Bildungsdirektion aussteht.</p>
+    <p style="margin-top:9px">Der aus eigener Sicht schwerwiegendste Punkt ist der vierte. Er war bis zum 31.07.2026 in keinem Dokument dieses Repos erwähnt, obwohl der technische Zugriff seit dem ersten Tag besteht. Er steht hier bewusst an prominenter Stelle, weil eine übersehene Möglichkeit gefährlicher ist als eine benannte.</p>
+  </div>
+
+  <div class="foot">
+    <span>Master-Thesis · KlassenHub — Forschungsethik &amp; Einwilligung (Entwurf, Stand 31.07.2026)</span>
+    <span><a href="gespraechsvorbereitung.html">Zur Gesprächsvorbereitung →</a></span>
+  </div>
+</div>
+</body>
+</html>
