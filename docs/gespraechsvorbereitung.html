@@ -58,6 +58,29 @@
   .say .sh { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
     color: var(--teal); display: flex; align-items: center; gap: 6px; }
   .say p { font-size: 14px; line-height: 1.68; color: var(--ink); margin-top: 9px; font-style: italic; }
+
+  /* ---- Wort-fuer-Wort-Herleitung der Forschungsfrage ----
+     Zwei Spalten, weil im Gespraech die Wendung gesucht wird, nicht der Fliesstext:
+     links die Stelle in der Frage, rechts was sie leistet und wogegen sie abgegrenzt ist. */
+  .fq { margin-top: 16px; padding: 16px 18px; border-radius: 12px;
+    background: color-mix(in srgb, var(--teal) 6%, var(--card-2)); border: 1px dashed var(--teal); }
+  .fq p { font-size: 14px; line-height: 1.7; color: var(--ink); font-style: italic; }
+  .wfw { margin-top: 18px; }
+  .wfw-item { display: grid; grid-template-columns: 186px 1fr; gap: 6px 18px;
+    padding: 13px 0; border-top: 1px solid var(--line); align-items: start; }
+  .wfw-item:first-child { border-top: none; padding-top: 4px; }
+  @media (max-width: 680px) { .wfw-item { grid-template-columns: 1fr; gap: 4px; } }
+  .wfw-w { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--teal); line-height: 1.3; }
+  .wfw-w small { display: block; font-family: var(--mono); font-size: 10px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .wfw-b { font-size: 13.5px; line-height: 1.62; color: var(--ink-soft); }
+  .wfw-b b { color: var(--ink); font-weight: 700; }
+  .wfw-b .vs { display: block; margin-top: 7px; font-size: 12.5px; color: var(--muted); }
+  .wfw-b .vs b { color: var(--ink-soft); font-weight: 700; }
+  .nots { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 10px; margin-top: 14px; }
+  .not { padding: 12px 14px; border-radius: 11px; background: var(--paper-2); border: 1px dashed var(--line); }
+  .not .nw { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--rose); }
+  .not p { font-size: 12.5px; line-height: 1.52; color: var(--ink-soft); margin-top: 5px; }
 </style>
 </head>
 <body>
@@ -158,7 +181,7 @@
 
       <div class="qa card strong">
         <div class="q"><span class="qn">03</span><span>Welche fachspezifischen Inhalte werden aktuell besonders häufig in der Forschung diskutiert?</span></div>
-        <div class="a">Drei erkennbare Konjunkturen: <b>Platformisierung von Schule</b> (kritische Bildungstechnologieforschung, u. a. <i>Learning, Media and Technology</i>), <b>Datafizierung und Überwachung</b> durch Schul-Apps, und <b>Elternbeteiligung als Policy-Thema</b> mit auffälliger Begriffsunschärfe. Auffällig ist zugleich, dass die Wirkungsevidenz ernüchternd ausfällt: Jeynes (2025) findet über 31 Studien keine belastbaren Effekte technologievermittelter Elternkommunikation.</div>
+        <div class="a">Drei erkennbare Konjunkturen: <b>Platformisierung von Schule</b> (kritische Bildungstechnologieforschung, u. a. <i>Learning, Media and Technology</i>), <b>Datafizierung und Überwachung</b> durch Schul-Apps, und <b>Elternbeteiligung als Policy-Thema</b> mit auffälliger Begriffsunschärfe. Auffällig ist zugleich, dass die Wirkungsevidenz ernüchternd ausfällt: See et al. (2021) finden über 29 Studien keine klare Evidenz für die Wirkung technologievermittelter Elternbeteiligung. Jeynes (2025) kommt über 31 Studien zum gleichen Ergebnis — <b>diese Quelle liegt mir bislang nur im Abstract vor</b> und steht als A4 auf der Beschaffungsliste; im Gespräch nenne ich sie mit diesem Vorbehalt.</div>
         <div class="qmeta">
           <span class="chip reuse">belastbar</span>
           <a class="fdoc" href="2026-07-literaturkarte.html">Literaturkarte <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
@@ -216,15 +239,130 @@
     <div class="sec-head"><span class="sec-num">03</span><h2>Fragestellung &amp; Forschungsdesign</h2></div>
     <p class="sec-sub">Der Kern dessen, was Groissböck laut eigener Aussage vordergründig interessiert: die saubere Darlegung von Forschungs- und Untersuchungsdesign.</p>
 
+    <div class="deep card">
+      <div class="deep-head">
+        <span class="deep-tag">Grundlage für 09–11</span>
+        <h4>Die Forschungsfrage, Wort für Wort</h4>
+      </div>
+      <p class="lede2">Auf die Aufforderung „rechtfertigen Sie jedes Wort" hin. Jede Wendung der Frage ist eine Entscheidung gegen mindestens eine Alternative — hier steht, welche, und mit welcher Begründung. Wo eine Setzung noch unbelegt ist, steht das dabei.</p>
+
+      <div class="fq">
+        <p>„Wie eignen sich Lehrpersonen, Schüler*innen und Eltern eine schulintern entwickelte Kommunikations- und Organisations-App im Rahmen einer Erprobung in der Sekundarstufe I an, und welche Bedeutung schreiben sie ihr für schulische Informations- und Beteiligungsprozesse zu?"</p>
+      </div>
+
+      <p class="lede2"><b>Zuerst der Bauplan.</b> Die Frage hat zwei Hälften, die zwei verschiedene Erkenntnisebenen ansprechen: <b>„Wie eignen sie sich … an?"</b> zielt auf die Praxis — was die Beteiligten mit dem Ding tun. <b>„Welche Bedeutung schreiben sie ihr zu?"</b> zielt auf den Sinn — was es für sie heißt. Das ist keine Doppelung, sondern die Trennung von Handlung und Deutung; beides ist über Interviews zugänglich, keines von beiden ist Wirkung. Der Fragetyp ist damit festgelegt: eine <b>Beschreibungs- und Verstehensfrage</b>. Keine Erklärungsfrage (kein „warum"), keine Wirkungsfrage (kein „welchen Effekt"), keine Gestaltungsfrage (kein „wie sollte").</p>
+
+      <div class="wfw">
+
+        <div class="wfw-item">
+          <div class="wfw-w">„Wie"<small>Frageform</small></div>
+          <div class="wfw-b">Offene Frageform: Sie verlangt die Beschreibung eines Vollzugs und lässt zu, dass die Antwort lautet <em>gar nicht</em> oder <em>ganz anders als gedacht</em>. Ergebnisoffenheit ist damit in der ersten Silbe verankert.
+            <span class="vs"><b>Nicht „Ob":</b> würde binär vorentscheiden. <b>Nicht „Inwiefern":</b> setzt voraus, dass es geschieht. <b>Nicht „Welchen Einfluss hat":</b> Wirkungsfrage.</span></div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„eignen … an"<small>Kernbegriff · Beleg offen</small></div>
+          <div class="wfw-b">Aneignung bezeichnet den Prozess, in dem Nutzende eine Technologie in ihren Alltag einbauen und dabei <b>umdeuten</b>. Der Begriff enthält von vornherein die Möglichkeit, dass die gelebte Nutzung von der intendierten Funktionslogik abweicht — genau das ist Unterfrage 1.
+            <span class="vs"><b>Nicht „nutzen":</b> Nutzung ist ein beobachtbarer Vorgang und wäre am ehrlichsten über Log- und Klickdaten zu erheben. Auf die verzichte ich bewusst (Ethik, Problemlage 4) — „nutzen" würde also ein Instrument versprechen, das ich nicht einsetze. Aneignung ist nur rekonstruierbar, über Erzählungen. Frage und Instrument sind deckungsgleich.<br>
+            <b>Nicht „akzeptieren":</b> fachsprachlich durch TAM/UTAUT besetzt — ein Einstellungskonstrukt mit etablierten Skalen, also quantitativ gedacht. Als Hauptfrage würde es ein Erhebungsverfahren nahelegen, das ich nicht verwende. Akzeptanz steht deshalb dort, wo sie hingehört: in Unterfrage 3, als Vergleichsurteil der Beteiligten.<br>
+            <b>Nicht „bewerten":</b> würde meine Bewertungslogik unterstellen — derselbe Rückfall, wegen dem ich die evaluative Kuckartz-Variante verworfen habe.</span></div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„Lehrpersonen, Schüler*innen und Eltern"<small>drei Rollen, ausgeschrieben</small></div>
+          <div class="wfw-b">Nicht „die Beteiligten" oder „Nutzergruppen": Die gleichzeitige Erhebung aller drei ist die Konstruktionsentscheidung der Arbeit — in meinem Bestand erhebt keine Quelle alle drei zum selben System. Die Reihenfolge folgt der Nähe zum System (wer postet, wer handelt, wer liest), nicht einer Rangfolge. Genderstern nach der Genderleitlinie der PH NÖ.
+            <span class="vs"><b>Ehrlich dazu:</b> Gouseti &amp; Shaw (2026) erheben genau diese Triangulation — an zugekauften Plattformen in England. Das ist mein nächstliegender Vergleichsfall, nicht die Widerlegung meiner Lücke.</span></div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„eine … App"<small>unbestimmter Artikel</small></div>
+          <div class="wfw-b">Die Frage nennt KlassenHub <b>nicht beim Namen</b>. Untersucht wird ein Fall eines Typs, nicht ein Produkt. Das ist die sprachliche Absicherung gegen den Vorwurf, die Arbeit sei eine Evaluation der eigenen Software. Der Produktname gehört ins Kapitel „Beschreibung der App", nicht in die Fragestellung.</div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„schulintern entwickelte"<small>eigene Setzung</small></div>
+          <div class="wfw-b">Das Merkmal, das den Fall von der gesamten Literatur unterscheidet: Entwicklung und Anwendung fallen zusammen, das System ist nicht zugekauft.
+            <span class="vs"><b>Nicht „selbst entwickelt":</b> „selbst" trüge die Ich-Perspektive in die Fragestellung. Meine Doppelrolle ist ein methodisches Problem und gehört in den Methodikteil (Positionalität nach Yip), nicht in die Frage. „Schulintern" ist zudem die <b>generalisierbare</b> Struktureigenschaft — die Frage gilt für jedes schulintern entwickelte System, nicht nur für meines.<br>
+            <b>Belegstatus:</b> eigene Setzung, als solche ausgewiesen. Keine Entsprechung in der herangezogenen Literatur — was zugleich der Grund ist, warum das Merkmal in der Frage steht.</span></div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„Kommunikations- und Organisations-App"<small>Gattungsbezeichnung</small></div>
+          <div class="wfw-b">Zwei Substantive, weil beide Funktionslogiken tatsächlich im System sind: Nachrichten und Mitteilungsheft einerseits, Termine, Dienste und Hausübungen andererseits.
+            <span class="vs"><b>Nicht „Lern-App":</b> untersucht wird kein Lernertrag. <b>Nicht „Gamification-App":</b> das Abenteuer-System ist ein Funktionsbereich, nicht der Gegenstand — stünde es in der Frage, wäre die App darauf reduziert. Die Gattungsbezeichnung setzt die Grenze der Arbeit schon in der Frage.</span></div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„im Rahmen einer Erprobung"<small>Korrektur vom 31.07.</small></div>
+          <div class="wfw-b">Die Erprobung ist der <b>Rahmen</b>, nicht der Gegenstand: Angeeignet wird die App, nicht die Erprobung. Der Zusatz markiert außerdem, dass die Aussagen für eine befristete Einführungsphase gelten und nicht für eingespielten Regelbetrieb — damit ist der Neuheitseffekt (Ratinho &amp; Martins 2023) methodisch eingestanden, statt später als Einwand zu kommen.</div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„in der Sekundarstufe I"<small>Kontextbindung</small></div>
+          <div class="wfw-b">Dreifach begründet: <b>(1)</b> Dort liegt der Fall. <b>(2)</b> Die Befundlage ist altersabhängig — Kurnaz &amp; Koçtürk (2025) finden den größten Gamification-Effekt in der Sekundarstufe, Bergdahl &amp; Bond (2021) verorten Disengagement dort. <b>(3)</b> Ethisch relevant: Befragte zwischen etwa zehn und vierzehn Jahren, daraus folgt die zweistufige Einwilligung.</div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„und"<small>Scharnier</small></div>
+          <div class="wfw-b">Trennt zwei Ebenen, die nicht ineinander überführbar sind: Praxis und Deutung. Jemand kann sich eine App intensiv aneignen und ihr wenig Bedeutung zuschreiben — oder umgekehrt. Die Frage will beides und <b>behauptet keinen Zusammenhang</b> zwischen ihnen.</div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„welche Bedeutung … zuschreiben"<small>der eigentliche Schutz</small></div>
+          <div class="wfw-b">Nicht „welche Bedeutung sie <em>hat</em>". Die Formulierung macht das Subjekt der Aussage explizit: <b>Nicht die App hat Bedeutung — die Beteiligten schreiben ihr eine zu.</b> Das ist der Unterschied zwischen einer Eigenschaftsbehauptung über das Objekt und der Rekonstruktion von Deutungen, und damit die Stelle, an der die Frage jede Wirkungsbehauptung ausschließt. Berichtet werden am Ende Zuschreibungen von Personen, nicht Eigenschaften eines Systems.
+            <span class="vs"><b>Nicht „wahrnehmen":</b> am 31.07. gestrichen, weil zu „Bedeutung zuschreiben" nicht trennscharf — Zuschreibung <em>ist</em> eine Form der Wahrnehmung, nur präziser gefasst. Wahrnehmung bleibt die Erkenntnisebene der Arbeit, ist aber kein Fragewort mehr.</span></div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„ihr"<small>Bezug</small></div>
+          <div class="wfw-b">Bezieht sich auf die App, nicht auf die Erprobung. Ohne diese Präzisierung ließe sich die zweite Hälfte auch auf das Projekt beziehen; gemeint ist das Artefakt.</div>
+        </div>
+
+        <div class="wfw-item">
+          <div class="wfw-w">„für schulische Informations- und Beteiligungsprozesse"<small>Bezugsbereich</small></div>
+          <div class="wfw-b">Drei Entscheidungen in einer Wendung.
+            <span class="vs"><b>Information und Beteiligung getrennt:</b> Das ist die Unterscheidung von <em>Involvement</em> und <em>Engagement</em> (Kent et al. 2022) direkt in die Frage gebaut. Informiertwerden ist noch keine Beteiligung; die Frage lässt offen, ob die App das eine leistet, das andere — oder nur das eine, während sie das andere verspricht.<br>
+            <b>„Prozesse" statt „Kommunikation":</b> Prozesse sind wiederkehrend und beschreibbar; „Kommunikation" wäre ein Zustandsbegriff und schwerer zu operationalisieren.<br>
+            <b>„schulische", nicht „elterliche":</b> Beteiligung schließt hier Schüler*innen ein. „Parental engagement" wird im Feld ohnehin widersprüchlich verwendet (Jones et al. 2025) — Grund genug, den Begriff nicht ungeklärt in die Hauptfrage zu setzen.</span></div>
+        </div>
+
+      </div>
+
+      <p class="lede2" style="margin-top:22px"><b>Was bewusst nicht in der Frage steht</b> — dieser Teil ist im Gespräch oft der stärkere.</p>
+      <div class="nots">
+        <div class="not"><div class="nw">Wirkung · Einfluss · unterstützen</div><p>Wirkungsverben. Ein qualitatives Design kann Wirkung nicht belegen. „unterstützen" stand bis 25.07. drin und ist genau deshalb entfernt worden.</p></div>
+        <div class="not"><div class="nw">Lernertrag · Leistung</div><p>Nicht Gegenstand — und See et al. (2021) zeigen, dass die Evidenz dafür ohnehin dünn ist.</p></div>
+        <div class="not"><div class="nw">Motivation</div><p>In die Unterfragen verlagert. Die Hauptfrage hätte sonst vier Konstrukte auf drei Ebenen getragen.</p></div>
+        <div class="not"><div class="nw">Gamification · Streaks</div><p>Ein Funktionsbereich, nicht der Gegenstand. Siehe Gattungsbezeichnung.</p></div>
+        <div class="not"><div class="nw">Leadership</div><p>Steckt in Unterfrage 4, ausdrücklich als Ableitungs-, nicht Erhebungsfrage. <b>Ob das reicht, ist meine Frage E4.</b></p></div>
+        <div class="not"><div class="nw">Verlässlichkeit</div><p>Seit 25.07. durch <em>Verbindlichkeit</em> ersetzt: fachsprachlich etabliert statt wertend. Steht jetzt in Unterfrage 2.</p></div>
+      </div>
+
+      <div class="say">
+        <div class="sh"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Wenn wenig Zeit ist — die Kurzfassung</div>
+        <p>„Jedes Wort der Frage hält eine Grenze. <em>Wie</em> lässt zu, dass die Antwort <em>gar nicht</em> lautet. <em>Aneignen</em> statt <em>nutzen</em>, weil ich Nutzungsdaten bewusst nicht auswerte und Aneignung nur aus Erzählungen rekonstruierbar ist — Frage und Instrument sind deckungsgleich. <em>Zuschreiben</em> statt <em>hat</em>, weil nicht die App Bedeutung hat, sondern die Beteiligten ihr eine geben; damit ist jede Wirkungsbehauptung ausgeschlossen. Und <em>schulintern entwickelt</em> statt <em>selbst entwickelt</em>, weil meine Doppelrolle in den Methodikteil gehört und nicht in die Fragestellung."</p>
+      </div>
+
+      <div class="qmeta" style="margin-top:16px">
+        <span class="chip todo">Beleglücke: „Aneignung"</span>
+        <a class="fdoc" href="2026-07-begriffsdefinitionen.html">Begriffsdefinitionen <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+      </div>
+      <p class="lede2" style="margin-top:10px"><b>Die eine Stelle, an der ich angreifbar bin — und die ich selbst nennen sollte:</b> „Aneignung" steht in der Hauptfrage und hat <b>keine Primärquelle im Bestand</b>. Der Begriff stammt aus der mediensoziologischen Aneignungs- und Domestizierungsforschung; die Anschlussquelle für den Schulkontext ist Hangartner et al. (2024), Ordner 06, noch zu beschaffen. Das ist auf der Begriffsseite als „offen" ausgewiesen und die auffälligste Begriffslücke der Arbeit. Sie zu schließen hat Priorität — einen Begriff zu tragen, den die Hauptfrage trägt, aber keine Quelle deckt, wäre auf Dauer nicht haltbar.</p>
+    </div>
+
     <div class="qa-list">
 
       <div class="qa card strong">
         <div class="q"><span class="qn">09</span><span>Lässt sich die Forschungsfrage aus der Literatur heraus beantworten oder muss sie empirisch bearbeitet werden?</span></div>
         <div class="a">Sie muss empirisch bearbeitet werden — und <b>das ist die Kernbegründung der Arbeit</b>. Die Literatur beschreibt Akzeptanz und Nutzung <em>zugekaufter</em> Plattformen, meist aus der Perspektive <em>einer</em> Gruppe und überwiegend außerhalb des deutschsprachigen Raums. Was fehlt: die mehrperspektivische Erprobung eines schulintern entwickelten Systems, in dem Lehrpersonen, Schüler*innen und Eltern denselben Gegenstand gleichzeitig deuten.
-        <br><br><b>Achtung — diese Antwort ist derzeit plausibel, aber nicht belegt.</b> Der Nachweis entsteht erst, wenn zu jeder Quelle systematisch erfasst ist, was sie <em>nicht</em> abdeckt. Das ist der nächste Arbeitsschritt.</div>
+        <br><br><b>Die Vorarbeit dafür liegt seit 30.07.2026 vor.</b> Zu jeder der 36 Quellen ist in der Spalte „Deckt nicht ab" der Literaturkarte erfasst, was sie <em>nicht</em> leistet. Drei Leerstellen kehren dabei bei nahezu jeder Quelle wieder: <b>Mehrperspektivität</b>, <b>DACH-Raum</b>, <b>schulintern entwickelte Systeme</b>.
+        <br><br><b>Was aussteht, ist nicht der Nachweis, sondern die Bewertung:</b> ob diese Leerstellen eine <em>relevante</em> Forschungslücke bilden oder nur unbesetzte Felder sind. Kapitel 2.7 des Gliederungsentwurfs ist dafür bewusst leer gelassen — das ist eine fachliche Einschätzung, bei der ich Ihr Urteil einer vorschnellen Ausformulierung vorziehe.
+        <br><br><b>Und ehrlich dazu:</b> Gouseti &amp; Shaw (2026) erheben genau diese Perspektiventriangulation — an zugekauften Plattformen in England. Die Studie ist mein nächstliegender Vergleichsfall, nicht die Widerlegung der Lücke; sie steht auf der Beschaffungsliste.</div>
         <div class="qmeta">
-          <span class="chip todo">Nachweis in Arbeit</span>
+          <span class="chip reuse">belastbar</span>
+          <span class="chip todo">Relevanz der Lücke: Ihr Urteil</span>
           <span class="chip low">wichtigste Frage des Gesprächs</span>
+          <a class="fdoc" href="2026-07-literaturkarte.html">Gesamttabelle „Deckt nicht ab" <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
         </div>
       </div>
 
