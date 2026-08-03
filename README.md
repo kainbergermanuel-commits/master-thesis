@@ -14,6 +14,56 @@ Bewusst kuratiert: Rohnotizen, Quellenbewertungen und private Vorbereitungen
 liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
 übernommen — hier stehen nur präsentable, abgeschlossene Inhalte.
 
+## Stand (03.08.2026)
+
+| | |
+|---|---|
+| **Seiten** | 21 (Startseite + 20 Dokumente unter `docs/`) |
+| **Literaturbestand** | 50 aktive Quellen, einzeln bewertet, in zehn Kategorien; 3 begründet ausgesondert |
+| **Erklärte Lücken** | 3 von 4 geschlossen; offen bleibt allein der österreichische Kontext (Ordner 07), bewusst bis zur Klärung mit der Betreuung |
+| **Forschungsfrage** | dreimal präzisiert (25.07., 31.07., 03.08.2026), zuletzt um den Leadership-Bezug erweitert |
+| **Exposé** | erster vollständiger Entwurf, liegt privat als `.docx` in der PH-Vorlage |
+| **Empirie** | noch nicht begonnen; Erhebung ab September 2026 |
+
+**Erstes Fachgespräch** (Explikation, 10 % der Note) fand am 03.08.2026 statt.
+
+### Wo was steht
+
+Die Dokumente sind auf der Startseite in drei Ebenen geordnet, und diese Ordnung
+ist die eigentliche Navigationshilfe:
+
+- **Ebene 1 — Die Arbeit.** Forschungsfrage, Design, Literatur, Ethik, Begriffe,
+  Rahmenbedingungen. Das, worauf die Betreuungsgespräche zielen. Acht Dokumente.
+- **Ebene 2 — Der Gegenstand.** Der App-Systemüberblick als Grundlage des Kapitels
+  „Beschreibung der App". Code-basiert, mit sauberer Trennung von Belegtem und
+  Interpretiertem.
+- **Ebene 3 — Entwicklungsdokumentation.** Zehn Dokumente zum Entstehungsprozess der
+  App, gebündelt auf einer Sammelseite. Sie belegen den Prozess, tragen aber nicht die
+  Forschungsargumentation.
+
+Neue Dokumente werden der passenden Ebene zugeordnet, nicht einfach angehängt.
+
+### Was hier bewusst nicht liegt
+
+Der eigentliche Arbeitsordner (`klassenhub thesis`, nicht öffentlich) enthält die
+PDFs des Literaturbestands, die Guideline-Dokumente der PH NÖ, das Exposé und die
+Gesprächsvorbereitungen. Maßgeblich für Literaturangaben ist trotzdem das Dokument
+in **diesem** Repo (`docs/2026-07-literaturverzeichnis.html`): Ältere Kopien im
+Arbeitsordner sind divergent und werden nicht gepflegt.
+
+### Zahlen, die zusammenpassen müssen
+
+Ändert sich der Literaturbestand, sind **vier** Orte nachzuziehen, sonst
+widersprechen sie einander:
+
+1. `docs/2026-07-literaturverzeichnis.html` — Quellenkarten und Kopfzahl
+2. `docs/2026-07-literaturkarte.html` — Tabellenzeilen, Filterleiste, Kopfzahl
+3. `index.html` — Stand-Block und die beiden Dokumentkarten
+4. `papers and references/README.md` im Arbeitsordner — Ordnertabelle
+
+Der Stand-Block auf der Startseite veraltet erfahrungsgemäß zuerst.
+
+
 ## Struktur
 
 ```
@@ -38,7 +88,11 @@ Seiten hinweg konsistent.
 4. Seiten-spezifische Komponenten in einem eigenen `<style>`-Block direkt
    in der Datei ergänzen — nicht in `theme.css`, damit die geteilte Basis
    schlank bleibt.
-5. In `index.html` unter „Dokumente" eine neue `.doc-card` ergänzen.
+5. In `index.html` unter „Dokumente" eine neue `.doc-card` ergänzen — in der
+   passenden Ebene (siehe „Wo was steht").
+6. Vor dem Commit prüfen: Tag-Balance, keine verschachtelten `<a>` (die Doc-Karten
+   sind selbst Links, ein Link darin zerlegt die Karte), und alle verwendeten
+   CSS-Klassen in `theme.css` oder im lokalen `<style>`-Block definiert.
 
 ## Design-System
 
