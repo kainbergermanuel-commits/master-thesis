@@ -82,7 +82,7 @@
 
   <section id="module">
     <div class="sec-head"><span class="sec-num">03</span><h2>Funktionsmodule</h2></div>
-    <p class="sec-sub">Die Bausteine, die in der empirischen Erprobung tatsächlich genutzt werden.</p>
+    <p class="sec-sub">Die Bausteine, die in der empirischen Erprobung tatsächlich genutzt werden. Vollständig erhoben am 03.08.2026 gegen den Routenbestand und die Migrationsdateien — einschließlich der Module, die keine der drei Nutzungsgruppen erreichen, und der einen Seite, die noch leer ist.</p>
 
     <div class="mod-grid">
       <div class="mod card">
@@ -120,10 +120,46 @@
         <p><span class="ev belegt">Belegt</span> Ein Helper erzeugt automatisch die korrekte Form je nach gespeichertem Geschlecht im Profil.</p>
         <p><span class="ev interpretiert">Interpretiert</span> Zeigt, dass geschlechtergerechte Sprache als Code-Funktion mitgedacht wurde — spiegelt denselben Anspruch wie die Genderleitlinie der PH NÖ für die Arbeit selbst.</p>
       </div>
+      
+            <div class="mod card">
+        <h4>Anwesenheit</h4>
+        <p><span class="ev belegt">Belegt</span> Gespeichert werden <b>nur Abweichungen</b>: kein Eintrag bedeutet anwesend, höchstens ein Eintrag je Kind und Tag. Zwei Status, <i>entschuldigt</i> und <i>unentschuldigt</i> — die Kategorie „krank" fehlt ausdrücklich, weil sie ein Gesundheitsdatum nach Art. 9 DSGVO wäre. Jede Meldung trägt ihre Herkunft mit: von der Lehrperson erfasste Einträge gelten sofort, Elternmeldungen bleiben bis zur Bestätigung offen. Die Rechte sind dreifach gestuft — Lehrperson für die eigenen Klassen, Elternteil nur für das eigene Kind, Schüler:in nur für sich selbst.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die Datenmodellierung enthält bereits eine datenschutzrechtliche Entscheidung: Der Verzicht auf „krank" vermeidet die Verarbeitung besonderer Kategorien personenbezogener Daten. Für die Erprobung ist das bemerkenswert, weil die Abwesenheitsmeldung der elternnächste Vorgang der App ist.</p>
+      </div>
       <div class="mod card">
-        <h4>Persönlicher Lehrer-Stundenplan</h4>
-        <p><span class="ev belegt">Belegt</span> Eigenständige Tabelle neben dem Klassenplan: die Woche der Lehrperson selbst, quer über mehrere Klassen, mit einem freien Textfeld für die Klassenbezeichnung statt einer echten Verknüpfung.</p>
-        <p><span class="ev interpretiert">Interpretiert</span> Bildet ab, dass „welche Klasse hat wann Unterricht" und „wo muss ich als Lehrperson wann hin" zwei unterschiedliche Fragen sind, siehe <a href="2026-07-organisation-vertieft.html">Organisation vertieft</a>.</p>
+        <h4>Anwesenheits-Statistik</h4>
+        <p><span class="ev belegt">Belegt</span> Eine eigene Auswertungsansicht für Lehrpersonen, filterbar nach Zeitraum und Status: Quote, Trend über die Zeit, Verteilung nach Wochentag sowie die Rechtzeitigkeit elterlicher Meldungen. Schüler:innen und Eltern sehen stattdessen eine persönliche Karte.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die Trennung von Klassenauswertung und Einzelsicht folgt derselben Logik wie bei den Hausübungen. Ob die Rechtzeitigkeitsauswertung von Eltern als Unterstützung oder als Kontrolle gelesen wird, ist eine offene Frage für Unterfrage 2.</p>
+      </div>
+      <div class="mod card">
+        <h4>Stundenplan — drei getrennte Achsen</h4>
+        <p><span class="ev belegt">Belegt</span> Drei Tabellen statt einer. Der <b>persönliche Plan des Kindes</b> ist die älteste; der <b>Standardplan der Klasse</b> wird von der Lehrperson gepflegt und kann per Knopfdruck an alle Kinder verteilt werden, wobei die Verteilung bestehende Einträge vollständig überschreibt statt zu verschmelzen; der <b>persönliche Plan der Lehrperson</b> beschreibt deren eigene Woche quer über mehrere Klassen, mit Freitext statt Verknüpfung für die Klassenbezeichnung.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die drei Achsen lassen sich nicht ineinander abbilden — der Plan einer Klasse und die Woche einer Person sind verschiedene Gegenstände. Dass die Verteilung überschreibt und das Schreibrecht der Kinder dabei erhalten bleibt, ist eine Abwägung zwischen Nachvollziehbarkeit und Autonomie, die im Feld auffallen dürfte.</p>
+      </div>
+      <div class="mod card">
+        <h4>Gangaufsichten</h4>
+        <p><span class="ev belegt">Belegt</span> Auf derselben Achse wie der persönliche Lehrerplan, also nicht klassengebunden. Pausen werden über ihre Position im Stundenraster adressiert; Uhrzeit und Länge werden daraus berechnet und nicht gespeichert. Ein Ortsfeld ist angelegt, wird von der Verwaltung aber noch nicht befüllt.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Ein Baustein, der ausschließlich der Lehrperson dient und keine der drei Nutzungsgruppen erreicht. Er zeigt, dass die App auch Arbeitsorganisation jenseits der Kommunikation aufnimmt.</p>
+      </div>
+      <div class="mod card">
+        <h4>Planungs-Tool</h4>
+        <p><span class="ev belegt">Belegt</span> Notizen zur Wochen- und Tagesplanung, wahlweise allgemein oder je Fach; je Klasse, Woche, Tag und Fach genau eine Notiz. Sichtbar und bearbeitbar ausschließlich für Lehrpersonen der Klasse.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Das einzige Modul, das bewusst nichts nach außen gibt. Es erweitert die App vom Kommunikations- zum Arbeitswerkzeug — relevant für die Frage, ob Lehrpersonen sie als Entlastung oder als zusätzliches System erleben.</p>
+      </div>
+      <div class="mod card">
+        <h4>Fächer-Katalog und Administration</h4>
+        <p><span class="ev belegt">Belegt</span> Ein global verwalteter Fächer-Katalog mit Farbe und Sortierung, gepflegt über einen Administrationsbereich, der zusätzlich Klassen, Lehrkräfte und Schüler:innen verwaltet. Der Katalog versorgt bewusst nur den Stundenplan; die ältere Fächerauswahl der Hausübungen bleibt unberührt.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die enge Begrenzung ist im Code dokumentiert und begründet: Eine Vereinheitlichung wäre ein größerer Umbau mit entsprechendem Risiko. Für die Beschreibung des Gegenstands heißt das, dass zwei Fächerlisten nebeneinander bestehen.</p>
+      </div>
+      <div class="mod card">
+        <h4>Mehrere Klassen je Lehrperson</h4>
+        <p><span class="ev belegt">Belegt</span> Eine Verknüpfungstabelle zwischen Lehrpersonen und Klassen mit einer ausgezeichneten Primärklasse. Schüler:innen und Eltern bleiben unverändert genau einer Klasse zugeordnet.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die Asymmetrie bildet die Realität ab: Eine Lehrperson unterrichtet in mehreren Klassen, ein Kind besucht eine. Für die Erprobung ist relevant, dass die untersuchte Klasse für die Lehrperson eine unter mehreren sein kann.</p>
+      </div>
+      <div class="mod card">
+        <h4>Nicht gebaut: Zahlungen</h4>
+        <p><span class="ev belegt">Belegt</span> Im Navigationsbereich existiert ein Eintrag „Zahlungen". Die Seite enthält keine Funktionalität, sondern den Hinweis „Kommt bald". Es ist die einzige Seite der App in diesem Zustand.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Für die Beschreibung des Untersuchungsgegenstands gehört das ausdrücklich hierher: Ein sichtbarer, aber leerer Menüpunkt kann im Feld als Versprechen gelesen werden. Vor dem Einfrieren des Funktionsstands ist zu entscheiden, ob er während der Erprobung sichtbar bleibt.</p>
       </div>
       <div class="mod card">
         <h4>Statistik-Panels</h4>
