@@ -128,7 +128,8 @@
         <tbody>
           <tr><td>OpenAlex</td><td>offene bibliografische Datenbank</td><td><span class="chip mid">1</span></td><td>Breitensuche, Abdeckungsprüfung, Metadaten; transparenter Index und offene API</td></tr>
           <tr><td>Google Scholar</td><td>Suchmaschine</td><td><span class="chip mid">1</span> <span class="chip reuse">2</span></td><td>Volltextzugang, Zitationsverfolgung, Einzelabfragen — ergänzend, nicht als eigenständiger Suchweg</td></tr>
-          <tr><td>Consensus</td><td>KI-gestützte Volltextsuche</td><td><span class="chip mid">1</span></td><td>Einstieg in Teilfragen, Auffinden von Reviews</td></tr>
+          <tr><td>Consensus (Weboberfläche)</td><td>KI-gestützte Volltextsuche</td><td><span class="chip mid">1</span></td><td>Einstieg in Teilfragen, Auffinden von Reviews — ohne festgehaltene Suchstrings, daher nicht reproduzierbar</td></tr>
+          <tr><td>Consensus (API-Zugang)</td><td>Suche über Semantic Scholar, PubMed, Scopus, arXiv</td><td><span class="chip reuse">2</span></td><td>Seit 05.08.2026. Dokumentierbare Filter für Suchstring, Jahr, Fachgebiet, Journal-Quartil und Studientyp, mit Trefferzahl — damit protokollfähig</td></tr>
           <tr><td>ResearchRabbit</td><td>Zitationsnetz-Visualisierung</td><td><span class="chip mid">1</span></td><td>Vorwärts- und Rückwärtsverfolgung ausgehend von Leitquellen</td></tr>
           <tr><td>KI-Rechercheassistent</td><td>dialogische Titelvorschläge</td><td><span class="chip mid">1</span></td><td>Lückenidentifikation und Vorschlagslisten, jede Angabe anschließend am Verlag geprüft</td></tr>
           <tr><td>ERIC</td><td>Fachdatenbank Bildungsforschung</td><td><span class="chip reuse">2</span></td><td>internationaler Standard des Feldes, frei zugänglich</td></tr>
@@ -140,7 +141,7 @@
 
     <div class="note" style="border-color: color-mix(in srgb, var(--amber) 32%, var(--line)); background: color-mix(in srgb, var(--amber) 7%, var(--card));">
       <h4 style="color: var(--amber)"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Grenzen der einzelnen Zugänge</h4>
-      <p><b>Google Scholar</b> ist nicht reproduzierbar: kein dokumentierbarer Suchstring, personalisierte Ergebnisse, intransparenter Index, und er erfasst auch nicht Begutachtetes. <b>Consensus und ResearchRabbit</b> sind Entdeckungswerkzeuge und keine Datenbanken; sie erheben keinen Anspruch auf Abdeckung. In Phase 1 <b>nicht genutzt</b> wurden ERIC, FIS Bildung, Scopus, Web of Science und PSYNDEX — das ist die zentrale Einschränkung dieser Phase und der Grund für Phase 2.</p>
+      <p><b>Google Scholar</b> ist nicht reproduzierbar: kein dokumentierbarer Suchstring, personalisierte Ergebnisse, intransparenter Index, und er erfasst auch nicht Begutachtetes. <b>Consensus in der Weboberfläche und ResearchRabbit</b> sind Entdeckungswerkzeuge und keine Datenbanken; sie erheben keinen Anspruch auf Abdeckung. Der seit August 2026 genutzte <b>API-Zugang zu Consensus</b> ist davon zu unterscheiden: Er ist protokollfähig, aber <b>kein Ersatz für ERIC oder FIS Bildung</b> — ERIC indexiert bildungswissenschaftlich mit eigenem Thesaurus, FIS Bildung erschließt den deutschsprachigen Raum, und beide Leistungen erbringt er nicht. Sein Wert liegt in der Breite und in der Reproduzierbarkeit. Vorbehalt: Auf der genutzten Zugangsstufe wird die Ergebnisliste gekürzt ausgegeben, Trefferzahlen sind daher Größenordnungen. In Phase 1 <b>nicht genutzt</b> wurden ERIC, FIS Bildung, Scopus, Web of Science und PSYNDEX — das ist die zentrale Einschränkung dieser Phase und der Grund für Phase 2.</p>
     </div>
   </section>
 
