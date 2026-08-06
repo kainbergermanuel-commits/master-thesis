@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenschutz &amp; Feldzugang — Master-Thesis KlassenHub</title>
+<meta name="description" content="Datenschutz-Grundlage der App als Voraussetzung der Erprobung: Trennung von Nutzung und Forschung, verifizierte Zugriffskontrolle, Datenkategorien, Löschkonzept, offene Entscheidungen.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<style>
+  .strands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+  @media (max-width: 820px) { .strands { grid-template-columns: 1fr; } }
+  .strand { padding: 16px 18px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .strand .sid { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal); }
+  .strand h3 { font-family: var(--display); font-size: 15px; margin-top: 4px; }
+  .strand .kind { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+  .strand p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 9px; }
+  .strand.free { border-color: color-mix(in srgb, var(--good) 45%, var(--line)); }
+  .strand.duty { border-color: color-mix(in srgb, var(--teal) 40%, var(--line)); }
+
+  .proof { margin-top: 18px; padding: 20px 22px; border-radius: 14px;
+    background: color-mix(in srgb, var(--good) 8%, var(--card-2));
+    border: 1px solid color-mix(in srgb, var(--good) 40%, var(--line)); }
+  .proof .pl { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--good); letter-spacing: .04em; }
+  .proof h3 { font-family: var(--display); font-size: 17px; margin-top: 6px; }
+  .proof p { font-size: 13px; line-height: 1.6; color: var(--ink-soft); margin-top: 8px; }
+  .pnums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+  @media (max-width: 620px) { .pnums { grid-template-columns: 1fr; } }
+  .pn { text-align: center; padding: 12px 10px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); }
+  .pn .v { font-family: var(--display); font-size: 24px; font-weight: 800; color: var(--good); }
+  .pn .l { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+  .dk-wrap { margin-top: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table.dk { width: 100%; min-width: 420px; border-collapse: collapse; font-size: 12.5px; }
+  table.dk th { text-align: left; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  table.dk td { padding: 10px; border-bottom: 1px solid var(--line); color: var(--ink-soft); line-height: 1.5; vertical-align: top; }
+  table.dk td b { color: var(--ink); }
+  table.dk tr.hot td { background: color-mix(in srgb, var(--amber) 7%, transparent); }
+  .lvl { font-family: var(--mono); font-size: 10.5px; font-weight: 700; white-space: nowrap; }
+  .lvl.a { color: var(--amber); } .lvl.b { color: var(--teal); } .lvl.c { color: var(--muted); }
+
+  .del { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .dr { display: grid; grid-template-columns: 1fr 150px; gap: 12px; align-items: center;
+    padding: 11px 15px; border-radius: 10px; background: var(--card-2); font-size: 12.5px; color: var(--ink-soft); }
+  @media (max-width: 620px) { .dr { grid-template-columns: 1fr; gap: 4px; } }
+  .dr b { color: var(--ink); }
+  .dr .when { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal); text-align: right; }
+  @media (max-width: 620px) { .dr .when { text-align: left; } }
+  .dr.now .when { color: var(--amber); }
+
+  .openlist { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .ol { padding: 13px 16px; border-radius: 11px; background: var(--card-2);
+    border: 1px dashed color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .ol h4 { font-family: var(--display); font-size: 13.5px; }
+  .ol p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7z"/></svg></span>
+      Datenschutz &amp; Feldzugang
+    </div>
+    <div class="legend">
+      <span class="chip mid">Voraussetzung</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Feldvorbereitung · Strang B</div>
+    <h1>Bevor erhoben wird,<br>muss die App rechtlich stehen.</h1>
+    <p class="lede">Die Erprobung setzt voraus, dass die Anwendung im Schulbetrieb überhaupt betrieben werden darf — unabhängig davon, ob darüber geforscht wird. Diese Seite dokumentiert die Grundlage: welche Daten verarbeitet werden, wie der Zugriff kontrolliert wird, wie lange gespeichert wird, und was noch zu entscheiden ist.</p>
+    <div class="thesis">
+      <strong>Datenschutz ist hier kein Anhang zur Forschung, sondern ihre Vorbedingung.</strong> Er betrifft die App als Organisationsmittel und wäre auch dann zu klären, wenn es diese Masterarbeit nicht gäbe. Die verbindliche Einordnung nimmt die Datenschutzbeauftragte der Bildungsdirektion vor; was hier steht, bereitet diese Prüfung vor und trifft begründete Vorschläge.
+    </div>
+  </header>
+
+  <section id="trennung">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Drei Stränge, die nicht vermischt werden</h2></div>
+    <p class="sec-sub">Die wichtigste Entscheidung fällt vor dem ersten Dokument: App-Nutzung und Forschungsteilnahme dürfen nie dasselbe Ereignis sein.</p>
+
+    <div class="strands">
+      <div class="strand duty">
+        <div class="sid">Strang A</div>
+        <h3>Einführung der App</h3>
+        <div class="kind">verpflichtend · Schulorganisation</div>
+        <p>Die App ersetzt bestehende Wege der Klassenorganisation. Wer sie nutzt, trifft damit keine Aussage über die Forschung.</p>
+      </div>
+      <div class="strand duty">
+        <div class="sid">Strang B</div>
+        <h3>Datenschutz</h3>
+        <div class="kind">rechtliche Voraussetzung</div>
+        <p>Gilt unabhängig vom Forschungsvorhaben und wird zuerst geklärt. Gegenstand dieser Seite.</p>
+      </div>
+      <div class="strand free">
+        <div class="sid">Strang C</div>
+        <h3>Forschungsteilnahme</h3>
+        <div class="kind">freiwillig · jederzeit widerrufbar</div>
+        <p>Eigener Zeitpunkt, eigenes Schreiben, eigene Unterschrift. Wer nicht teilnimmt, nutzt die App unverändert weiter.</p>
+      </div>
+    </div>
+
+    <div class="thesis" style="margin-top:18px">
+      <strong>Warum die Trennung überhaupt funktioniert:</strong> weil die Nutzungsdaten der App nicht ausgewertet werden. Nur deshalb kann jemand die App verwenden, ohne an der Forschung teilzunehmen — und nur deshalb bleibt Nichtteilnahme folgenlos. Was im Exposé wie eine vorsichtige Selbstbeschränkung aussieht, ist tatsächlich die tragende Säule der gesamten forschungsethischen Konstruktion.
+    </div>
+  </section>
+
+  <section id="zugriff">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Zugriffskontrolle — geprüft, nicht behauptet</h2></div>
+    <p class="sec-sub">Die Sichtbarkeit von Daten wird in der Datenbank durchgesetzt, nicht im Frontend verborgen. Ein manipulierter Client kann sie nicht umgehen.</p>
+
+    <div class="proof">
+      <div class="pl">EXTERNER TEST · 06.08.2026</div>
+      <h3>Anonymer Zugriff auf alle Tabellen: kein einziger Datensatz</h3>
+      <p>Mit dem öffentlichen Anwendungsschlüssel wurde jede Tabelle des Live-Schemas ohne Anmeldung abgefragt. Aussagekräftig ist das Ergebnis, weil die weit überwiegende Mehrzahl der Tabellen tatsächlich befüllt war — bei leeren Tabellen würde ein Nullergebnis nichts belegen.</p>
+      <div class="pnums">
+        <div class="pn"><div class="v">31</div><div class="l">Tabellen im Live-Schema geprüft</div></div>
+        <div class="pn"><div class="v">28</div><div class="l">davon befüllt, der Test ist damit aussagekräftig</div></div>
+        <div class="pn"><div class="v">0</div><div class="l">Datensätze ohne Anmeldung ausgeliefert</div></div>
+      </div>
+      <p>Der Test ist reproduzierbar und wird vor dem Produktivstart sowie nach jeder Schema-Änderung wiederholt.</p>
+    </div>
+
+    <p style="margin-top:18px">Getragen wird das von <b>Row-Level-Security auf Datenbankebene</b> mit über 150 einzelnen Regeln, einer zentralen Helper-Funktion für die Klassenisolation und einem granularen Rollenmodell (Lehrperson, Elternteil, Schüler*in, dazu eng umrissene Sonderrollen). Das digitale Mitteilungsheft ist strikt getrennt: je Elternteil ein eigener Thread, für Schüler*innen kein Zugriff. Zwölf eigene Migrationsdateien dokumentieren, dass Berechtigungen wiederholt nachgeschärft wurden.</p>
+
+    <p style="margin-top:12px">Keine Analytics, kein Tracking, keine Drittanbieter-Einbindungen. Datenbank und Authentifizierung laufen in einer <b>EU-Region (Frankfurt)</b> — es findet kein Drittlandtransfer statt.</p>
+  </section>
+
+  <section id="daten">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Welche Daten verarbeitet werden</h2></div>
+    <p class="sec-sub">Erhoben am 06.08.2026 direkt gegen das Live-Schema, nicht aus der Dokumentation abgeleitet.</p>
+
+    <div class="dk-wrap">
+    <table class="dk">
+      <thead><tr><th>Kategorie</th><th>Inhalte</th><th>Schutzbedarf</th></tr></thead>
+      <tbody>
+        <tr><td><b>Stammdaten</b></td><td>Name, Rolle, Klassenzuordnung, Geschlecht, Avatar-Merkmale, Eltern-Kind-Zuordnung</td><td class="lvl b">erhöht</td></tr>
+        <tr><td><b>Organisationsdaten</b></td><td>Aufgaben, Termine, Erinnerungen, Stundenpläne, Dienste, Fächer</td><td class="lvl c">normal</td></tr>
+        <tr class="hot"><td><b>Verhaltens- und leistungsnahe Daten</b></td><td>Erledigung von Aufgaben über ein Schuljahr, Fehlzeiten, Durchhalteverhalten, Nutzung des Motivationssystems</td><td class="lvl a">hoch</td></tr>
+        <tr class="hot"><td><b>Kommunikationsinhalte</b></td><td>Freitext zwischen Lehrperson und einzelnem Elternteil, mit Lesebestätigung</td><td class="lvl a">hoch</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p style="margin-top:16px"><b>Ein Befund aus der Bestandsaufnahme:</b> Offene Textfelder können besondere Kategorien nach Art. 9 DSGVO aufnehmen. Trägt ein Elternteil bei einer Abwesenheit „Fieber" oder „Arzttermin" ein, liegen Gesundheitsdaten vor, für die die allgemeine Rechtsgrundlage nicht genügt. Die vorgesehene Lösung ist, den Grund gar nicht erst zu erheben: eine Auswahl aus entschuldigt, unentschuldigt und verspätet statt eines Freitextfeldes. Datenminimierung ist hier zugleich die einfachste Lösung.</p>
+
+    <p style="margin-top:12px"><b>Kein Profiling:</b> Es werden keine automatisierten Entscheidungen mit rechtlicher Wirkung getroffen. Rückmeldungen des Motivationssystems fließen nicht in die Leistungsbeurteilung ein.</p>
+  </section>
+
+  <section id="loeschen">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Löschkonzept</h2></div>
+    <p class="sec-sub">Der Punkt, an dem Eigenentwicklungen regelmäßig scheitern — und die erste Frage jeder prüfenden Stelle.</p>
+
+    <div class="del">
+      <div class="dr now"><span><b>Testdaten aus der Entwicklung</b> — vollständig entfernen, protokolliert</span><span class="when">vor Produktivstart</span></div>
+      <div class="dr now"><span><b>Daten entfernter Funktionen</b> — Tabellen eines zurückgebauten Features löschen; personenbezogene Daten ohne Zweck widersprechen der Datenminimierung</span><span class="when">vor Produktivstart</span></div>
+      <div class="dr"><span><b>Motivationssystem und Aufgabenverlauf</b> — Bewegungsdaten des abgelaufenen Jahres</span><span class="when">Schuljahresende</span></div>
+      <div class="dr"><span><b>Abwesenheiten</b> — in der App nur das laufende Schuljahr; die schulrechtliche Aufbewahrung erfolgt in der Schulverwaltung, nicht hier</span><span class="when">Schuljahresende</span></div>
+      <div class="dr"><span><b>Kommunikationsinhalte</b> — ein Jahr nach Schuljahresende, längere Frist nur bei belegter Dokumentationspflicht</span><span class="when">+1 Jahr</span></div>
+      <div class="dr"><span><b>Stammdaten bei Klassen- oder Schulwechsel</b> — mit allen verknüpften Daten</span><span class="when">binnen 30 Tagen</span></div>
+    </div>
+
+    <p style="margin-top:16px">Umgesetzt als dokumentierter Jahresendlauf zu einem festgelegten Stichtag, mit Protokoll über gelöschte Datensatzmengen — nicht über Inhalte. Die Infrastruktur dafür ist vorhanden: geplante Datenbankaufgaben laufen bereits für die wöchentliche Dienstezuteilung.</p>
+  </section>
+
+  <section id="offen">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Was noch zu entscheiden ist</h2></div>
+    <p class="sec-sub">Offen benannt statt stillschweigend mitlaufen gelassen.</p>
+
+    <div class="openlist">
+      <div class="ol">
+        <h4>Verantwortlichkeit</h4>
+        <p>Vorgeschlagen wird: die Schule ist Verantwortliche, die Entwicklung stellt das System im Auftrag bereit — mit Auftragsverarbeitungsvertrag. Die Alternative, eine Privatperson als Verantwortliche, ist bei Daten Minderjähriger zu schulischen Zwecken nicht tragfähig. Zusätzlich wird angeregt, das Projekt auf ein dienstliches Konto der Schule zu übertragen: Dann bleibt der Zugang der Schule auch unabhängig von einzelnen Personen erhalten. Die Entscheidung liegt bei der Bildungsdirektion.</p>
+      </div>
+      <div class="ol">
+        <h4>Rechtsgrundlage des Motivationssystems</h4>
+        <p>Für die Kernfunktionen greift die Wahrnehmung einer Aufgabe im öffentlichen Interesse. Ob Gamification unter dieselbe Grundlage fällt oder gesondert zu betrachten ist, wird ausdrücklich zur Prüfung gestellt.</p>
+      </div>
+      <div class="ol">
+        <h4>Einsicht in die Nutzersicht</h4>
+        <p>Lehrpersonen können die Anwendung aus der Perspektive einzelner Nutzender betrachten — fachlich sinnvoll für Unterstützung, datenschutzrechtlich ein Zusatzzugriff. Er wird im Verarbeitungsverzeichnis benannt, auf die eigene Klasse begrenzt und protokolliert.</p>
+      </div>
+      <div class="ol">
+        <h4>Aufbewahrungspflichten</h4>
+        <p>Ob für schulische Kommunikation eine Dokumentationspflicht besteht, die über die vorgeschlagene Frist hinausgeht, klärt die Schule.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:18px">Eingereicht wird ein vollständiges Dossier statt einer Anfrage: Bestandsaufnahme, technische Maßnahmen, Löschkonzept, Auftragsverarbeitungsvertrag, Entwurf der Elterninformation und Entwurf des Eintrags ins Verarbeitungsverzeichnis — mit konkreter Frage und konkretem Terminwunsch. <b>Getrennt vom Forschungsantrag</b>, auch wenn beides dieselbe Stelle erreicht: Eine Vermischung würde beide Vorgänge verlangsamen und die Trennung untergraben, auf der die Freiwilligkeit beruht.</p>
+  </section>
+</div>
+
+</body>
+</html>
