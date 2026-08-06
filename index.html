@@ -39,6 +39,24 @@
     border: 1px solid color-mix(in srgb, var(--teal) 35%, var(--line)); color: var(--teal); }
   .sprung a:hover { background: color-mix(in srgb, var(--teal) 20%, var(--card-2)); }
   .quiet-note { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+  /* Gruppierung innerhalb von Ebene 1. Die Ebenen-Logik (Arbeit / Gegenstand /
+     Entstehung) bleibt; hier wird nur die groesste Ebene binnendifferenziert,
+     damit neue Dokumente eine eindeutige Heimat haben. */
+  .grp-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .grp-nav a { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px;
+    font-weight: 700; padding: 7px 14px; border-radius: 999px; text-decoration: none;
+    background: var(--card-2); border: 1px solid var(--line); color: var(--ink-soft); }
+  .grp-nav a:hover { border-color: color-mix(in srgb, var(--teal) 45%, var(--line));
+    color: var(--teal); }
+  .grp-nav a b { font-family: var(--mono); font-size: 11px; color: var(--teal); }
+  .doc-group { margin-top: 30px; padding-top: 4px; scroll-margin-top: 80px; }
+  .grp-head { display: flex; align-items: baseline; gap: 10px; }
+  .grp-head h4 { font-family: var(--display); font-size: 16px; margin: 0; }
+  .grp-n { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal);
+    padding: 2px 8px; border-radius: 999px;
+    background: color-mix(in srgb, var(--teal) 12%, transparent); }
+  .grp-sub { font-size: 12.5px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+  .doc-group + .doc-grid { margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -166,14 +184,18 @@
 
     <div class="doc-level"><span class="lv">Ebene 1</span><h3>Die Arbeit</h3></div>
     <p class="doc-level-sub">Forschungsfrage, Design, Theorie und kritische Einordnung — das, worauf die Betreuungsgespräche zielen.</p>
+        <div class="grp-nav">
+      <a href="#g-design"><b>2</b> Forschungsdesign</a>
+      <a href="#g-theorie"><b>4</b> Theorie &amp; Literatur</a>
+      <a href="#g-feld"><b>2</b> Feldzugang &amp; Ethik</a>
+      <a href="#g-rahmen"><b>2</b> Rahmen &amp; Betreuung</a>
+    </div>
+
+    <div class="doc-group" id="g-design">
+      <div class="grp-head"><h4>Forschungsdesign</h4><span class="grp-n">2</span></div>
+      <p class="grp-sub">Fragestellung, Design und die Begriffe, mit denen gearbeitet wird.</p>
+    </div>
     <div class="doc-grid">
-      <a class="doc-card card reveal" href="docs/gespraechsvorbereitung.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">02.08.2026 · Arbeitsinstrument</div>
-        <h3>Vorbereitung erstes Fachgespräch</h3>
-        <p>Vier offene Entscheidungen, die im Gespräch geklärt werden sollen — dazu die 19 Beispielfragen der „Dimension Zukunft" aus dem MA-Gesprächsleitfaden, zu 17 Blöcken zusammengefasst, jede mit Antwortstand und Belegverweis. Neu: die Forschungsfrage Wort für Wort hergeleitet, dazu die Herleitung, warum die Arbeit keine Hypothese formuliert.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Explikation · 10 %</span></div>
-      </a>
       <a class="doc-card card reveal" href="docs/2026-07-forschungsdesign.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.07.2026 · Kern-Dokument</div>
@@ -188,13 +210,13 @@
         <p>Sechzehn zentrale Begriffe — Engagement, digitales Kapital, SES, Involvement vs. Engagement, Selbstbestimmungstheorie, Game fiction — jeweils mit Quelle, Verwendung in dieser Arbeit und ausgewiesenem Belegstatus.</p>
         <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Begriffsverständnis</span></div>
       </a>
-      <a class="doc-card card reveal" href="docs/2026-07-forschungsethik.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">31.07.2026 · Entwurf</div>
-        <h3>Forschungsethik &amp; Einwilligung</h3>
-        <p>Vier ethische Problemlagen mit je einem Vorschlag: Freiwilligkeit im Abhängigkeitsverhältnis, Einwilligung Minderjähriger, Anonymität im Kleinfeld und der Umgang mit den Nutzungsdaten der App. Dazu eine Übersicht, wer worin einwilligt.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip high">offene Punkte</span></div>
-      </a>
+    </div>
+
+    <div class="doc-group" id="g-theorie">
+      <div class="grp-head"><h4>Theorie &amp; Literatur</h4><span class="grp-n">4</span></div>
+      <p class="grp-sub">Der Forschungsstand: was im Bestand liegt, wozu es dient, wie er entstanden ist — und die kritische Gegenperspektive.</p>
+    </div>
+    <div class="doc-grid">
       <a class="doc-card card reveal" href="docs/2026-07-literaturkarte.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">01.08.2026</div>
@@ -208,13 +230,6 @@
         <h3>Literaturverzeichnis</h3>
         <p>52 aktive Quellen nach Themenfeld kategorisiert, mit Qualitäts-/Relevanzbewertung und Einschätzung je Kategorie. Dazu drei begründet aussortierte Titel.</p>
         <div class="dc-tags"><span class="chip reuse">Forschung</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-08-datenschutz.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">06.08.2026</div>
-        <h3>Datenschutz &amp; Feldzugang</h3>
-        <p>Die rechtliche Voraussetzung der Erprobung: strikte Trennung von verpflichtender App-Nutzung und freiwilliger Forschungsteilnahme, extern geprüfte Zugriffskontrolle über alle Tabellen, Datenkategorien, Löschkonzept und die offen benannten Entscheidungen der Bildungsdirektion.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Voraussetzung</span></div>
       </a>
       <a class="doc-card card reveal" href="docs/2026-08-suchstrategie.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
@@ -230,12 +245,47 @@
         <p>Kritische Gegenperspektive: Neuheitseffekt, Lehrkräfte-Mehrbelastung, digitale Gaps, Learning-Analytics-Risiken.</p>
         <div class="dc-tags"><span class="chip high">Kritische Perspektive</span></div>
       </a>
+    </div>
+
+    <div class="doc-group" id="g-feld">
+      <div class="grp-head"><h4>Feldzugang &amp; Ethik</h4><span class="grp-n">2</span></div>
+      <p class="grp-sub">Was vor der ersten Erhebung geklärt sein muss — forschungsethisch und rechtlich.</p>
+    </div>
+    <div class="doc-grid">
+      <a class="doc-card card reveal" href="docs/2026-07-forschungsethik.html">
+        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        <div class="dc-date">31.07.2026 · Entwurf</div>
+        <h3>Forschungsethik &amp; Einwilligung</h3>
+        <p>Vier ethische Problemlagen mit je einem Vorschlag: Freiwilligkeit im Abhängigkeitsverhältnis, Einwilligung Minderjähriger, Anonymität im Kleinfeld und der Umgang mit den Nutzungsdaten der App. Dazu eine Übersicht, wer worin einwilligt.</p>
+        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip high">offene Punkte</span></div>
+      </a>
+      <a class="doc-card card reveal" href="docs/2026-08-datenschutz.html">
+        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        <div class="dc-date">06.08.2026</div>
+        <h3>Datenschutz &amp; Feldzugang</h3>
+        <p>Die rechtliche Voraussetzung der Erprobung: strikte Trennung von verpflichtender App-Nutzung und freiwilliger Forschungsteilnahme, extern geprüfte Zugriffskontrolle über alle Tabellen, Datenkategorien, Löschkonzept und die offen benannten Entscheidungen der Bildungsdirektion.</p>
+        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Voraussetzung</span></div>
+      </a>
+    </div>
+
+    <div class="doc-group" id="g-rahmen">
+      <div class="grp-head"><h4>Rahmen &amp; Betreuung</h4><span class="grp-n">2</span></div>
+      <p class="grp-sub">Formale Vorgaben des Lehrgangs und die Vorbereitung der Fachgespräche.</p>
+    </div>
+    <div class="doc-grid">
       <a class="doc-card card reveal" href="docs/2026-07-rahmenbedingungen.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.07.2026</div>
         <h3>Rahmenbedingungen &amp; Fahrplan</h3>
         <p>Umfang, Zitierstil, Kapitelstruktur, Notenschema, Fristen — PH-NÖ-Guideline.</p>
         <div class="dc-tags"><span class="chip phase">Formalia</span></div>
+      </a>
+      <a class="doc-card card reveal" href="docs/gespraechsvorbereitung.html">
+        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        <div class="dc-date">02.08.2026 · Arbeitsinstrument</div>
+        <h3>Vorbereitung erstes Fachgespräch</h3>
+        <p>Vier offene Entscheidungen, die im Gespräch geklärt werden sollen — dazu die 19 Beispielfragen der „Dimension Zukunft" aus dem MA-Gesprächsleitfaden, zu 17 Blöcken zusammengefasst, jede mit Antwortstand und Belegverweis. Neu: die Forschungsfrage Wort für Wort hergeleitet, dazu die Herleitung, warum die Arbeit keine Hypothese formuliert.</p>
+        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Explikation · 10 %</span></div>
       </a>
     </div>
 
