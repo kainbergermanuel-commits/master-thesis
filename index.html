@@ -42,14 +42,33 @@
   /* Gruppierung innerhalb von Ebene 1. Die Ebenen-Logik (Arbeit / Gegenstand /
      Entstehung) bleibt; hier wird nur die groesste Ebene binnendifferenziert,
      damit neue Dokumente eine eindeutige Heimat haben. */
-  .grp-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .grp-nav a { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px;
-    font-weight: 700; padding: 7px 14px; border-radius: 999px; text-decoration: none;
-    background: var(--card-2); border: 1px solid var(--line); color: var(--ink-soft); }
-  .grp-nav a:hover { border-color: color-mix(in srgb, var(--teal) 45%, var(--line));
-    color: var(--teal); }
-  .grp-nav a b { font-family: var(--mono); font-size: 11px; color: var(--teal); }
-  .doc-group { margin-top: 30px; padding-top: 4px; scroll-margin-top: 80px; }
+  /* Sticky Pillen-Navigation. Klebt bewusst NUR innerhalb von section#dokumente:
+     position:sticky endet am Elternelement, die Leiste verschwindet also wieder,
+     sobald man die Dokumente verlassen hat — kein Dauerbalken. --tb = Hoehe der
+     globalen Topbar, darunter dockt sie an. */
+  :root { --tb: 52px; }
+  .grp-nav { position: sticky; top: calc(var(--tb) + 8px); z-index: 12;
+    display: flex; gap: 7px; margin-top: 18px; padding: 7px;
+    border-radius: 999px; overflow-x: auto; scrollbar-width: none;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px); border: 1px solid var(--line);
+    box-shadow: 0 6px 22px -12px rgba(0,0,0,.55); }
+  .grp-nav::-webkit-scrollbar { display: none; }
+  .grp-nav a { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+    font-size: 12.5px; font-weight: 700; padding: 7px 14px; border-radius: 999px;
+    text-decoration: none; color: var(--ink-soft); border: 1px solid transparent;
+    transition: background .15s, color .15s, border-color .15s; }
+  .grp-nav a:hover { background: var(--card-2); color: var(--ink); }
+  .grp-nav a b { font-family: var(--mono); font-size: 11px; color: var(--muted);
+    transition: color .15s; }
+  .grp-nav a.is-active { color: var(--teal);
+    background: color-mix(in srgb, var(--teal) 13%, transparent);
+    border-color: color-mix(in srgb, var(--teal) 38%, var(--line)); }
+  .grp-nav a.is-active b { color: var(--teal); }
+  @media (max-width: 560px) { .grp-nav a { padding: 7px 11px; font-size: 12px; } }
+  /* Sprungziel muss unter Topbar UND Pillenleiste landen, sonst verdeckt sie es. */
+  .doc-group { margin-top: 30px; padding-top: 4px;
+    scroll-margin-top: calc(var(--tb) + 74px); }
   .grp-head { display: flex; align-items: baseline; gap: 10px; }
   .grp-head h4 { font-family: var(--display); font-size: 16px; margin: 0; }
   .grp-n { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal);
@@ -329,6 +348,45 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
   }
+
+  /* Scrollspy fuer die Pillen-Navigation: markiert die Gruppe, die gerade unter
+     der Leiste steht. Bewusst ohne IntersectionObserver — die Gruppen sind
+     unterschiedlich hoch, hier zaehlt allein, welche zuletzt passiert wurde. */
+  (() => {
+    const nav = document.querySelector('.grp-nav');
+    if (!nav) return;
+    /* Die Topbar bricht auf schmalen Viewports um und wird dann deutlich hoeher.
+       Ein fester Wert wuerde die Pillenleiste dort teilweise verdecken, also wird
+       die tatsaechliche Hoehe gemessen und als --tb gesetzt. */
+    const topbar = document.querySelector('.topbar');
+    const messen = () => {
+      if (!topbar) return;
+      document.documentElement.style.setProperty(
+        '--tb', Math.round(topbar.getBoundingClientRect().height) + 'px');
+    };
+    messen();
+    /* ResizeObserver statt nur resize-Event: Die Topbar-Hoehe aendert sich auch
+       ohne Fensteraenderung, etwa wenn die Webfonts nachladen. */
+    if (topbar && 'ResizeObserver' in window) new ResizeObserver(messen).observe(topbar);
+    else addEventListener('resize', messen, { passive: true });
+    const links = [...nav.querySelectorAll('a')];
+    const ziele = links.map((a) => document.querySelector(a.getAttribute('href')))
+                       .filter(Boolean);
+    if (ziele.length !== links.length) return;
+    let warten = false;
+    const setzen = () => {
+      warten = false;
+      const grenze = nav.getBoundingClientRect().bottom + 24;
+      let aktiv = 0;
+      ziele.forEach((z, i) => { if (z.getBoundingClientRect().top <= grenze) aktiv = i; });
+      links.forEach((a, i) => a.classList.toggle('is-active', i === aktiv));
+    };
+    addEventListener('scroll', () => {
+      if (!warten) { warten = true; requestAnimationFrame(setzen); }
+    }, { passive: true });
+    addEventListener('resize', setzen, { passive: true });
+    setzen();
+  })();
 </script>
 </body>
 </html>
