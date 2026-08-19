@@ -18,7 +18,7 @@ liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
 
 | | |
 |---|---|
-| **Seiten** | 21 (Startseite + 20 Dokumente unter `docs/`) |
+| **Seiten** | 24 (Startseite + 23 Dokumente unter `docs/`) |
 | **Literaturbestand** | 50 aktive Quellen, einzeln bewertet, in zehn Kategorien; 3 begründet ausgesondert |
 | **Erklärte Lücken** | 3 von 4 geschlossen; offen bleibt allein der österreichische Kontext (Ordner 07), bewusst bis zur Klärung mit der Betreuung |
 | **Forschungsfrage** | dreimal präzisiert (25.07., 31.07., 03.08.2026), zuletzt um den Leadership-Bezug erweitert |

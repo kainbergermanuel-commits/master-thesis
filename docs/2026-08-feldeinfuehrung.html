@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feldeinführung &amp; Erhebungsstart — Master-Thesis KlassenHub</title>
+<meta name="description" content="Wie die App eingeführt wird, ohne die Erhebung zu beschädigen: Trennung von Nutzung und Forschung im Kalender, Einführung als Methodenentscheidung, Freiwilligkeit als Verfahren, vier Protokolle ab dem ersten Schultag.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<style>
+  .anchors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+  @media (max-width: 820px) { .anchors { grid-template-columns: 1fr; } }
+  .anch { padding: 14px 16px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .anch .aw { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: .04em; }
+  .anch h4 { font-family: var(--display); font-size: 14.5px; margin-top: 5px; }
+  .anch p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 6px; }
+  .anch.gate { border-color: color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .anch.gate .aw { color: var(--amber); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+  .sp { padding: 16px 18px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .sp .sl { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+  .sp.can { border-left: 3px solid var(--good); } .sp.can .sl { color: var(--good); }
+  .sp.cannot { border-left: 3px solid var(--rose); } .sp.cannot .sl { color: var(--rose); }
+  .sp li { font-size: 13px; line-height: 1.56; color: var(--ink-soft); margin-bottom: 8px; }
+  .sp ul { padding-left: 17px; margin: 0; }
+  .sp li:last-child { margin-bottom: 0; }
+
+  .steps { margin-top: 18px; display: flex; flex-direction: column; gap: 9px; }
+  .st { display: grid; grid-template-columns: 26px 1fr; gap: 13px; align-items: baseline;
+    padding: 12px 16px; border-radius: 10px; background: var(--card-2); }
+  .st .sn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--teal); }
+  .st p { font-size: 13px; line-height: 1.58; color: var(--ink-soft); margin: 0; }
+  .st p b { color: var(--ink); }
+
+  .prot { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-top: 18px; }
+  @media (max-width: 820px) { .prot { grid-template-columns: 1fr; } }
+  .pr { padding: 16px 18px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+  .pr .pn2 { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--violet); }
+  .pr h4 { font-family: var(--display); font-size: 15px; margin-top: 4px; }
+  .pr .rh { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+  .pr p { font-size: 12.5px; line-height: 1.58; color: var(--ink-soft); margin-top: 9px; }
+
+  .openlist { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .ol { padding: 13px 16px; border-radius: 11px; background: var(--card-2);
+    border: 1px dashed color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .ol h4 { font-family: var(--display); font-size: 13.5px; }
+  .ol p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M8 3v4M16 3v4M4 9h16M5 5h14v16H5z"/></svg></span>
+      Feldeinführung &amp; Erhebungsstart
+    </div>
+    <div class="legend">
+      <span class="chip mid">Planung</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Feldvorbereitung · Strang A und C</div>
+    <h1>Die Einführung entscheidet mit,<br>was später erhoben wird.</h1>
+    <p class="lede">Zwischen der Freigabe der App und dem ersten Interview liegen rund sechs Wochen, in denen alles passiert, was die Erhebung tragen oder beschädigen kann: die Einführung im Kollegium, bei den Familien und in den Klassen, die Einholung der Einwilligungen und der Aufbau der Dokumentation. Diese Seite hält fest, wie diese Wochen angelegt sind und warum.</p>
+    <div class="thesis">
+      <strong>Die Einführung ist keine Vorstufe der Erhebung, sondern ihr erster methodischer Akt.</strong> Was den Beteiligten bei der Einführung gesagt wird, bildet den Deutungsrahmen, in dem sie wenige Wochen später über die App sprechen. Der Rahmen lässt sich nicht vermeiden, aber er lässt sich kontrollieren und offenlegen.
+    </div>
+  </header>
+
+  <section id="kalender">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Die Trennung steht im Kalender, nicht nur im Text</h2></div>
+    <p class="sec-sub">Verpflichtende App-Nutzung und freiwillige Forschungsteilnahme sind zwei Vorgänge. Damit die Zusicherung mehr ist als eine Formulierung, bekommen sie verschiedene Termine, verschiedene Schreiben und verschiedene Rückgabewege.</p>
+
+    <div class="anchors">
+      <div class="anch">
+        <div class="aw">Erste Schulwoche</div>
+        <h4>Einführung der App</h4>
+        <p>Kurzes Treffen mit den Erziehungsberechtigten, Onboarding der Klassen, schriftliche Anleitung im Kollegium. Hier darf für die App geworben werden: sie ist Schulorganisation.</p>
+      </div>
+      <div class="anch">
+        <div class="aw">Vierte Schulwoche</div>
+        <h4>Anfrage zur Forschung</h4>
+        <p>Eigener Tagesordnungspunkt am Ende des Klassenforums, eigenes Schreiben, eigene Mappe. Hier wird nicht geworben, sondern informiert.</p>
+      </div>
+      <div class="anch gate">
+        <div class="aw">Ab sechster Woche</div>
+        <h4>Erste Erhebung</h4>
+        <p>Erst wenn der Rücklauf vollständig registriert ist. Der zeitliche Abstand zwischen Einführung und Erhebung ist zugleich der Abstand, den der Neuheitseffekt braucht, um beobachtbar zu werden.</p>
+      </div>
+    </div>
+
+    <div class="findings" style="margin-top:20px">
+      <div class="fh">Warum die Reihenfolge nicht umkehrbar ist</div>
+      <span class="finding">Werden beide Vorgänge zusammen kommuniziert, liest sich die Ablehnung der Forschung als Ablehnung der Klassenorganisation. Die Freiwilligkeit wäre dann formal zugesichert und praktisch aufgehoben.</span>
+      <span class="finding">Die Trennung ist nur tragfähig, weil die <b>Nutzungsdaten der App nicht ausgewertet werden</b>. Nur deshalb kann jemand die App verwenden, ohne an der Forschung teilzunehmen.</span>
+      <span class="finding">Auch die formale Ebene wird mitgesagt: Die Forschungsteilnahme ist <b>kein Beschlussgegenstand des Klassenforums</b>, sondern eine Entscheidung jeder einzelnen Familie.</span>
+    </div>
+  </section>
+
+  <section id="zeitplan">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Rückwärts vom Schulbeginn</h2></div>
+    <p class="sec-sub">Fixpunkt ist der erste Schultag. Zwei rechtliche Randbedingungen setzen die übrigen Termine: die Frist für die Einberufung des Klassenforums und die Genehmigung der empirischen Untersuchung.</p>
+
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div>
+          <div class="tw">Vor dem Schulbeginn · Strang B</div>
+          <h4>Freigabe und Einfrieren des Funktionsstands</h4>
+          <p>Zustimmung der Schulleitung, Einreichung der Datenschutz-Unterlagen, Anlegen der Zugänge. Danach wird der forschungsrelevante Funktionsstand versioniert, damit sich alle späteren Aussagen auf denselben Gegenstand beziehen.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div>
+          <div class="tw">Woche 1 bis 3 · Strang A</div>
+          <h4>Gestaffelte Einführung statt Vollstart</h4>
+          <p>Am ersten Tag nur der Zugang und eine einzige Funktion, danach je Woche ein Modul. Die Staffelung folgt derselben Überlegung wie die Einführung von Klassenroutinen: breit angelegte Einführungen wirken schwächer als fokussierte.</p>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg></div>
+        <div>
+          <div class="tw">Woche 4 · Strang C</div>
+          <h4>Klassenforum mit abgesetztem Forschungsteil</h4>
+          <p>Das Klassenforum ist innerhalb der ersten acht Wochen des Schuljahres einzuberufen, die Einladung ergeht spätestens zwei Wochen vorher (§ 63a SchUG). Der Forschungsteil steht als eigener Punkt auf der Einladung und am Ende der Sitzung.</p>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg></div>
+        <div>
+          <div class="tw">Woche 5 · Strang C</div>
+          <h4>Rücklauf und Zustimmung der Kinder</h4>
+          <p>Die Zustimmung der Minderjährigen wird in einer eigenen Einheit eingeholt, getrennt von jeder App-Einführung, mit einem eigenen Text statt einer gekürzten Erwachsenenfassung.</p>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg></div>
+        <div>
+          <div class="tw">Woche 6 bis 8</div>
+          <h4>Erhebung 1</h4>
+          <p>Leitfadeninterviews mit Lehrpersonen, je Klasse ein Gruppeninterview, offene Fragebögen für Erziehungsberechtigte mit nicht-digitalem Rückgabeweg. Erhebung 2 folgt gegen Schuljahresende.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="findings gap" style="margin-top:20px">
+      <div class="fh">Der kritische Pfad</div>
+      <span class="finding">Die Genehmigung der empirischen Untersuchung ist ein Gate für die Forschung, <b>nicht für den Start der App</b>. Diese Entkopplung hält den Zeitplan auch dann, wenn die Genehmigung sich verzögert.</span>
+      <span class="finding">Verzögert sie sich über den Herbst hinaus, wird die erste Erhebung nicht ersatzlos gestrichen, sondern als Halbjahreserhebung neu verortet. Dass der Neuheitseffekt dann nur eingeschränkt beobachtbar bleibt, wäre offen auszuweisen.</span>
+      <span class="finding">Weil die Erhebung an den Rhythmus des Schuljahres gebunden ist, verschiebt eine Verzögerung über den Schuljahresbeginn hinaus den Start um ein ganzes Jahr.</span>
+    </div>
+  </section>
+
+  <section id="rahmen">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Die Einführung als Methodenentscheidung</h2></div>
+    <p class="sec-sub">Hier liegt der Konflikt, der bei der Planung sichtbar geworden ist: Was organisatorisch nötig ist, kann forschungsmethodisch schaden.</p>
+
+    <p><b>Die organisatorische Seite:</b> Eine der beiden Klassen wechselt von einem bereits genutzten System auf die neue App. Die Familien haben Anspruch auf eine Begründung. Ohne sie wirkt der Wechsel als Willkür der Lehrperson.</p>
+
+    <p style="margin-top:12px"><b>Die methodische Seite:</b> Eine der vier Unterfragen erhebt genau diesen Vergleich – welche Vergleiche die Beteiligten zu bereits genutzten Systemen ziehen und woran sie Unterschiede in Akzeptanz und Aneignung festmachen. Wird bei der Einführung eine Vergleichsliste vorgegeben, kommt sie bei der Erhebung als Antwort zurück.</p>
+
+    <div class="split">
+      <div class="sp can">
+        <div class="sl">Was gesagt wird</div>
+        <ul>
+          <li>Was die App tut, in Funktionen beschrieben, und warum die Klasse sie bekommt.</li>
+          <li>Wie die Daten verarbeitet werden und wo das in der App nachlesbar ist.</li>
+          <li>Dass der Funktionsstand während der Erprobung unverändert bleibt und Rückmeldungen gesammelt, aber nicht umgesetzt werden.</li>
+          <li>Dass die App ein Organisationswerkzeug ist und keine Wirkung auf Leistung verspricht.</li>
+        </ul>
+      </div>
+      <div class="sp cannot">
+        <div class="sl">Was nicht gesagt wird</div>
+        <ul>
+          <li>Keine Rangfolge gegenüber dem bisherigen System und keine Aussagen über dessen Eigenschaften.</li>
+          <li>Keine Bewertungen, die im Interview als Kategorie zurückkommen könnten.</li>
+          <li>Kein Versprechen über Lernerfolg. Ein Review von 29 Studien findet für technologievermittelte Elternbeteiligung keine klare Evidenz auf Leistungen.</li>
+          <li>Keine Werbung für die Teilnahme an der Forschung, in keiner Form.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="thesis" style="margin-top:20px">
+      <strong>Die Lösung ist nicht Verzicht, sondern Protokoll.</strong> Der Wortlaut der Kernsätze jeder Einführung wird mit Datum und Adressatengruppe festgehalten. Damit ist im Methodenkapitel angebbar, welchen Deutungsrahmen die Befragten vor der Erhebung gehört haben, und unterscheidbar, was eigene Interpretation der Befragten ist. Ein Rahmen, der dokumentiert ist, ist ein anderer Sachverhalt als ein Rahmen, der unbemerkt wirkt.
+    </div>
+
+    <p style="margin-top:18px">Dieselbe Logik gilt gegenüber den Klassen. Spontane Vergleiche zum bisherigen System werden im Unterricht weder bestätigt noch bestritten und nicht personenbezogen notiert, sondern auf das Gruppeninterview verwiesen. Das erhält die Aussage für die Erhebung, statt sie im Alltag zu verbrauchen.</p>
+  </section>
+
+  <section id="freiwilligkeit">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Freiwilligkeit als Verfahren</h2></div>
+    <p class="sec-sub">Das Exposé benennt vier ethische Problemlagen. Die praktisch schwerste ist, dass Teilnahme und Nichtteilnahme unsichtbar bleiben müssen, obwohl die forschende Person beide Klassen unterrichtet. Hier steht das Verfahren, das aus dem Anspruch folgt.</p>
+
+    <div class="steps">
+      <div class="st"><span class="sn">01</span><p><b>Eine nicht beteiligte Stelle nimmt entgegen.</b> Eine Person, die in keiner der beiden Klassen unterrichtet und dort niemanden beurteilt, sammelt die Antworten, führt das Verzeichnis und nimmt Widerrufe entgegen. Sie erinnert nicht, fragt nicht nach und überredet nicht.</p></div>
+      <div class="st"><span class="sn">02</span><p><b>Alle geben zurück, auch die Ablehnung.</b> Jede Familie und jedes Kind erhält ein verschlossenes Kuvert und gibt es zurück, unabhängig von der Entscheidung. Damit trägt die Rückgabe selbst keine Information mehr.</p></div>
+      <div class="st"><span class="sn">03</span><p><b>Zahlen vor Namen.</b> Die forschende Person erfährt zuerst nur, wie viele zugestimmt haben. Die Namen folgen erst, wenn sie für die Einteilung der Gruppeninterviews organisatorisch unvermeidlich werden. Dieser Zwischenschritt ist dokumentiert.</p></div>
+      <div class="st"><span class="sn">04</span><p><b>Erinnert wird einmal und an alle.</b> Eine sachliche Sammelnachricht, keine Einzelansprache. Einzelansprache erzeugt Druck und macht sichtbar, wer noch nicht abgegeben hat.</p></div>
+      <div class="st"><span class="sn">05</span><p><b>Widerruf führt nicht über die forschende Person.</b> Formular und Rückgabeweg gehen an dieselbe nicht beteiligte Stelle, jederzeit und ohne Begründung.</p></div>
+    </div>
+
+    <div class="findings gap" style="margin-top:20px">
+      <div class="fh">Wo das Verfahren an seine Grenze kommt</div>
+      <span class="finding">Die Gruppeninterviews finden im Klassenverband statt. Wer nicht teilnimmt, ist für die Mitschüler*innen erkennbar. Gemildert wird das durch eine parallele, von einer zweiten Person betreute Arbeitsphase, aus der die Gruppen in mehreren Wellen geholt werden.</span>
+      <span class="finding">Vollständige Unsichtbarkeit ist im Kleinfeld nicht herstellbar. Dokumentiert wird deshalb, welche Maßnahmen getroffen wurden und wo ihre Grenze liegt – nicht die Behauptung, es sei gelungen.</span>
+      <span class="finding">Dasselbe gilt für die Anonymität in Klassen dieser Größe: identifizierende Merkmale werden bereits bei der Transkription ersetzt, Unerkennbarkeit wird nicht zugesichert.</span>
+    </div>
+  </section>
+
+  <section id="protokolle">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Vier Protokolle ab dem ersten Schultag</h2></div>
+    <p class="sec-sub">Weil die Nutzungsdaten der App nicht ausgewertet werden, entsteht das Material des Erprobungsjahres nicht im System, sondern in der Dokumentation. Sie beginnt am ersten Schultag, nicht am ersten Erhebungstag.</p>
+
+    <div class="prot">
+      <div class="pr">
+        <div class="pn2">01</div>
+        <h4>Einführungsprotokoll</h4>
+        <div class="rh">nach jeder Einführung</div>
+        <p>Datum, Adressatengruppe, Format, Dauer, die Kernsätze im Wortlaut. Belegt den Deutungsrahmen und trägt damit die Unterfrage zum Vergleichshorizont sowie die Offenlegung der eigenen Position.</p>
+      </div>
+      <div class="pr">
+        <div class="pn2">02</div>
+        <h4>Forschungstagebuch</h4>
+        <div class="rh">wöchentlich</div>
+        <p>Beobachtung und Deutung in getrennten Spalten. Es löst ein, was an die Stelle von Hypothesen tritt: die Offenlegung der theoretischen Vorannahmen, die Helfferich (2011) für jede Interviewform verlangt.</p>
+      </div>
+      <div class="pr">
+        <div class="pn2">03</div>
+        <h4>Versionsprotokoll und Wunschliste</h4>
+        <div class="rh">bei jeder Änderung</div>
+        <p>Fehlerbehebungen und datenschutzbedingte Änderungen bleiben zulässig und werden festgehalten. Änderungswünsche der Beteiligten werden nicht umgesetzt, sondern mit Datum und Wortlaut gesammelt und als Material ausgewertet.</p>
+      </div>
+      <div class="pr">
+        <div class="pn2">04</div>
+        <h4>Abdeckungsprotokoll</h4>
+        <div class="rh">monatlich je Klasse</div>
+        <p>Welche Module tatsächlich in Gebrauch sind und was weiter über andere Wege läuft. Ohne diese Aufzeichnung ist ein Unterschied zwischen den beiden Settings nicht von einem Unterschied im Alltagsgebrauch zu trennen.</p>
+      </div>
+    </div>
+
+    <div class="findings alt" style="margin-top:20px">
+      <div class="fh">Der dritte Kontrastfaktor</div>
+      <span class="finding">Die beiden Klassen unterscheiden sich nicht nur in Schulstufe und Klassenkultur, sondern auch im <b>Abdeckungsgrad</b>: In der einen ist die App die gesamte Klassenorganisation, in der anderen deckt sie die drei Hauptgegenstände ab.</span>
+      <span class="finding">Der Unterschied wird als <b>Kontextmerkmal ausgewiesen, nicht als Vergleichsbedingung behauptet</b>. Bei einer Klasse je Ausprägung sind die Faktoren konfundiert; die Kontrastierung dient der Erschließung von Bandbreite, nicht der Erklärung von Unterschieden.</span>
+      <span class="finding">Zugleich liegt darin ein Ertrag: Verbindlichkeit ist ein Kernbegriff der Arbeit, und hier stehen zwei Settings mit unterschiedlicher <b>institutioneller</b> Verbindlichkeit nebeneinander.</span>
+    </div>
+
+    <p style="margin-top:18px">Von der Forschungsdokumentation strikt getrennt bleiben die dienstlichen Aufzeichnungen der Klassenführung. Sie sind Amtsschriften mit eigenem Zweck und eigener Rechtsgrundlage und werden weder zitiert noch als Material herangezogen.</p>
+  </section>
+
+  <section id="offen">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Was noch zu entscheiden ist</h2></div>
+    <p class="sec-sub">Offen benannt statt stillschweigend mitlaufen gelassen.</p>
+
+    <div class="openlist">
+      <div class="ol">
+        <h4>Vorlauf der Genehmigung</h4>
+        <p>Wie lange die Genehmigung der empirischen Untersuchung braucht, ist die einzige Größe, die den gesamten Zeitplan bestimmt und nicht in eigener Hand liegt. Sie wird über die Betreuung geführt.</p>
+      </div>
+      <div class="ol">
+        <h4>Umfang der Erprobung im zweiten Setting</h4>
+        <p>Welche Module dort laufen und ob die Erziehungsberechtigten dort eigene Zugänge erhalten, bestimmt, wie tragfähig die Elternperspektive in diesem Setting ist. Vorgesehen sind lesende Zugänge, damit die Perspektive schmaler, aber vorhanden und beschreibbar bleibt.</p>
+      </div>
+      <div class="ol">
+        <h4>Zugang zu den Erziehungsberechtigten des zweiten Settings</h4>
+        <p>Dort besteht keine Klassenvorstandsrolle und damit kein eigener Zugang zum Klassenforum. Vorgesehen ist der rein schriftliche Weg mit zwei getrennten Schreiben, wodurch der Abstand zwischen Einführung und Forschungsanfrage in beiden Settings gleich bleibt.</p>
+      </div>
+      <div class="ol">
+        <h4>Restsichtbarkeit der Nichtteilnahme</h4>
+        <p>Für die Gruppeninterviews bleibt eine Restsichtbarkeit bestehen (siehe Abschnitt 04). Die getroffenen Maßnahmen und ihre Grenze gehören in die Methodenkritik, nicht in eine Zusicherung.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:18px">Aus dem Plan folgen neun Dokumente, die vor dem Schuljahresbeginn beziehungsweise vor dem Klassenforum vorliegen müssen: die schriftliche Anleitung für das Kollegium, die Elterninformation zur App, die Informations- und Einwilligungsunterlagen für Erziehungsberechtigte, Kinder und Lehrpersonen, das Widerrufsformular sowie die Vorlagen der vier Protokolle. Die Muster für die Einwilligung sind im Exposé im Anhang zugesagt.</p>
+  </section>
+
+  <div class="foot">
+    <span>Feldeinführung &amp; Erhebungsstart · Stand 20.08.2026</span>
+    <span>Master-Thesis KlassenHub · PH Niederösterreich</span>
+  </div>
+</div>
+
+</body>
+</html>
