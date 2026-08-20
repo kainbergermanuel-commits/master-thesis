@@ -18,7 +18,8 @@ liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
 
 | | |
 |---|---|
-| **Seiten** | 24 (Startseite + 23 Dokumente unter `docs/`) |
+| **Seiten** | 26 (Startseite + 25 Dokumente unter `docs/`) |
+| **Mappe** | 58 Entwurfsdokumente als Markdown unter `mappe/` |
 | **Literaturbestand** | 50 aktive Quellen, einzeln bewertet, in zehn Kategorien; 3 begründet ausgesondert |
 | **Erklärte Lücken** | 3 von 4 geschlossen; offen bleibt allein der österreichische Kontext (Ordner 07), bewusst bis zur Klärung mit der Betreuung |
 | **Forschungsfrage** | dreimal präzisiert (25.07., 31.07., 03.08.2026), zuletzt um den Leadership-Bezug erweitert |
@@ -70,6 +71,7 @@ Der Stand-Block auf der Startseite veraltet erfahrungsgemäß zuerst.
 index.html          Übersichtsseite (Timeline, Dokumenten-Übersicht)
 assets/theme.css     geteiltes Design-System (Tokens, Basis-Komponenten)
 docs/*.html          einzelne Dokumente (Konzepte, Entwürfe, Notizen)
+mappe/**/*.md        Praxisunterlagen zum Schulstart (Markdown, nicht gerendert)
 ```
 
 Jede Datei unter `docs/` ist ein eigenständiges, selbst-enthaltenes HTML-

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ausgabe-Timeline Schulstart &mdash; Master-Thesis KlassenHub</title>
+<meta name="description" content="Wann welches Dokument fertig sein muss, an wen es geht und in welcher Form: Phasenplan vom 20. August bis zur ersten Erhebung, Druckliste, Materialliste, Packlisten und die Gestaltungsregel, die App und Forschung optisch trennt.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<style>
+  .rule2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  @media (max-width: 820px) { .rule2 { grid-template-columns: 1fr; } }
+  .rc { padding: 17px 19px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .rc .rl { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+  .rc.a { border-left: 3px solid var(--teal); } .rc.a .rl { color: var(--teal); }
+  .rc.c { border-left: 3px solid var(--muted); } .rc.c .rl { color: var(--muted); }
+  .rc h3 { font-family: var(--display); font-size: 15px; margin-top: 5px; }
+  .rc ul { margin: 10px 0 0; padding-left: 17px; }
+  .rc li { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 6px; }
+  .rc li:last-child { margin-bottom: 0; }
+
+  .ph { margin-top: 20px; padding: 18px 20px 16px; border-radius: 14px;
+    background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .ph-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .ph-when { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal);
+    letter-spacing: .04em; white-space: nowrap; }
+  .ph-head h3 { font-family: var(--display); font-size: 17px; }
+  .ph-goal { font-size: 13px; color: var(--ink-soft); margin-top: 6px; }
+  .ph.gate { border-color: color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .ph.gate .ph-when { color: var(--amber); }
+
+  .note2 { margin-top: 14px; padding: 12px 15px; border-radius: 10px; font-size: 12.5px;
+    line-height: 1.58; color: var(--ink-soft); background: color-mix(in srgb, var(--teal) 6%, var(--card-2));
+    border-left: 3px solid var(--teal-2); }
+  .note2.warn { background: color-mix(in srgb, var(--amber) 8%, var(--card-2)); border-left-color: var(--amber); }
+  .note2 b { color: var(--ink); }
+  .note2 .nl { display: block; font-family: var(--mono); font-size: 10.5px; font-weight: 700;
+    letter-spacing: .05em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .note2.warn .nl { color: var(--amber); }
+
+  .fix { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 18px; }
+  @media (max-width: 900px) { .fix { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .fix { grid-template-columns: 1fr; } }
+  .fx { padding: 13px 14px; border-radius: 11px; background: var(--card-2); border: 1px solid var(--line); }
+  .fx .d { font-family: var(--display); font-size: 16px; font-weight: 800; color: var(--teal); }
+  .fx .t { font-size: 12px; line-height: 1.45; color: var(--ink-soft); margin-top: 5px; }
+
+  .pack { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 820px) { .pack { grid-template-columns: 1fr; } }
+  .pk { padding: 16px 18px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .pk h4 { font-family: var(--display); font-size: 14.5px; }
+  .pk ul { list-style: none; margin: 10px 0 0; padding: 0; }
+  .pk li { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); padding-left: 20px;
+    position: relative; margin-bottom: 7px; }
+  .pk li::before { content: ""; position: absolute; left: 0; top: 3px; width: 11px; height: 11px;
+    border: 1.5px solid var(--line); border-radius: 3px; }
+  .pk li b { color: var(--ink); }
+
+  .tips { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .tp { display: grid; grid-template-columns: 28px 1fr; gap: 13px; padding: 13px 16px;
+    border-radius: 11px; background: var(--card-2); }
+  .tp .n { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--violet); }
+  .tp h4 { font-family: var(--display); font-size: 14px; }
+  .tp p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 4px; }
+
+  table.tl2 { min-width: 640px; }
+  table.tl2 td.w { font-family: var(--mono); font-size: 11.5px; font-weight: 700; white-space: nowrap; color: var(--teal); }
+  table.tl2 td.f { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  table.tl2 td b { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M8 3v4M16 3v4M4 9h16M5 5h14v16H5z"/></svg></span>
+      Ausgabe-Timeline Schulstart
+    </div>
+    <div class="legend"><span class="chip mid">Umsetzung</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Umsetzung · Schuljahr 2026/27</div>
+    <h1>Wann welches Blatt<br>die Hand wechselt.</h1>
+    <p class="lede">Aus dem Einführungsplan folgen 58 Dokumente. Diese Seite sagt, wann jedes davon fertig sein muss, an wen es geht, auf welchem Weg und in welcher Form. Dazu Druckmengen, Materialbedarf und die Gestaltungsentscheidungen, die aus der Ethik-Architektur folgen und nicht aus dem Geschmack.</p>
+    <div class="thesis">
+      <strong>Zwei Termine je Dokument, und sie fallen nie zusammen.</strong> <em>Fertig bis</em> ist der Tag, an dem der Text steht. <em>Übergabe</em> ist der Tag, an dem das Blatt die Hand wechselt. Dazwischen liegt bewusst Luft, weil Drucken, Kuvertieren und Laminieren länger dauern als geplant und weil ein Formular, das am Vorabend entsteht, nicht mehr gegengelesen wird.
+    </div>
+    <div class="fix">
+      <div class="fx"><div class="d">23.08.</div><div class="t">Zusage der Stelle, die den Rücklauf entgegennimmt</div></div>
+      <div class="fx"><div class="d">30.08.</div><div class="t">Funktionsstand eingefroren und versioniert</div></div>
+      <div class="fx"><div class="d">17.09.</div><div class="t">Einladung Klassenforum, Zweiwochenfrist</div></div>
+      <div class="fx"><div class="d">24.09.</div><div class="t">Forschungsmappen gepackt</div></div>
+      <div class="fx"><div class="d">09.10.</div><div class="t">Rückgabefrist, danach beginnt die Erhebung</div></div>
+    </div>
+  </header>
+
+  <section id="gestaltung">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Die Gestaltungsregel, die aus der Ethik folgt</h2></div>
+    <p class="sec-sub">Die ganze Konstruktion beruht darauf, dass verpflichtende App-Nutzung und freiwillige Forschungsteilnahme zwei verschiedene Vorgänge sind. Tragen beide Papierstapel dasselbe Layout, dieselbe Farbe und dasselbe Zeichen, liest die Empfängerin sie als eine Sache, unabhängig davon, was im Text steht.</p>
+
+    <div class="rule2">
+      <div class="rc a">
+        <div class="rl">STRANG A · APP</div>
+        <h3>Farbig, mit Zeichen, einladend</h3>
+        <ul>
+          <li>Akzentfarbe der Anwendung, sparsam eingesetzt</li>
+          <li>Anwendungszeichen in der Kopfzeile</li>
+          <li>Icons erlaubt, größere Überschriften</li>
+          <li>QR-Code auf jedem Dokument, das zur Anmeldung führt</li>
+        </ul>
+      </div>
+      <div class="rc c">
+        <div class="rl">STRANG C · FORSCHUNG</div>
+        <h3>Schwarzweiß, ohne Zeichen, ruhig</h3>
+        <ul>
+          <li>keine Farbe, kein Anwendungszeichen, keine Icons</li>
+          <li>Kopfzeile als Text, mit Bezug zur Hochschule</li>
+          <li>viel Weißraum, nüchterne Typografie</li>
+          <li>einzige Ausnahme: die Fassungen für Kinder, größere Schrift und eine Illustration</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note2">
+      <span class="nl">Warum das keine Geschmacksfrage ist</span>
+      Für die App darf geworben werden, für die Forschung nicht. Ein gestaltetes Einwilligungsformular mit Anwendungszeichen und Farbverlauf ist <b>visuelle Werbung</b> und untergräbt genau die Freiwilligkeit, die der Text zusichert. Nüchtern ist hier die korrekte Gestaltung, nicht die lieblose.
+    </div>
+
+    <p style="margin-top:16px">Die Unterlagen der Klassenführung bekommen ein drittes, eigenes Erscheinungsbild im Stil der bestehenden Klassenposter. Damit hat jedes der drei Themen eine optische Heimat, und niemand verwechselt einen Ausflugszettel mit einer Einwilligung.</p>
+
+    <div class="note2 warn">
+      <span class="nl">Der wichtigste Einzelhinweis der ganzen Seite</span>
+      In jedem Einwilligungsformular stehen <b>Ja und Nein in derselben Zeile, in derselben Schriftgröße, in derselben Stärke, mit gleich großen Kästchen.</b> Kein fettes Ja, kein kleines Nein, keine Ablehnung, die man auf der Rückseite sucht. Wer ablehnen will, muss den Weg dazu schneller finden als den Weg zur Zustimmung. Das ist keine Formalie, das ist Freiwilligkeit in Layoutform.
+    </div>
+  </section>
+
+  <section id="vorbereitung">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Vor dem Schulbeginn</h2></div>
+    <p class="sec-sub">Drei Wochen, in denen nichts übergeben wird und fast alles entsteht.</p>
+
+    <div class="ph gate">
+      <div class="ph-head"><span class="ph-when">20.–23.08.</span><h3>Freigaben und die eine blockierende Zusage</h3></div>
+      <p class="ph-goal">Freigabe der Schulleitung, Übergabe der Datenschutz-Unterlagen, Fixierung des Klassenforumstermins. Und die Anfrage an die Stelle, die den Rücklauf der Einwilligungen entgegennehmen soll.</p>
+      <div class="note2 warn">
+        <span class="nl">Blockiert zwölf Dokumente</span>
+        Solange diese Zusage fehlt, steht der gesamte freiwillige Strang still, und zwar unbemerkt: Man merkt es erst beim Kuvertieren Ende September, wenn die Rückgabeadresse fehlt. Die Anfrage gehört nicht in eine Mail. Sie hat eine ungewöhnliche Form, weil die Person ausdrücklich <b>nichts</b> tun soll: nicht erinnern, nicht nachfragen, nichts weitergeben. Ohne zwei Minuten Erklärung wirkt das wie Misstrauen.
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="ph-head"><span class="ph-when">24.–30.08.</span><h3>Technik, dann einfrieren</h3></div>
+      <p class="ph-goal">Nach Abschluss der technischen Vorbereitung wird der forschungsrelevante Funktionsstand versioniert. Der Protokolleintrag entsteht <b>am Tag des Einfrierens</b>, nicht später aus der Erinnerung: Ein nachträglich rekonstruierter Eintrag ist genau das nicht, was das Exposé zusagt.</p>
+      <div class="note2">
+        <span class="nl">Gestaltung Zugangszettel</span>
+        Ein Zettel je Person, nicht eine Liste je Familie. Etwa ein Drittel A4, damit er ungefaltet ins Kuvert passt. Zugangsdaten in <b>Monospace</b>, groß genug zum Abtippen, mit klarer Unterscheidung von Null und O sowie Eins und kleinem L. Ein QR-Code spart die halbe Fehlerquote beim ersten Anmelden.
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="ph-head"><span class="ph-when">31.08.–04.09.</span><h3>Die Druckwoche</h3></div>
+      <p class="ph-goal">Hier entsteht der größte Teil des Papiers: Anleitung für das Kollegium, zwei Elternbriefe, Anmelde-Merkblatt, Onboarding-Skripte, Notfallkarte, Kontaktblatt und alle Protokollvorlagen.</p>
+      <div class="tablewrap" style="margin-top:14px">
+        <table class="tl2">
+          <thead><tr><th>fertig bis</th><th>Dokument</th><th>an wen</th><th>Form</th></tr></thead>
+          <tbody>
+            <tr><td class="w">Mo 31.08.</td><td><b>Anleitung Kollegium</b></td><td>6 Lehrpersonen</td><td class="f">A4 beidseitig, Farbe, QR-Code</td></tr>
+            <tr><td class="w">Mo 31.08.</td><td>Sprechzettel Konferenzpunkt</td><td>nur ich</td><td class="f">A4, in der Hand</td></tr>
+            <tr><td class="w">Mi 02.09.</td><td><b>Elternbrief zur App</b></td><td>Eltern 5. Stufe</td><td class="f">A4 einseitig</td></tr>
+            <tr><td class="w">Mi 02.09.</td><td>Merkblatt Anmeldung</td><td>alle Familien</td><td class="f">A4, drei Screenshots</td></tr>
+            <tr><td class="w">Mi 02.09.</td><td>Schreiben an die 8. Stufe</td><td>Eltern 8. Stufe</td><td class="f">A4, über den dortigen KV</td></tr>
+            <tr><td class="w">Do 03.09.</td><td><b>Elternbrief Klassenvorstand</b></td><td>Eltern 5. Stufe</td><td class="f">A4, <b>eigenes Layout</b></td></tr>
+            <tr><td class="w">Do 03.09.</td><td>Notfallkarte</td><td>Klassenzimmer</td><td class="f">A5 laminiert, Farbe</td></tr>
+            <tr><td class="w">Do 03.09.</td><td>Ablaufplan erste drei Tage</td><td>nur ich</td><td class="f">A4, ausgedruckt</td></tr>
+            <tr><td class="w">Fr 04.09.</td><td>vier Protokollvorlagen</td><td>nur ich</td><td class="f">digital, Kopfzeilen fertig</td></tr>
+            <tr><td class="w">Fr 04.09.</td><td>Routinenkarten 1 bis 7</td><td>Klassenzimmer</td><td class="f">A4 laminiert, Farbe</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note2 warn">
+        <span class="nl">Zwei Briefe, nicht geheftet</span>
+        Der Brief zur App und der Brief des Klassenvorstands gehen am selben Abend mit, aber als zwei getrennte Blätter. Zwei Themen, zwei Blätter. Wer sie zusammenheftet, bekommt Rückfragen zum einen, wenn das andere gemeint war.
+      </div>
+    </div>
+  </section>
+
+  <section id="schulstart">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Vom Schulstart bis zum Klassenforum</h2></div>
+    <p class="sec-sub">Fünf Wochen, in denen die App eingeführt wird und die Forschungsanfrage vorbereitet, aber noch nicht gestellt.</p>
+
+    <div class="ph">
+      <div class="ph-head"><span class="ph-when">Woche 1</span><h3>Onboarding und Kurztreffen</h3></div>
+      <p class="ph-goal">Kinder-Onboarding mit genau einer Aufgabe, Kurztreffen mit den Erziehungsberechtigten, Zugangskuverts persönlich in die Hand, Start in der zweiten Klasse. Am selben Abend zwei Einträge ins Einführungsprotokoll.</p>
+      <div class="note2 warn">
+        <span class="nl">Die Kuvert-Falle</span>
+        Die Zugangskuverts im September werden <b>mit Namen beschriftet</b>, weil es um Zuordnung geht. Die Forschungskuverts im Oktober bleiben <b>leer und identisch</b>, weil es um Anonymität geht. Das ist genau umgekehrt und wird beim Packen verwechselt.
+      </div>
+      <div class="note2">
+        <span class="nl">Praktisch</span>
+        Kuverts in derselben Reihenfolge stapeln wie die Übergabeliste. Wer beim Austeilen suchen muss, verliert vier von zehn Minuten. Die Liste bleibt auf Papier: Beim Austeilen ist keine Hand für ein Gerät frei.
+      </div>
+    </div>
+
+    <div class="ph gate">
+      <div class="ph-head"><span class="ph-when">Woche 2</span><h3>Einladung zum Klassenforum</h3></div>
+      <p class="ph-goal">Der einzige harte Rechtsstichtag im ganzen Plan: Die Einberufung ergeht spätestens zwei Wochen vor der Sitzung (§ 63a SchUG). Versäumt man die Frist, verschiebt sich das Klassenforum und mit ihm der gesamte freiwillige Strang.</p>
+      <div class="note2 warn">
+        <span class="nl">Kalendereintrag</span>
+        Die Erinnerung gehört auf den <b>Montag</b> der Woche, nicht auf den Stichtag selbst. Versandform: digital <b>und</b> auf Papier. Digital, weil es der Weg der Klasse ist; auf Papier, weil die Frist im Streitfall nachweisbar sein muss und in Woche 2 noch nicht alle angemeldet sind.
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="ph-head"><span class="ph-when">Woche 3</span><h3>Schreiben, kuvertieren, Box aufstellen</h3></div>
+      <p class="ph-goal">Die inhaltlich schwersten Dokumente entstehen: Forschungsinformation, Einwilligung, Widerruf, die beiden Kinderfassungen und das Skript für den Forschungsteil. Das Skript entsteht <b>nach</b> der Information, nicht davor, weil es sie mündlich wiedergibt und nicht umgekehrt.</p>
+      <div class="note2 warn">
+        <span class="nl">32 Mappen, zwei Stapel, zwei Kartons</span>
+        Jede Mappe enthält sechs identische Teile, mit einer einzigen Ausnahme: Blatt 3 ist die altersgerechte Fassung für das Kind. Genau dieser eine Unterschied wird verwechselt, wenn beide Stapel nebeneinander auf demselben Tisch liegen.
+      </div>
+      <div class="note2">
+        <span class="nl">Papierfarbe ja, Kuvertfarbe nein</span>
+        Getöntes Papier als Sortierhilfe innerhalb der Mappe ist hilfreich. <b>Das Kuvert bleibt weiß, unbeschriftet und aus derselben Packung wie alle anderen.</b> Ein farbiges oder abweichendes Kuvert macht beim Einwurf sichtbar, welche Gruppe abgibt, und entwertet den gesamten Mechanismus.
+      </div>
+    </div>
+
+    <div class="ph gate">
+      <div class="ph-head"><span class="ph-when">Woche 4</span><h3>Klassenforum</h3></div>
+      <p class="ph-goal">Zwischenstand zur App als eigener Tagesordnungspunkt, danach abgesetzt der Forschungsteil, dann die Mappen beim Hinausgehen. Am selben Abend der Protokolleintrag, und darin zuerst die Abweichungen vom Skript.</p>
+      <div class="note2">
+        <span class="nl">Zum Vorlesen, nicht zum freien Sprechen</span>
+        Das Skript wird tatsächlich abgelesen. Das wirkt zunächst unnatürlich und ist genau richtig: Der Wortlaut ist Teil der Methode. <b>Die Abweichungen sind der wertvollste Teil des Protokolleintrags</b>, nicht die Übereinstimmung. Deshalb 14 pt, nicht 10.
+      </div>
+      <div class="note2">
+        <span class="nl">Zwischenstand in Zahlen</span>
+        „13 von 15 Familien angemeldet, Hausübungen laufen in fünf Fächern" trägt weiter als drei Folien voller Adjektive. Und was hakt, gehört mit gesagt: Ein Bericht, der nur Erfolge meldet, erzeugt Misstrauen.
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="ph-head"><span class="ph-when">Woche 5</span><h3>Zustimmung der Kinder, Rücklauf, Frist</h3></div>
+      <p class="ph-goal">Die Zustimmung der Minderjährigen wird in einer eigenen Einheit eingeholt, ausdrücklich nicht in derselben Stunde wie eine App-Einführung. Der Abstand <em>ist</em> die Trennung. Zwei Tage vor der Frist eine einzige Erinnerung, an alle, ohne Zahlen, ohne Einzelansprache.</p>
+      <div class="note2 warn">
+        <span class="nl">Was ich zu diesem Zeitpunkt bewusst nicht weiß</span>
+        Wer noch nicht abgegeben hat. Diese Auskunft wird nicht erfragt, auch nicht beiläufig. Nach der Frist erhalte ich zuerst nur die <b>Zahlen</b>, die Namen erst danach und nur für die Einteilung der Gruppengespräche.
+      </div>
+    </div>
+  </section>
+
+  <section id="druck">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Druck und Material</h2></div>
+    <p class="sec-sub">Mengen für zwei Klassen mit 15 und 17 Familien und sechs Lehrpersonen, jeweils mit Reserve. Rund 550 Blatt A4, 13 Laminierungen, 60 identische Kuverts.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Gruppe</th><th>Umfang</th><th>Besonderheit</th></tr></thead>
+        <tbody>
+          <tr><td><b>Strang A</b>, Farbe erlaubt</td><td>rund 190 Blatt, davon 70 Zugangszettel</td><td>Screenshots mit mindestens 600 dpi, sonst ist das Menü unlesbar</td></tr>
+          <tr><td><b>Strang C</b>, ausschließlich Schwarzweiß</td><td>rund 230 Blatt</td><td>Einwilligungen <b>einseitig</b>: Sie werden unterschrieben und abgelegt</td></tr>
+          <tr><td><b>Klassenführung</b>, eigenes Erscheinungsbild</td><td>rund 130 Blatt, 13 Laminierungen</td><td>Regelposter A3, Routinenkarten A4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note2 warn">
+      <span class="nl">Nicht alles in Farbe drucken</span>
+      Wer aus Bequemlichkeit den ganzen Stapel farbig druckt, hebt die optische Trennung zwischen App und Forschung wieder auf, für die dieser ganze Abschnitt existiert.
+    </div>
+
+    <div class="tablewrap" style="margin-top:18px">
+      <table>
+        <thead><tr><th>Material</th><th>Menge</th><th>Wofür</th></tr></thead>
+        <tbody>
+          <tr><td>Kuverts C6, weiß, unbedruckt, <b>alle aus derselben Packung</b></td><td>60</td><td>Mappen, Lehrpersonen, Ersatz</td></tr>
+          <tr><td>Versandtaschen C5</td><td>40</td><td>Zugangsdaten beider Klassen</td></tr>
+          <tr><td>Box mit Schlitz</td><td>1</td><td>Rücklauf bei der unbeteiligten Stelle</td></tr>
+          <tr><td><b>Zwei</b> getrennte versperrbare Ablagen</td><td>2</td><td>Einwilligungen einerseits, Amtsschriften andererseits</td></tr>
+          <tr><td>Laminierfolien A4 / A3</td><td>25 / 10</td><td>Routinenkarten, Notfallkarte, Poster</td></tr>
+          <tr><td>Etikettenbogen</td><td>3</td><td>Box, Mappen, Zugangszettel</td></tr>
+          <tr><td>Aktenvernichter mindestens P-4</td><td>Zugang klären</td><td>Vernichtungen laut Protokoll</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note2 warn">
+      <span class="nl">Zwei Ablagen, nicht eine mit zwei Fächern</span>
+      Die Einwilligungen sind Forschungsmaterial bei der unbeteiligten Stelle, die Aufzeichnungen der Klassenführung sind Amtsschrift. Liegen sie im selben Schrank, ist die Trennung praktisch aufgehoben, unabhängig davon, was auf den Ordnern steht.
+    </div>
+  </section>
+
+  <section id="packen">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Die zwei Termine, an denen nichts fehlen darf</h2></div>
+    <p class="sec-sub">Beide sind einmalig und nicht wiederholbar: Beim Kurztreffen entscheidet sich die Anmeldequote, beim Klassenforum die Rücklaufquote.</p>
+
+    <div class="pack">
+      <div class="pk">
+        <h4>Kurztreffen mit den Eltern, Woche 1</h4>
+        <ul>
+          <li><b>Zugangskuverts</b>, nach Familien sortiert, in der Reihenfolge der Übergabeliste</li>
+          <li>Übergabeliste auf Papier, Kugelschreiber</li>
+          <li>Elternbrief zur App</li>
+          <li>Elternbrief des Klassenvorstands, <b>getrennter Stapel</b></li>
+          <li>Kontaktblätter</li>
+          <li>Sprechzettel</li>
+          <li>eigenes Gerät mit installierter Anwendung zum Vorzeigen</li>
+          <li>fünf Ersatz-Zugangszettel</li>
+          <li>Liste der nicht anwesenden Familien</li>
+        </ul>
+        <div class="note2 warn" style="margin-top:14px">
+          <span class="nl">Nicht mitnehmen</span>
+          Kein Formular und keine Mappe aus dem freiwilligen Strang. Wer nach der Masterarbeit fragt, bekommt einen Satz und den Verweis auf das Klassenforum.
+        </div>
+      </div>
+      <div class="pk">
+        <h4>Klassenforum, Woche 4</h4>
+        <ul>
+          <li>15 Mappen, gepackt, <b>Blatt 3 auf die richtige Altersfassung geprüft</b></li>
+          <li>Skript in 14 pt, einmal laut vorgelesen</li>
+          <li>zweites Skriptexemplar für die Schulleitung</li>
+          <li>Zahlen für den Zwischenstand</li>
+          <li>Protokollvorlage, Anwesenheitsliste, Stimmzettel für die Wahl</li>
+          <li>fünf Ersatzkuverts</li>
+          <li>Adresse der Rückgabebox, exakt benennbar</li>
+          <li>Tagesordnung mit dem Forschungsteil als <b>eigenem Punkt</b></li>
+        </ul>
+        <div class="note2 warn" style="margin-top:14px">
+          <span class="nl">Vorher geklärt</span>
+          Liegt die Genehmigung vor? Wenn nein, entfällt der Forschungsteil ersatzlos und die Mappen bleiben im Auto. Sagt die Schulleitung die zwei Sätze zur Folgenlosigkeit? Steht die Box, und weiß die unbeteiligte Stelle, dass ab morgen Kuverts kommen?
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tipps">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Fünf Entscheidungen, die sich lohnen</h2></div>
+
+    <div class="tips">
+      <div class="tp"><span class="n">1</span><div>
+        <h4>Drei Erscheinungsbilder statt eines</h4>
+        <p>App farbig mit Zeichen, Forschung schwarzweiß ohne Zeichen, Klassenführung im Stil der Klassenposter. Der Aufwand ist einmalig, der Nutzen hält das ganze Jahr und trägt die Trennung mit, auf der die Freiwilligkeit beruht.</p>
+      </div></div>
+      <div class="tp"><span class="n">2</span><div>
+        <h4>Ja und Nein gleich gewichtet</h4>
+        <p>In jedem Einwilligungsformular, jedes Mal. Wenn das Layout eine Antwort nahelegt, ist die Unterschrift wertlos, unabhängig davon, was der Text zusichert.</p>
+      </div></div>
+      <div class="tp"><span class="n">3</span><div>
+        <h4>Ein QR-Code auf jedem Dokument, das zur Anmeldung führt</h4>
+        <p>Die Adresse abzutippen ist die häufigste Fehlerquelle beim ersten Anmelden, und jede gescheiterte Anmeldung kostet eine Nachricht und etwas Vertrauen.</p>
+      </div></div>
+      <div class="tp"><span class="n">4</span><div>
+        <h4>Große Schrift dort, wo vorgelesen wird</h4>
+        <p>Skript in 14 pt, Kinderfassung der jüngeren Klasse in 13 pt. Ein Skript in 10 pt liest man schlechter vor, und Vorlesen ist hier nicht Verlegenheit, sondern Methode.</p>
+      </div></div>
+      <div class="tp"><span class="n">5</span><div>
+        <h4>Ein Referenzexemplar je Dokument aufheben</h4>
+        <p>Mit Datum und Version, in einem eigenen Ordner. Im Februar ist sonst nicht mehr rekonstruierbar, welche Fassung tatsächlich ausgegeben wurde. Für das Methodenkapitel ist genau das die Frage, die gestellt wird.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Ausgabe-Timeline Schulstart · Stand 20.08.2026 · <a href="2026-08-schulstart-mappe.html">zur Dokumentenmappe</a></span>
+    <span>Master-Thesis KlassenHub · PH Niederösterreich</span>
+  </div>
+</div>
+
+</body>
+</html>
