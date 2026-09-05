@@ -14,7 +14,7 @@ haben und danach gezielt zu schärfen.
 Dort stehen auch Druckliste, Materialliste, Packlisten und die Gestaltungshinweise.
 
 **Woher der Inhalt kommt:** `klassenhub thesis/Feldvorbereitung/02_Einfuehrungsplan.md` (Ablauf und
-Verfahren), `03_Vorlagen/00_Bauauftrag.md` (Anforderungen je Dokument), `KV 2026/01_planung/`
+Verfahren), `03_Vorlagen/00_Bauauftrag.md` (Anforderungen je Dokument), `Schule/01_planung/`
 (Klassenführung), Exposé-Abgabefassung und die veröffentlichte Ethikseite.
 
 ---

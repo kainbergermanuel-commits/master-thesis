@@ -168,7 +168,7 @@ Fächer legen, nicht erst in der Konferenz austeilen; wer es in der Hand hat, h�
 | `11/01` bis `11/05` Protokollvorlagen | für mich | digital, Kopfzeilen fertig |
 | `10/01_kv-notizbuch.md` | für mich | ausgedruckt, in einen **eigenen versperrten Ordner** |
 | `10/02_konsequenzstufen-karte.md` | ab W2 | A5-Karten, 20 Stück auf Vorrat |
-| Routinenkarten 1 bis 7 | Klasse | **laminiert**, aus `KV 2026/02_material/grafiken/` |
+| Routinenkarten 1 bis 7 | Klasse | **laminiert**, aus `Schule/02_material/` |
 
 > ⚠️ **Vor dem Druck der Routinenkarten: fünf Grafiken haben Textfehler.** Doppelte Nummerierung
 > in `routine-arbeitsphase-starten`, `routine-zuhoeren`, `routine-fokus-signal` und
