@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Erhebung 1 · Dokumentation · Master-Thesis KlassenHub</title>
+<meta name="description" content="Laufende Dokumentation der ersten Erhebungswelle: Stand, Fahrplan, Aufbau der drei Instrumente, getroffene Entscheidungen, Qualitätssicherung und Änderungsprotokoll.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<script src="../assets/nav.js" defer></script>
+<style>
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+  @media (max-width: 820px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { padding: 14px 16px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .kpi .kv { font-family: var(--display); font-size: 24px; font-weight: 700; color: var(--teal); }
+  .kpi .kl { font-size: 12px; line-height: 1.45; color: var(--ink-soft); margin-top: 4px; }
+
+  .instr { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 18px; }
+  @media (max-width: 900px) { .instr { grid-template-columns: 1fr; } }
+  .in { padding: 16px 18px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+  .in .iw { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: .04em; }
+  .in h4 { font-family: var(--display); font-size: 15px; margin-top: 4px; }
+  .in .ih { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+  .in ul { padding-left: 17px; margin: 10px 0 0; }
+  .in li { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 6px; }
+
+  table.map { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 13px; }
+  table.map th { text-align: left; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); padding: 8px 10px; border-bottom: 2px solid color-mix(in srgb, var(--teal) 55%, var(--line)); }
+  table.map td { padding: 9px 10px; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; line-height: 1.5; }
+  table.map td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  .tablewrap { overflow-x: auto; }
+
+  .dec { display: flex; flex-direction: column; gap: 9px; margin-top: 18px; }
+  .de { display: grid; grid-template-columns: 34px 1fr; gap: 13px; align-items: baseline; padding: 12px 16px; border-radius: 10px; background: var(--card-2); border-left: 3px solid var(--teal); }
+  .de .dn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--teal); }
+  .de h4 { font-family: var(--display); font-size: 14px; }
+  .de p { font-size: 12.8px; line-height: 1.56; color: var(--ink-soft); margin-top: 4px; }
+
+  .log { margin-top: 18px; display: flex; flex-direction: column; gap: 0; }
+  .lg { display: grid; grid-template-columns: 96px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .lg .ld { font-family: var(--mono); font-size: 11.5px; font-weight: 700; color: var(--teal); }
+  .lg p { font-size: 13px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  .lg p b { color: var(--ink); }
+
+  .openlist { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .ol { padding: 13px 16px; border-radius: 11px; background: var(--card-2); border: 1px dashed color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .ol h4 { font-family: var(--display); font-size: 13.5px; }
+  .ol p { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+      Erhebung 1 · Dokumentation
+    </div>
+    <div class="legend">
+      <span class="chip mid">laufend</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Empirie · Erste Erhebungswelle · November 2026</div>
+    <h1>Erhebung 1:<br>vorbereitet, geprüft, nachvollziehbar.</h1>
+    <p class="lede">Diese Seite dokumentiert die erste Erhebungswelle laufend: was steht, was entschieden wurde und warum, wie die drei Instrumente aufgebaut sind und wie sie sich verändert haben. Sie wird bei jedem Schritt fortgeschrieben; das Änderungsprotokoll am Ende ist zugleich der Nachweis des Vorgehens.</p>
+    <div class="thesis">
+      <strong>Drei Perspektiven, drei Zugänge, dieselben Kategorien.</strong> Lehrpersonen, Schüler*innen und Eltern werden mit drei verschiedenen Instrumenten befragt, die aber nach demselben Plan gebaut sind: dieselben Hauptkategorien, dieselben Pflichtfragen an derselben Stelle. Nur so lassen sich die Perspektiven später nebeneinanderlegen.
+    </div>
+  </header>
+
+  <section id="stand">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Stand und Fahrplan</h2></div>
+    <p class="sec-sub">Stand 02.11.2026. Die Instrumente liegen als geprüfte Entwürfe vor; vor der Durchführung stehen noch Pretest, Probeinterview, die Abstimmung mit der Betreuung und vier organisatorische Bausteine.</p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="kv">3</div><div class="kl">Instrumente: Leitfadeninterview, Gruppeninterview, offener Fragebogen</div></div>
+      <div class="kpi"><div class="kv">4</div><div class="kl">Lehrpersonen-Interviews</div></div>
+      <div class="kpi"><div class="kv">2 × 5</div><div class="kl">Kinder in zwei Gruppeninterviews, per Los</div></div>
+      <div class="kpi"><div class="kv">K1–K5</div><div class="kl">gemeinsame Hauptkategorien über alle drei Perspektiven</div></div>
+    </div>
+
+    <div class="tl" style="margin-top:22px">
+      <div class="tl-item">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div>
+          <div class="tw">24.10. bis 02.11.2026 · erledigt</div>
+          <h4>Instrumente entwickelt, geprüft, überarbeitet</h4>
+          <p>Leitfäden nach dem SPSS-Prinzip, Fragebogen parallel dazu; gedanklicher Probelauf der ganzen Erhebung; Gesamtprüfung gegen Design, Literatur und Durchführbarkeit; sechs Entscheidungen.</p>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v5l3 2M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg></div>
+        <div>
+          <div class="tw">KW 45 bis 46</div>
+          <h4>Vorbereitung im Feld</h4>
+          <p>Probeinterview mit einer Lehrperson außerhalb der Stichprobe, aufgenommen und selbst abgehört; Pretest des Fragebogens (lautes Denken); Termine; Los; Versionsstand der App einfrieren.</p>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div>
+          <div class="tw">KW 47 bis 48</div>
+          <h4>Durchführung</h4>
+          <p>Zuerst die Lehrpersonen-Interviews, dann die Gruppeninterviews und am selben Tag die Ausgabe der Elternfragebögen. Protokoll am selben Tag, Transkript binnen weniger Tage.</p>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></div>
+        <div>
+          <div class="tw">KW 49 bis 50</div>
+          <h4>Rücklauf und erste Auswertung</h4>
+          <p>Rücklauf der Fragebögen mit einer Erinnerung, Transkription der Gruppen, Kategorienhandbuch mit ersten Ankerbeispielen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="instrumente">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Die drei Instrumente</h2></div>
+    <p class="sec-sub">Gebaut nach dem SPSS-Prinzip (Sammeln, Prüfen, Sortieren, Subsumieren): höchstens vier Blöcke, jeder mit einer einzigen Erzählaufforderung, dazu Stichworte zum Abhaken, Pflichtfragen im vorgegebenen Wortlaut und Aufrechterhaltungsfragen (Helfferich, 2011, S. 181–187). Alle Fragen sind gegen Helfferichs Frageregeln geprüft: keine geschlossenen Fragen, keine Mehrfachfragen, keine Präsuppositionen, keine „Warum"-Fragen (S. 108).</p>
+
+    <div class="instr">
+      <div class="in">
+        <div class="iw">Lehrpersonen</div>
+        <h4>Leitfadeninterview</h4>
+        <div class="ih">Einzelgespräch · 30 bis 45 Minuten</div>
+        <ul>
+          <li>drei Blöcke: die App im Alltag, Informationsfluss zwischen Lehrperson, Kindern und Eltern, Vergleich und Haltung</li>
+          <li>konkrete Episode aus der letzten Woche statt Selbsteinschätzung</li>
+          <li>Schlussfrage als Material für die Ableitungsfrage zur Leitung, ohne die Forschungsfrage an die Befragten weiterzureichen</li>
+          <li>Fakten in einem Kurzfragebogen nach dem Gespräch</li>
+        </ul>
+      </div>
+      <div class="in">
+        <div class="iw">Schüler*innen</div>
+        <h4>Gruppeninterview</h4>
+        <div class="ih">zwei Gruppen zu fünf Kindern · etwa 45 Minuten</div>
+        <ul>
+          <li>stärker strukturiert, weil für Kinder strukturiertere Formen besser geeignet sind (Helfferich, 2011, S. 47)</li>
+          <li>Kartenaufgabe „oft, manchmal, nie", die Aushandlung in der Gruppe auslöst und Nichtnutzung sichtbar macht, ohne dass ein Kind sie begründen muss</li>
+          <li>heikle Themen nur in der dritten Person</li>
+          <li>verbindliche Regel zum Kinderschutz</li>
+        </ul>
+      </div>
+      <div class="in">
+        <div class="iw">Erziehungsberechtigte</div>
+        <h4>Offener Fragebogen</h4>
+        <div class="ih">zehn offene Fragen · etwa 15 Minuten · auf Papier</div>
+        <ul>
+          <li>dieselben Pflichtfragen wie in den Leitfäden, an derselben Stelle</li>
+          <li>eine geschlossene Übersicht zur Nutzung, bewusst am Ende, damit sie die offenen Antworten nicht rahmt</li>
+          <li>Rückgabe im verschlossenen Kuvert über eine neutrale Stelle, Kennung statt Name</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+    <table class="map">
+      <thead><tr><th>Block</th><th>Unterfrage</th><th>Hauptkategorie</th><th>Pflichtfrage, in allen drei Perspektiven</th></tr></thead>
+      <tbody>
+        <tr><td>Nutzung</td><td>U1 Nutzung und Aneignung</td><td>K1 Nutzungspraxis und Aneignung</td><td>eine konkrete Situation · was nie genutzt wird</td></tr>
+        <tr><td>Information und Beteiligung</td><td>U2 zugeschriebene Wirkung</td><td>K2 zugeschriebene Veränderungen · K3 Grenzen, Belastungen, Nebenwirkungen</td><td>eine Situation, die nicht gut lief, <b>vor</b> einer, die gut lief</td></tr>
+        <tr><td>Vergleich</td><td>U3 Vergleichshorizont und Akzeptanz</td><td>K4 Vergleichshorizont und Akzeptanz</td><td>„Was würdest du jemandem erzählen, der neu dazukommt?"</td></tr>
+        <tr><td>Schluss</td><td>Material für U4 (Ableitungsfrage)</td><td>K5 Bedingungen von Zuständigkeit und Fortbestand</td><td>eigene Relevanzen</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="findings" style="margin-top:20px">
+      <div class="fh">Drei Konstruktionsregeln, die durchgehend gelten</div>
+      <span class="finding"><b>Kein Wirkungsverb in einer Frage.</b> Gefragt wird nach Erleben, Situationen und Deutungen; ob die Befragten der App eine Veränderung zuschreiben, soll aus ihren Erzählungen hervorgehen, nicht aus der Frage.</span>
+      <span class="finding"><b>Das Misslingen wird zuerst gefragt.</b> Der Interviewer hat die App entwickelt; soziale Erwünschtheit ist deshalb die größte Gefahr für die Daten. Jede befragte Person hört die Frage nach einer Situation, die nicht gut lief.</span>
+      <span class="finding"><b>Nähe wird als Problem behandelt.</b> Wer das Gegenüber kennt, erzählt bereitwilliger, aber verkürzt (Helfferich, 2011, S. 119–122). Deshalb die Nachfrage „Erklär es mir, als wüsste ich es nicht".</span>
+    </div>
+
+    <p style="margin-top:18px" class="quiet-note">Der vollständige Wortlaut der Instrumente wird nach Abschluss der Erhebung hier ergänzt. Vorab veröffentlicht, könnten die Befragten die Fragen kennen und ihre Antworten vorbereiten; das würde gerade die spontanen Erzählungen beschädigen, auf die die Instrumente zielen.</p>
+  </section>
+
+  <section id="entscheidungen">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Entscheidungen vom 02.11.2026</h2></div>
+    <p class="sec-sub">Getroffen nach einer Gesamtprüfung der Erhebungswelle. Jede Entscheidung ist mit ihrer Begründung festgehalten, auch die verworfenen Varianten.</p>
+    <div class="dec">
+      <div class="de"><span class="dn">E1</span><div><h4>Erhebung 1 in einem Setting</h4><p>Die erste Welle läuft in der fünften Schulstufe. Wie das zweite Setting im Schuljahr einbezogen wird, wird mit der Betreuung geklärt. Verworfen wurde, im zweiten Setting nur Kinder zu befragen, die die App aktiv nutzen: Das wäre eine Auswahl nach erwarteter Zustimmung, und die Nutzung wäre nur über Daten feststellbar, deren Auswertung ausgeschlossen ist.</p></div></div>
+      <div class="de"><span class="dn">E2</span><div><h4>Auswahl der Kinder per Los</h4><p>Zehn Kinder aus allen mit Zustimmung, getrennt nach Geschlecht gelost; einzige vorab festgelegte Korrektur: stark dominierende Kinder kommen in verschiedene Gruppen. In der zweiten Welle werden dieselben zehn Kinder wieder befragt, die übrigen in einer dritten Gruppe. So bleibt der Vergleich zweier Zeitpunkte erhalten, und alle kommen einmal dran.</p></div></div>
+      <div class="de"><span class="dn">E3</span><div><h4>Die Gruppe ist der Fall</h4><p>Bei Gruppeninterviews kann die Gruppe oder die einzelne Person Analyseeinheit sein (Kuckartz &amp; Rädiker, 2022, S. 118). Gewählt ist die Gruppe; die Kinder sind Sprechende darin. Das schützt die Kinder und passt dazu, dass nicht nach einzelnen Kindern ausgewertet werden soll.</p></div></div>
+      <div class="de"><span class="dn">E4</span><div><h4>Fragebogen nur auf Papier</h4><p>Der Papierweg ist zugesagt und reicht. Eine digitale Fassung kommt erst in Frage, wenn ein datenschutzkonformes Werkzeug über die Hochschule zur Verfügung steht.</p></div></div>
+      <div class="de"><span class="dn">E5</span><div><h4>Abtippen durch den Autor, offengelegt</h4><p>Die Papierbögen werden vom Autor selbst abgetippt. Dass einzelne Handschriften im Kleinfeld wiedererkannt werden könnten, wird im Methodenkapitel offengelegt.</p></div></div>
+      <div class="de"><span class="dn">E6</span><div><h4>Moderation der Gruppeninterviews durch den Autor, offengelegt</h4><p>Eine Moderation durch eine andere Person der Schule wäre ein neues Anonymitätsproblem. Die Doppelrolle wird durch Regeln im Leitfaden abgefedert und im Methodenkapitel offengelegt.</p></div></div>
+    </div>
+  </section>
+
+  <section id="qualitaet">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Qualitätssicherung</h2></div>
+    <p class="sec-sub">Drei Prüfschritte vor der Durchführung.</p>
+    <div class="instr">
+      <div class="in">
+        <div class="iw">Probelauf</div>
+        <h4>Gedanklicher Durchlauf der ganzen Erhebung</h4>
+        <ul>
+          <li>31 mögliche Fallen, je mit Frühwarnzeichen und Gegenmaßnahme</li>
+          <li>etwa: Stille am Anfang des Gruppeninterviews, nur Lob, nicht unterscheidbare Stimmen, leere Fragebögen, Namen im Freitext</li>
+          <li>die lösbaren direkt in die Instrumente eingebaut</li>
+        </ul>
+      </div>
+      <div class="in">
+        <div class="iw">Literatur</div>
+        <h4>Prüfung gegen Helfferich und Kuckartz</h4>
+        <ul>
+          <li>Frageregeln Satz für Satz, drei Restverstöße behoben</li>
+          <li>Analyseeinheit bei Gruppeninterviews entschieden</li>
+          <li>Kontextangaben als Fallvariablen (Kuckartz &amp; Rädiker, 2022, S. 214 ff.); keine Prozentwerte bei so wenigen Fällen (S. 118)</li>
+          <li>Transkription nach festgelegten Regeln (S. 197–203)</li>
+        </ul>
+      </div>
+      <div class="in">
+        <div class="iw">Ethik</div>
+        <h4>Regeln für die Durchführung</h4>
+        <ul>
+          <li>Aufnahme ohne Cloud-Synchronisierung, Transkription nur lokal</li>
+          <li>Aufnahme erst nach dem Gegenhören des Transkripts löschen</li>
+          <li>Feldnotizen dienen nur der Kontextbeschreibung und werden nicht codiert</li>
+          <li>Was im Interview gesagt wird, kommt im Schulalltag nicht vor</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="protokoll">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Änderungsprotokoll</h2></div>
+    <p class="sec-sub">Jede Fassung der Instrumente mit dem Grund der Änderung. Neue Einträge kommen oben dazu.</p>
+    <div class="log">
+      <div class="lg"><span class="ld">02.11.2026</span><p><b>Leitfäden v0.4, Fragebogen v0.5.</b> Umbau nach der Gesamtprüfung: Erzählaufforderung der Lehrpersonen auf den Informationsfluss ausgerichtet, damit der Block auch für Fachlehrpersonen trägt; eine geschlossene Schlussfrage geöffnet; zwei Präsuppositionen im Gruppenleitfaden gestrichen; Einstieg bei den Kindern ehrlicher formuliert; Deckblatt des Fragebogens gekürzt; Entscheidungen E1 bis E6 eingearbeitet.</p></div>
+      <div class="lg"><span class="ld">25.10.2026</span><p><b>Leitfäden v0.3, Fragebogen v0.4.</b> Gegenmaßnahmen aus dem Probelauf: gegenwärtiger Einstieg bei den Kindern, Reservefrage in der dritten Person, vierte Gesprächsregel, Kinderschutzregel, Hinweis für wenig nutzende Eltern.</p></div>
+      <div class="lg"><span class="ld">25.10.2026</span><p><b>Fragebogen v0.3.</b> Die geschlossene Nutzungsübersicht wandert vom Anfang ans Ende, damit sie die offenen Antworten nicht vorstrukturiert.</p></div>
+      <div class="lg"><span class="ld">25.10.2026</span><p><b>Alle Instrumente v0.2.</b> Mehrfachfragen aufgelöst; Kernbereiche der App ausdrücklich benannt (Hausübungen, Mitteilungsheft, Anwesenheit und Krankmeldungen, Stundenplan, Termine); Vorannahmen offengelegt.</p></div>
+      <div class="lg"><span class="ld">24.10.2026</span><p><b>Erste Entwürfe v0.1</b> aller drei Instrumente.</p></div>
+    </div>
+  </section>
+
+  <section id="offen">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Noch offen</h2></div>
+    <div class="openlist">
+      <div class="ol"><h4>Abstimmung mit der Betreuung</h4><p>Instrumente und Entscheidungen werden der Betreuung vorgelegt, bevor die Erhebung beginnt.</p></div>
+      <div class="ol"><h4>Vier Bausteine für die Durchführung</h4><p>Transkriptionsregeln, Interviewdeckblatt mit Protokollbogen, Datenmanagement auf einer Seite, Ablaufplan mit Terminen.</p></div>
+      <div class="ol"><h4>Methodenquelle für Gruppeninterviews mit Kindern</h4><p>Für das Methodenkapitel fehlt noch eine Fachquelle zu Gruppeninterviews im Alter von zehn bis elf Jahren. Für die Durchführung nicht blockierend.</p></div>
+      <div class="ol"><h4>Kategorienhandbuch</h4><p>Definitionen der Hauptkategorien K1 bis K5 jetzt, Ankerbeispiele nach der ersten Welle (Kuckartz &amp; Rädiker, 2022, S. 65 ff.).</p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Erhebung 1 · Dokumentation · Stand 02.11.2026</span>
+    <span>Master-Thesis KlassenHub · PH Niederösterreich</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -30,6 +30,10 @@ liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
 
 ### Wo was steht
 
+**Aktuell: die Dokumentation der ersten Erhebungswelle liegt unter
+`docs/2026-11-erhebung-1.html`** und ist auf der Startseite ganz oben verlinkt. Sie wird
+bei jedem Schritt fortgeschrieben (Änderungsprotokoll am Seitenende).
+
 Die Dokumente sind auf der Startseite in drei Ebenen geordnet, und diese Ordnung
 ist die eigentliche Navigationshilfe:
 
@@ -43,6 +47,17 @@ ist die eigentliche Navigationshilfe:
   Forschungsargumentation.
 
 Neue Dokumente werden der passenden Ebene zugeordnet, nicht einfach angehängt.
+
+### Navigation
+
+Alle Seiten binden `assets/nav.js` ein. Es ergänzt Brotkrumen in der Topbar, einen
+Navigator mit Suche (Taste `/` oder Strg/⌘+K), „Weiterlesen" mit vorherigem und nächstem
+Dokument derselben Ebene und einen „Nach oben"-Knopf. Auf der Startseite führt die
+Pillenleiste über alle vier Ebenen.
+
+**Neue Dokumente müssen zusätzlich in `SITE` am Anfang von `assets/nav.js` eingetragen
+werden**, an der Stelle, an der sie auf der Startseite stehen. Sonst fehlen sie im
+Navigator und in der Weiterlesen-Kette.
 
 ### Was hier bewusst nicht liegt
 

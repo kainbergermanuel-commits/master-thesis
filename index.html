@@ -76,7 +76,12 @@
     background: color-mix(in srgb, var(--teal) 12%, transparent); }
   .grp-sub { font-size: 12.5px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
   .doc-group + .doc-grid { margin-top: 12px; }
+  /* Die Pillenleiste fuehrt auch zu Ebene 2 bis 4; deren Sprungziele muessen ebenfalls
+     unter Topbar und Leiste landen. */
+  #dokumente .doc-level { scroll-margin-top: calc(var(--tb) + 74px); }
+  .grp-sep { flex: none; width: 1px; align-self: stretch; margin: 6px 3px; background: var(--line); }
 </style>
+<script src="assets/nav.js" defer></script>
 </head>
 <body>
 
@@ -104,6 +109,17 @@
     </div>
   </header>
 
+
+  <!-- ===================== AKTUELL: ERHEBUNG 1 ===================== -->
+  <section id="erhebung-1" style="margin-bottom:18px">
+    <a class="doc-card card" href="docs/2026-11-erhebung-1.html" style="display:block;border-left:4px solid var(--teal)">
+      <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+      <div class="dc-date">Aktuell · laufend dokumentiert · Stand 02.11.2026</div>
+      <h3>Erhebung 1 · Dokumentation</h3>
+      <p>Die erste Erhebungswelle an einer Stelle: Stand und Fahrplan, Aufbau der drei Instrumente, die Entscheidungen vom 02.11. mit Begründung, Qualitätssicherung und das Änderungsprotokoll aller Fassungen.</p>
+      <div class="dc-tags"><span class="chip phase">Empirie</span><span class="chip mid">laufend</span></div>
+    </a>
+  </section>
 
   <!-- ===================== STAND HEUTE ===================== -->
   <section id="stand">
@@ -146,6 +162,7 @@
       </div>
 
       <div class="sprung">
+        <a href="docs/2026-11-erhebung-1.html">Erhebung 1 <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
         <a href="docs/gespraechsvorbereitung.html">Vorbereitung Fachgespräch <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
         <a href="docs/2026-07-forschungsdesign.html">Forschungsdesign <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
         <a href="docs/2026-07-begriffsdefinitionen.html">Begriffe <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
@@ -201,13 +218,17 @@
     <div class="sec-head"><span class="sec-num">02</span><h2>Dokumente</h2></div>
     <p class="sec-sub">Jedes Dokument ist eigenständig lesbar und versioniert — die Git-Historie dieses Repos ist zugleich der Fortschritts-Nachweis für die Betreuungsgespräche.</p>
 
-    <div class="doc-level"><span class="lv">Ebene 1</span><h3>Die Arbeit</h3></div>
+    <div class="doc-level" id="ebene-1"><span class="lv">Ebene 1</span><h3>Die Arbeit</h3></div>
     <p class="doc-level-sub">Forschungsfrage, Design, Theorie und kritische Einordnung — das, worauf die Betreuungsgespräche zielen.</p>
         <div class="grp-nav">
       <a href="#g-design"><b>2</b> Forschungsdesign</a>
       <a href="#g-theorie"><b>4</b> Theorie &amp; Literatur</a>
       <a href="#g-feld"><b>3</b> Feldzugang &amp; Ethik</a>
       <a href="#g-rahmen"><b>2</b> Rahmen &amp; Betreuung</a>
+      <span class="grp-sep" aria-hidden="true"></span>
+      <a href="#ebene-2"><b>E2</b> Gegenstand</a>
+      <a href="#ebene-3"><b>E3</b> Entwicklung</a>
+      <a href="#ebene-4"><b>E4</b> Umsetzung</a>
     </div>
 
     <div class="doc-group" id="g-design">
@@ -315,7 +336,7 @@
       </a>
     </div>
 
-    <div class="doc-level"><span class="lv">Ebene 2</span><h3>Der Gegenstand</h3></div>
+    <div class="doc-level" id="ebene-2"><span class="lv">Ebene 2</span><h3>Der Gegenstand</h3></div>
     <p class="doc-level-sub">Was KlassenHub ist. Grundlage für das Kapitel „Beschreibung der App" — code-basiert belegbar, aber ohne Aussagen über Wirkung oder Akzeptanz.</p>
     <div class="doc-grid">
       <a class="doc-card card reveal" href="docs/2026-07-app-systemueberblick.html">
@@ -327,7 +348,7 @@
       </a>
     </div>
 
-    <div class="doc-level"><span class="lv">Ebene 3</span><h3>Entwicklungsdokumentation</h3></div>
+    <div class="doc-level" id="ebene-3"><span class="lv">Ebene 3</span><h3>Entwicklungsdokumentation</h3></div>
     <p class="doc-level-sub">Zehn Dokumente zum Entstehungsprozess der App — Umsetzungsberichte, Design-Rationale, technische Pläne. Bewusst nachgeordnet: Sie belegen den Prozess, tragen aber nicht die Forschungsargumentation.</p>
     <div class="doc-grid single">
       <a class="doc-card card reveal" href="docs/entwicklungsdokumentation.html">
@@ -339,9 +360,16 @@
       </a>
     </div>
 
-    <div class="doc-level"><span class="lv">Ebene 4</span><h3>Die Umsetzung</h3></div>
+    <div class="doc-level" id="ebene-4"><span class="lv">Ebene 4</span><h3>Die Umsetzung</h3></div>
     <p class="doc-level-sub">Was zwischen Plan und Feld liegt: Termine, Ausgabewege und die Unterlagen selbst. Praxismaterial, kein Argumentationsteil &#8212; es belegt die Durchf&#252;hrbarkeit, nicht die Fragestellung.</p>
     <div class="doc-grid">
+      <a class="doc-card card reveal" href="docs/2026-11-erhebung-1.html">
+        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        <div class="dc-date">02.11.2026 &#183; laufend</div>
+        <h3>Erhebung 1 &#183; Dokumentation</h3>
+        <p>Laufende Dokumentation der ersten Erhebungswelle: Fahrplan, Aufbau der drei Instrumente, Entscheidungen mit Begr&#252;ndung, Qualit&#228;tssicherung und &#196;nderungsprotokoll.</p>
+        <div class="dc-tags"><span class="chip phase">Empirie</span><span class="chip mid">laufend</span></div>
+      </a>
       <a class="doc-card card reveal" href="docs/2026-08-schulstart-timeline.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">20.08.2026</div>
@@ -406,6 +434,14 @@
       let aktiv = 0;
       ziele.forEach((z, i) => { if (z.getBoundingClientRect().top <= grenze) aktiv = i; });
       links.forEach((a, i) => a.classList.toggle('is-active', i === aktiv));
+      /* Auf schmalen Bildschirmen scrollt die Leiste seitlich mit, damit die aktive
+         Pille sichtbar bleibt. */
+      const on = links[aktiv];
+      if (on && nav.scrollWidth > nav.clientWidth) {
+        const l = on.offsetLeft - 12, r = on.offsetLeft + on.offsetWidth + 12;
+        if (l < nav.scrollLeft) nav.scrollLeft = l;
+        else if (r > nav.scrollLeft + nav.clientWidth) nav.scrollLeft = r - nav.clientWidth;
+      }
     };
     addEventListener('scroll', () => {
       if (!warten) { warten = true; requestAnimationFrame(setzen); }
