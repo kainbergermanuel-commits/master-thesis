@@ -32,8 +32,10 @@
   --body: "Hanken Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", monospace;
 }
+/* Standard ist hell. Dunkel gilt nur bei ausdrücklicher Wahl (data-theme="dark")
+   oder bei "auto", wenn das Gerät dunkel eingestellt ist. Umschalter: assets/nav.js */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root[data-theme="auto"] {
     --paper: #0F1E1D; --paper-2: #142624; --card: #172A28; --card-2: #1D322F;
     --ink: #E9F1EE; --ink-soft: #C4D2CE; --muted: #8FA5A1;
     --line: rgba(255,255,255,.12); --line-soft: rgba(255,255,255,.06);

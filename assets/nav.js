@@ -9,6 +9,9 @@
       Auf schmalen Bildschirmen ersetzt er das Inhaltsverzeichnis am Rand.
    3. „Weiterlesen" am Seitenende: vorheriges und nächstes Dokument derselben Ebene.
    4. „Nach oben"-Knopf nach längerem Scrollen.
+   5. Umschalter für die Darstellung: Hell (Standard), Dunkel, Automatisch.
+      Gespeichert in localStorage "mt-theme"; ein kleines Skript im <head> jeder
+      Seite setzt die Wahl vor dem ersten Zeichnen.
 
    Neue Dokumente werden nur in SITE eingetragen, in der Reihenfolge der
    Startseite. Die Gruppen spiegeln die Ebenen und Untergruppen der Startseite.
@@ -147,7 +150,20 @@
     '.nv-top.on{opacity:1;transform:none;pointer-events:auto}',
     '.nv-top:hover{color:var(--nv-teal)}',
     '.nv-top svg{width:17px;height:17px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}',
-    '@media print{.nv-open,.nv-top,.nv-next,.nv-dlg{display:none!important}}',
+    /* Darstellung */
+    '.nv-theme{display:inline-grid;place-items:center;width:32px;height:32px;flex:none;order:98;border-radius:50%;cursor:pointer;',
+    'color:var(--nv-muted);background:var(--nv-card2);border:1px solid var(--nv-line);transition:color .15s,border-color .15s}',
+    '.nv-theme:hover{color:var(--nv-teal);border-color:color-mix(in srgb,var(--nv-teal) 45%,var(--nv-line))}',
+    '.nv-theme:focus-visible,.nv-seg button:focus-visible{outline:2px solid var(--nv-teal);outline-offset:2px}',
+    '.nv-theme svg,.nv-seg svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}',
+    '.topbar .legend ~ .nv-theme{margin-left:0}',
+    '.nv-mode{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid var(--nv-line)}',
+    '.nv-mode .ml{font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--nv-muted)}',
+    '.nv-seg{display:inline-flex;gap:3px;padding:3px;border-radius:999px;background:var(--nv-card2);border:1px solid var(--nv-line)}',
+    '.nv-seg button{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12px;font-weight:700;color:var(--nv-muted);background:transparent;border:0;border-radius:999px;padding:5px 11px;cursor:pointer}',
+    '.nv-seg button[aria-pressed="true"]{background:var(--nv-card);color:var(--nv-teal);box-shadow:0 1px 4px rgba(0,0,0,.12)}',
+    '@media (max-width:420px){.nv-seg button .sl{display:none}}',
+    '@media print{.nv-open,.nv-top,.nv-next,.nv-dlg,.nv-theme{display:none!important}}',
     '@media (prefers-reduced-motion:reduce){.nv-top,.nv-pn a,.nv-open{transition:none}}'
   ].join('');
   var st = document.createElement('style');
@@ -202,6 +218,36 @@
   var bar = document.querySelector('.topbar-in, .topbar .wrap');
   if (bar) bar.appendChild(btn); else { btn.classList.add('nv-float'); document.body.appendChild(btn); }
 
+  // ---- 5 Darstellung ---------------------------------------------------------
+  var MODES = {
+    light: { label: 'Hell', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>' },
+    dark:  { label: 'Dunkel', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>' },
+    auto:  { label: 'Automatisch', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/></svg>' }
+  };
+  var ORDER = ['light', 'dark', 'auto'];
+  function getMode() {
+    try { var t = localStorage.getItem('mt-theme'); if (MODES[t]) return t; } catch (e) {}
+    return 'light';
+  }
+  var themeBtn = el('button', 'nv-theme');
+  themeBtn.type = 'button';
+  var segBtns = [];
+  function applyMode(m) {
+    document.documentElement.setAttribute('data-theme', m);
+    try { localStorage.setItem('mt-theme', m); } catch (e) {}
+    var nxt = MODES[ORDER[(ORDER.indexOf(m) + 1) % ORDER.length]].label;
+    themeBtn.innerHTML = MODES[m].icon;
+    themeBtn.setAttribute('aria-label', 'Darstellung: ' + MODES[m].label + '. Wechseln zu ' + nxt);
+    themeBtn.title = 'Darstellung: ' + MODES[m].label + ' (Klick: ' + nxt + ')';
+    segBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === m)); });
+  }
+  themeBtn.addEventListener('click', function () {
+    var m = getMode();
+    applyMode(ORDER[(ORDER.indexOf(m) + 1) % ORDER.length]);
+  });
+  if (bar) bar.insertBefore(themeBtn, btn);
+  else { themeBtn.classList.add('nv-float'); themeBtn.style.left = '64px'; document.body.appendChild(themeBtn); }
+
   var dlg = el('dialog', 'nv-dlg');
   dlg.setAttribute('aria-label', 'Navigation');
   dlg.innerHTML =
@@ -209,9 +255,21 @@
     '<input type="search" placeholder="Dokument oder Abschnitt suchen …" aria-label="Suchen" autocomplete="off">' +
     '<button type="button" class="nv-x">Esc</button></div>' +
     '<div class="nv-list" role="listbox"></div>' +
+    '<div class="nv-mode"><span class="ml">Darstellung</span><div class="nv-seg" role="group" aria-label="Darstellung"></div></div>' +
     '<div class="nv-foot"><span><kbd>↑</kbd><kbd>↓</kbd>auswählen</span><span><kbd>Enter</kbd>öffnen</span><span><kbd>Esc</kbd>schließen</span></div>';
   document.body.appendChild(dlg);
   var input = dlg.querySelector('input');
+  var seg = dlg.querySelector('.nv-seg');
+  ORDER.forEach(function (m) {
+    var b = el('button');
+    b.type = 'button';
+    b.dataset.mode = m;
+    b.innerHTML = MODES[m].icon + '<span class="sl">' + MODES[m].label + '</span>';
+    b.addEventListener('click', function () { applyMode(m); });
+    seg.appendChild(b);
+    segBtns.push(b);
+  });
+  applyMode(getMode());
   var list = dlg.querySelector('.nv-list');
 
   // Abschnitte der aktuellen Seite (gleiche Logik wie toc.js)

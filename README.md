@@ -55,6 +55,11 @@ Navigator mit Suche (Taste `/` oder Strg/⌘+K), „Weiterlesen" mit vorherigem 
 Dokument derselben Ebene und einen „Nach oben"-Knopf. Auf der Startseite führt die
 Pillenleiste über alle vier Ebenen.
 
+**Darstellung:** Standard ist hell. Über den Knopf in der Kopfzeile (oder im Navigator)
+lässt sich auf Dunkel oder Automatisch (folgt dem Gerät) umschalten; die Wahl wird im
+Browser gespeichert. Jede Seite trägt dafür ein kleines Skript im `<head>`, das die Wahl
+vor dem ersten Zeichnen setzt. Neue Seiten brauchen dieses Skript ebenfalls.
+
 **Neue Dokumente müssen zusätzlich in `SITE` am Anfang von `assets/nav.js` eingetragen
 werden**, an der Stelle, an der sie auf der Startseite stehen. Sonst fehlen sie im
 Navigator und in der Weiterlesen-Kette.

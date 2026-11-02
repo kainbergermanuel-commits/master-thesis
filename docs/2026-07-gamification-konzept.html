@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KlassenHub · Abenteuer, Quests & Nudging — Umsetzungsplan</title>
 <meta name="description" content="Vollständiger Gamification-Umsetzungsplan für KlassenHub: Quest-Maschine, Story-Kosmos, Held:innen-Ebene, kosmetische Basis, Nudging, Phasen-Fahrplan.">
@@ -36,7 +37,7 @@
     --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", monospace;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root[data-theme="auto"] {
       --paper: #0F1E1D;
       --paper-2: #142624;
       --card: #172A28;
@@ -57,6 +58,7 @@
       --shadow-sm: 0 4px 14px rgba(0,0,0,.28);
     }
   }
+
   :root[data-theme="light"] {
     --paper: #F1ECE1; --paper-2: #E9E3D6; --card: #FBF9F3; --card-2: #F4F0E7;
     --ink: #16292E; --ink-soft: #35494D; --muted: #6E7E80;

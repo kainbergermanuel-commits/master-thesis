@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KlassenHub · Story-Welten</title>
 <meta name="description" content="Die narrative Ebene des Abenteuer-Systems von KlassenHub: elf Welten, Erzählstränge und Guide-Figuren als Rahmen für die Quest-Mechanik.">
@@ -18,7 +19,7 @@
     --mono:ui-monospace,"SF Mono",Menlo,monospace;
   }
   @media (prefers-color-scheme:dark){
-    :root{ --paper:#14201F; --card:#1B2A28; --card2:#20302D; --ink:#EAF1EC; --muted:#9DB0AC;
+    :root[data-theme="auto"]{ --paper:#14201F; --card:#1B2A28; --card2:#20302D; --ink:#EAF1EC; --muted:#9DB0AC;
       --teal:#37B6AB; --amber:#E0A94B; --violet:#8A93E0; --rose:#E48AA2; --good:#4FCB93; --line:#2C3E3A; --gold:#EDC06A; }
   }
   :root[data-theme="dark"]{ --paper:#14201F; --card:#1B2A28; --card2:#20302D; --ink:#EAF1EC; --muted:#9DB0AC;
