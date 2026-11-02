@@ -230,14 +230,27 @@ caption { caption-side: bottom; padding: 11px 15px; font-size: 12.5px; color: va
 
 /* ---- document index cards ---- */
 .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-.doc-card { display: block; padding: 20px; text-decoration: none; color: inherit; transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s; position: relative; overflow: hidden; }
-.doc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+/* --acc = Akzent des Abschnitts. Standard Petrol; auf der Startseite setzt jede Gruppe
+   ihren eigenen Ton (index.html, .acc-*). Bewusst nur an drei Stellen sichtbar: feine
+   Kante oben, Pfeil und Hover-Schimmer. Die Karten bleiben ruhig. */
+.doc-card { --acc: var(--teal); display: block; padding: 20px; text-decoration: none; color: inherit; transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s, border-color .25s; position: relative; overflow: hidden; isolation: isolate; }
+/* Kante oben: läuft vom Akzent ins Leere aus */
+.doc-card::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; pointer-events: none;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 70%, transparent), transparent 62%); }
+/* Hover-Schimmer: Verläufe lassen sich nicht überblenden, deshalb eine eigene Ebene,
+   deren Deckkraft wechselt. z-index -1 liegt dank isolation über dem Kartengrund. */
+.doc-card::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .35s ease;
+  background: radial-gradient(130% 100% at 0% 0%, color-mix(in srgb, var(--acc) 19%, transparent), transparent 64%),
+              linear-gradient(160deg, transparent 50%, color-mix(in srgb, var(--acc) 9%, transparent)); }
+.doc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--acc) 32%, var(--line)); }
+.doc-card:hover::before, .doc-card:focus-visible::before { opacity: 1; }
 .doc-card .dc-date { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .03em; }
 .doc-card h3 { font-family: var(--display); font-size: 17px; margin: 8px 0 6px; color: var(--ink); }
 .doc-card p { font-size: 13px; color: var(--ink-soft); }
 .doc-card .dc-tags { display: flex; align-items: center; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
 .doc-card .dc-arrow { position: absolute; right: 16px; top: 16px; color: var(--muted); transition: transform .18s, color .18s; }
-.doc-card:hover .dc-arrow { transform: translate(2px,-2px); color: var(--teal); }
+.doc-card:hover .dc-arrow { transform: translate(2px,-2px); color: var(--acc); }
+@media (prefers-reduced-motion: reduce) { .doc-card, .doc-card::before { transition: none; } }
 
 /* ---- timeline (thesis phases) ---- */
 .tl { margin-top: 18px; display: flex; flex-direction: column; }

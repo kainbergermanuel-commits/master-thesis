@@ -96,6 +96,30 @@
      unter Topbar und Leiste landen. */
   #dokumente .doc-level { scroll-margin-top: calc(var(--tb) + 74px); }
   .grp-sep { flex: none; width: 1px; align-self: stretch; margin: 6px 3px; background: var(--line); }
+  /* Abschnitts-Logik: jede Gruppe trägt einen eigenen, gedämpften Ton. Er erscheint
+     nur am Gruppenkopf, an der Kartenkante, am Pfeil und im Hover, nie als Fläche. */
+  .acc-design  { --acc: var(--teal); }
+  .acc-theorie { --acc: var(--violet); }
+  .acc-feld    { --acc: var(--rose); }
+  .acc-rahmen  { --acc: var(--amber); }
+  .acc-e2      { --acc: var(--good); }
+  .acc-e3      { --acc: color-mix(in srgb, var(--muted) 70%, var(--teal)); }
+  .acc-e4      { --acc: color-mix(in srgb, var(--teal) 55%, var(--good)); }
+  .doc-grid[class*="acc-"] .doc-card { --acc: inherit; }
+  .grp-head h4 { display: flex; align-items: center; gap: 9px; }
+  .grp-head h4::before { content: ""; width: 4px; height: 15px; border-radius: 2px; background: var(--acc, var(--teal)); }
+  .doc-group[class*="acc-"] .grp-n { color: var(--acc); background: color-mix(in srgb, var(--acc) 12%, transparent); }
+  .doc-level[class*="acc-"] .lv { color: var(--acc); background: color-mix(in srgb, var(--acc) 12%, transparent); }
+  .grp-nav a[class*="acc-"] b { color: var(--acc); }
+  .grp-nav a[class*="acc-"].is-active { color: var(--acc); background: color-mix(in srgb, var(--acc) 13%, transparent);
+    border-color: color-mix(in srgb, var(--acc) 38%, var(--line)); }
+  /* Die Jetzt-Zeile bekommt denselben sanften Schimmer wie die Karten. */
+  .now { position: relative; isolation: isolate; overflow: hidden; }
+  .now::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .35s ease; pointer-events: none;
+    background: linear-gradient(100deg, color-mix(in srgb, var(--teal) 14%, transparent), transparent 70%); }
+  .now:hover::before { opacity: 1; }
+  .now-a svg { transition: transform .18s; }
+  .now:hover .now-a svg { transform: translate(2px,-2px); }
 </style>
 <script src="assets/nav.js" defer></script>
 </head>
@@ -249,21 +273,21 @@
     <div class="doc-level" id="ebene-1"><span class="lv">Ebene 1</span><h3>Die Arbeit</h3></div>
     <p class="doc-level-sub">Forschungsfrage, Design, Theorie und kritische Einordnung – das, worauf die Betreuungsgespräche zielen.</p>
         <div class="grp-nav">
-      <a href="#g-design"><b>2</b> Forschungsdesign</a>
-      <a href="#g-theorie"><b>4</b> Theorie &amp; Literatur</a>
-      <a href="#g-feld"><b>3</b> Feldzugang &amp; Ethik</a>
-      <a href="#g-rahmen"><b>2</b> Rahmen &amp; Betreuung</a>
+      <a class="acc-design" href="#g-design"><b>2</b> Forschungsdesign</a>
+      <a class="acc-theorie" href="#g-theorie"><b>4</b> Theorie &amp; Literatur</a>
+      <a class="acc-feld" href="#g-feld"><b>3</b> Feldzugang &amp; Ethik</a>
+      <a class="acc-rahmen" href="#g-rahmen"><b>2</b> Rahmen &amp; Betreuung</a>
       <span class="grp-sep" aria-hidden="true"></span>
-      <a href="#ebene-2"><b>E2</b> Gegenstand</a>
-      <a href="#ebene-3"><b>E3</b> Entwicklung</a>
-      <a href="#ebene-4"><b>E4</b> Umsetzung</a>
+      <a class="acc-e2" href="#ebene-2"><b>E2</b> Gegenstand</a>
+      <a class="acc-e3" href="#ebene-3"><b>E3</b> Entwicklung</a>
+      <a class="acc-e4" href="#ebene-4"><b>E4</b> Umsetzung</a>
     </div>
 
-    <div class="doc-group" id="g-design">
+    <div class="doc-group acc-design" id="g-design">
       <div class="grp-head"><h4>Forschungsdesign</h4><span class="grp-n">2</span></div>
       <p class="grp-sub">Fragestellung, Design und die Begriffe, mit denen gearbeitet wird.</p>
     </div>
-    <div class="doc-grid">
+    <div class="doc-grid acc-design">
       <a class="doc-card card reveal" href="docs/2026-07-forschungsdesign.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.07.2026 · Kern-Dokument</div>
@@ -280,11 +304,11 @@
       </a>
     </div>
 
-    <div class="doc-group" id="g-theorie">
+    <div class="doc-group acc-theorie" id="g-theorie">
       <div class="grp-head"><h4>Theorie &amp; Literatur</h4><span class="grp-n">4</span></div>
       <p class="grp-sub">Der Forschungsstand: was im Bestand liegt, wozu es dient, wie er entstanden ist – und die kritische Gegenperspektive.</p>
     </div>
-    <div class="doc-grid">
+    <div class="doc-grid acc-theorie">
       <a class="doc-card card reveal" href="docs/2026-07-literaturkarte.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">01.08.2026</div>
@@ -315,11 +339,11 @@
       </a>
     </div>
 
-    <div class="doc-group" id="g-feld">
+    <div class="doc-group acc-feld" id="g-feld">
       <div class="grp-head"><h4>Feldzugang &amp; Ethik</h4><span class="grp-n">3</span></div>
       <p class="grp-sub">Was vor der ersten Erhebung geklärt sein muss – forschungsethisch und rechtlich.</p>
     </div>
-    <div class="doc-grid">
+    <div class="doc-grid acc-feld">
       <a class="doc-card card reveal" href="docs/2026-07-forschungsethik.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">31.07.2026 · Entwurf</div>
@@ -343,11 +367,11 @@
       </a>
     </div>
 
-    <div class="doc-group" id="g-rahmen">
+    <div class="doc-group acc-rahmen" id="g-rahmen">
       <div class="grp-head"><h4>Rahmen &amp; Betreuung</h4><span class="grp-n">2</span></div>
       <p class="grp-sub">Formale Vorgaben des Lehrgangs und die Vorbereitung der Fachgespräche.</p>
     </div>
-    <div class="doc-grid">
+    <div class="doc-grid acc-rahmen">
       <a class="doc-card card reveal" href="docs/2026-07-rahmenbedingungen.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.07.2026</div>
@@ -364,9 +388,9 @@
       </a>
     </div>
 
-    <div class="doc-level" id="ebene-2"><span class="lv">Ebene 2</span><h3>Der Gegenstand</h3></div>
+    <div class="doc-level acc-e2" id="ebene-2"><span class="lv">Ebene 2</span><h3>Der Gegenstand</h3></div>
     <p class="doc-level-sub">Was KlassenHub ist. Grundlage für das Kapitel „Beschreibung der App" – code-basiert belegbar, aber ohne Aussagen über Wirkung oder Akzeptanz.</p>
-    <div class="doc-grid">
+    <div class="doc-grid acc-e2">
       <a class="doc-card card reveal" href="docs/2026-07-app-systemueberblick.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.07.–03.08.2026 · laufend aktualisiert</div>
@@ -376,9 +400,9 @@
       </a>
     </div>
 
-    <div class="doc-level" id="ebene-3"><span class="lv">Ebene 3</span><h3>Entwicklungsdokumentation</h3></div>
+    <div class="doc-level acc-e3" id="ebene-3"><span class="lv">Ebene 3</span><h3>Entwicklungsdokumentation</h3></div>
     <p class="doc-level-sub">Zehn Dokumente zum Entstehungsprozess der App – Umsetzungsberichte, Design-Rationale, technische Pläne. Bewusst nachgeordnet: Sie belegen den Prozess, tragen aber nicht die Forschungsargumentation.</p>
-    <div class="doc-grid single">
+    <div class="doc-grid acc-e3 single">
       <a class="doc-card card reveal" href="docs/entwicklungsdokumentation.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">12.07.–03.08.2026 · 10 Dokumente</div>
@@ -388,9 +412,9 @@
       </a>
     </div>
 
-    <div class="doc-level" id="ebene-4"><span class="lv">Ebene 4</span><h3>Die Umsetzung</h3></div>
-    <p class="doc-level-sub">Was zwischen Plan und Feld liegt: Termine, Ausgabewege und die Unterlagen selbst. Praxismaterial, kein Argumentationsteil &#8212; es belegt die Durchf&#252;hrbarkeit, nicht die Fragestellung.</p>
-    <div class="doc-grid">
+    <div class="doc-level acc-e4" id="ebene-4"><span class="lv">Ebene 4</span><h3>Die Umsetzung</h3></div>
+    <p class="doc-level-sub">Was zwischen Plan und Feld liegt: Termine, Ausgabewege und die Unterlagen selbst. Praxismaterial, kein Argumentationsteil; es belegt die Durchf&#252;hrbarkeit, nicht die Fragestellung.</p>
+    <div class="doc-grid acc-e4">
       <a class="doc-card card reveal" href="docs/2026-11-erhebung-1.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">02.11.2026 &#183; laufend</div>
@@ -398,11 +422,18 @@
         <p>Laufende Dokumentation der ersten Erhebungswelle: Fahrplan, Aufbau der drei Instrumente, Entscheidungen mit Begr&#252;ndung, Qualit&#228;tssicherung und &#196;nderungsprotokoll.</p>
         <div class="dc-tags"><span class="chip phase">Empirie</span><span class="chip mid">laufend</span></div>
       </a>
+      <a class="doc-card card reveal" href="docs/2026-11-versionsprotokoll.html">
+        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        <div class="dc-date">02.11.2026 &#183; laufend</div>
+        <h3>Versionsprotokoll der App</h3>
+        <p>Was sich an der App seit dem Start der Erprobung ver&#228;ndert hat: Startstand, 21 &#196;nderungspakete nach Art, Einordnung gegen&#252;ber der Versionierungszusage des Expos&#233;s.</p>
+        <div class="dc-tags"><span class="chip reuse">Empirie</span><span class="chip mid">laufend</span></div>
+      </a>
       <a class="doc-card card reveal" href="docs/2026-08-schulstart-timeline.html">
         <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
         <div class="dc-date">20.08.2026</div>
         <h3>Ausgabe-Timeline Schulstart</h3>
-        <p>Wann welches Dokument fertig sein muss, an wen es geht und in welcher Form: Phasenplan vom 20.&#160;August bis zur ersten Erhebung, Druckmengen, Materialbedarf, Packlisten f&#252;r die zwei einmaligen Termine &#8212; und die Gestaltungsregel, die verpflichtende Nutzung und freiwillige Teilnahme auch optisch trennt.</p>
+        <p>Wann welches Dokument fertig sein muss, an wen es geht und in welcher Form: Phasenplan vom 20.&#160;August bis zur ersten Erhebung, Druckmengen, Materialbedarf, Packlisten f&#252;r die zwei einmaligen Termine, dazu die Gestaltungsregel, die verpflichtende Nutzung und freiwillige Teilnahme auch optisch trennt.</p>
         <div class="dc-tags"><span class="chip phase">Umsetzung</span><span class="chip mid">Termine</span></div>
       </a>
       <a class="doc-card card reveal" href="docs/2026-08-schulstart-mappe.html">
@@ -419,7 +450,7 @@
 
   <div class="foot">
     <span>Master-Thesis · ClassHaven (bis September 2026: KlassenHub) · Arbeitsdokumentation für Betreuungsgespräche</span>
-    <span>Zuletzt aktualisiert: 20.08.2026</span>
+    <span>Zuletzt aktualisiert: 02.11.2026</span>
   </div>
 </div>
 
