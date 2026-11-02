@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>App-Systemüberblick — Master-Thesis KlassenHub</title>
-<meta name="description" content="Code-basierte Analyse von KlassenHub: technischer Aufbau, Rollen- und Berechtigungsmodell, Funktionsmodule — sauber getrennt in belegte und interpretierte Aussagen.">
+<title>App-Systemüberblick · Master-Thesis KlassenHub</title>
+<meta name="description" content="Code-basierte Analyse von KlassenHub: technischer Aufbau, Rollen- und Berechtigungsmodell, Funktionsmodule – sauber getrennt in belegte und interpretierte Aussagen.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,18 +55,18 @@
     <h1>Was KlassenHub<br>technisch ist.</h1>
     <p class="lede">Direkt aus dem Code erhoben, nicht aus Erinnerung rekonstruiert. Jede Aussage ist markiert: <span class="ev belegt" style="margin:0">Belegt</span> = direkt aus Code/Schema ablesbar, <span class="ev interpretiert" style="margin:0">Interpretiert</span> = Deutung der Motivation, nicht durch Primärbeleg gedeckt.</p>
     <div class="thesis">
-      <strong>Wichtig für die Studie:</strong> Diese Analyse erlaubt validere technische Aussagen als reine Motivations-Rekonstruktion — sie ersetzt aber <strong>nicht</strong> die noch ausstehende Nutzer-Evaluation. Aussagen zu tatsächlicher Wirkung oder Akzeptanz stammen ausschließlich aus der empirischen Untersuchung, nicht aus dieser Code-Analyse.
+      <strong>Wichtig für die Studie:</strong> Diese Analyse erlaubt validere technische Aussagen als reine Motivations-Rekonstruktion – sie ersetzt aber <strong>nicht</strong> die noch ausstehende Nutzer-Evaluation. Aussagen zu tatsächlicher Wirkung oder Akzeptanz stammen ausschließlich aus der empirischen Untersuchung, nicht aus dieser Code-Analyse.
     </div>
   </header>
 
   <section id="aufbau">
     <div class="sec-head"><span class="sec-num">01</span><h2>Technischer Aufbau</h2></div>
     <span class="ev belegt">Belegt</span>
-    <p class="sec-sub">Next.js (App Router) + Supabase (Postgres, Auth, Row-Level-Security), Tailwind CSS, PWA-Manifest (standalone, portrait, eigenes Icon/Theme). Auth/Datenzugriff läuft über deduplizierte Helper — ein Datenbank-Request pro Anfrage statt pro Komponente.</p>
+    <p class="sec-sub">Next.js (App Router) + Supabase (Postgres, Auth, Row-Level-Security), Tailwind CSS, PWA-Manifest (standalone, portrait, eigenes Icon/Theme). Auth/Datenzugriff läuft über deduplizierte Helper – ein Datenbank-Request pro Anfrage statt pro Komponente.</p>
 
     <div class="role-grid">
       <div class="role card"><div class="ric" style="background:linear-gradient(135deg,var(--teal),var(--teal-2))"><svg class="i" viewBox="0 0 24 24" style="stroke:#fff"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h5>Lehrperson</h5><p>Postet Hausübungen, Erinnerungen, Termine; sieht Aggregatzahlen der Klasse.</p></div>
-      <div class="role card"><div class="ric" style="background:linear-gradient(135deg,var(--amber),var(--amber-2))"><svg class="i" viewBox="0 0 24 24" style="stroke:#fff"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h5>Schüler:in</h5><p>Sieht eigene offene HÜ, Streak, Dienst — persönliche, nicht aggregierte Sicht.</p></div>
+      <div class="role card"><div class="ric" style="background:linear-gradient(135deg,var(--amber),var(--amber-2))"><svg class="i" viewBox="0 0 24 24" style="stroke:#fff"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h5>Schüler:in</h5><p>Sieht eigene offene HÜ, Streak, Dienst – persönliche, nicht aggregierte Sicht.</p></div>
       <div class="role card"><div class="ric" style="background:linear-gradient(135deg,var(--violet),#8791dd)"><svg class="i" viewBox="0 0 24 24" style="stroke:#fff"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/></svg></div><h5>Elternteil</h5><p>Kind-Banner mit Streak, offene Bestätigungen, eigenes Mitteilungsheft.</p></div>
     </div>
     <p class="sec-sub" style="margin-top:14px"><span class="ev interpretiert">Interpretiert</span> Statt einer generischen App mit Rollen-Toggle wurde für jede Zielgruppe eine eigene, auf ihre Bedürfnisse zugeschnittene Informationsarchitektur gebaut.</p>
@@ -78,13 +78,13 @@
     <p class="sec-sub">Durchgehend serverseitig über Postgres-RLS-Policies abgesichert, nicht nur im Frontend verborgen. Granulares Modell jenseits von „Lehrer vs. Rest": Schüler:innen mit Sonderrolle dürfen selbst Hausübungen im Entwurfsstatus anlegen, Klassensprecher:innen analog bei Erinnerungen.</p>
     <div class="note">
       <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> <span class="ev interpretiert" style="margin:0">Interpretiert</span></h4>
-      <p>Das ist ein Beteiligungsmechanismus, der Schüler:innen aktiv Mitgestaltung ermöglicht, nicht nur Konsum. Das digitale Mitteilungsheft läuft bewusst ausschließlich zwischen Lehrperson und Eltern — Schüler:innen haben explizit keinen Zugriff, was die reale Schulkommunikation 1:1 nachbildet.</p>
+      <p>Das ist ein Beteiligungsmechanismus, der Schüler:innen aktiv Mitgestaltung ermöglicht, nicht nur Konsum. Das digitale Mitteilungsheft läuft bewusst ausschließlich zwischen Lehrperson und Eltern – Schüler:innen haben explizit keinen Zugriff, was die reale Schulkommunikation 1:1 nachbildet.</p>
     </div>
   </section>
 
   <section id="module">
     <div class="sec-head"><span class="sec-num">03</span><h2>Funktionsmodule</h2></div>
-    <p class="sec-sub">Die Bausteine, die in der empirischen Erprobung tatsächlich genutzt werden. Vollständig erhoben am 03.08.2026 gegen den Routenbestand und die Migrationsdateien — einschließlich der Module, die keine der drei Nutzungsgruppen erreichen, und der einen Seite, die noch leer ist.</p>
+    <p class="sec-sub">Die Bausteine, die in der empirischen Erprobung tatsächlich genutzt werden. Vollständig erhoben am 03.08.2026 gegen den Routenbestand und die Migrationsdateien – einschließlich der Module, die keine der drei Nutzungsgruppen erreichen, und der einen Seite, die noch leer ist.</p>
 
     <div class="mod-grid">
       <div class="mod card">
@@ -93,14 +93,14 @@
         <p><span class="ev interpretiert">Interpretiert</span> Diese Transparenz macht Verantwortung sichtbar, ohne einzelne Schüler:innen bloßzustellen.</p>
       </div>
       <div class="mod card">
-        <h4>Streaks — die Mechanik</h4>
+        <h4>Streaks – die Mechanik</h4>
         <p><span class="ev belegt">Belegt</span> Serie aufeinanderfolgender erledigter Hausübungen; Meilensteine bei 5/10/15/20. Muss von einem Elternteil bestätigt werden, bevor sie im Leaderboard sichtbar zählt.</p>
-        <p><span class="ev interpretiert">Interpretiert</span> Die Eltern-Bestätigung koppelt Gamification an echte soziale Anerkennung statt reiner Selbstoptimierung — siehe auch <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a> und <a href="2026-07-risiken-gamifizierung.html">Risiken &amp; Grenzen</a>.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die Eltern-Bestätigung koppelt Gamification an echte soziale Anerkennung statt reiner Selbstoptimierung – siehe auch <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a> und <a href="2026-07-risiken-gamifizierung.html">Risiken &amp; Grenzen</a>.</p>
       </div>
       <div class="mod card">
-        <h4>Abenteuer-System — die narrative Rahmung</h4>
+        <h4>Abenteuer-System – die narrative Rahmung</h4>
         <p><span class="ev belegt">Belegt</span> Um die Streak-Mechanik liegt ein durchgehendes Narrativ: elf aufeinanderfolgende <b>Welten</b> mit eigener Story und Bildsprache, <b>Quests</b> als Wochenaufgaben, eine <b>Heldenebene</b> mit Rängen, <b>Begleitfiguren</b>, ein <b>Rucksack</b> mit erworbenen Gegenständen und eine Jahres-<b>Reise</b>, die den Fortschritt über die Saison hinweg zusammenhält. Ausgestaltung in <a href="2026-07-story-welten.html">Story &amp; Welten</a>, Designregeln in <a href="2026-07-gamification-prinzipien.html">Gamification-Prinzipien</a>.</p>
-        <p><span class="ev interpretiert">Interpretiert</span> Das ist keine Dekoration um die Punkte herum, sondern der zweite, eigenständige Teil des Gamification-Designs. Der Fachbegriff dafür lautet <b><i>game fiction</i></b> — der Einbezug einer fiktionalen Spielwelt oder Geschichte. Sailer &amp; Homner (2019) prüfen ihn als eigenen Moderator und finden ihn für <b>behaviorale</b> Outcomes signifikant, für kognitive und motivationale dagegen nicht. Da die App auf Verhalten zielt und nicht auf Lernertrag, ist das die tragende Begründung für den Aufwand. <a class="fdoc" href="2026-07-begriffsdefinitionen.html#game-fiction">Begriff <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a></p>
+        <p><span class="ev interpretiert">Interpretiert</span> Das ist keine Dekoration um die Punkte herum, sondern der zweite, eigenständige Teil des Gamification-Designs. Der Fachbegriff dafür lautet <b><i>game fiction</i></b>– der Einbezug einer fiktionalen Spielwelt oder Geschichte. Sailer &amp; Homner (2019) prüfen ihn als eigenen Moderator und finden ihn für <b>behaviorale</b> Outcomes signifikant, für kognitive und motivationale dagegen nicht. Da die App auf Verhalten zielt und nicht auf Lernertrag, ist das die tragende Begründung für den Aufwand. <a class="fdoc" href="2026-07-begriffsdefinitionen.html#game-fiction">Begriff <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a></p>
       </div>
       <div class="mod card">
         <h4>Digitales Mitteilungsheft</h4>
@@ -120,12 +120,12 @@
       <div class="mod card">
         <h4>Gegenderte Sprache</h4>
         <p><span class="ev belegt">Belegt</span> Ein Helper erzeugt automatisch die korrekte Form je nach gespeichertem Geschlecht im Profil.</p>
-        <p><span class="ev interpretiert">Interpretiert</span> Zeigt, dass geschlechtergerechte Sprache als Code-Funktion mitgedacht wurde — spiegelt denselben Anspruch wie die Genderleitlinie der PH NÖ für die Arbeit selbst.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Zeigt, dass geschlechtergerechte Sprache als Code-Funktion mitgedacht wurde – spiegelt denselben Anspruch wie die Genderleitlinie der PH NÖ für die Arbeit selbst.</p>
       </div>
       
             <div class="mod card">
         <h4>Anwesenheit</h4>
-        <p><span class="ev belegt">Belegt</span> Gespeichert werden <b>nur Abweichungen</b>: kein Eintrag bedeutet anwesend, höchstens ein Eintrag je Kind und Tag. Zwei Status, <i>entschuldigt</i> und <i>unentschuldigt</i> — die Kategorie „krank" fehlt ausdrücklich, weil sie ein Gesundheitsdatum nach Art. 9 DSGVO wäre. Jede Meldung trägt ihre Herkunft mit: von der Lehrperson erfasste Einträge gelten sofort, Elternmeldungen bleiben bis zur Bestätigung offen. Die Rechte sind dreifach gestuft — Lehrperson für die eigenen Klassen, Elternteil nur für das eigene Kind, Schüler:in nur für sich selbst.</p>
+        <p><span class="ev belegt">Belegt</span> Gespeichert werden <b>nur Abweichungen</b>: kein Eintrag bedeutet anwesend, höchstens ein Eintrag je Kind und Tag. Zwei Status, <i>entschuldigt</i> und <i>unentschuldigt</i>– die Kategorie „krank" fehlt ausdrücklich, weil sie ein Gesundheitsdatum nach Art. 9 DSGVO wäre. Jede Meldung trägt ihre Herkunft mit: von der Lehrperson erfasste Einträge gelten sofort, Elternmeldungen bleiben bis zur Bestätigung offen. Die Rechte sind dreifach gestuft – Lehrperson für die eigenen Klassen, Elternteil nur für das eigene Kind, Schüler:in nur für sich selbst.</p>
         <p><span class="ev interpretiert">Interpretiert</span> Die Datenmodellierung enthält bereits eine datenschutzrechtliche Entscheidung: Der Verzicht auf „krank" vermeidet die Verarbeitung besonderer Kategorien personenbezogener Daten. Für die Erprobung ist das bemerkenswert, weil die Abwesenheitsmeldung der elternnächste Vorgang der App ist.</p>
       </div>
       <div class="mod card">
@@ -134,9 +134,9 @@
         <p><span class="ev interpretiert">Interpretiert</span> Die Trennung von Klassenauswertung und Einzelsicht folgt derselben Logik wie bei den Hausübungen. Ob die Rechtzeitigkeitsauswertung von Eltern als Unterstützung oder als Kontrolle gelesen wird, ist eine offene Frage für Unterfrage 2.</p>
       </div>
       <div class="mod card">
-        <h4>Stundenplan — drei getrennte Achsen</h4>
+        <h4>Stundenplan – drei getrennte Achsen</h4>
         <p><span class="ev belegt">Belegt</span> Drei Tabellen statt einer. Der <b>persönliche Plan des Kindes</b> ist die älteste; der <b>Standardplan der Klasse</b> wird von der Lehrperson gepflegt und kann per Knopfdruck an alle Kinder verteilt werden, wobei die Verteilung bestehende Einträge vollständig überschreibt statt zu verschmelzen; der <b>persönliche Plan der Lehrperson</b> beschreibt deren eigene Woche quer über mehrere Klassen, mit Freitext statt Verknüpfung für die Klassenbezeichnung.</p>
-        <p><span class="ev interpretiert">Interpretiert</span> Die drei Achsen lassen sich nicht ineinander abbilden — der Plan einer Klasse und die Woche einer Person sind verschiedene Gegenstände. Dass die Verteilung überschreibt und das Schreibrecht der Kinder dabei erhalten bleibt, ist eine Abwägung zwischen Nachvollziehbarkeit und Autonomie, die im Feld auffallen dürfte.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Die drei Achsen lassen sich nicht ineinander abbilden – der Plan einer Klasse und die Woche einer Person sind verschiedene Gegenstände. Dass die Verteilung überschreibt und das Schreibrecht der Kinder dabei erhalten bleibt, ist eine Abwägung zwischen Nachvollziehbarkeit und Autonomie, die im Feld auffallen dürfte.</p>
       </div>
       <div class="mod card">
         <h4>Gangaufsichten</h4>
@@ -146,7 +146,7 @@
       <div class="mod card">
         <h4>Planungs-Tool</h4>
         <p><span class="ev belegt">Belegt</span> Notizen zur Wochen- und Tagesplanung, wahlweise allgemein oder je Fach; je Klasse, Woche, Tag und Fach genau eine Notiz. Sichtbar und bearbeitbar ausschließlich für Lehrpersonen der Klasse.</p>
-        <p><span class="ev interpretiert">Interpretiert</span> Das einzige Modul, das bewusst nichts nach außen gibt. Es erweitert die App vom Kommunikations- zum Arbeitswerkzeug — relevant für die Frage, ob Lehrpersonen sie als Entlastung oder als zusätzliches System erleben.</p>
+        <p><span class="ev interpretiert">Interpretiert</span> Das einzige Modul, das bewusst nichts nach außen gibt. Es erweitert die App vom Kommunikations- zum Arbeitswerkzeug – relevant für die Frage, ob Lehrpersonen sie als Entlastung oder als zusätzliches System erleben.</p>
       </div>
       <div class="mod card">
         <h4>Fächer-Katalog und Administration</h4>
@@ -165,7 +165,7 @@
       </div>
       <div class="mod card">
         <h4>Statistik-Panels</h4>
-        <p><span class="ev belegt">Belegt</span> Auf der Startseite von Lehrperson und Elternteil: Verteilung der Reiselängen in der Klasse, Verlauf der Abgabequoten mit Trend, Pünktlichkeits-Anteil — durchgehend aus bereits geladenen Daten berechnet.</p>
+        <p><span class="ev belegt">Belegt</span> Auf der Startseite von Lehrperson und Elternteil: Verteilung der Reiselängen in der Klasse, Verlauf der Abgabequoten mit Trend, Pünktlichkeits-Anteil – durchgehend aus bereits geladenen Daten berechnet.</p>
         <p><span class="ev interpretiert">Interpretiert</span> Verschiebt die Darstellung von einer einzelnen Momentaufnahme zu einem Verlauf, der die Frage „wird es besser oder schlechter" beantwortbar macht.</p>
       </div>
     </div>
@@ -174,11 +174,11 @@
   <section id="historie">
     <div class="sec-head"><span class="sec-num">04</span><h2>Entwicklungs-Historie &amp; Robustheit</h2></div>
     <span class="ev belegt">Belegt</span>
-    <p class="sec-sub">Viele einzelne, benannte Migrationsdateien statt eines einzigen Schemas — zeigt iterative, inkrementelle Entwicklung mit Rückbau-Option. Mehrfache RLS-Härtungen deuten auf schrittweises Schließen von Sicherheitslücken hin, wie es bei echten Entwicklungsprojekten typisch ist — nicht „einmal richtig geplant", sondern kontinuierlich abgesichert.</p>
+    <p class="sec-sub">Viele einzelne, benannte Migrationsdateien statt eines einzigen Schemas – zeigt iterative, inkrementelle Entwicklung mit Rückbau-Option. Mehrfache RLS-Härtungen deuten auf schrittweises Schließen von Sicherheitslücken hin, wie es bei echten Entwicklungsprojekten typisch ist – nicht „einmal richtig geplant", sondern kontinuierlich abgesichert.</p>
   </section>
 
   <div class="foot">
-    <span>Master-Thesis · KlassenHub — App-Systemüberblick (code-basiert, Stand 21.07.2026)</span>
+    <span>Master-Thesis · KlassenHub – App-Systemüberblick (code-basiert, Stand 21.07.2026)</span>
     <span><a href="2026-07-organisation-vertieft.html">Zu Organisation vertieft →</a></span>
   </div>
 </div>

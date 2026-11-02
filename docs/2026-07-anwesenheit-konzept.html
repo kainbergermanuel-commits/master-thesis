@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anwesenheit — Konzept · Master-Thesis KlassenHub</title>
+<title>Anwesenheit · Konzept · Master-Thesis KlassenHub</title>
 <meta name="description" content="Konzept für das Anwesenheits-Feature von KlassenHub: Forschungsbezug, bewusste Abgrenzung vom amtlichen Klassenbuch, Datenschutz, Datenmodell und Umsetzungsplan.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,11 +47,11 @@
     </a>
     <div class="brand">
       <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
-      Anwesenheit — Konzept
+      Anwesenheit – Konzept
     </div>
     <div class="legend">
       <span class="chip reuse">App-Weiterentwicklung</span>
-      <span class="chip done">Gebaut &amp; live — siehe <a href="2026-07-juli-update.html" style="color:inherit">Juli-Update</a></span>
+      <span class="chip done">Gebaut &amp; live – siehe <a href="2026-07-juli-update.html" style="color:inherit">Juli-Update</a></span>
     </div>
   </div>
 </div>
@@ -60,9 +60,9 @@
   <header class="hero">
     <div class="eyebrow">Funktionsmodul · Konzept &amp; Umsetzungsplan</div>
     <h1>Anwesenheit statt<br>Klassenbuch.</h1>
-    <p class="lede">Ein leichtgewichtiges Anwesenheits- und Abwesenheitsmelde-Modul für KlassenHub — bewusst <strong>kein</strong> amtliches Klassenbuch. Lehrpersonen erfassen Abwesenheiten pro Tag, Eltern melden ihr Kind direkt in der App ab, ein Bestätigungs-Loop verbindet beide Seiten.</p>
+    <p class="lede">Ein leichtgewichtiges Anwesenheits- und Abwesenheitsmelde-Modul für KlassenHub – bewusst <strong>kein</strong> amtliches Klassenbuch. Lehrpersonen erfassen Abwesenheiten pro Tag, Eltern melden ihr Kind direkt in der App ab, ein Bestätigungs-Loop verbindet beide Seiten.</p>
     <div class="thesis">
-      <strong>Warum dieses Modul:</strong> Es ist kein Lern-Feature, sondern bedient exakt die untersuchten Dimensionen der Studie — Verbindlichkeit, Elternbeteiligung, Arbeitsbelastung der Lehrperson und den Vergleich zu bestehenden Systemen (SchoolFox bietet eine vergleichbare Abwesenheitsmeldung). Die Elternmeldung verschiebt Eltern vom reinen Empfänger zum handelnden Akteur — genau die Grenze zwischen <em>Involvement</em> und <em>Engagement</em> (Kent et&nbsp;al., 2022).
+      <strong>Warum dieses Modul:</strong> Es ist kein Lern-Feature, sondern bedient exakt die untersuchten Dimensionen der Studie – Verbindlichkeit, Elternbeteiligung, Arbeitsbelastung der Lehrperson und den Vergleich zu bestehenden Systemen (SchoolFox bietet eine vergleichbare Abwesenheitsmeldung). Die Elternmeldung verschiebt Eltern vom reinen Empfänger zum handelnden Akteur – genau die Grenze zwischen <em>Involvement</em> und <em>Engagement</em> (Kent et&nbsp;al., 2022).
     </div>
   </header>
 
@@ -76,16 +76,16 @@
           <tr>
             <td>Verbindlichkeit</td>
             <td>Ein verbindlicher, nachvollziehbarer Ort für An-/Abwesenheit statt Zettel, Anruf und Messenger-Wildwuchs.</td>
-            <td><span class="src">—</span> (Kerndimension der eigenen Erhebung)</td>
+            <td><span class="src">– </span> (Kerndimension der eigenen Erhebung)</td>
           </tr>
           <tr>
             <td>Lehrerakzeptanz &amp; Arbeitsbelastung</td>
-            <td>Abwesenheitsmeldungen kommen strukturiert über einen Kanal — potenzielle Entlastung, aber auch mögliche neue Erreichbarkeitserwartung. Beides wird offen erhoben, nicht vorentschieden.</td>
+            <td>Abwesenheitsmeldungen kommen strukturiert über einen Kanal – potenzielle Entlastung, aber auch mögliche neue Erreichbarkeitserwartung. Beides wird offen erhoben, nicht vorentschieden.</td>
             <td><span class="src">Bauwens et&nbsp;al. 2020</span> · <span class="src">Khoo et&nbsp;al. 2024</span> · <span class="src">See et&nbsp;al. 2021</span> (kritisch: keine klare Wirkungsevidenz)</td>
           </tr>
           <tr>
             <td>Elternbeteiligung</td>
-            <td>Eltern handeln aktiv (Kind abmelden) statt nur zu lesen — Engagement statt Involvement. Niederschwelligkeit und Flexibilität als Erfolgsfaktoren.</td>
+            <td>Eltern handeln aktiv (Kind abmelden) statt nur zu lesen – Engagement statt Involvement. Niederschwelligkeit und Flexibilität als Erfolgsfaktoren.</td>
             <td><span class="src">Kent et&nbsp;al. 2022</span> · <span class="src">Pöntinen et&nbsp;al. 2023</span> · <span class="src">Beilmann et&nbsp;al. 2023</span> · <span class="src">Dou&nbsp;&amp;&nbsp;Chen 2025</span></td>
           </tr>
           <tr>
@@ -98,7 +98,7 @@
     </div>
     <div class="note">
       <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Erprobungsvorbehalt</h4>
-      <p>Das Modul wird bewusst so gebaut, dass es <strong>vollständig rückbaubar</strong> ist (eigene Migration mit Rollback-Skript, isolierte Commits, minimale Berührung bestehender Dateien). Fühlt es sich im Alltag oder in der Erprobung nicht gut an, wird es ersatzlos gestrichen — das ist eine legitime Erkenntnis der Studie, kein Scheitern.</p>
+      <p>Das Modul wird bewusst so gebaut, dass es <strong>vollständig rückbaubar</strong> ist (eigene Migration mit Rollback-Skript, isolierte Commits, minimale Berührung bestehender Dateien). Fühlt es sich im Alltag oder in der Erprobung nicht gut an, wird es ersatzlos gestrichen – das ist eine legitime Erkenntnis der Studie, kein Scheitern.</p>
     </div>
   </section>
 
@@ -108,18 +108,18 @@
     <div class="persp">
       <div class="persp-card card">
         <h3><svg class="i big" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/></svg> Kein amtliches Klassenbuch</h3>
-        <p class="small">Das amtliche Klassenbuch in Österreich ist Amtsschriftgut — rechtlich bindend, revisionssicher, aufbewahrungspflichtig (heute meist WebUntis). KlassenHub erhebt diesen Anspruch <strong>bewusst nicht</strong>: Das Modul heißt „Anwesenheit", nicht „Klassenbuch", und versteht sich als Kommunikations- und Organisationswerkzeug neben dem amtlichen System, nicht als dessen Ersatz.</p>
+        <p class="small">Das amtliche Klassenbuch in Österreich ist Amtsschriftgut – rechtlich bindend, revisionssicher, aufbewahrungspflichtig (heute meist WebUntis). KlassenHub erhebt diesen Anspruch <strong>bewusst nicht</strong>: Das Modul heißt „Anwesenheit", nicht „Klassenbuch", und versteht sich als Kommunikations- und Organisationswerkzeug neben dem amtlichen System, nicht als dessen Ersatz.</p>
       </div>
       <div class="persp-card card">
         <h3><svg class="i big" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Keine Gesundheitsdaten</h3>
-        <p class="small">Ein Status „krank" wäre eine Gesundheitsangabe — besondere Kategorie personenbezogener Daten (DSGVO Art.&nbsp;9), bei einer minderjährigen Zielgruppe besonders heikel. Deshalb gibt es nur zwei Status: <strong>entschuldigt</strong> und <strong>unentschuldigt</strong>. Das Notizfeld ist optional und fordert nie eine Begründung oder Diagnose ein. In Einverständniserklärung und Forschungsethik-Kapitel wird das Modul explizit genannt.</p>
+        <p class="small">Ein Status „krank" wäre eine Gesundheitsangabe – besondere Kategorie personenbezogener Daten (DSGVO Art.&nbsp;9), bei einer minderjährigen Zielgruppe besonders heikel. Deshalb gibt es nur zwei Status: <strong>entschuldigt</strong> und <strong>unentschuldigt</strong>. Das Notizfeld ist optional und fordert nie eine Begründung oder Diagnose ein. In Einverständniserklärung und Forschungsethik-Kapitel wird das Modul explizit genannt.</p>
       </div>
     </div>
     <div class="decide">
-      <div class="d"><b>Name</b>„Anwesenheit" — ehrlich gegenüber dem, was das Modul ist; weckt keine rechtlichen Erwartungen.</div>
-      <div class="d"><b>Granularität</b>Pro Tag, nicht pro Unterrichtsstunde — Sekundarstufe I erfasst i.&nbsp;d.&nbsp;R. morgens; Stunden-Granularität wäre für eine 4–6-wöchige Erprobung Over-Engineering. Als Zukunftsoption dokumentiert.</div>
+      <div class="d"><b>Name</b>„Anwesenheit" – ehrlich gegenüber dem, was das Modul ist; weckt keine rechtlichen Erwartungen.</div>
+      <div class="d"><b>Granularität</b>Pro Tag, nicht pro Unterrichtsstunde – Sekundarstufe I erfasst i.&nbsp;d.&nbsp;R. morgens; Stunden-Granularität wäre für eine 4–6-wöchige Erprobung Over-Engineering. Als Zukunftsoption dokumentiert.</div>
       <div class="d"><b>Status</b>Nur entschuldigt / unentschuldigt. Kein „krank" (Art.&nbsp;9), kein „verspätet" (Detailtiefe ohne Forschungsnutzen).</div>
-      <div class="d"><b>Elternmeldung</b>Im ersten Wurf enthalten — sie <em>ist</em> der Beteiligungsaspekt, der das Modul für die Studie interessant macht.</div>
+      <div class="d"><b>Elternmeldung</b>Im ersten Wurf enthalten – sie <em>ist</em> der Beteiligungsaspekt, der das Modul für die Studie interessant macht.</div>
       <div class="d"><b>Nicht-Ziele</b>Keine Notenkopplung, keine Fehlstunden-Minuten, kein Export, keine Statistik-Engine. Nur ein einfacher Fehltage-Zähler pro Kind.</div>
     </div>
   </section>
@@ -141,7 +141,7 @@
       <div class="role card">
         <div class="ric" style="background:linear-gradient(135deg,var(--amber),var(--amber-2))"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></div>
         <h4>Schüler:in</h4>
-        <p>Sieht ausschließlich die eigenen Abwesenheiten, read-only. Sieht <strong>niemals</strong> Einträge von Mitschüler:innen — serverseitig erzwungen, nicht nur im Frontend verborgen.</p>
+        <p>Sieht ausschließlich die eigenen Abwesenheiten, read-only. Sieht <strong>niemals</strong> Einträge von Mitschüler:innen – serverseitig erzwungen, nicht nur im Frontend verborgen.</p>
       </div>
     </div>
 
@@ -150,7 +150,7 @@
       <div class="step card">
         <div class="who">Elternteil</div>
         <h5>Meldet Kind ab</h5>
-        <p>Datum oder Zeitraum wählen, optional eine Notiz — der Eintrag entsteht als „gemeldet, noch unbestätigt".</p>
+        <p>Datum oder Zeitraum wählen, optional eine Notiz – der Eintrag entsteht als „gemeldet, noch unbestätigt".</p>
       </div>
       <div class="arr"><svg class="i big" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       <div class="step card">
@@ -173,20 +173,20 @@
 
   <section id="datenmodell">
     <div class="sec-head"><span class="sec-num">04</span><h2>Datenmodell &amp; Sicherheit</h2></div>
-    <p class="sec-sub">Ein Grundprinzip der App wird übernommen: Es werden nur <strong>Abweichungen</strong> gespeichert. Kein Eintrag bedeutet anwesend — die Tabelle bleibt klein, der Normalfall kostet nichts.</p>
+    <p class="sec-sub">Ein Grundprinzip der App wird übernommen: Es werden nur <strong>Abweichungen</strong> gespeichert. Kein Eintrag bedeutet anwesend – die Tabelle bleibt klein, der Normalfall kostet nichts.</p>
     <div class="schema">
-      <span class="k">attendance</span> <span class="c">— eine Zeile pro Abwesenheit (max. eine pro Kind und Tag)</span><br>
+      <span class="k">attendance</span> <span class="c">– eine Zeile pro Abwesenheit (max. eine pro Kind und Tag)</span><br>
       &nbsp;&nbsp;class_id · student_id · <span class="t">date</span><br>
       &nbsp;&nbsp;status &nbsp;&nbsp;&nbsp;<span class="c">entschuldigt | unentschuldigt</span><br>
       &nbsp;&nbsp;note &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c">optional, nie verpflichtend, keine Diagnose</span><br>
-      &nbsp;&nbsp;source &nbsp;&nbsp;&nbsp;<span class="c">teacher | parent — wer den Eintrag angelegt hat</span><br>
+      &nbsp;&nbsp;source &nbsp;&nbsp;&nbsp;<span class="c">teacher | parent – wer den Eintrag angelegt hat</span><br>
       &nbsp;&nbsp;confirmed_by / confirmed_at &nbsp;<span class="c">leer = offene Elternmeldung</span>
     </div>
     <div class="layers" style="margin-top:16px">
       <div class="layer card">
         <div class="n">RLS · Lehrperson</div>
         <h4>Volle Rechte, eigene Klasse</h4>
-        <p>Lesen, Anlegen, Bestätigen, Löschen — nur für Klassen, denen die Lehrperson zugeordnet ist. Identisches Policy-Muster wie bei Terminen und Planung.</p>
+        <p>Lesen, Anlegen, Bestätigen, Löschen – nur für Klassen, denen die Lehrperson zugeordnet ist. Identisches Policy-Muster wie bei Terminen und Planung.</p>
       </div>
       <div class="layer card">
         <div class="n">RLS · Elternteil</div>
@@ -196,52 +196,52 @@
       <div class="layer card">
         <div class="n">RLS · Schüler:in</div>
         <h4>Nur die eigenen Zeilen</h4>
-        <p>Read-only auf Einträge mit der eigenen ID. Abwesenheiten von Mitschüler:innen sind auf Datenbankebene unsichtbar — wichtig, weil Abwesenheit sozial sensibel ist.</p>
+        <p>Read-only auf Einträge mit der eigenen ID. Abwesenheiten von Mitschüler:innen sind auf Datenbankebene unsichtbar – wichtig, weil Abwesenheit sozial sensibel ist.</p>
       </div>
     </div>
   </section>
 
   <section id="plan">
     <div class="sec-head"><span class="sec-num">05</span><h2>Umsetzungsplan</h2></div>
-    <p class="sec-sub">Vier Phasen, jede einzeln lauffähig und einzeln rückbaubar. Die Migration wird — wie bei allen Features — als idempotentes SQL-Skript mit passendem Rollback-Skript geführt.</p>
+    <p class="sec-sub">Vier Phasen, jede einzeln lauffähig und einzeln rückbaubar. Die Migration wird – wie bei allen Features – als idempotentes SQL-Skript mit passendem Rollback-Skript geführt.</p>
 
     <div class="phase card">
       <div class="phase-head"><span class="phase-num">1</span><h3>Datenbank</h3><span class="chip new">Migration</span></div>
       <p class="goal">Tabelle <span class="src">attendance</span> mit Constraints, Index und vollständigen RLS-Policies für alle drei Rollen.</p>
       <ul>
-        <li><b>feature-anwesenheit.sql</b> — idempotent, im Supabase-SQL-Editor auszuführen</li>
-        <li><b>rollback-anwesenheit.sql</b> — vollständiger Rückbau mit einem Skript</li>
+        <li><b>feature-anwesenheit.sql</b>– idempotent, im Supabase-SQL-Editor auszuführen</li>
+        <li><b>rollback-anwesenheit.sql</b>– vollständiger Rückbau mit einem Skript</li>
       </ul>
     </div>
     <div class="phase card">
       <div class="phase-head"><span class="phase-num">2</span><h3>Lehrpersonen-Ansicht</h3><span class="chip new">Kern</span></div>
       <p class="goal">Seite <span class="src">/anwesenheit</span>: Tages-Abgleich mit der Klassenliste, offene Elternmeldungen, Zeitraum-Übersicht.</p>
       <ul>
-        <li><b>Tages-Abgleich</b> — Standard anwesend, ein Tap pro Abweichung, sofort gespeichert</li>
-        <li><b>Fehltage-Zähler</b> — einfache Summe pro Kind im gewählten Zeitraum, keine Statistik-Engine</li>
+        <li><b>Tages-Abgleich</b>– Standard anwesend, ein Tap pro Abweichung, sofort gespeichert</li>
+        <li><b>Fehltage-Zähler</b>– einfache Summe pro Kind im gewählten Zeitraum, keine Statistik-Engine</li>
       </ul>
     </div>
     <div class="phase card">
       <div class="phase-head"><span class="phase-num">3</span><h3>Eltern &amp; Schüler:innen</h3><span class="chip new">Beteiligung</span></div>
       <p class="goal">Elternmeldung mit Bestätigungs-Loop und die persönliche Read-only-Sicht für Schüler:innen.</p>
       <ul>
-        <li><b>Kind abmelden</b> — Tag oder Zeitraum, optionale Notiz, Status gemeldet → bestätigt</li>
-        <li><b>1-Tap-Bestätigung</b> — offene Meldungen angepinnt in der Lehrer-Ansicht</li>
+        <li><b>Kind abmelden</b>– Tag oder Zeitraum, optionale Notiz, Status gemeldet → bestätigt</li>
+        <li><b>1-Tap-Bestätigung</b>– offene Meldungen angepinnt in der Lehrer-Ansicht</li>
       </ul>
     </div>
     <div class="phase card">
       <div class="phase-head"><span class="phase-num">4</span><h3>Integration &amp; Doku</h3><span class="chip reuse">Abschluss</span></div>
       <p class="goal">Navigation, Startseiten-Einbindung und Nachführung der Thesis-Dokumentation.</p>
       <ul>
-        <li><b>Navigation</b> — Eintrag je Rolle; Startseiten-Hinweis für die Lehrperson bei offenen Meldungen</li>
-        <li><b>App-Systemüberblick</b> — Modul nach dem Bau code-basiert nachtragen (Belegt/Interpretiert-Schema)</li>
-        <li><b>Forschungsethik</b> — Anwesenheitsdaten in Einverständniserklärung und Ethik-Kapitel aufnehmen</li>
+        <li><b>Navigation</b>– Eintrag je Rolle; Startseiten-Hinweis für die Lehrperson bei offenen Meldungen</li>
+        <li><b>App-Systemüberblick</b>– Modul nach dem Bau code-basiert nachtragen (Belegt/Interpretiert-Schema)</li>
+        <li><b>Forschungsethik</b>– Anwesenheitsdaten in Einverständniserklärung und Ethik-Kapitel aufnehmen</li>
       </ul>
     </div>
   </section>
 
   <div class="foot">
-    <span>Master-Thesis · KlassenHub — Anwesenheit: Konzept &amp; Umsetzungsplan (16.07.2026, zuletzt aktualisiert 17.07.2026)</span>
+    <span>Master-Thesis · KlassenHub – Anwesenheit: Konzept &amp; Umsetzungsplan (16.07.2026, zuletzt aktualisiert 17.07.2026)</span>
     <span><a href="2026-07-app-systemueberblick.html">Zum App-Systemüberblick →</a></span>
   </div>
 </div>

@@ -2,31 +2,34 @@
 
 Öffentliche Arbeitsdokumentation für die Master-Thesis „Digitale Schulkommunikation
 als Entwicklungsfeld schulischer Leadership" (Hochschullehrgang Schulmanagement &
-Leadership, PH NÖ) — eine qualitative Untersuchung zur Erprobung der selbst
+Leadership, PH NÖ) – eine qualitative Untersuchung zur Erprobung der selbst
 entwickelten Schulklassen-App **KlassenHub**. KlassenHub selbst ist Untersuchungs­
 gegenstand der Studie; die empirische Erprobung beginnt mit dem ersten
 Schulsemester ab September 2026.
 
 Gedacht vor allem als vorzeigbare, versionierte Grundlage für die
-Betreuungsgespräche — die Git-Historie ist zugleich Fortschritts-Nachweis.
+Betreuungsgespräche – die Git-Historie ist zugleich Fortschritts-Nachweis.
 
 Bewusst kuratiert: Rohnotizen, Quellenbewertungen und private Vorbereitungen
 liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
-übernommen — hier stehen nur präsentable, abgeschlossene Inhalte.
+übernommen – hier stehen nur präsentable, abgeschlossene Inhalte.
 
-## Stand (03.08.2026)
+## Stand (02.11.2026)
 
 | | |
 |---|---|
-| **Seiten** | 26 (Startseite + 25 Dokumente unter `docs/`) |
+| **Phase** | Feldphase: Erhebung 1 vorbereitet, Durchführung im November 2026 |
+| **Seiten** | 33 (Startseite, 27 Dokumente, 5 Instrumentenseiten unter `docs/`) |
 | **Mappe** | 58 Entwurfsdokumente als Markdown unter `mappe/` |
-| **Literaturbestand** | 50 aktive Quellen, einzeln bewertet, in zehn Kategorien; 3 begründet ausgesondert |
-| **Erklärte Lücken** | 3 von 4 geschlossen; offen bleibt allein der österreichische Kontext (Ordner 07), bewusst bis zur Klärung mit der Betreuung |
-| **Forschungsfrage** | dreimal präzisiert (25.07., 31.07., 03.08.2026), zuletzt um den Leadership-Bezug erweitert |
-| **Exposé** | erster vollständiger Entwurf, liegt privat als `.docx` in der PH-Vorlage |
-| **Empirie** | noch nicht begonnen; Erhebung ab September 2026 |
+| **Literaturbestand** | 52 aktive Quellen, einzeln bewertet, in zehn Kategorien; Lückenanalyse für den Theorieteil abgeschlossen |
+| **Forschungsfrage** | dreimal präzisiert, am 17.08.2026 mit der Betreuung abgestimmt |
+| **Exposé** | am 17.08.2026 besprochen, inhaltlich ohne Einwände; liegt privat als `.docx` |
+| **Empirie** | App seit Schulbeginn im Einsatz; Erhebung 1 dokumentiert unter `docs/2026-11-erhebung-1.html` |
 
-**Erstes Fachgespräch** (Explikation, 10 % der Note) fand am 03.08.2026 statt.
+**Fachgespräche:** erstes am 03.08.2026 (Explikation), Exposé-Besprechung am 17.08.2026.
+
+**Zum Namen:** Die App heißt seit September 2026 **ClassHaven**, vorher **KlassenHub**. Ältere
+Dokumente verwenden den alten Namen; die Startseite erklärt das.
 
 ### Wo was steht
 
@@ -37,12 +40,12 @@ bei jedem Schritt fortgeschrieben (Änderungsprotokoll am Seitenende).
 Die Dokumente sind auf der Startseite in drei Ebenen geordnet, und diese Ordnung
 ist die eigentliche Navigationshilfe:
 
-- **Ebene 1 — Die Arbeit.** Forschungsfrage, Design, Literatur, Ethik, Begriffe,
+- **Ebene 1 – Die Arbeit.** Forschungsfrage, Design, Literatur, Ethik, Begriffe,
   Rahmenbedingungen. Das, worauf die Betreuungsgespräche zielen. Acht Dokumente.
-- **Ebene 2 — Der Gegenstand.** Der App-Systemüberblick als Grundlage des Kapitels
+- **Ebene 2 – Der Gegenstand.** Der App-Systemüberblick als Grundlage des Kapitels
   „Beschreibung der App". Code-basiert, mit sauberer Trennung von Belegtem und
   Interpretiertem.
-- **Ebene 3 — Entwicklungsdokumentation.** Zehn Dokumente zum Entstehungsprozess der
+- **Ebene 3 – Entwicklungsdokumentation.** Zehn Dokumente zum Entstehungsprozess der
   App, gebündelt auf einer Sammelseite. Sie belegen den Prozess, tragen aber nicht die
   Forschungsargumentation.
 
@@ -77,10 +80,10 @@ Arbeitsordner sind divergent und werden nicht gepflegt.
 Ändert sich der Literaturbestand, sind **vier** Orte nachzuziehen, sonst
 widersprechen sie einander:
 
-1. `docs/2026-07-literaturverzeichnis.html` — Quellenkarten und Kopfzahl
-2. `docs/2026-07-literaturkarte.html` — Tabellenzeilen, Filterleiste, Kopfzahl
-3. `index.html` — Stand-Block und die beiden Dokumentkarten
-4. `papers and references/README.md` im Arbeitsordner — Ordnertabelle
+1. `docs/2026-07-literaturverzeichnis.html` – Quellenkarten und Kopfzahl
+2. `docs/2026-07-literaturkarte.html` – Tabellenzeilen, Filterleiste, Kopfzahl
+3. `index.html` – Stand-Block und die beiden Dokumentkarten
+4. `papers and references/README.md` im Arbeitsordner – Ordnertabelle
 
 Der Stand-Block auf der Startseite veraltet erfahrungsgemäß zuerst.
 
@@ -108,9 +111,9 @@ Seiten hinweg konsistent.
 3. Im `<div class="topbar">` einen Zurück-Link auf `../index.html` setzen
    (siehe `docs/2026-07-gamification-konzept.html` als Vorlage).
 4. Seiten-spezifische Komponenten in einem eigenen `<style>`-Block direkt
-   in der Datei ergänzen — nicht in `theme.css`, damit die geteilte Basis
+   in der Datei ergänzen – nicht in `theme.css`, damit die geteilte Basis
    schlank bleibt.
-5. In `index.html` unter „Dokumente" eine neue `.doc-card` ergänzen — in der
+5. In `index.html` unter „Dokumente" eine neue `.doc-card` ergänzen – in der
    passenden Ebene (siehe „Wo was steht").
 6. Vor dem Commit prüfen: Tag-Balance, keine verschachtelten `<a>` (die Doc-Karten
    sind selbst Links, ein Link darin zerlegt die Karte), und alle verwendeten
@@ -120,14 +123,14 @@ Seiten hinweg konsistent.
 
 Farb-Tokens, Typografie-Paarung (Bricolage Grotesque / Hanken Grotesque) und
 die Komponenten-Bausteine (Topbar, Hero, Chips, Karten, Tabellen, Timeline,
-Phasen-Roadmap …) sind bewusst identisch zur KlassenHub-App gehalten — die
+Phasen-Roadmap …) sind bewusst identisch zur KlassenHub-App gehalten – die
 Thesis dokumentiert ein Produkt, dessen visuelle Sprache sie mitträgt. Beide
 Farbschemata (hell/dunkel) werden über CSS-Variablen bedient, sowohl über
 `prefers-color-scheme` als auch über ein manuelles `data-theme`-Attribut.
 
 ## GitHub Pages einrichten
 
-1. Repo auf GitHub erstellen (öffentlich — private Pages brauchen einen
+1. Repo auf GitHub erstellen (öffentlich – private Pages brauchen einen
    bezahlten Plan) und diesen lokalen Ordner als Remote verbinden.
 2. Push auf `main`.
 3. Auf GitHub: **Settings → Pages → Source: Deploy from a branch → Branch:
@@ -137,7 +140,7 @@ Farbschemata (hell/dunkel) werden über CSS-Variablen bedient, sowohl über
 
 ## Lokale Vorschau
 
-Kein Build-Schritt nötig — reines HTML/CSS. Einfach lokal servieren, damit
+Kein Build-Schritt nötig – reines HTML/CSS. Einfach lokal servieren, damit
 relative Pfade (`assets/…`, `docs/…`) korrekt auflösen:
 
 ```bash

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Datenschutz &amp; Feldzugang — Master-Thesis KlassenHub</title>
+<title>Datenschutz &amp; Feldzugang · Master-Thesis KlassenHub</title>
 <meta name="description" content="Datenschutz-Grundlage der App als Voraussetzung der Erprobung: Trennung von Nutzung und Forschung, verifizierte Zugriffskontrolle, Datenkategorien, Löschkonzept, offene Entscheidungen.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,7 +83,7 @@
   <header class="hero">
     <div class="eyebrow">Feldvorbereitung · Strang B</div>
     <h1>Bevor erhoben wird,<br>muss die App rechtlich stehen.</h1>
-    <p class="lede">Die Erprobung setzt voraus, dass die Anwendung im Schulbetrieb überhaupt betrieben werden darf — unabhängig davon, ob darüber geforscht wird. Diese Seite dokumentiert die Grundlage: welche Daten verarbeitet werden, wie der Zugriff kontrolliert wird, wie lange gespeichert wird, und was noch zu entscheiden ist.</p>
+    <p class="lede">Die Erprobung setzt voraus, dass die Anwendung im Schulbetrieb überhaupt betrieben werden darf – unabhängig davon, ob darüber geforscht wird. Diese Seite dokumentiert die Grundlage: welche Daten verarbeitet werden, wie der Zugriff kontrolliert wird, wie lange gespeichert wird, und was noch zu entscheiden ist.</p>
     <div class="thesis">
       <strong>Datenschutz ist hier kein Anhang zur Forschung, sondern ihre Vorbedingung.</strong> Er betrifft die App als Organisationsmittel und wäre auch dann zu klären, wenn es diese Masterarbeit nicht gäbe. Die verbindliche Einordnung nimmt die Datenschutzbeauftragte der Bildungsdirektion vor; was hier steht, bereitet diese Prüfung vor und trifft begründete Vorschläge.
     </div>
@@ -115,18 +115,18 @@
     </div>
 
     <div class="thesis" style="margin-top:18px">
-      <strong>Warum die Trennung überhaupt funktioniert:</strong> weil die Nutzungsdaten der App nicht ausgewertet werden. Nur deshalb kann jemand die App verwenden, ohne an der Forschung teilzunehmen — und nur deshalb bleibt Nichtteilnahme folgenlos. Was im Exposé wie eine vorsichtige Selbstbeschränkung aussieht, ist tatsächlich die tragende Säule der gesamten forschungsethischen Konstruktion.
+      <strong>Warum die Trennung überhaupt funktioniert:</strong> weil die Nutzungsdaten der App nicht ausgewertet werden. Nur deshalb kann jemand die App verwenden, ohne an der Forschung teilzunehmen – und nur deshalb bleibt Nichtteilnahme folgenlos. Was im Exposé wie eine vorsichtige Selbstbeschränkung aussieht, ist tatsächlich die tragende Säule der gesamten forschungsethischen Konstruktion.
     </div>
   </section>
 
   <section id="zugriff">
-    <div class="sec-head"><span class="sec-num">02</span><h2>Zugriffskontrolle — geprüft, nicht behauptet</h2></div>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Zugriffskontrolle – geprüft, nicht behauptet</h2></div>
     <p class="sec-sub">Die Sichtbarkeit von Daten wird in der Datenbank durchgesetzt, nicht im Frontend verborgen. Ein manipulierter Client kann sie nicht umgehen.</p>
 
     <div class="proof">
       <div class="pl">EXTERNER TEST · 06.08.2026</div>
       <h3>Anonymer Zugriff auf alle Tabellen: kein einziger Datensatz</h3>
-      <p>Mit dem öffentlichen Anwendungsschlüssel wurde jede Tabelle des Live-Schemas ohne Anmeldung abgefragt. Aussagekräftig ist das Ergebnis, weil die weit überwiegende Mehrzahl der Tabellen tatsächlich befüllt war — bei leeren Tabellen würde ein Nullergebnis nichts belegen.</p>
+      <p>Mit dem öffentlichen Anwendungsschlüssel wurde jede Tabelle des Live-Schemas ohne Anmeldung abgefragt. Aussagekräftig ist das Ergebnis, weil die weit überwiegende Mehrzahl der Tabellen tatsächlich befüllt war – bei leeren Tabellen würde ein Nullergebnis nichts belegen.</p>
       <div class="pnums">
         <div class="pn"><div class="v">31</div><div class="l">Tabellen im Live-Schema geprüft</div></div>
         <div class="pn"><div class="v">28</div><div class="l">davon befüllt, der Test ist damit aussagekräftig</div></div>
@@ -137,7 +137,7 @@
 
     <p style="margin-top:18px">Getragen wird das von <b>Row-Level-Security auf Datenbankebene</b> mit über 150 einzelnen Regeln, einer zentralen Helper-Funktion für die Klassenisolation und einem granularen Rollenmodell (Lehrperson, Elternteil, Schüler*in, dazu eng umrissene Sonderrollen). Das digitale Mitteilungsheft ist strikt getrennt: je Elternteil ein eigener Thread, für Schüler*innen kein Zugriff. Zwölf eigene Migrationsdateien dokumentieren, dass Berechtigungen wiederholt nachgeschärft wurden.</p>
 
-    <p style="margin-top:12px">Keine Analytics, kein Tracking, keine Drittanbieter-Einbindungen. Datenbank und Authentifizierung laufen in einer <b>EU-Region (Frankfurt)</b> — es findet kein Drittlandtransfer statt.</p>
+    <p style="margin-top:12px">Keine Analytics, kein Tracking, keine Drittanbieter-Einbindungen. Datenbank und Authentifizierung laufen in einer <b>EU-Region (Frankfurt)</b>– es findet kein Drittlandtransfer statt.</p>
   </section>
 
   <section id="daten">
@@ -163,18 +163,18 @@
 
   <section id="loeschen">
     <div class="sec-head"><span class="sec-num">04</span><h2>Löschkonzept</h2></div>
-    <p class="sec-sub">Der Punkt, an dem Eigenentwicklungen regelmäßig scheitern — und die erste Frage jeder prüfenden Stelle.</p>
+    <p class="sec-sub">Der Punkt, an dem Eigenentwicklungen regelmäßig scheitern – und die erste Frage jeder prüfenden Stelle.</p>
 
     <div class="del">
-      <div class="dr now"><span><b>Testdaten aus der Entwicklung</b> — vollständig entfernen, protokolliert</span><span class="when">vor Produktivstart</span></div>
-      <div class="dr now"><span><b>Daten entfernter Funktionen</b> — Tabellen eines zurückgebauten Features löschen; personenbezogene Daten ohne Zweck widersprechen der Datenminimierung</span><span class="when">vor Produktivstart</span></div>
-      <div class="dr"><span><b>Motivationssystem und Aufgabenverlauf</b> — Bewegungsdaten des abgelaufenen Jahres</span><span class="when">Schuljahresende</span></div>
-      <div class="dr"><span><b>Abwesenheiten</b> — in der App nur das laufende Schuljahr; die schulrechtliche Aufbewahrung erfolgt in der Schulverwaltung, nicht hier</span><span class="when">Schuljahresende</span></div>
-      <div class="dr"><span><b>Kommunikationsinhalte</b> — ein Jahr nach Schuljahresende, längere Frist nur bei belegter Dokumentationspflicht</span><span class="when">+1 Jahr</span></div>
-      <div class="dr"><span><b>Stammdaten bei Klassen- oder Schulwechsel</b> — mit allen verknüpften Daten</span><span class="when">binnen 30 Tagen</span></div>
+      <div class="dr now"><span><b>Testdaten aus der Entwicklung</b>– vollständig entfernen, protokolliert</span><span class="when">vor Produktivstart</span></div>
+      <div class="dr now"><span><b>Daten entfernter Funktionen</b>– Tabellen eines zurückgebauten Features löschen; personenbezogene Daten ohne Zweck widersprechen der Datenminimierung</span><span class="when">vor Produktivstart</span></div>
+      <div class="dr"><span><b>Motivationssystem und Aufgabenverlauf</b>– Bewegungsdaten des abgelaufenen Jahres</span><span class="when">Schuljahresende</span></div>
+      <div class="dr"><span><b>Abwesenheiten</b>– in der App nur das laufende Schuljahr; die schulrechtliche Aufbewahrung erfolgt in der Schulverwaltung, nicht hier</span><span class="when">Schuljahresende</span></div>
+      <div class="dr"><span><b>Kommunikationsinhalte</b>– ein Jahr nach Schuljahresende, längere Frist nur bei belegter Dokumentationspflicht</span><span class="when">+1 Jahr</span></div>
+      <div class="dr"><span><b>Stammdaten bei Klassen- oder Schulwechsel</b>– mit allen verknüpften Daten</span><span class="when">binnen 30 Tagen</span></div>
     </div>
 
-    <p style="margin-top:16px">Umgesetzt als dokumentierter Jahresendlauf zu einem festgelegten Stichtag, mit Protokoll über gelöschte Datensatzmengen — nicht über Inhalte. Die Infrastruktur dafür ist vorhanden: geplante Datenbankaufgaben laufen bereits für die wöchentliche Dienstezuteilung.</p>
+    <p style="margin-top:16px">Umgesetzt als dokumentierter Jahresendlauf zu einem festgelegten Stichtag, mit Protokoll über gelöschte Datensatzmengen – nicht über Inhalte. Die Infrastruktur dafür ist vorhanden: geplante Datenbankaufgaben laufen bereits für die wöchentliche Dienstezuteilung.</p>
   </section>
 
   <section id="offen">
@@ -184,7 +184,7 @@
     <div class="openlist">
       <div class="ol">
         <h4>Verantwortlichkeit</h4>
-        <p>Vorgeschlagen wird: die Schule ist Verantwortliche, die Entwicklung stellt das System im Auftrag bereit — mit Auftragsverarbeitungsvertrag. Die Alternative, eine Privatperson als Verantwortliche, ist bei Daten Minderjähriger zu schulischen Zwecken nicht tragfähig. Zusätzlich wird angeregt, das Projekt auf ein dienstliches Konto der Schule zu übertragen: Dann bleibt der Zugang der Schule auch unabhängig von einzelnen Personen erhalten. Die Entscheidung liegt bei der Bildungsdirektion.</p>
+        <p>Vorgeschlagen wird: die Schule ist Verantwortliche, die Entwicklung stellt das System im Auftrag bereit – mit Auftragsverarbeitungsvertrag. Die Alternative, eine Privatperson als Verantwortliche, ist bei Daten Minderjähriger zu schulischen Zwecken nicht tragfähig. Zusätzlich wird angeregt, das Projekt auf ein dienstliches Konto der Schule zu übertragen: Dann bleibt der Zugang der Schule auch unabhängig von einzelnen Personen erhalten. Die Entscheidung liegt bei der Bildungsdirektion.</p>
       </div>
       <div class="ol">
         <h4>Rechtsgrundlage des Motivationssystems</h4>
@@ -192,7 +192,7 @@
       </div>
       <div class="ol">
         <h4>Einsicht in die Nutzersicht</h4>
-        <p>Lehrpersonen können die Anwendung aus der Perspektive einzelner Nutzender betrachten — fachlich sinnvoll für Unterstützung, datenschutzrechtlich ein Zusatzzugriff. Er wird im Verarbeitungsverzeichnis benannt, auf die eigene Klasse begrenzt und protokolliert.</p>
+        <p>Lehrpersonen können die Anwendung aus der Perspektive einzelner Nutzender betrachten – fachlich sinnvoll für Unterstützung, datenschutzrechtlich ein Zusatzzugriff. Er wird im Verarbeitungsverzeichnis benannt, auf die eigene Klasse begrenzt und protokolliert.</p>
       </div>
       <div class="ol">
         <h4>Aufbewahrungspflichten</h4>
@@ -200,7 +200,7 @@
       </div>
     </div>
 
-    <p style="margin-top:18px">Eingereicht wird ein vollständiges Dossier statt einer Anfrage: Bestandsaufnahme, technische Maßnahmen, Löschkonzept, Auftragsverarbeitungsvertrag, Entwurf der Elterninformation und Entwurf des Eintrags ins Verarbeitungsverzeichnis — mit konkreter Frage und konkretem Terminwunsch. <b>Getrennt vom Forschungsantrag</b>, auch wenn beides dieselbe Stelle erreicht: Eine Vermischung würde beide Vorgänge verlangsamen und die Trennung untergraben, auf der die Freiwilligkeit beruht.</p>
+    <p style="margin-top:18px">Eingereicht wird ein vollständiges Dossier statt einer Anfrage: Bestandsaufnahme, technische Maßnahmen, Löschkonzept, Auftragsverarbeitungsvertrag, Entwurf der Elterninformation und Entwurf des Eintrags ins Verarbeitungsverzeichnis – mit konkreter Frage und konkretem Terminwunsch. <b>Getrennt vom Forschungsantrag</b>, auch wenn beides dieselbe Stelle erreicht: Eine Vermischung würde beide Vorgänge verlangsamen und die Trennung untergraben, auf der die Freiwilligkeit beruht.</p>
   </section>
 </div>
 

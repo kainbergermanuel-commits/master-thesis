@@ -59,7 +59,13 @@
       { name: null, items: [
         ['2026-11-erhebung-1.html', 'Erhebung 1 · Dokumentation'],
         ['2026-08-schulstart-timeline.html', 'Ausgabe-Timeline Schulstart'],
-        ['2026-08-schulstart-mappe.html', 'Dokumentenmappe Schulstart'] ] } ] }
+        ['2026-08-schulstart-mappe.html', 'Dokumentenmappe Schulstart'] ] },
+      { name: 'Instrumente Erhebung 1', items: [
+        ['2026-11-e1-leitfaden-lehrpersonen.html', 'Leitfaden Lehrpersonen'],
+        ['2026-11-e1-kurzfragebogen-lehrpersonen.html', 'Kurzfragebogen Lehrpersonen'],
+        ['2026-11-e1-leitfaden-gruppeninterview.html', 'Leitfaden Gruppeninterview'],
+        ['2026-11-e1-kartenaufgabe.html', 'Kartenaufgabe'],
+        ['2026-11-e1-fragebogen-eltern.html', 'Fragebogen Erziehungsberechtigte'] ] } ] }
   ];
 
   // ---- Pfade ---------------------------------------------------------------

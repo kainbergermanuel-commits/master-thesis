@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gamification-Umsetzung — Master-Thesis KlassenHub</title>
-<meta name="description" content="Von der Konzeptplanung zur lauffähigen Umsetzung: Streak-Redesign, Story-Hero, Rucksack-Item-System und Dienst-Selbstbestätigung — inklusive der dabei gefundenen und behobenen Fehler.">
+<title>Gamification-Umsetzung · Master-Thesis KlassenHub</title>
+<meta name="description" content="Von der Konzeptplanung zur lauffähigen Umsetzung: Streak-Redesign, Story-Hero, Rucksack-Item-System und Dienst-Selbstbestätigung – inklusive der dabei gefundenen und behobenen Fehler.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,16 +71,16 @@
   <header class="hero">
     <div class="eyebrow">App-Weiterentwicklung · Umsetzungsbericht</div>
     <h1>Vom Konzept<br>zur lauffähigen App.</h1>
-    <p class="lede">Das <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a> beschreibt den Plan. Dieses Dokument beschreibt, was davon an einem konzentrierten Umsetzungstag tatsächlich in Code gegossen wurde — inklusive der Fehler, die dabei im eigenen Review-Durchgang auffielen und behoben wurden. Für die Thesis ist gerade dieser zweite Teil interessant: Konzept und Umsetzung klaffen in der Praxis fast immer auseinander, und die Art, wie diese Lücke geschlossen wird, ist selbst ein kleines Stück Forschungsgegenstand.</p>
+    <p class="lede">Das <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a> beschreibt den Plan. Dieses Dokument beschreibt, was davon an einem konzentrierten Umsetzungstag tatsächlich in Code gegossen wurde – inklusive der Fehler, die dabei im eigenen Review-Durchgang auffielen und behoben wurden. Für die Thesis ist gerade dieser zweite Teil interessant: Konzept und Umsetzung klaffen in der Praxis fast immer auseinander, und die Art, wie diese Lücke geschlossen wird, ist selbst ein kleines Stück Forschungsgegenstand.</p>
     <div class="thesis">
-      <strong>Leitentscheidung des Tages:</strong> Die zuvor öffentliche Streak-Rangliste wurde vollständig entfernt und durch ein <strong>privates</strong> Fortschritts-System ersetzt — begründet über eine Meta-Analyse, die für Gamification-Studien <em>ohne</em> Leaderboard deutlich höhere Lernerfolgs-Effekte findet als für Studien <em>mit</em> Leaderboard (g = .771 vs. g = .358). Diese Entscheidung zieht sich durch fast alle unten beschriebenen Bausteine.
+      <strong>Leitentscheidung des Tages:</strong> Die zuvor öffentliche Streak-Rangliste wurde vollständig entfernt und durch ein <strong>privates</strong> Fortschritts-System ersetzt – begründet über eine Meta-Analyse, die für Gamification-Studien <em>ohne</em> Leaderboard deutlich höhere Lernerfolgs-Effekte findet als für Studien <em>mit</em> Leaderboard (g = .771 vs. g = .358). Diese Entscheidung zieht sich durch fast alle unten beschriebenen Bausteine.
     </div>
   </header>
 
   <!-- ===================== 1 · STREAK-REDESIGN ===================== -->
   <section id="streak-redesign">
     <div class="sec-head"><span class="sec-num">01</span><h2>Vom Leaderboard zum privaten Emblem</h2></div>
-    <p class="sec-sub">Die Rangliste war der auffälligste Rest des ursprünglichen, vergleichsbasierten Streak-Systems. Sie wurde nicht "entschärft", sondern komplett entfernt — und durch eine leise, private Darstellung ersetzt.</p>
+    <p class="sec-sub">Die Rangliste war der auffälligste Rest des ursprünglichen, vergleichsbasierten Streak-Systems. Sie wurde nicht "entschärft", sondern komplett entfernt – und durch eine leise, private Darstellung ersetzt.</p>
 
     <div class="swap">
       <div class="side old card">
@@ -90,35 +90,35 @@
       <div class="arrow"><svg class="i big" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="side card">
         <div class="lbl">Nachher</div>
-        <p>Ein kleines, privates Schild-Symbol im "Heldenbuch" — zeigt nur den eigenen Streak-Schutz-Status (Joker), mit Hover-Tooltip. Die Streak-Länge selbst wird separat als Flammen-Reihe angezeigt. Kein Vergleich zwischen Schüler:innen mehr sichtbar, weder aktuell noch rückblickend.</p>
+        <p>Ein kleines, privates Schild-Symbol im "Heldenbuch" – zeigt nur den eigenen Streak-Schutz-Status (Joker), mit Hover-Tooltip. Die Streak-Länge selbst wird separat als Flammen-Reihe angezeigt. Kein Vergleich zwischen Schüler:innen mehr sichtbar, weder aktuell noch rückblickend.</p>
       </div>
     </div>
 
     <div class="note" style="margin-top:20px">
       <h4><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m9 12 2 2 4-4"/></svg> Warum nicht nur "entschärfen"?</h4>
-      <p>Ein zentrales Argument aus der Recherche: Ein Streak bricht binär bei einer einzigen vergessenen Hausübung. Öffentlich gespiegelt (Platz X von Y) trifft das leistungsschwächere Schüler:innen besonders hart und kann zum kompletten Aufgeben statt zu neuem Anlauf führen — der gegenteilige Effekt dessen, was Gamification erreichen soll. Der zugrunde liegende Mechanismus (Streak-Zähler, Schutz-Joker) blieb bestehen, weil er wertvolle Informationen für die private Rückschau liefert — nur die <em>Vergleichs-Dimension</em> wurde entfernt.</p>
+      <p>Ein zentrales Argument aus der Recherche: Ein Streak bricht binär bei einer einzigen vergessenen Hausübung. Öffentlich gespiegelt (Platz X von Y) trifft das leistungsschwächere Schüler:innen besonders hart und kann zum kompletten Aufgeben statt zu neuem Anlauf führen – der gegenteilige Effekt dessen, was Gamification erreichen soll. Der zugrunde liegende Mechanismus (Streak-Zähler, Schutz-Joker) blieb bestehen, weil er wertvolle Informationen für die private Rückschau liefert – nur die <em>Vergleichs-Dimension</em> wurde entfernt.</p>
     </div>
   </section>
 
   <!-- ===================== 2 · STORY-HERO ===================== -->
   <section id="story-hero">
     <div class="sec-head"><span class="sec-num">02</span><h2>Die Story-Hero-Karte</h2></div>
-    <p class="sec-sub">Aus dem Konzept-Kapitel "Story — niederschwellig eingewoben" wurde eine konkrete Startseiten-Komponente: Guide-Portrait, Etappen-Erzähltext und ein paar Kennzahlen, alles aus bereits geladenen Daten berechnet.</p>
+    <p class="sec-sub">Aus dem Konzept-Kapitel "Story – niederschwellig eingewoben" wurde eine konkrete Startseiten-Komponente: Guide-Portrait, Etappen-Erzähltext und ein paar Kennzahlen, alles aus bereits geladenen Daten berechnet.</p>
 
     <div class="impl-grid">
       <div class="impl card">
         <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#E8A020,#F5C842)"><svg class="i" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"/></svg></span><h4>Guide-Portrait statt Icon-Platzhalter</h4></div>
-        <p>Erste echte Charakter-Illustration ("Bergführerin Vala") ersetzt das generische Icon — zentral in einer Theme-Zuordnung hinterlegt, sodass weitere Guides ohne Codeänderung ergänzt werden können.</p>
-        <div class="why"><b>Warum:</b> Der Plan sah durchgehend Guide-Figuren als "Stimme" der App vor — ein Gesicht macht das greifbarer als ein Material-Icon.</div>
+        <p>Erste echte Charakter-Illustration ("Bergführerin Vala") ersetzt das generische Icon – zentral in einer Theme-Zuordnung hinterlegt, sodass weitere Guides ohne Codeänderung ergänzt werden können.</p>
+        <div class="why"><b>Warum:</b> Der Plan sah durchgehend Guide-Figuren als "Stimme" der App vor – ein Gesicht macht das greifbarer als ein Material-Icon.</div>
       </div>
       <div class="impl card">
         <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#3DB5AC,#0F8A82)"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><h4>Längere Etappen-Texte</h4></div>
         <p>Alle 15 Etappen-Texte (3 Themen × 5 Etappen) wurden von ein bis zwei knappen Sätzen auf drei bis vier atmosphärische Sätze mit kleinen erzählerischen Details erweitert.</p>
-        <div class="why"><b>Warum:</b> Kurztexte lasen sich wie Statusmeldungen, nicht wie Geschichte — die Erweiterung zielt direkt auf den Story-Faktor, der laut Meta-Analyse ein signifikanter Moderator für behaviorale Gamification-Effekte ist.</div>
+        <div class="why"><b>Warum:</b> Kurztexte lasen sich wie Statusmeldungen, nicht wie Geschichte – die Erweiterung zielt direkt auf den Story-Faktor, der laut Meta-Analyse ein signifikanter Moderator für behaviorale Gamification-Effekte ist.</div>
       </div>
       <div class="impl card">
         <div class="ih"><span class="ic" style="background:linear-gradient(135deg,#5965B8,#8791dd)"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h4>Info-Pillen mit Tooltip</h4></div>
-        <p>Klassenziel-Fortschritt, Wochen-Quest-Stand und nächster Termin als kompakte Pillen mit Hover-Erklärung — keine zusätzliche Datenbankabfrage, alles aus ohnehin geladenen Werten.</p>
+        <p>Klassenziel-Fortschritt, Wochen-Quest-Stand und nächster Termin als kompakte Pillen mit Hover-Erklärung – keine zusätzliche Datenbankabfrage, alles aus ohnehin geladenen Werten.</p>
         <div class="why"><b>Warum:</b> Ersetzt die zuvor entfernten Feature-Minicards, ohne deren Redundanz-Problem zu wiederholen.</div>
       </div>
       <div class="impl card">
@@ -132,13 +132,13 @@
   <!-- ===================== 3 · RUCKSACK ===================== -->
   <section id="rucksack">
     <div class="sec-head"><span class="sec-num">03</span><h2>Das Rucksack-Item-System</h2></div>
-    <p class="sec-sub">Der größte neue Baustein: ein Inventar aus acht Ausrüstungs-Items, die reale App-Mechaniken im Fantasy-Skin sichtbar machen. Kein Item wird pauschal freigeschaltet — jedes ist an ein echtes, für alle Schüler:innen gleich geltendes Signal geknüpft.</p>
+    <p class="sec-sub">Der größte neue Baustein: ein Inventar aus acht Ausrüstungs-Items, die reale App-Mechaniken im Fantasy-Skin sichtbar machen. Kein Item wird pauschal freigeschaltet – jedes ist an ein echtes, für alle Schüler:innen gleich geltendes Signal geknüpft.</p>
 
     <div class="tablewrap">
       <table>
         <thead><tr><th>Item</th><th>Reale Mechanik dahinter</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td class="qname">Schutzschild</td><td>Streak-Joker — 1× pro Season eine vergessene HÜ ohne Streak-Bruch</td><td><span class="chip reuse">interaktiv einsetzbar</span></td></tr>
+          <tr><td class="qname">Schutzschild</td><td>Streak-Joker – 1× pro Season eine vergessene HÜ ohne Streak-Bruch</td><td><span class="chip reuse">interaktiv einsetzbar</span></td></tr>
           <tr><td class="qname">Meistersiegel</td><td>Ab Streak 15: eigene HÜ zählen automatisch ohne Eltern-Bestätigung</td><td><span class="chip reuse">bereits bestehend</span></td></tr>
           <tr><td class="qname">Wappen-Fragment</td><td>Ab 3 gesammelten Erfolgen (Quest/Gilde/Klassenziel)</td><td><span class="chip new">neu verdrahtet</span></td></tr>
           <tr><td class="qname">Gildenbanner</td><td>Zugehörigkeit zur aktuellen (monatlich neu gemischten) Gilde</td><td><span class="chip new">neu verdrahtet</span></td></tr>
@@ -152,20 +152,20 @@
 
     <div class="note" style="margin-top:20px">
       <h4><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Bewusste Grenze: keine vorgetäuschte Freischaltung</h4>
-      <p>Für Zeitkristall und Botenfeder existiert noch keine echte Funktion dahinter. Statt sie trotzdem als "freigeschaltet" darzustellen, sind sie im Interface klar als in Entwicklung befindlich markiert — für alle Nutzer:innen gleich, ohne Sonderbehandlung einzelner Testfälle. Diese Zurückhaltung ist Teil des größeren Prinzips, keine Suchtmechaniken oder unehrlichen Fortschrittsanzeigen einzubauen.</p>
+      <p>Für Zeitkristall und Botenfeder existiert noch keine echte Funktion dahinter. Statt sie trotzdem als "freigeschaltet" darzustellen, sind sie im Interface klar als in Entwicklung befindlich markiert – für alle Nutzer:innen gleich, ohne Sonderbehandlung einzelner Testfälle. Diese Zurückhaltung ist Teil des größeren Prinzips, keine Suchtmechaniken oder unehrlichen Fortschrittsanzeigen einzubauen.</p>
     </div>
   </section>
 
   <!-- ===================== 4 · GEFUNDENE BUGS ===================== -->
   <section id="bugs">
     <div class="sec-head"><span class="sec-num">04</span><h2>Fehler, die der eigene Review-Durchgang fand</h2></div>
-    <p class="sec-sub">Nach dem Bau wurde der komplette Diff eines Umsetzungstages gezielt auf Denk- und Codefehler durchsucht — nicht nur auf Kompilierfehler. Vier Befunde waren nennenswert.</p>
+    <p class="sec-sub">Nach dem Bau wurde der komplette Diff eines Umsetzungstages gezielt auf Denk- und Codefehler durchsucht – nicht nur auf Kompilierfehler. Vier Befunde waren nennenswert.</p>
 
     <div class="bug card">
       <div class="bn">1</div>
       <div>
         <h4>Fortschrittsbalken traf die Etappen-Symbole nicht</h4>
-        <p>Die Breite des Balkens wurde nach der Formel <em>Etappen-Index ÷ (Anzahl−1)</em> berechnet, während die Symbole selbst gleich breite Spalten belegten (Mittelpunkt bei <em>(Index+0,5) ÷ Anzahl</em>). Beide Formeln stimmten nur in der Mitte der Reise überein — an jeder anderen Etappe blieb der Balken sichtbar vor dem erreichten Symbol stehen.</p>
+        <p>Die Breite des Balkens wurde nach der Formel <em>Etappen-Index ÷ (Anzahl−1)</em> berechnet, während die Symbole selbst gleich breite Spalten belegten (Mittelpunkt bei <em>(Index+0,5) ÷ Anzahl</em>). Beide Formeln stimmten nur in der Mitte der Reise überein – an jeder anderen Etappe blieb der Balken sichtbar vor dem erreichten Symbol stehen.</p>
         <p class="fixnote">Behoben: Balken-Formel an die tatsächliche Symbol-Position angeglichen.</p>
       </div>
     </div>
@@ -183,7 +183,7 @@
       <div class="bn">3</div>
       <div>
         <h4>Instabiler Listen-Schlüssel bei wiederholten Meilensteinen</h4>
-        <p>Die Meilenstein-Liste im Heldenbuch nutzte die Meilenstein-Zahl selbst als React-Schlüssel. Erreicht ein Kind denselben Meilenstein nach einem Streak-Bruch später erneut, kollidieren zwei Einträge mit demselben Schlüssel — ein subtiler, in der Oberfläche schwer bemerkbarer Fehler.</p>
+        <p>Die Meilenstein-Liste im Heldenbuch nutzte die Meilenstein-Zahl selbst als React-Schlüssel. Erreicht ein Kind denselben Meilenstein nach einem Streak-Bruch später erneut, kollidieren zwei Einträge mit demselben Schlüssel – ein subtiler, in der Oberfläche schwer bemerkbarer Fehler.</p>
         <p class="fixnote">Behoben: Schlüssel aus Meilenstein-Zahl <em>und</em> Bestätigungs-Zeitpunkt zusammengesetzt.</p>
       </div>
     </div>
@@ -192,7 +192,7 @@
       <div class="bn">4</div>
       <div>
         <h4>Die "ehrliche Datenlücke" aus dem Konzeptdokument war noch aktiv</h4>
-        <p>Das Konzept hatte diese Lücke selbst schon benannt: Die Dienst-Quest zählte allein die <em>Zuteilung</em> eines Diensts als erfüllt — unabhängig davon, ob der Dienst tatsächlich erledigt wurde. Das betraf sowohl die individuelle Quest als auch die kooperative Gilden-Quest.</p>
+        <p>Das Konzept hatte diese Lücke selbst schon benannt: Die Dienst-Quest zählte allein die <em>Zuteilung</em> eines Diensts als erfüllt – unabhängig davon, ob der Dienst tatsächlich erledigt wurde. Das betraf sowohl die individuelle Quest als auch die kooperative Gilden-Quest.</p>
         <p class="fixnote">Behoben, nicht nur dokumentiert: eigene Selbstbestätigungs-Tabelle plus Schüler-seitige Bestätigungs-Funktion ergänzt, Quest-Signal von "zugeteilt" auf "selbst bestätigt" umgestellt.</p>
       </div>
     </div>
@@ -201,16 +201,16 @@
   <!-- ===================== 5 · OFFEN ===================== -->
   <section id="offen">
     <div class="sec-head"><span class="sec-num">05</span><h2>Offen für die nächste Runde</h2></div>
-    <p class="sec-sub">Nicht alles aus dem Konzept wurde an diesem Tag umgesetzt — bewusst priorisiert nach Aufwand/Wirkung.</p>
+    <p class="sec-sub">Nicht alles aus dem Konzept wurde an diesem Tag umgesetzt – bewusst priorisiert nach Aufwand/Wirkung.</p>
     <div class="layers">
-      <div class="layer card"><div class="n">Visuell</div><h4>Kosmetische Klassen-Basis</h4><p>Die im Konzept beschriebene SVG-Szene, die sich mit dem Klassenfortschritt verändert — größter noch fehlender visueller Baustein.</p></div>
+      <div class="layer card"><div class="n">Visuell</div><h4>Kosmetische Klassen-Basis</h4><p>Die im Konzept beschriebene SVG-Szene, die sich mit dem Klassenfortschritt verändert – größter noch fehlender visueller Baustein.</p></div>
       <div class="layer card"><div class="n">Illustration</div><h4>Weitere Guide-Portraits</h4><p>Nur "Vala" (Bergexpedition) hat bereits eine echte Illustration; die anderen zwei Monatsthemen zeigen weiterhin einen Icon-Platzhalter.</p></div>
-      <div class="layer card"><div class="n">Politur</div><h4>UI/UX-Durchgang</h4><p>Bewusst zurückgestellt, bis die meisten Phasen inhaltlich stehen — dann ein eigener, gebündelter Gestaltungs-Durchgang statt Feature-für-Feature-Politur.</p></div>
+      <div class="layer card"><div class="n">Politur</div><h4>UI/UX-Durchgang</h4><p>Bewusst zurückgestellt, bis die meisten Phasen inhaltlich stehen – dann ein eigener, gebündelter Gestaltungs-Durchgang statt Feature-für-Feature-Politur.</p></div>
     </div>
   </section>
 
   <div class="foot">
-    <span>Master-Thesis · KlassenHub — Umsetzungsbericht zum <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a></span>
+    <span>Master-Thesis · KlassenHub – Umsetzungsbericht zum <a href="2026-07-gamification-konzept.html">Gamification-Konzept</a></span>
     <span>13.07.2026</span>
   </div>
 </div>

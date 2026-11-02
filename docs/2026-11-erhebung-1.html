@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Erhebung 1 · Dokumentation · Master-Thesis KlassenHub</title>
+<title>Erhebung 1 · Dokumentation · Master-Thesis ClassHaven</title>
 <meta name="description" content="Laufende Dokumentation der ersten Erhebungswelle: Stand, Fahrplan, Aufbau der drei Instrumente, getroffene Entscheidungen, Qualitätssicherung und Änderungsprotokoll.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +47,14 @@
   .lg p { font-size: 13px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
   .lg p b { color: var(--ink); }
 
+  .ilist { display: flex; flex-direction: column; margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .il-i { display: grid; grid-template-columns: 120px 1fr auto; gap: 14px; align-items: baseline; padding: 12px 16px; text-decoration: none; background: var(--card); border-top: 1px solid var(--line); transition: background .15s; }
+  .il-i:first-child { border-top: 0; }
+  .il-i:hover { background: var(--card-2); }
+  .il-w { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal); }
+  .il-t { font-family: var(--display); font-size: 14.5px; font-weight: 700; color: var(--ink); }
+  .il-v { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  @media (max-width: 560px) { .il-i { grid-template-columns: 1fr auto; } .il-w { grid-column: 1 / -1; } }
   .openlist { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
   .ol { padding: 13px 16px; border-radius: 11px; background: var(--card-2); border: 1px dashed color-mix(in srgb, var(--amber) 45%, var(--line)); }
   .ol h4 { font-family: var(--display); font-size: 13.5px; }
@@ -185,7 +193,16 @@
       <span class="finding"><b>Nähe wird als Problem behandelt.</b> Wer das Gegenüber kennt, erzählt bereitwilliger, aber verkürzt (Helfferich, 2011, S. 119–122). Deshalb die Nachfrage „Erklär es mir, als wüsste ich es nicht".</span>
     </div>
 
-    <p style="margin-top:18px" class="quiet-note">Der vollständige Wortlaut der Instrumente wird nach Abschluss der Erhebung hier ergänzt. Vorab veröffentlicht, könnten die Befragten die Fragen kennen und ihre Antworten vorbereiten; das würde gerade die spontanen Erzählungen beschädigen, auf die die Instrumente zielen.</p>
+    <h3 id="instrumente-einsehen" style="font-family:var(--display);font-size:16px;margin-top:28px">Die Instrumente im Wortlaut</h3>
+    <p class="sec-sub" style="margin-top:6px">Jedes Instrument als eigene Seite, die die Word-Fassung abbildet, und als Word-Datei zum Herunterladen.</p>
+    <div class="ilist">
+      <a class="il-i" href="2026-11-e1-leitfaden-lehrpersonen.html"><span class="il-w">Lehrpersonen</span><span class="il-t">Leitfaden Lehrpersonen</span><span class="il-v">v0.4</span></a>
+      <a class="il-i" href="2026-11-e1-kurzfragebogen-lehrpersonen.html"><span class="il-w">Lehrpersonen</span><span class="il-t">Kurzfragebogen nach dem Interview</span><span class="il-v">v0.4</span></a>
+      <a class="il-i" href="2026-11-e1-leitfaden-gruppeninterview.html"><span class="il-w">Schüler*innen</span><span class="il-t">Leitfaden Gruppeninterview</span><span class="il-v">v0.4</span></a>
+      <a class="il-i" href="2026-11-e1-kartenaufgabe.html"><span class="il-w">Schüler*innen</span><span class="il-t">Kartenaufgabe: Karten und Ablagefelder</span><span class="il-v">v0.4</span></a>
+      <a class="il-i" href="2026-11-e1-fragebogen-eltern.html"><span class="il-w">Eltern</span><span class="il-t">Fragebogen Erziehungsberechtigte</span><span class="il-v">v0.5</span></a>
+    </div>
+    <p class="quiet-note" style="margin-top:12px">Alle fünf Word-Dateien: <a href="downloads/01_Leitfaden_Lehrpersonen_E1.docx" download>Leitfaden Lehrpersonen</a> · <a href="downloads/02_Kurzfragebogen_Lehrpersonen_E1.docx" download>Kurzfragebogen</a> · <a href="downloads/03_Leitfaden_Gruppeninterview_E1.docx" download>Leitfaden Gruppeninterview</a> · <a href="downloads/04_Kartenaufgabe_Karten_und_Felder_E1.docx" download>Kartenaufgabe</a> · <a href="downloads/05_Fragebogen_Eltern_E1.docx" download>Fragebogen Eltern</a></p>
   </section>
 
   <section id="entscheidungen">
@@ -241,6 +258,7 @@
     <div class="sec-head"><span class="sec-num">05</span><h2>Änderungsprotokoll</h2></div>
     <p class="sec-sub">Jede Fassung der Instrumente mit dem Grund der Änderung. Neue Einträge kommen oben dazu.</p>
     <div class="log">
+      <div class="lg"><span class="ld">02.11.2026</span><p><b>Instrumente veröffentlicht.</b> Alle fünf Instrumente sind als eigene Seiten im Wortlaut und als Word-Dateien einsehbar.</p></div>
       <div class="lg"><span class="ld">02.11.2026</span><p><b>Leitfäden v0.4, Fragebogen v0.5.</b> Umbau nach der Gesamtprüfung: Erzählaufforderung der Lehrpersonen auf den Informationsfluss ausgerichtet, damit der Block auch für Fachlehrpersonen trägt; eine geschlossene Schlussfrage geöffnet; zwei Präsuppositionen im Gruppenleitfaden gestrichen; Einstieg bei den Kindern ehrlicher formuliert; Deckblatt des Fragebogens gekürzt; Entscheidungen E1 bis E6 eingearbeitet.</p></div>
       <div class="lg"><span class="ld">25.10.2026</span><p><b>Leitfäden v0.3, Fragebogen v0.4.</b> Gegenmaßnahmen aus dem Probelauf: gegenwärtiger Einstieg bei den Kindern, Reservefrage in der dritten Person, vierte Gesprächsregel, Kinderschutzregel, Hinweis für wenig nutzende Eltern.</p></div>
       <div class="lg"><span class="ld">25.10.2026</span><p><b>Fragebogen v0.3.</b> Die geschlossene Nutzungsübersicht wandert vom Anfang ans Ende, damit sie die offenen Antworten nicht vorstrukturiert.</p></div>
@@ -261,7 +279,7 @@
 
   <div class="foot">
     <span>Erhebung 1 · Dokumentation · Stand 02.11.2026</span>
-    <span>Master-Thesis KlassenHub · PH Niederösterreich</span>
+    <span>Master-Thesis ClassHaven · PH Niederösterreich</span>
   </div>
 </div>
 
