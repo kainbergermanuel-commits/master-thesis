@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Versionsprotokoll · Master-Thesis ClassHaven</title>
+<meta name="description" content="Was sich an der App seit dem Start der Erprobung am 07.09.2026 verändert hat: Startstand, 21 Änderungspakete nach Art, Einordnung gegenüber der Versionierungszusage des Exposés.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<script src="../assets/nav.js" defer></script>
+<style>
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+  @media (max-width: 820px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { padding: 14px 16px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .kpi .kv { font-family: var(--display); font-size: 24px; font-weight: 700; color: var(--teal); }
+  .kpi .kl { font-size: 12px; line-height: 1.45; color: var(--ink-soft); margin-top: 4px; }
+  .kpi .kv.mono { font-family: var(--mono); font-size: 20px; }
+
+  /* Farben der fünf Arten: ruhig, nur die Erweiterung tritt hervor */
+  .f { --c: var(--teal); } .d { --c: var(--violet); } .a { --c: var(--muted); } .b { --c: color-mix(in srgb, var(--muted) 55%, var(--teal)); } .e { --c: var(--amber); }
+
+  .stack { display: flex; height: 16px; border-radius: 999px; overflow: hidden; margin-top: 20px; gap: 2px; background: var(--line-soft); }
+  .seg { background: var(--c); }
+  .legend-x { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; }
+  .lgd { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-soft); }
+  .lgd b { color: var(--ink); }
+  .sw { width: 10px; height: 10px; border-radius: 3px; background: var(--c); display: inline-block; }
+
+  .tablewrap { overflow-x: auto; margin-top: 18px; -webkit-overflow-scrolling: touch; }
+  table.vp { width: 100%; border-collapse: collapse; min-width: 760px; font-size: 13px; }
+  table.vp th { text-align: left; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); padding: 8px 10px; border-bottom: 2px solid color-mix(in srgb, var(--teal) 55%, var(--line)); }
+  table.vp td { padding: 10px; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; line-height: 1.5; }
+  table.vp td.nr { font-family: var(--mono); font-weight: 700; color: var(--ink); width: 34px; }
+  table.vp td.dt { font-family: var(--mono); font-size: 12px; white-space: nowrap; color: var(--ink); }
+  table.vp tr.r-e td:first-child { box-shadow: inset 3px 0 0 var(--amber); }
+  .art { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .02em; padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+    color: var(--c); background: color-mix(in srgb, var(--c) 13%, var(--card)); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
+  .az { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .fn { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+  td.refs { width: 200px; font-family: var(--mono); font-size: 11px; line-height: 1.7; }
+  td.refs a { color: var(--teal); text-decoration: none; margin-right: 4px; }
+  td.refs a:hover { text-decoration: underline; }
+  .tkey { font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+  .dec { display: flex; flex-direction: column; gap: 9px; margin-top: 18px; }
+  .de { display: grid; grid-template-columns: 34px 1fr; gap: 13px; align-items: baseline; padding: 12px 16px; border-radius: 10px; background: var(--card-2); border-left: 3px solid var(--teal); }
+  .de .dn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--teal); }
+  .de h4 { font-family: var(--display); font-size: 14px; }
+  .de p { font-size: 12.8px; line-height: 1.56; color: var(--ink-soft); margin-top: 4px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 18px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+  .tc { padding: 15px 18px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+  .tc .tl2 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+  .tc p { font-size: 13px; line-height: 1.58; color: var(--ink-soft); margin-top: 6px; }
+  .tc.warn .tl2 { color: var(--amber); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.3 7.2 15.7 11M8.3 16.8l7.4-3.8"/></svg></span>
+      Versionsprotokoll
+    </div>
+    <div class="legend">
+      <span class="chip mid">laufend</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Empirie · Erprobung · Gegenstand der Untersuchung</div>
+    <h1>Was sich an der App<br>seit dem Start verändert hat.</h1>
+    <p class="lede">Untersucht wird, wie Menschen sich eine App aneignen. Dafür muss feststehen, worauf sich ihre Aussagen beziehen. Diese Seite hält fest, in welchem Stand die App in die Erprobung gegangen ist, was sich seither geändert hat und von welcher Art jede Änderung war. Grundlage ist die öffentliche Versionsgeschichte der App; jede Zeile verweist auf die zugehörigen Commits.</p>
+    <div class="thesis">
+      <strong>Die Zusage aus dem Exposé:</strong> Nach dem Start bleiben Fehlerbehebungen und datenschutzbedingte Änderungen zulässig und werden protokolliert. Änderungswünsche der Beteiligten werden nicht umgesetzt, sondern gesammelt und als Material ausgewertet. Diese Seite zeigt, wie weit das eingehalten wurde, und weist aus, wo nicht.
+    </div>
+  </header>
+
+  <section id="startstand">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Startstand und Bilanz</h2></div>
+    <p class="sec-sub">Stand 02.11.2026. Das Protokoll ist an diesem Tag aus der Versionsgeschichte rekonstruiert worden und wird ab jetzt fortlaufend geführt.</p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="kv mono">574c717</div><div class="kl">Startstand: letzter Commit vor dem ersten Schultag (06.09.2026), als Tag <code>erprobung-start</code> markiert</div></div>
+      <div class="kpi"><div class="kv">90</div><div class="kl">Commits seither, zusammengefasst zu 21 Änderungspaketen</div></div>
+      <div class="kpi"><div class="kv">8</div><div class="kl">Pakete sind Erweiterungen (43 Commits) und fallen nicht unter die Zusage</div></div>
+      <div class="kpi"><div class="kv">06.10.</div><div class="kl">letzte Änderung; seither ist die App unverändert</div></div>
+    </div>
+
+    <div class="stack" role="img" aria-label="Verteilung der 90 Commits nach Art"><span class="seg f" style="flex:27" title="Fehler: 27 Commits"></span><span class="seg d" style="flex:1" title="Datenschutz: 1 Commits"></span><span class="seg a" style="flex:3" title="Darstellung: 3 Commits"></span><span class="seg b" style="flex:16" title="Betrieb: 16 Commits"></span><span class="seg e" style="flex:43" title="Erweiterung: 43 Commits"></span></div>
+    <div class="legend-x"><span class="lgd"><i class="sw f"></i>Fehler <b>7</b> Pakete · 27 Commits</span><span class="lgd"><i class="sw d"></i>Datenschutz <b>1</b> Pakete · 1 Commits</span><span class="lgd"><i class="sw a"></i>Darstellung <b>2</b> Pakete · 3 Commits</span><span class="lgd"><i class="sw b"></i>Betrieb <b>3</b> Pakete · 16 Commits</span><span class="lgd"><i class="sw e"></i>Erweiterung <b>8</b> Pakete · 43 Commits</span></div>
+
+    <p class="sec-sub" style="margin-top:18px">Zum Start waren alle Module in Betrieb: Hausübungen, Erinnerungen, Mitteilungsheft, Termine, Stundenplan, Dienste, Anwesenheit, Abenteuer, Planung und Gangaufsichten; Zahlungen als Platzhalter ohne Funktion. Das Abenteuer hat sich am 14.09.2026 datumsgesteuert selbst eingeschaltet. Das war vor dem Start so gebaut und ist deshalb keine Änderung. 17 der 21 Pakete fallen in die ersten zwölf Schultage.</p>
+  </section>
+
+  <section id="pakete">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Die 21 Änderungspakete</h2></div>
+    <p class="sec-sub">Zusammengehörige Commits sind zu einem Paket gefasst. Erweiterungen sind am linken Rand markiert.</p>
+    <div class="tablewrap">
+      <table class="vp">
+        <thead><tr><th>Nr</th><th>Datum</th><th>Art</th><th>Was sich geändert hat</th><th>Commits</th></tr></thead>
+        <tbody>
+          <tr class="r-e"><td class="nr">1</td><td class="dt">07.09.</td><td><span class="art e">Erweiterung</span><span class="az">behebt eine Fehlzählung</span></td><td>Einzelne Kinder lassen sich von einer Hausübung ausnehmen; alle Quoten rechnen die Ausnahmen mit.<div class="fn">Hausübungen · spürbar für LP · S · E</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/9350431">9350431</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/765880a">765880a</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/f1b898f">f1b898f</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/28c3af1">28c3af1</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/a28c40d">a28c40d</a></td></tr>
+          <tr class="r-f"><td class="nr">2</td><td class="dt">07.09.</td><td><span class="art f">Fehler</span></td><td>Drei Quoten zählten die falsche Grundgesamtheit (Gilde, Klassenziel, Erinnerungen).<div class="fn">Abenteuer, Erinnerungen · spürbar für LP · S</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/ac1cf25">ac1cf25</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/29100b6">29100b6</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/3f8c695">3f8c695</a></td></tr>
+          <tr class="r-a"><td class="nr">3</td><td class="dt">08.09.</td><td><span class="art a">Darstellung</span></td><td>Neues in der Navigation als „neu“-Pille in zwei Stärken statt als Punkt.<div class="fn">Navigation · spürbar für alle</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/71d073e">71d073e</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/b481426">b481426</a></td></tr>
+          <tr class="r-f"><td class="nr">4</td><td class="dt">09.09.</td><td><span class="art f">Fehler</span></td><td>Kurze Verbindungsaussetzer meldeten fälschlich „abgemeldet“; schwarzer Startbildschirm auf iOS; Hineinzoomen bei Eingabefeldern; Symbolschrift von 5,1 MB auf 331 KB verkleinert.<div class="fn">ganze App · spürbar für alle</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/be9ac07">be9ac07</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/55e8e59">55e8e59</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/b929944">b929944</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/96e9ff5">96e9ff5</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/90be590">90be590</a></td></tr>
+          <tr class="r-b"><td class="nr">5</td><td class="dt">09.09.</td><td><span class="art b">Betrieb</span></td><td>Vorschau-Leiste der Rollenvorschau einklappbar.<div class="fn">Verwaltung · spürbar für nur Verwaltung</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/15f8739">15f8739</a></td></tr>
+          <tr class="r-b"><td class="nr">6</td><td class="dt">10.09.</td><td><span class="art b">Betrieb</span></td><td>Umbenennung von KlassenHub in ClassHaven.<div class="fn">ganze App · spürbar für alle</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/2b422c1">2b422c1</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/21ac784">21ac784</a></td></tr>
+          <tr class="r-a"><td class="nr">7</td><td class="dt">10.09.</td><td><span class="art a">Darstellung</span></td><td>Erledigte Hausübungen sehen bei Kindern aus wie bei Eltern.<div class="fn">Hausübungen · spürbar für S</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/a687258">a687258</a></td></tr>
+          <tr class="r-f"><td class="nr">8</td><td class="dt">10.09.</td><td><span class="art f">Fehler</span></td><td>Ein Elternkonto führt mehrere Kinder; die Sammelanlage legt Eltern mit an. Der Code las bis dahin nur das Hauptkind, obwohl die Verknüpfungen in der Datenbank vollständig waren.<div class="fn">Konten, Mitteilungsheft · spürbar für E · Verwaltung</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/f4a870c">f4a870c</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/ae4f8c9">ae4f8c9</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/f461387">f461387</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/779029b">779029b</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/5973df7">5973df7</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/79773db">79773db</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/1886820">1886820</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/cfcc0cb">cfcc0cb</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/1588d64">1588d64</a></td></tr>
+          <tr class="r-e"><td class="nr">9</td><td class="dt">10.–11.09.</td><td><span class="art e">Erweiterung</span><span class="az">mit zwei Fehlerbehebungen</span></td><td>Ein Mitteilungsheft je Klasse statt je Elternteil; Klassen- und Statusfilter, „Meine/Kollegium“; Bestätigung in drei Stufen. Behoben: Nachrichten von Kolleg*innen erschienen als eigene, Ungelesenes beim Geschwisterkind war unsichtbar.<div class="fn">Mitteilungsheft · spürbar für LP · E</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/d0b4134">d0b4134</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/310a4e3">310a4e3</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/37774f1">37774f1</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/ebfdce8">ebfdce8</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/34e741f">34e741f</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/faa153b">faa153b</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/e3b701b">e3b701b</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/f06c196">f06c196</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/0f56b5e">0f56b5e</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/2f59040">2f59040</a></td></tr>
+          <tr class="r-e"><td class="nr">10</td><td class="dt">12.09.</td><td><span class="art e">Erweiterung</span></td><td>Planung als dritter Reiter in der Agenda; die Planung gehört der Lehrperson, nicht der Klasse.<div class="fn">Planung · spürbar für LP</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/04947bc">04947bc</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/46cc9cc">46cc9cc</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/477eb75">477eb75</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/c096cbd">c096cbd</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/d76dfed">d76dfed</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/d83eef4">d83eef4</a></td></tr>
+          <tr class="r-e"><td class="nr">11</td><td class="dt">12.09.</td><td><span class="art e">Erweiterung</span></td><td>Lerngruppen: eine Hausübung für Kinder aus mehreren Klassen, einzelne Mitglieder abwählbar; Standard-Ausnahmen je Kind und Fach.<div class="fn">Hausübungen · spürbar für LP · S</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/e3479d7">e3479d7</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/074f5ef">074f5ef</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/931b324">931b324</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/90cceee">90cceee</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/6071132">6071132</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/70cbb76">70cbb76</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/27446f6">27446f6</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/93704a6">93704a6</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/7c6ce20">7c6ce20</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/2e74909">2e74909</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/2e78278">2e78278</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/aa0ca58">aa0ca58</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/d43f9dc">d43f9dc</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/27e264f">27e264f</a></td></tr>
+          <tr class="r-d"><td class="nr">12</td><td class="dt">12.09.</td><td><span class="art d">Datenschutz</span></td><td>Datenbestand und Datenschutzseite um die Lerngruppen ergänzt.<div class="fn">Datenschutz · spürbar für alle</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/8f9342b">8f9342b</a></td></tr>
+          <tr class="r-f"><td class="nr">13</td><td class="dt">12.09.</td><td><span class="art f">Fehler</span></td><td>Samstag und Sonntag zählten in der Anwesenheit als Schultage; stille Falschzustände beseitigt.<div class="fn">Anwesenheit · spürbar für LP · E</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/c8ebc0c">c8ebc0c</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/fc54348">fc54348</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/b1a5b63">b1a5b63</a></td></tr>
+          <tr class="r-b"><td class="nr">14</td><td class="dt">14.09.</td><td><span class="art b">Betrieb</span></td><td>Hinweiszeile auf die neue Adresse classhaven.at.<div class="fn">ganze App · spürbar für alle</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/7650da2">7650da2</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/ce8658a">ce8658a</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/29c0997">29c0997</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/8f7551f">8f7551f</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/b14e75a">b14e75a</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/c616cc7">c616cc7</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/f000aee">f000aee</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/6eca5b8">6eca5b8</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/1924d20">1924d20</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/2931f40">2931f40</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/571bc35">571bc35</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/2d23b75">2d23b75</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/f1d300a">f1d300a</a></td></tr>
+          <tr class="r-f"><td class="nr">15</td><td class="dt">15.–17.09.</td><td><span class="art f">Fehler</span></td><td>Startseiten brachen auf dem Handy aus der Breite; grauer Streifen auf einer Karte; das Auge auf der Startseite zeigte anderes als auf der Hausübungsseite.<div class="fn">Startseite · spürbar für alle</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/20a571c">20a571c</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/5cf9bd4">5cf9bd4</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/72e2405">72e2405</a></td></tr>
+          <tr class="r-e"><td class="nr">16</td><td class="dt">16.–18.09.</td><td><span class="art e">Erweiterung</span></td><td>Anwesenheit kennt „zu spät gekommen“ und „vorzeitig gegangen“; Fehlstunden und Verspätungen in Statistik, Übersicht und Elternansicht.<div class="fn">Anwesenheit · spürbar für LP · E</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/9ca8f32">9ca8f32</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/13ed8bf">13ed8bf</a></td></tr>
+          <tr class="r-e"><td class="nr">17</td><td class="dt">18.09.</td><td><span class="art e">Erweiterung</span></td><td>Der Stundenplan zeigt Beginn und Ende jeder Stunde.<div class="fn">Stundenplan · spürbar für alle</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/c3a945d">c3a945d</a></td></tr>
+          <tr class="r-f"><td class="nr">18</td><td class="dt">25.09.</td><td><span class="art f">Fehler</span></td><td>Neu angelegte Konten landeten in der Stammklasse statt in der gewählten; Fehlermeldungen beim Anlegen lesbar.<div class="fn">Verwaltung · spürbar für nur Verwaltung</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/298fd38">298fd38</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/6341ca0">6341ca0</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/733180d">733180d</a></td></tr>
+          <tr class="r-f"><td class="nr">19</td><td class="dt">01.10.</td><td><span class="art f">Fehler</span></td><td>Lange Links im Mitteilungsheft sprengten die Sprechblase; jetzt umbrochen und klickbar.<div class="fn">Mitteilungsheft · spürbar für LP · E</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/bc051b0">bc051b0</a></td></tr>
+          <tr class="r-e"><td class="nr">20</td><td class="dt">01.10.</td><td><span class="art e">Erweiterung</span></td><td>Eigene Nachrichten im Mitteilungsheft löschen; ein Platzhalter bleibt sichtbar.<div class="fn">Mitteilungsheft · spürbar für LP · E</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/6e98163">6e98163</a></td></tr>
+          <tr class="r-e"><td class="nr">21</td><td class="dt">06.10.</td><td><span class="art e">Erweiterung</span></td><td>Push-Benachrichtigungen fürs Mitteilungsheft: freiwillig, mit eigener Einwilligungsfrage und Datenschutztext, aktiv nur in der Klasse 1b und der Testklasse.<div class="fn">Mitteilungsheft · spürbar für E</div></td><td class="refs"><a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/8322408">8322408</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/8f20ba5">8f20ba5</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/0f4d613">0f4d613</a> <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/5f1db00">5f1db00</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tkey">LP = Lehrpersonen · S = Schüler*innen · E = Erziehungsberechtigte. Alle Daten 2026.</p>
+  </section>
+
+  <section id="einordnung">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Einordnung gegenüber der Zusage</h2></div>
+    <p class="sec-sub">Was verlangt war, was geschehen ist und wie damit umgegangen wird. Die Position wird der Betreuung vorgelegt.</p>
+
+    <div class="two">
+      <div class="tc"><div class="tl2">Verlangt</div><p>Nach dem Start nur Fehlerbehebungen und datenschutzbedingte Änderungen. Was Beteiligte sich wünschen, wird gesammelt und nicht umgesetzt.</p></div>
+      <div class="tc warn"><div class="tl2">Geschehen</div><p>In den ersten vier Wochen wurde die App zusätzlich an die Organisation der Schule angepasst. Wo der Anlass festgehalten ist, war es jeweils ein Fall, den das System beim Start nicht abbilden konnte: in einem Fach gesondert unterrichtete Kinder (Paket 1), Geschwister in verschiedenen Klassen (8), klassenübergreifender Unterricht (11).</p></div>
+    </div>
+
+    <div class="dec">
+      <div class="de"><span class="dn">01</span><div><h4>Die Einrichtungsphase wird ausgewiesen</h4><p>Die Zeit vom 07.09. bis 06.10.2026 wird im Methodenkapitel als Einrichtungsphase beschrieben, mit diesem Protokoll als Beleg. Dahinter steht dieselbe Überlegung, mit der das Exposé den harten Feature-Freeze durch Versionierung ersetzt hat: Ein schulintern entwickeltes System ist gerade deshalb gestaltbar, weil es auf die Organisation der Schule reagieren kann. Dass es das in den ersten Wochen getan hat, ist selbst ein Befund zu dieser Konstellation und wird ausgewertet.</p></div></div>
+      <div class="de"><span class="dn">02</span><div><h4>Ein fester Bezugsstand für Erhebung 1</h4><p>Vor dem ersten Interview wird der dann aktuelle Stand als Tag <code>erhebung-1</code> gesetzt. Stand heute wäre das <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/5f1db00">5f1db00</a> vom 06.10.2026. Wo Befragte zwischen einem früheren und dem jetzigen Stand der App unterscheiden, wird im Interviewprotokoll vermerkt, worauf sich die Aussage bezieht. Das betrifft vor allem das Mitteilungsheft und die Anwesenheit (Pakete 9, 16, 21).</p></div></div>
+      <div class="de"><span class="dn">03</span><div><h4>Ab jetzt gilt die Zusage wörtlich</h4><p>Bis zum Ende der Erprobung nur noch Fehlerbehebungen und datenschutzbedingte Änderungen. Jede weitere Erweiterung wäre eine bewusste Abweichung und bräuchte die Zustimmung der Betreuung.</p></div></div>
+      <div class="de"><span class="dn">04</span><div><h4>Anlass und Wunschliste bleiben privat</h4><p>Ob ein Paket auf einen eigenen Befund, eine Fehlermeldung oder den Wunsch einer beteiligten Person zurückgeht, wird im privaten Protokoll ergänzt. Wünsche von Beteiligten stehen zusätzlich in der Wunschliste, mit Datum, Gruppe und Wortlaut, und werden dort als Material ausgewertet. Beides enthält Aussagen aus dem Feld und wird deshalb nicht veröffentlicht.</p></div></div>
+    </div>
+
+    <div class="note" style="margin-top:22px">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg> Nachprüfbarkeit</h4>
+      <p>Die Versionsgeschichte der App ist öffentlich. Wer die Zahlen nachrechnen will, findet den Startstand unter dem Commit <a href="https://github.com/kainbergermanuel-commits/Klassenhub/commit/574c717">574c717</a> und alle späteren Commits in der Reihenfolge dieser Tabelle. Die Zuordnung zu Paketen und Arten ist eine Einordnung des Verfassers und als solche gekennzeichnet.</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Versionsprotokoll · Stand 02.11.2026</span>
+    <span><a href="2026-11-erhebung-1.html">Zur Dokumentation von Erhebung 1 →</a></span>
+  </div>
+</div>
+
+</body>
+</html>

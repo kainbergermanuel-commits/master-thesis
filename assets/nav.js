@@ -58,6 +58,7 @@
     { ebene: 4, name: 'Die Umsetzung', anchor: 'ebene-4', groups: [
       { name: null, items: [
         ['2026-11-erhebung-1.html', 'Erhebung 1 · Dokumentation'],
+        ['2026-11-versionsprotokoll.html', 'Versionsprotokoll der App'],
         ['2026-08-schulstart-timeline.html', 'Ausgabe-Timeline Schulstart'],
         ['2026-08-schulstart-mappe.html', 'Dokumentenmappe Schulstart'] ] },
       { name: 'Instrumente Erhebung 1', items: [

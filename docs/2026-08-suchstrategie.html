@@ -5,7 +5,7 @@
 <script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suchstrategie &amp; Literaturauswahl · Master-Thesis KlassenHub</title>
-<meta name="description" content="Wie der Literaturbestand von 52 Quellen zustande gekommen ist: Zugänge, Vorgehen, Ein- und Ausschlusskriterien, dreistufige Qualitätsprüfung, Umgang mit KI-Werkzeugen und die benannten Grenzen des Bestandes. Stand 05.08.2026.">
+<meta name="description" content="Wie der Literaturbestand von 52 Quellen zustande gekommen ist: Zugänge, Vorgehen, Ein- und Ausschlusskriterien, dreistufige Qualitätsprüfung, Umgang mit KI-Werkzeugen und die benannten Grenzen des Bestandes. Suchprotokoll fortgeführt bis 02.11.2026.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +60,12 @@
   table.terms { min-width: 640px; font-size: 12.8px; }
   table.terms td:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
   table.terms td i { color: var(--muted); font-style: normal; }
+  table.prot { min-width: 900px; font-size: 12.5px; }
+  table.prot td { vertical-align: top; }
+  table.prot td:nth-child(3) { min-width: 250px; }
+  table.prot td:last-child { min-width: 170px; }
+  table.prot td:first-child { white-space: nowrap; font-family: var(--mono); font-size: 11.5px; color: var(--ink); }
+  table.prot code { font-size: 11.5px; }
 </style>
 </head>
 <body>
@@ -298,8 +304,44 @@
 
     <div class="note" style="margin-top:20px">
       <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg> Protokollierung</h4>
-      <p>Je Suchlauf werden Datum, Datenbank, Suchstring, gesetzte Filter, Trefferzahl, Zahl der nach Titel und Abstract verbliebenen Treffer sowie die Einschlussentscheidung festgehalten. Damit steht im Methodenkapitel nicht, das Vorgehen sei nachträglich beschrieben worden, sondern es sei ab August 2026 protokolliert geführt.</p>
+      <p>Je Suchlauf werden Datum, Datenbank, Suchstring, gesetzte Filter, Trefferzahl, Zahl der nach Titel und Abstract verbliebenen Treffer sowie die Einschlussentscheidung festgehalten. Damit steht im Methodenkapitel nicht, das Vorgehen sei nachträglich beschrieben worden, sondern es sei ab August 2026 protokolliert geführt. Alle Einträge stehen im <a href="#protokoll">Suchprotokoll</a>.</p>
       <p style="margin-top:9px"><b>Erster Eintrag, 05.08.2026:</b> keine Datenbankrecherche, sondern gezielte Beschaffung zweier namentlich bekannter Standardtitel. Anlass war eine Volltextsuche über den eigenen Bestand, die zwei Fachbegriffe ohne Deckung fand – Triangulation und Informationsstärke. Beide Titel gegen die Verlagsangaben geprüft und eingeschlossen: Flick (2011) und Malterud et al. (2016).</p>
+    </div>
+  </section>
+
+
+  <section id="protokoll">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Suchprotokoll</h2></div>
+    <p class="sec-sub">Jeder Suchlauf seit dem 04.08.2026, mit dem Datum, an dem er stattfand. Stand 02.11.2026: 19 Einträge.</p>
+    <div class="tablewrap">
+      <table class="prot">
+        <thead><tr><th>Datum</th><th>Zugang</th><th>Suchstring oder Anlass</th><th>Filter</th><th>Treffer</th><th>nach Titel und Abstract</th><th>eingeschlossen</th><th>Notiz</th></tr></thead>
+        <tbody>
+          <tr><td>05.08.2026</td><td>gezielte Titelbeschaffung</td><td>Zwei Fachbegriffe des Designs ohne Quelle (Triangulation, Informationsstärke)</td><td>–</td><td>2</td><td>2</td><td>2</td><td>Flick (2011), Malterud et al. (2016)</td></tr>
+          <tr><td>06.08.2026</td><td>Volltextsuche im eigenen Bestand</td><td>Deckung des Begriffs „hermeneutische Literaturanalyse“</td><td>–</td><td>7</td><td>0</td><td>0</td><td>Methodenetikett aufgegeben statt Quelle beschafft</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>parents and teachers perceptions of digital home-school communication platforms</code></td><td>Q1</td><td>10</td><td>4</td><td>offen</td><td>3 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>technology appropriation practice lens structuration organizations</code></td><td>–</td><td>10</td><td>3</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>relational trust between parents and teachers family-school relationship</code></td><td>Q1</td><td>10</td><td>3</td><td>offen</td><td>3 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>technology acceptance model teachers meta-analytic structural equation modeling</code></td><td>Q1</td><td>10</td><td>1</td><td>offen</td><td>1 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>teacher technostress availability expectations digital communication with parents workload</code></td><td>Q1</td><td>10</td><td>1</td><td>offen</td><td>1 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>school leadership for technology integration review principals digital change</code></td><td>Q1</td><td>10</td><td>2</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>teacher-led bottom-up educational technology innovation designed within school sustainability</code></td><td>Q1</td><td>10</td><td>1</td><td>offen</td><td>2 vorgemerkt; Negativbefund zu schulintern entwickelten Systemen</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>extrinsic rewards undermine intrinsic motivation meta-analysis</code></td><td>–</td><td>9</td><td>2</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>school engagement concept behavioral emotional cognitive dimensions</code></td><td>Q1</td><td>10</td><td>2</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>datafication of children school apps parental monitoring surveillance</code></td><td>Q1</td><td>10</td><td>2</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>conceptualizing digital capital digital inequalities Bourdieu</code></td><td>Q1</td><td>10</td><td>2</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>parental involvement in middle school adolescents meta-analysis academic socialization</code></td><td>Q1</td><td>10</td><td>3</td><td>offen</td><td>3 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>homework model parental homework involvement control autonomy support Trautwein</code></td><td>Q1</td><td>10</td><td>2</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>streaks in gamified apps habit formation loss aversion user engagement</code></td><td>–</td><td>10</td><td>2</td><td>offen</td><td>2 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>digital technology school administration management systems teachers work critical study Selwyn</code></td><td>Q1</td><td>10</td><td>4</td><td>offen</td><td>5 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Consensus (API)</td><td><code>from parental involvement to parental engagement continuum</code></td><td>Q1</td><td>10</td><td>1</td><td>offen</td><td>1 vorgemerkt</td></tr>
+          <tr><td>24.10.2026</td><td>Crossref</td><td>Titelauflösung namentlich bekannter Werke, DOI-Prüfung aller Kandidaten</td><td>–</td><td>–</td><td>–</td><td>offen</td><td>kein Suchlauf</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:20px">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg> Lesart der Runde vom 24.10.2026</h4>
+      <p>Die Runde diente einer Lückenanalyse des Theorieteils, gegliedert nach dessen Kapiteln. Die Consensus-Suche gibt auf der genutzten Zugangsstufe höchstens zehn Treffer aus; die Trefferzahlen sind deshalb als Größenordnung zu lesen. Filter Q1 ist der Journal-Quartilsfilter des Dienstes. „Offen“ heißt: Die vorgemerkten Titel werden beschafft und durchlaufen die drei Prüfstufen; erst dann wird der Einschluss eingetragen. Lauf 7 ergab einen Negativbefund: Zu einem schulintern gebauten Kommunikations- oder Organisationssystem fand sich keine Studie, nur Arbeiten zu Lehrpersonen als Gestalter*innen von Unterricht. Als Beleg einer Abwesenheit stützt das die Forschungslücke, auf die sich die Arbeit beruft.</p>
     </div>
   </section>
 
@@ -310,7 +352,7 @@
   </div>
 
   <div class="foot">
-    <span>Master-Thesis · KlassenHub – Suchstrategie und Literaturauswahl (Stand 05.08.2026)</span>
+    <span>Master-Thesis · Suchstrategie und Literaturauswahl (Stand 02.11.2026)</span>
     <span><a href="2026-07-literaturverzeichnis.html">Zum Literaturverzeichnis →</a></span>
   </div>
 </div>

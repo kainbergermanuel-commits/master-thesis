@@ -24,7 +24,7 @@ liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
 | **Literaturbestand** | 52 aktive Quellen, einzeln bewertet, in zehn Kategorien; Lückenanalyse für den Theorieteil abgeschlossen |
 | **Forschungsfrage** | dreimal präzisiert, am 17.08.2026 mit der Betreuung abgestimmt |
 | **Exposé** | am 17.08.2026 besprochen, inhaltlich ohne Einwände; liegt privat als `.docx` |
-| **Empirie** | App seit Schulbeginn im Einsatz; Erhebung 1 dokumentiert unter `docs/2026-11-erhebung-1.html` |
+| **Empirie** | App seit Schulbeginn im Einsatz; Erhebung 1 dokumentiert unter `docs/2026-11-erhebung-1.html`, Änderungen an der App unter `docs/2026-11-versionsprotokoll.html` |
 
 **Fachgespräche:** erstes am 03.08.2026 (Explikation), Exposé-Besprechung am 17.08.2026.
 
