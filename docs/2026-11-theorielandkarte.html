@@ -241,11 +241,11 @@ L.forEach((l, i) => {
 
 // Mitte
 const core = el('g', { class: 'node core', tabindex: 0 }, svg.querySelector('#nodes'));
-el('rect', { class: 'box', x: CX - 165, y: CY - 70, width: 330, height: 140, rx: 16 }, core);
-el('text', { class: 'eyb', x: CX, y: CY - 44, 'text-anchor': 'middle' }, core, 'FORSCHUNGSFRAGE');
-['Wie eignen sich Lehrpersonen, Schüler*innen', 'und Eltern eine schulintern entwickelte App an,', 'welche Bedeutung schreiben sie ihr zu?'].forEach((s, i) =>
-  el('text', { class: 'q', x: CX, y: CY - 18 + i * 20, 'text-anchor': 'middle' }, core, s));
-el('text', { class: 'src', x: CX, y: CY + 52, 'text-anchor': 'middle' }, core, 'Aneignung: Dourish (2003) · Primärquelle');
+el('rect', { class: 'box', x: CX - 170, y: CY - 80, width: 340, height: 160, rx: 16 }, core);
+el('text', { class: 'eyb', x: CX, y: CY - 52, 'text-anchor': 'middle' }, core, 'FORSCHUNGSFRAGE');
+['Wie eignen sich Lehrpersonen,', 'Schüler*innen und Eltern eine', 'schulintern entwickelte App an, und', 'welche Bedeutung schreiben sie ihr zu?'].forEach((s, i) =>
+  el('text', { class: 'q', x: CX, y: CY - 26 + i * 20, 'text-anchor': 'middle' }, core, s));
+el('text', { class: 'src', x: CX, y: CY + 62, 'text-anchor': 'middle' }, core, 'Aneignung: Dourish (2003) · Primärquelle');
 
 // Kapitel
 K.forEach(k => {
