@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorie-Landkarte · Master-Thesis KlassenHub</title>
+<meta name="description" content="Bildlicher Überblick über den Theorieteil: die Forschungsfrage in der Mitte, die sieben Unterkapitel mit ihren tragenden Quellen, die Unterfragen, die sie bedienen, und die Verbindungen zwischen ihnen. Stand 03.11.2026.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<script src="../assets/nav.js" defer></script>
+<style>
+  /* Jedes Unterkapitel hat einen eigenen Ton; er taucht in Karte, Kartei und Pillen gleich auf. */
+  .k1 { --k: var(--violet); } .k2 { --k: var(--teal); } .k3 { --k: var(--amber); }
+  .k4 { --k: var(--rose); }   .k5 { --k: var(--good); } .k6 { --k: color-mix(in srgb, var(--teal) 45%, var(--violet)); }
+  .k7 { --k: var(--muted); }
+
+  .mapwrap { margin-top: 18px; padding: 10px; }
+  .mapwrap svg { display: block; width: 100%; height: auto; }
+  #map text { font-family: var(--body); letter-spacing: 0; }
+  #map text.ttl, #map text.q { font-family: var(--display); }
+  .map-hint { font-size: 12.5px; color: var(--muted); margin: 10px 6px 2px; }
+  .map-mobile { display: none; }
+  @media (max-width: 719px) {
+    .mapwrap { display: none; }
+    .map-mobile { display: block; margin-top: 14px; font-size: 13.5px; color: var(--ink-soft); }
+  }
+
+  /* SVG-Elemente */
+  .spoke { stroke: var(--line); stroke-width: 1.4; }
+  .link { fill: none; stroke: var(--k); stroke-width: 1.8; stroke-dasharray: 5 5; opacity: .75; transition: opacity .2s, stroke-width .2s; }
+  .lnum circle { fill: var(--card); stroke: var(--k); stroke-width: 1.6; }
+  .lnum text { font-size: 12px; font-weight: 800; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
+  .node { cursor: pointer; }
+  .node rect.box { fill: var(--card); stroke: color-mix(in srgb, var(--k) 55%, var(--line)); stroke-width: 1.4; transition: stroke-width .2s; }
+  .node rect.bar { fill: var(--k); }
+  .node .num { font-size: 12px; font-weight: 800; fill: var(--k); letter-spacing: .04em; }
+  .node .ttl { font-family: var(--display); font-size: 15.5px; font-weight: 700; fill: var(--ink); }
+  .node .src { font-size: 12px; fill: var(--ink-soft); }
+  .node .src.p { font-weight: 700; fill: var(--ink); }
+  .node .uq { font-size: 10.5px; font-weight: 800; fill: var(--k); }
+  .node:hover rect.box, .node:focus rect.box, .node.on rect.box { stroke-width: 2.6; stroke: var(--k); }
+  .node:focus { outline: none; }
+  svg.focus .link { opacity: .12; }
+  svg.focus .link.on { opacity: 1; stroke-width: 2.6; }
+  svg.focus .node:not(.on):not(.core) text, svg.focus .node:not(.on):not(.core) rect.bar { opacity: .4; }
+  .core rect.box { fill: color-mix(in srgb, var(--teal) 8%, var(--card)); stroke: var(--teal); stroke-width: 1.8; }
+  .core .eyb { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; fill: var(--teal); }
+  .core .q { font-family: var(--display); font-size: 15px; font-weight: 700; fill: var(--ink); }
+  .core .src { font-size: 12px; fill: var(--ink-soft); }
+
+  /* Legende */
+  .legend-m { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 12px 6px 4px; font-size: 12.5px; color: var(--muted); }
+  .legend-m b { color: var(--ink); }
+
+  /* Kartei der Unterkapitel */
+  .kgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 16px; }
+  .kcard { padding: 16px 18px; border-top: 3px solid var(--k); scroll-margin-top: 80px; transition: box-shadow .25s; }
+  .kcard.flash { box-shadow: 0 0 0 3px color-mix(in srgb, var(--k) 35%, transparent); }
+  .kcard .kn { font-size: 12px; font-weight: 800; color: var(--k); letter-spacing: .05em; }
+  .kcard h3 { margin: 2px 0 6px; font-size: 17px; }
+  .kcard p { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 10px; }
+  .kcard ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-soft); }
+  .kcard li { margin: 3px 0; }
+  .kcard li.p { color: var(--ink); font-weight: 700; }
+  .upills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .upill { font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 999px; color: var(--k); background: color-mix(in srgb, var(--k) 14%, transparent); }
+
+  /* Verbindungen */
+  .links { display: grid; gap: 10px; margin-top: 16px; }
+  .lrow { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 14px 16px; align-items: start; }
+  .lrow .ln { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--k); display: grid; place-items: center; font-weight: 800; font-size: 13px; color: var(--ink); }
+  .lrow h4 { margin: 0 0 4px; font-size: 15px; }
+  .lrow p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+  .lrow .pair { font-size: 11.5px; font-weight: 700; color: var(--muted); margin-bottom: 2px; }
+
+  /* Unterfragen-Matrix */
+  table.um { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.um th, table.um td { padding: 9px 10px; border-bottom: 1px solid var(--line-soft); text-align: center; }
+  table.um th:first-child, table.um td:first-child { text-align: left; }
+  table.um td.kc { font-weight: 700; color: var(--ink); }
+  table.um td.kc i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--k); margin-right: 8px; }
+  .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--k); }
+  .dot.half { background: transparent; border: 2px solid var(--k); width: 8px; height: 8px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><path d="M6 6.5 9.5 10M18 6.5 14.5 10M6 17.5l3.5-3.5M18 17.5 14.5 14"/></svg></span>
+      Theorie-Landkarte
+    </div>
+    <div class="legend">
+      <span class="chip mid">Entwurf</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Theoretischer Rahmen · Überblick</div>
+    <h1>Wie die Theorie<br>zusammenhängt.</h1>
+    <p class="lede">In der Mitte steht die Forschungsfrage, darum herum die sieben Unterkapitel des Theorieteils mit ihren tragenden Quellen. Die gestrichelten Linien sind die Stellen, an denen zwei Kapitel aufeinander angewiesen sind. Die Karte ist eine Lesehilfe für den Bestand, keine neue Gliederung: Sie folgt dem <a href="2026-07-literaturkarte.html#theoriebezug">Gliederungsentwurf</a> in der Literaturkarte. Die Einzelbewertung jeder Quelle steht im <a href="2026-07-literaturverzeichnis.html">Literaturverzeichnis</a>.</p>
+    <div class="thesis">
+      <strong>So ist die Karte zu lesen:</strong> Fett gesetzte Quellen sind Primärquellen, also die Texte, in denen ein Begriff seinen Ursprung hat. Die Kürzel U1 bis U4 zeigen, welche Unterfrage ein Kapitel bedient. Ein Klick auf ein Kapitel hebt seine Verbindungen hervor.
+    </div>
+  </header>
+
+  <section id="karte">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Die Karte</h2></div>
+
+    <div class="card mapwrap">
+      <svg id="map" viewBox="0 0 1000 730" role="img" aria-labelledby="mapt">
+        <title id="mapt">Theorie-Landkarte: Forschungsfrage in der Mitte, sieben Unterkapitel ringsum, sechs Querverbindungen</title>
+        <g id="spokes"></g>
+        <g id="links"></g>
+        <g id="nodes"></g>
+        <g id="nums"></g>
+      </svg>
+      <div class="legend-m">
+        <span><b>Fett</b> Primärquelle</span>
+        <span><b>U1–U4</b> bediente Unterfrage</span>
+        <span><b>①–⑥</b> Querverbindung, erklärt unten</span>
+      </div>
+      <p class="map-hint">Klick auf ein Kapitel hebt seine Verbindungen hervor, ein zweiter Klick springt zur Kartei. Klick auf die Mitte hebt die Hervorhebung auf.</p>
+    </div>
+    <p class="map-mobile">Die Karte braucht eine breite Ansicht. Auf dem Handy steht derselbe Inhalt unten als Kartei und als Liste der Verbindungen.</p>
+  </section>
+
+  <section id="kapitel">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Die sieben Unterkapitel</h2></div>
+    <p class="sec-sub">Jede Karte nennt, was das Kapitel klärt, welche Quellen es tragen und welche Unterfragen es bedient. Methodenliteratur (Kategorien 09 und 10) gehört zum Methodenteil und steht deshalb nicht auf der Karte.</p>
+    <div class="kgrid" id="kgrid"></div>
+  </section>
+
+  <section id="verbindungen">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Sechs Querverbindungen</h2></div>
+    <p class="sec-sub">Die Stellen, an denen ein Kapitel ohne das andere nicht trägt. Sie sind zugleich die Stellen, die im Fließtext ausdrücklich verknüpft werden sollten.</p>
+    <div class="links" id="lgrid"></div>
+  </section>
+
+  <section id="unterfragen">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Welches Kapitel welche Unterfrage trägt</h2></div>
+    <p class="sec-sub">Ein voller Punkt heißt: Das Kapitel liefert die Begriffe, mit denen die Unterfrage ausgewertet wird. Ein leerer Punkt heißt: Es liefert Kontext. U4 ist eine Ableitungsfrage und wird nicht erhoben; sie stützt sich vor allem auf 2.6.</p>
+    <div class="card tablewrap" style="padding:6px 10px;overflow-x:auto">
+      <table class="um" id="um">
+        <thead><tr><th>Unterkapitel</th><th>U1<br><small>Nutzung &amp; Aneignung</small></th><th>U2<br><small>Zugeschriebene Wirkung</small></th><th>U3<br><small>Vergleich &amp; Akzeptanz</small></th><th>U4<br><small>Folgerungen für Leitung</small></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:18px">
+      <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg> Was die Matrix zeigt</h4>
+      <p>U3 hängt fast allein an 2.5. Das ist der Teil der Fragestellung, der den Vergleich mit SchoolFox und anderen Systemen verlangt, und er hat die schmalste Theorie. Wenn der Bestand noch einmal wachsen soll, dann am ehesten hier oder in Kategorie 07.</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Theorie-Landkarte · Stand 03.11.2026 · 63 aktive Quellen</span>
+    <span><a href="2026-07-literaturkarte.html">Zur Literaturkarte →</a></span>
+  </div>
+</div>
+
+<script>
+/* Inhalt der Karte. P = Primärquelle. u = Unterfragen: 2 = trägt Begriffe, 1 = Kontext. */
+const K = [
+  { id: 'k1', n: '2.1', t: 'Elternbeteiligung', long: 'Schulische Kommunikation zwischen Lehrpersonen, Eltern und Lernenden',
+    what: 'Was Elternbeteiligung heißt, warum der Begriff uneinheitlich ist, und wie sich Beteiligung beim Übertritt in die Sekundarstufe verändert.',
+    map: ['P:Goodall & Montgomery 2014', 'Hill & Tyson 2009', 'Adams & Christenson 2000'],
+    src: ['P:Goodall & Montgomery (2014)', 'Kent et al. (2022)', 'Jones et al. (2025)', 'Hill & Tyson (2009)', 'Gonida & Cortina (2014)', 'Adams & Christenson (2000)', 'Beilmann et al. (2023)', 'Nakambale & Shikalepo (2025)'],
+    u: [2, 2, 0, 1], x: 500, y: 95 },
+  { id: 'k2', n: '2.2', t: 'Digitale Kommunikation', long: 'Digitalisierung schulischer Kommunikation: Befundlage und kritische Einwände',
+    what: 'Was über digitale Plattformen zwischen Schule und Zuhause bekannt ist, einschließlich der kritischen Lesart der Plattformisierung.',
+    map: ['Grant 2011', 'Gouseti & Shaw 2026', 'Corser et al. 2025'],
+    src: ['Grant (2011)', 'Gouseti & Shaw (2026)', 'Corser et al. (2025)', 'Hangartner et al. (2024)', 'See et al. (2021)', 'Khoo et al. (2024)', 'Dou & Chen (2025)', 'Osorio-Saez et al. (2021)', 'Basatha et al. (2025)'],
+    u: [2, 2, 1, 0], x: 790, y: 205 },
+  { id: 'k3', n: '2.3', t: 'Teilhabe & Ungleichheit', long: 'Digitale Teilhabe und Ungleichheit',
+    what: 'Ob niederschwellige Werkzeuge Teilhabe erleichtern oder bestehende Ungleichheit fortschreiben. Begründet zugleich die Auswahl der Eltern.',
+    map: ['P:Ragnedda 2018', 'Addi-Raccah 2024', 'Pöntinen et al. 2023'],
+    src: ['P:Ragnedda (2018)', 'Addi-Raccah (2024)', 'Pöntinen et al. (2023)', 'Osorio-Saez et al. (2021)'],
+    u: [1, 2, 0, 1], x: 845, y: 455 },
+  { id: 'k4', n: '2.4', t: 'Motivation & Engagement', long: 'Selbstbestimmungstheorie, Engagement und Gamification',
+    what: 'Das theoretische Rückgrat: Grundbedürfnisse, Engagement der Schüler*innen, Belohnung und Spielfiktion als zwei getrennte Designteile.',
+    map: ['P:Ryan & Deci 2000', 'P:Deci et al. 1999', 'P:Fredricks et al. 2004'],
+    src: ['P:Ryan & Deci (2000)', 'P:Deci, Koestner & Ryan (1999)', 'P:Fredricks et al. (2004)', 'P:Schultz et al. (2007)', 'P:Sparkman & Walton (2017)', 'Li et al. (2024)', 'Sailer & Homner (2019)', 'Landers (2014)', 'Hanus & Fox (2015)', 'Kurnaz & Koçtürk (2025)', 'Chiu (2021a, 2021b)', 'Bergdahl & Bond (2021)'],
+    u: [2, 2, 0, 0], x: 655, y: 645 },
+  { id: 'k5', n: '2.5', t: 'Akzeptanz bei Lehrpersonen', long: 'Akzeptanz digitaler Werkzeuge bei Lehrpersonen',
+    what: 'Technologieakzeptanz als Prozess, Nützlichkeit vor Bedienbarkeit, und die Frage nach Mehrbelastung und Erreichbarkeit.',
+    map: ['P:Davis 1989', 'Wohlfart & Wagner 2025', 'Yang et al. 2025'],
+    src: ['P:Davis (1989)', 'Wohlfart & Wagner (2025)', 'Yang et al. (2025)', 'Bauwens et al. (2020)', 'Antonietti et al. (2022)', 'Maier (2024)'],
+    u: [1, 1, 2, 1], x: 345, y: 645 },
+  { id: 'k6', n: '2.6', t: 'Digital Leadership', long: 'Digitale Schulentwicklung als Leadership-Aufgabe',
+    what: 'Die Rückbindung an den Lehrgang: wie Schulen digitalen Wandel führen, und warum ein von einer Lehrperson ausgehendes System ein Sonderfall ist.',
+    map: ['Ruloff & Petko 2021', 'Wollscheid et al. 2025', 'Reis-Andersson 2024'],
+    src: ['Ruloff & Petko (2021)', 'Wollscheid et al. (2025)', 'Reis-Andersson (2024)', 'Antony-Newman (2024)', 'Wang et al. (2024)'],
+    u: [0, 0, 1, 2], x: 155, y: 455 },
+  { id: 'k7', n: '2.7', t: 'Forschungslücke', long: 'Forschungslücke und Ableitung der Fragestellung',
+    what: 'Was die Literatur offenlässt: Aneignung eines schulintern entwickelten Systems, aus drei Perspektiven, im österreichischen Kontext.',
+    map: ['Grant 2011', 'Gouseti & Shaw 2026', 'Yang et al. 2023'],
+    src: ['Grant (2011)', 'Gouseti & Shaw (2026)', 'Yang et al. (2023)', 'Hangartner et al. (2024)'],
+    u: [1, 1, 1, 1], x: 210, y: 205 },
+];
+const L = [
+  { a: 'k1', b: 'k4', c: 'k4', bend: -230, t: 'Engagement und Autonomie: zwei Berührungen', p: 'Erstens ein Wort für zwei Begriffe: Fredricks et al. (2004) meinen das Engagement der Schüler*innen, Goodall & Montgomery (2014) das der Eltern; der Theorieteil muss beide getrennt einführen. Zweitens zeigen Gonida & Cortina (2014) Autonomieunterstützung als günstigste Form der Elternbeteiligung bei der Hausübung. Das ist dieselbe Größe wie bei Ryan & Deci (2000), und hier hängen Eltern-Bestätigung und Motivationstheorie zusammen.' },
+  { a: 'k3', b: 'k1', c: 'k3', t: 'Digitales Kapital entscheidet, wer Beteiligung erreicht', p: 'Ragnedda (2018) beschreibt drei Ebenen digitaler Ungleichheit. Auf der dritten erreichen Eltern mit demselben Zugang verschieden viel. Das bestimmt, wer auf dem Kontinuum von Goodall & Montgomery wie weit kommt.' },
+  { a: 'k4', b: 'k2', c: 'k4', bend: -70, t: 'Belohnung, Kontrolle und Plattformkritik', p: 'Deci et al. (1999) belegen den Untergrabungseffekt erwarteter Belohnungen. Corser et al. (2025) kritisieren ClassDojo für Datafizierung und Performativität. Beide treffen die Streaks mit Eltern-Bestätigung, von zwei Seiten.' },
+  { a: 'k5', b: 'k6', c: 'k5', t: 'Akzeptanz ist eine Leitungsaufgabe', p: 'Davis (1989) erklärt Akzeptanz über wahrgenommene Nützlichkeit. Ruloff & Petko (2021) zeigen, dass zielgetriebene Führung schneller verändert als werkzeuggetriebene. Daraus leitet sich U4 ab.' },
+  { a: 'k2', b: 'k7', c: 'k2', t: 'Erwartungen sind nicht Aneignung', p: 'Grant (2011) befragt dieselben drei Gruppen in der Sekundarstufe, aber vor der Einführung eines Systems. Die Forschungslücke muss deshalb auf Aneignung zielen, nicht auf die Perspektiventriangulation allein.' },
+  { a: 'k2', b: 'k5', c: 'k5', bend: -250, t: 'Erreichbarkeit als Belastung', p: 'Grant (2011) stellt fest, dass Lehrpersonen für digitale Kommunikation mehr Zeit bräuchten. Yang et al. (2025) belegen den Zusammenhang von Elternkommunikation und Stress. Das ist die Belastungsseite von U2 aus Sicht der Lehrpersonen.' },
+];
+const N = (id) => K.find(k => k.id === id);
+const SVGNS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs, parent, text) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent && parent.appendChild(e); return e; };
+const W = 236, H = 132, CX = 500, CY = 380;
+const svg = document.getElementById('map');
+
+// Speichen von der Mitte
+K.forEach(k => el('line', { class: 'spoke', x1: CX, y1: CY, x2: k.x, y2: k.y }, svg.querySelector('#spokes')));
+
+// Querverbindungen als Kurven, Nummer am Scheitel
+L.forEach((l, i) => {
+  const A = N(l.a), B = N(l.b);
+  const mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2;
+  const dx = B.x - A.x, dy = B.y - A.y, len = Math.hypot(dx, dy);
+  const off = (l.bend ?? 40);
+  const qx = mx - dy / len * off, qy = my + dx / len * off;
+  const g = el('g', { class: l.c }, svg.querySelector('#links'));
+  el('path', { class: 'link', d: `M${A.x},${A.y} Q${qx},${qy} ${B.x},${B.y}`, 'data-a': l.a, 'data-b': l.b }, g);
+  const tx = 0.25 * A.x + 0.5 * qx + 0.25 * B.x, ty = 0.25 * A.y + 0.5 * qy + 0.25 * B.y;
+  const n = el('g', { class: 'lnum ' + l.c }, svg.querySelector('#nums'));
+  el('circle', { cx: tx, cy: ty, r: 12 }, n); el('text', { x: tx, y: ty }, n, i + 1);
+});
+
+// Mitte
+const core = el('g', { class: 'node core', tabindex: 0 }, svg.querySelector('#nodes'));
+el('rect', { class: 'box', x: CX - 165, y: CY - 70, width: 330, height: 140, rx: 16 }, core);
+el('text', { class: 'eyb', x: CX, y: CY - 44, 'text-anchor': 'middle' }, core, 'FORSCHUNGSFRAGE');
+['Wie eignen sich Lehrpersonen, Schüler*innen', 'und Eltern eine schulintern entwickelte App an,', 'welche Bedeutung schreiben sie ihr zu?'].forEach((s, i) =>
+  el('text', { class: 'q', x: CX, y: CY - 18 + i * 20, 'text-anchor': 'middle' }, core, s));
+el('text', { class: 'src', x: CX, y: CY + 52, 'text-anchor': 'middle' }, core, 'Aneignung: Dourish (2003) · Primärquelle');
+
+// Kapitel
+K.forEach(k => {
+  const g = el('g', { class: `node ${k.id}`, tabindex: 0, role: 'button', 'aria-label': `${k.n} ${k.t}`, 'data-id': k.id }, svg.querySelector('#nodes'));
+  const x = k.x - W / 2, y = k.y - H / 2;
+  el('rect', { class: 'box', x, y, width: W, height: H, rx: 14 }, g);
+  el('rect', { class: 'bar', x: x + 14, y: y + 14, width: 26, height: 4, rx: 2 }, g);
+  el('text', { class: 'num', x: x + 48, y: y + 19 }, g, k.n);
+  el('text', { class: 'ttl', x: x + 14, y: y + 40 }, g, k.t);
+  k.map.forEach((s, i) => {
+    const p = s.startsWith('P:');
+    el('text', { class: 'src' + (p ? ' p' : ''), x: x + 14, y: y + 62 + i * 17 }, g, p ? s.slice(2) : s);
+  });
+  const us = k.u.map((v, i) => v === 2 ? `U${i + 1}` : null).filter(Boolean).join(' · ');
+  el('text', { class: 'uq', x: x + W - 14, y: y + 19, 'text-anchor': 'end' }, g, us);
+});
+
+// Hervorheben
+let active = null;
+function focusOn(id) {
+  active = id;
+  svg.classList.toggle('focus', !!id);
+  svg.querySelectorAll('.node[data-id]').forEach(n => n.classList.toggle('on', n.dataset.id === id));
+  svg.querySelectorAll('.link').forEach(p => p.classList.toggle('on', p.dataset.a === id || p.dataset.b === id));
+}
+svg.querySelectorAll('.node[data-id]').forEach(n => {
+  const go = () => {
+    if (active === n.dataset.id) {
+      const c = document.getElementById('c-' + n.dataset.id);
+      c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1400);
+    } else focusOn(n.dataset.id);
+  };
+  n.addEventListener('click', go);
+  n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+});
+core.addEventListener('click', () => focusOn(null));
+
+// Kartei
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+document.getElementById('kgrid').innerHTML = K.map(k => `
+  <div class="card kcard ${k.id}" id="c-${k.id}">
+    <div class="kn">${k.n}</div>
+    <h3>${esc(k.long)}</h3>
+    <p>${esc(k.what)}</p>
+    <ul>${k.src.map(s => s.startsWith('P:') ? `<li class="p">${esc(s.slice(2))}</li>` : `<li>${esc(s)}</li>`).join('')}</ul>
+    <div class="upills">${k.u.map((v, i) => v === 2 ? `<span class="upill">U${i + 1}</span>` : '').join('')}</div>
+  </div>`).join('');
+
+// Verbindungen
+document.getElementById('lgrid').innerHTML = L.map((l, i) => `
+  <div class="card lrow ${l.c}">
+    <div class="ln">${i + 1}</div>
+    <div><div class="pair">${N(l.a).n} ${esc(N(l.a).t)} ↔ ${N(l.b).n} ${esc(N(l.b).t)}</div><h4>${esc(l.t)}</h4><p>${esc(l.p)}</p></div>
+  </div>`).join('');
+
+// Matrix
+document.querySelector('#um tbody').innerHTML = K.map(k => `
+  <tr class="${k.id}"><td class="kc"><i></i>${k.n} ${esc(k.t)}</td>${k.u.map(v => `<td>${v === 2 ? '<span class="dot" title="trägt Begriffe"></span>' : v === 1 ? '<span class="dot half" title="Kontext"></span>' : ''}</td>`).join('')}</tr>`).join('');
+</script>
+</body>
+</html>

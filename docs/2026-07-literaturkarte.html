@@ -46,6 +46,7 @@
   .qbadge.vh { color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
   .qbadge.h  { color: var(--teal); background: color-mix(in srgb, var(--teal) 13%, transparent); }
   .qbadge.m  { color: var(--amber); background: color-mix(in srgb, var(--amber) 15%, transparent); }
+  table.lit .qbadge { display: inline-block; white-space: normal; text-align: center; line-height: 1.25; border-radius: 10px; }
   .qbadge.l  { color: var(--rose); background: color-mix(in srgb, var(--rose) 15%, transparent); }
 
   /* ---- Cluster -> Theoriekapitel ---- */
@@ -78,8 +79,8 @@
 <div class="wrap">
   <header class="hero">
     <div class="eyebrow">Theoretischer Rahmen · Stand der Forschung</div>
-    <h1>Sieben belegte Felder,<br>drei offene Lücken.</h1>
-    <p class="lede">Die aktuelle Literaturbasis (63 aktive Quellen, überwiegend 2019–2025, dazu die Primärquellen ab 1989) gliedert sich in sieben belegte Kategorien, die direkt auf die theoretischen Bezugspunkte des <a href="2026-07-forschungsdesign.html">Forschungsdesigns</a> einzahlen – und in drei <a href="#luecken">erklärte Lücken</a>, für die noch keine Quelle vorliegt. Die Nummerierung entspricht der Ablage und dem <a href="2026-07-literaturverzeichnis.html">Literaturverzeichnis</a>: Wer 03 sucht, findet an allen drei Orten dasselbe. Die Einzelbewertung je Quelle steht im Literaturverzeichnis.</p>
+    <h1>Neun belegte Felder,<br>eine offene Lücke.</h1>
+    <p class="lede">Die aktuelle Literaturbasis (63 aktive Quellen, überwiegend 2019–2025, dazu die Primärquellen ab 1989) gliedert sich in neun belegte Kategorien, die direkt auf die theoretischen Bezugspunkte des <a href="2026-07-forschungsdesign.html">Forschungsdesigns</a> einzahlen – und in eine <a href="#luecken">erklärte Lücke</a>, für die noch keine Quelle vorliegt. Die Nummerierung entspricht der Ablage und dem <a href="2026-07-literaturverzeichnis.html">Literaturverzeichnis</a>: Wer 03 sucht, findet an allen drei Orten dasselbe. Die Einzelbewertung je Quelle steht im Literaturverzeichnis.</p>
   </header>
 
   <!-- ===================== GESAMTTABELLE ===================== -->
@@ -88,7 +89,7 @@
     <p class="sec-sub">Die vollständige Literaturbasis in einer Tabelle: was die Quelle beiträgt – und was sie <em>nicht</em> abdeckt. Die letzte Spalte ist die Vorarbeit für den Nachweis der Forschungslücke: Wo dieselbe Leerstelle bei allen Quellen wiederkehrt, liegt die Lücke.</p>
 
     <div class="filters" role="group" aria-label="Nach Themenfeld filtern">
-      <button class="fbtn" data-f="all" aria-pressed="true">Alle 50</button>
+      <button class="fbtn" data-f="all" aria-pressed="true">Alle 63</button>
       <button class="fbtn" data-f="eng" aria-pressed="false">01 Engagement &amp; Sek I</button>
       <button class="fbtn" data-f="gam" aria-pressed="false">02 Gamification</button>
       <button class="fbtn" data-f="akz" aria-pressed="false">03 Akzeptanz</button>
@@ -103,8 +104,8 @@
     <div class="tablewrap">
       <table class="lit">
         <colgroup>
-          <col style="width:16%"><col style="width:18%"><col style="width:9%">
-          <col style="width:32%"><col style="width:25%">
+          <col style="width:16%"><col style="width:17%"><col style="width:12%">
+          <col style="width:30%"><col style="width:25%">
         </colgroup>
         <thead>
           <tr>
@@ -206,6 +207,8 @@
             <tr data-c="prim"><td class="who">Sparkman &amp; Walton<small>2017 · Psychological Science</small></td><td>Experimentreihe, dynamische Normen</td><td><span class="qbadge vh">sehr hoch</span></td><td>Information über Veränderung wirkt, auch gegen die statische Norm. Grundlage des Wochen-Puls.</td><td class="gapcell">Schulkontext · Eltern · digitale Systeme</td></tr>
             <tr data-c="m10"><td class="who">Helfferich<small>2011 · VS Verlag</small></td><td>Lehrbuch, Leitfadenkonstruktion</td><td><span class="qbadge vh">sehr hoch</span></td><td>SPSS-Prinzip der Leitfadenkonstruktion. Hier entscheidet sich, ob die Interviewfragen auf der Aneignungsebene bleiben.</td><td class="gapcell">inhaltliche Belege zu Schule oder Kommunikation</td></tr>
             <tr data-c="m10"><td class="who">Schreier<small>2014 · FQS, Open Access</small></td><td>Übersichtsbeitrag, Variantenverortung</td><td><span class="qbadge h">hoch</span></td><td>Neutrale Verortung der Varianten. Begründet die Wahl der inhaltlich strukturierenden Analyse unabhängig von Kuckartz.</td><td class="gapcell">inhaltliche Belege zu Schule oder Kommunikation</td></tr>
+            <tr data-c="m10"><td class="who">Flick<small>2011 · VS Verlag (3. Aufl.)</small></td><td>Lehrbuch, Triangulation</td><td><span class="qbadge vh">sehr hoch</span></td><td>Belegt den Triangulationsbegriff des Designs. Korrigiert die Bezeichnung: Daten- und Methodentriangulation, nicht Perspektiven-Triangulation.</td><td class="gapcell">Schule · digitale Systeme · Auswertungsverfahren</td></tr>
+            <tr data-c="m10"><td class="who">Malterud, Siersma &amp; Guassora<small>2016 · Qualitative Health Research</small></td><td>Methodenbeitrag, information power</td><td><span class="qbadge h">hoch</span></td><td>Begründet die kleine Stichprobe über Informationsstärke der Fälle und zugleich, warum Sättigung nicht beansprucht wird.</td><td class="gapcell">Bildungsforschung · Gruppeninterviews · Minderjährige</td></tr>
             <tr data-c="prim"><td class="who">Dourish<small>2003 · Computer Supported Cooperative Work</small></td><td>Theoriebeitrag, Primärquelle</td><td><span class="qbadge h">hoch</span></td><td><strong>Primärquelle des Aneignungsbegriffs.</strong> Aneignung als Übernehmen und Anpassen von Technik in die eigene Praxis – und weiter: als Einbau „into systems of meaning". Verbindet damit die beiden Teile der Hauptfrage.</td><td class="gapcell">Schulkontext · Eltern · deutschsprachiger Raum</td></tr><tr data-c="plat"><td class="who">Hangartner, Hürzeler &amp; Aebli<small>2024 · Learning, Media and Technology</small></td><td>ethnografisch, Sekundarstufe Schweiz</td><td><span class="qbadge vh">sehr hoch</span></td><td>Aneignung von Plattformen im deutschsprachigen Schulalltag: Die gelebte Nutzung weicht regelmäßig von der intendierten Funktionslogik ab. Zweite deutschsprachige Arbeit im Bestand.</td><td class="gapcell">Eltern- und Lernendenperspektive · Österreich · schulintern entwickelte Systeme</td></tr>
             <tr data-c="prim"><td class="who">Goodall &amp; Montgomery<small>2014 · Educational Review</small></td><td>Theoriebeitrag, Modell</td><td><span class="qbadge h">hoch</span></td><td>Kontinuum von involvement zu engagement; Handlungsmacht und Ort wandern zu den Eltern. Primärquelle der Leitunterscheidung.</td><td class="gapcell">Digitale Kanäle · Empirie · Schüler*innen</td></tr>
             <tr data-c="prim"><td class="who">Fredricks et al.<small>2004 · Review of Educational Research</small></td><td>Review, Begriffsarbeit</td><td><span class="qbadge vh">sehr hoch</span></td><td>Engagement verhaltensbezogen, emotional, kognitiv; kontextabhängig und veränderbar. Original des Engagement-Begriffs.</td><td class="gapcell">Eltern · digitale Systeme · qualitative Zugänge</td></tr>
@@ -397,37 +400,37 @@
     <div class="kap card">
       <div class="kap-head"><span class="kap-num">2.1</span><h4>Schulische Kommunikation zwischen Lehrpersonen, Eltern und Lernenden</h4></div>
       <p class="kb">Begriffsklärung als Fundament: Was heißt Elternbeteiligung, und warum ist der Begriff uneinheitlich? Epsteins Typologie, die Unterscheidung von <em>Involvement</em> und <em>Engagement</em>, und der Nachweis widersprüchlicher Verwendung in Bildungspolitik.</p>
-      <p class="ksrc"><b>Trägt:</b> Kent et al. (2022) · Jones et al. (2025) · Nakambale &amp; Shikalepo (2025) · Beilmann et al. (2023)</p>
+      <p class="ksrc"><b>Trägt:</b> <b>Goodall &amp; Montgomery (2014)</b> · Kent et al. (2022) · Jones et al. (2025) · Nakambale &amp; Shikalepo (2025) · Beilmann et al. (2023) · Adams &amp; Christenson (2000) · Hill &amp; Tyson (2009) · Gonida &amp; Cortina (2014)</p>
     </div>
 
     <div class="kap card">
       <div class="kap-head"><span class="kap-num">2.2</span><h4>Digitalisierung schulischer Kommunikation – Befundlage und kritische Einwände</h4></div>
       <p class="kb">Was über digitale Kommunikationsplattformen im Schulkontext bekannt ist – einschließlich der ernüchternden Wirkungsevidenz. Dieses Unterkapitel begründet, warum die eigene Arbeit nicht auf Wirkung, sondern auf Wahrnehmung zielt.</p>
-      <p class="ksrc"><b>Trägt:</b> See et al. (2021) · Khoo et al. (2024) · Yang et al. (2025) · Dou &amp; Chen (2025) · Osorio-Saez et al. (2021) · Basatha et al. (2025)</p>
+      <p class="ksrc"><b>Trägt:</b> Grant (2011) · See et al. (2021) · Khoo et al. (2024) · Yang et al. (2025) · Dou &amp; Chen (2025) · Osorio-Saez et al. (2021) · Basatha et al. (2025)</p>
     </div>
 
     <div class="kap card">
       <div class="kap-head"><span class="kap-num">2.3</span><h4>Digitale Teilhabe und Ungleichheit</h4></div>
       <p class="kb">Die kritische Kehrseite: Digitales Kapital, sozioökonomische Unterschiede und die Frage, ob niederschwellige Werkzeuge Teilhabe erleichtern oder bestehende Ungleichheit reproduzieren.</p>
-      <p class="ksrc"><b>Trägt:</b> Addi-Raccah (2024) · Pöntinen et al. (2023) · Osorio-Saez et al. (2021)</p>
+      <p class="ksrc"><b>Trägt:</b> <b>Ragnedda (2018)</b> · Addi-Raccah (2024) · Pöntinen et al. (2023) · Osorio-Saez et al. (2021)</p>
     </div>
 
     <div class="kap card">
       <div class="kap-head"><span class="kap-num">2.4</span><h4>Motivation und Engagement – Selbstbestimmungstheorie im Schulkontext</h4></div>
       <p class="kb">Das theoretische Rückgrat: Autonomie, Kompetenz und Zugehörigkeit als Grundbedürfnisse, ihre Übertragung auf Gamification und die Befundlage zu Engagement und Disengagement in der Sekundarstufe. Eigener Unterpunkt: die <b>narrative Rahmung</b> (<i>game fiction</i>) als vom Belohnungsmechanismus zu unterscheidender Designteil – bei Sailer &amp; Homner ein signifikanter Moderator für behaviorale Outcomes und damit die theoretische Grundlage des Abenteuer-Systems.</p>
-      <p class="ksrc"><b>Trägt:</b> Li et al. (2024) · Kurnaz &amp; Koçtürk (2025) · Sailer &amp; Homner (2019) · Huang et al. (2020) · Vrcelj et al. (2023) · Ratinho &amp; Martins (2023) · Chiu (2021a, 2021b) · Bergdahl &amp; Bond (2021) · Bergdahl (2022)</p>
+      <p class="ksrc"><b>Trägt:</b> <b>Fredricks et al. (2004)</b> · <b>Deci et al. (1999)</b> · Li et al. (2024) · Kurnaz &amp; Koçtürk (2025) · Sailer &amp; Homner (2019) · Huang et al. (2020) · Vrcelj et al. (2023) · Ratinho &amp; Martins (2023) · Chiu (2021a, 2021b) · Bergdahl &amp; Bond (2021) · Bergdahl (2022)</p>
     </div>
 
     <div class="kap card">
       <div class="kap-head"><span class="kap-num">2.5</span><h4>Akzeptanz digitaler Werkzeuge bei Lehrpersonen</h4></div>
       <p class="kb">Technologieakzeptanz als Prozess statt als Zustand – inklusive der Frage nach Mehrbelastung und Erreichbarkeitserwartung außerhalb der Dienstzeit.</p>
-      <p class="ksrc"><b>Trägt:</b> Bauwens et al. (2020) · Wohlfart &amp; Wagner (2025) · Yang et al. (2025) · Antonietti et al. (2022) · Maier (2024)</p>
+      <p class="ksrc"><b>Trägt:</b> <b>Davis (1989)</b> · Bauwens et al. (2020) · Wohlfart &amp; Wagner (2025) · Yang et al. (2025) · Antonietti et al. (2022) · Maier (2024)</p>
     </div>
 
     <div class="kap card">
       <div class="kap-head"><span class="kap-num">2.6</span><h4>Digitale Schulentwicklung als Leadership-Aufgabe</h4></div>
       <p class="kb">Die Rückbindung an den Lehrgang. Bis Juli 2026 als schwächstes Unterkapitel geführt; mit Wollscheid et al. (2025) und Reis-Andersson (2024) steht nun eine tragfähige Basis aus zwei Springer-Quellen. Zu klären bleibt, ob zusätzlich deutschsprachige Schulentwicklungsliteratur ergänzt werden soll.</p>
-      <p class="ksrc"><b>Trägt:</b> Wollscheid et al. (2025) · Reis-Andersson (2024) · Antony-Newman (2024) · Wang et al. (2024)</p>
+      <p class="ksrc"><b>Trägt:</b> Ruloff &amp; Petko (2021) · Wollscheid et al. (2025) · Reis-Andersson (2024) · Antony-Newman (2024) · Wang et al. (2024)</p>
     </div>
 
     <div class="kap card" style="border-left:4px solid var(--amber)">
