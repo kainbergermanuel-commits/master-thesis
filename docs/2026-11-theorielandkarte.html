@@ -53,6 +53,25 @@
   .core .q { font-family: var(--display); font-size: 15px; font-weight: 700; fill: var(--ink); }
   .core .src { font-size: 12px; fill: var(--ink-soft); }
 
+  /* Unterfragen-Leiste */
+  .ubar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+  @media (max-width: 860px) { .ubar { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .ubar { grid-template-columns: minmax(0, 1fr); } }
+  .ubtn { text-align: left; font: inherit; color: inherit; cursor: pointer; padding: 12px 14px; border-radius: var(--r, 14px);
+    border: 1px solid var(--line); background: var(--card); transition: border-color .2s, box-shadow .2s; }
+  .ubtn:hover, .ubtn:focus-visible, .ubtn[aria-pressed="true"] { border-color: var(--teal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 18%, transparent); outline: none; }
+  .ubtn .uk { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--teal); }
+  .ubtn .ut { display: block; font-weight: 700; font-size: 14px; color: var(--ink); margin: 2px 0 4px; }
+  .ubtn .uq { display: block; font-size: 12.5px; line-height: 1.45; color: var(--ink-soft); }
+  .ubtn .ux { display: block; font-size: 11.5px; color: var(--muted); margin-top: 6px; }
+  svg.ufocus .node:not(.core) text, svg.ufocus .node:not(.core) rect.bar { opacity: .35; }
+  svg.ufocus .link, svg.ufocus .lnum { opacity: .15; }
+  svg.ufocus .node.u2 text, svg.ufocus .node.u2 rect.bar { opacity: 1; }
+  svg.ufocus .node.u2 rect.box { stroke: var(--k); stroke-width: 3; }
+  svg.ufocus .node.u1 text, svg.ufocus .node.u1 rect.bar { opacity: .8; }
+  svg.ufocus .node.u1 rect.box { stroke: var(--k); stroke-width: 1.6; stroke-dasharray: 5 4; }
+  .node .uq { cursor: help; }
+
   /* Legende */
   .legend-m { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 12px 6px 4px; font-size: 12.5px; color: var(--muted); }
   .legend-m b { color: var(--ink); }
@@ -118,6 +137,8 @@
   <section id="karte">
     <div class="sec-head"><span class="sec-num">01</span><h2>Die Karte</h2></div>
 
+    <p class="sec-sub" style="margin-top:10px">Die vier Unterfragen. Darüberfahren oder antippen zeigt auf der Karte, welche Kapitel sie tragen (durchgezogener Rand) und welche nur Kontext liefern (gestrichelt).</p>
+    <div class="ubar" id="ubar"></div>
     <div class="card mapwrap">
       <svg id="map" viewBox="0 0 1000 730" role="img" aria-labelledby="mapt">
         <title id="mapt">Theorie-Landkarte: Forschungsfrage in der Mitte, sieben Unterkapitel ringsum, sechs Querverbindungen</title>
@@ -128,7 +149,7 @@
       </svg>
       <div class="legend-m">
         <span><b>Fett</b> Primärquelle</span>
-        <span><b>U1–U4</b> bediente Unterfrage</span>
+        <span><b>U1–U4</b> bediente Unterfrage, Details beim Darüberfahren</span>
         <span><b>①–⑥</b> Querverbindung, erklärt unten</span>
       </div>
       <p class="map-hint">Klick auf ein Kapitel hebt seine Verbindungen hervor, ein zweiter Klick springt zur Kartei. Klick auf die Mitte hebt die Hervorhebung auf.</p>
@@ -216,6 +237,12 @@ const L = [
   { a: 'k2', b: 'k7', c: 'k2', t: 'Erwartungen sind nicht Aneignung', p: 'Grant (2011) befragt dieselben drei Gruppen in der Sekundarstufe, aber vor der Einführung eines Systems. Die Forschungslücke muss deshalb auf Aneignung zielen, nicht auf die Perspektiventriangulation allein.' },
   { a: 'k2', b: 'k5', c: 'k5', bend: -250, t: 'Erreichbarkeit als Belastung', p: 'Grant (2011) stellt fest, dass Lehrpersonen für digitale Kommunikation mehr Zeit bräuchten. Yang et al. (2025) belegen den Zusammenhang von Elternkommunikation und Stress. Das ist die Belastungsseite von U2 aus Sicht der Lehrpersonen.' },
 ];
+const U = [
+  { t: 'Nutzung & Aneignung', q: 'Wie nutzen die drei Gruppen die App im schulischen Alltag, und wo weicht die gelebte Nutzung von der intendierten Funktionslogik ab?' },
+  { t: 'Zugeschriebene Wirkung', q: 'Welche Veränderungen in Informationsfluss, Verbindlichkeit und Beteiligung schreiben die Beteiligten der App zu, und welche Grenzen, Belastungen und Nebenwirkungen benennen sie?' },
+  { t: 'Vergleichshorizont & Akzeptanz', q: 'Welche Vergleiche ziehen die Beteiligten zu bereits genutzten Systemen (z. B. SchoolFox), und woran machen sie Unterschiede in Akzeptanz und Aneignung fest?' },
+  { t: 'Folgerungen für Leitung', q: 'Welche Anforderungen an schulische Leitungs- und Entwicklungsarbeit lassen sich aus den Befunden ableiten?', x: 'Ableitungsfrage, wird nicht erhoben' },
+];
 const N = (id) => K.find(k => k.id === id);
 const SVGNS = 'http://www.w3.org/2000/svg';
 const el = (tag, attrs, parent, text) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent && parent.appendChild(e); return e; };
@@ -260,7 +287,8 @@ K.forEach(k => {
     el('text', { class: 'src' + (p ? ' p' : ''), x: x + 14, y: y + 62 + i * 17 }, g, p ? s.slice(2) : s);
   });
   const us = k.u.map((v, i) => v === 2 ? `U${i + 1}` : null).filter(Boolean).join(' · ');
-  el('text', { class: 'uq', x: x + W - 14, y: y + 19, 'text-anchor': 'end' }, g, us);
+  const ul = el('text', { class: 'uq', x: x + W - 14, y: y + 19, 'text-anchor': 'end' }, g, us);
+  el('title', {}, ul, k.u.map((v, i) => v === 2 ? `U${i + 1} ${U[i].t}: ${U[i].q}` : null).filter(Boolean).join('\n\n'));
 });
 
 // Hervorheben
@@ -279,13 +307,37 @@ svg.querySelectorAll('.node[data-id]').forEach(n => {
       c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1400);
     } else focusOn(n.dataset.id);
   };
-  n.addEventListener('click', go);
+  n.addEventListener('click', () => { if (uLock != null) { uLock = null; showU(null); } go(); });
   n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
 });
-core.addEventListener('click', () => focusOn(null));
+core.addEventListener('click', () => { focusOn(null); uLock = null; showU(null); });
+
+// Unterfragen-Leiste
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const ubar = document.getElementById('ubar');
+ubar.innerHTML = U.map((u, i) => {
+  const tr = K.filter(k => k.u[i] === 2).map(k => k.n).join(', ') || 'keines';
+  return `<button class="ubtn" type="button" data-u="${i}" aria-pressed="false"><span class="uk">U${i + 1}</span><span class="ut">${esc(u.t)}</span><span class="uq">${esc(u.q)}</span><span class="ux">${u.x ? esc(u.x) + ' · ' : ''}getragen von ${tr}</span></button>`;
+}).join('');
+let uLock = null;
+function showU(i) {
+  svg.classList.toggle('ufocus', i != null);
+  svg.querySelectorAll('.node[data-id]').forEach(n => {
+    const v = i == null ? 0 : N(n.dataset.id).u[i];
+    n.classList.toggle('u2', v === 2); n.classList.toggle('u1', v === 1);
+  });
+  ubar.querySelectorAll('.ubtn').forEach(b => b.setAttribute('aria-pressed', String(uLock != null && +b.dataset.u === uLock)));
+}
+ubar.querySelectorAll('.ubtn').forEach(b => {
+  const i = +b.dataset.u;
+  b.addEventListener('mouseenter', () => showU(i));
+  b.addEventListener('mouseleave', () => showU(uLock));
+  b.addEventListener('focus', () => showU(i));
+  b.addEventListener('blur', () => showU(uLock));
+  b.addEventListener('click', () => { uLock = uLock === i ? null : i; if (uLock != null) focusOn(null); showU(uLock); });
+});
 
 // Kartei
-const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 document.getElementById('kgrid').innerHTML = K.map(k => `
   <div class="card kcard ${k.id}" id="c-${k.id}">
     <div class="kn">${k.n}</div>
