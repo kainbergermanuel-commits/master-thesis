@@ -17,8 +17,10 @@
   .term { padding: 20px 22px; margin-top: 13px; }
   .term-head { display: flex; align-items: baseline; gap: 11px; flex-wrap: wrap; }
   .term h3 { font-family: var(--display); font-size: 17px; margin: 0; line-height: 1.3; min-width: 0; }
+  .term h3[id] { scroll-margin-top: 90px; }
   .term .en { font-size: 12.5px; color: var(--muted); font-style: italic; }
-  .term .st { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .06em;
+  .legend3 .st { margin-left: 0; }
+  .term .st, .legend3 .st { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .06em;
     text-transform: uppercase; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
   .st.ok   { color: var(--good);   background: color-mix(in srgb, var(--good) 15%, transparent); }
   .st.sek  { color: var(--amber);  background: color-mix(in srgb, var(--amber) 15%, transparent); }
@@ -70,10 +72,10 @@
       <p style="margin-top:9px">Alle Seitenangaben beziehen sich auf die im Bestand liegenden Volltexte. Vor der Übernahme in den Fließtext ist jede Formulierung erneut am Original zu prüfen und nach APA zu zitieren.</p>
     </div>
     <div class="legend3">
-      <span class="chip reuse">geprüft</span>
-      <span class="chip mid">Sekundärbeleg</span>
-      <span class="chip low">eigene Setzung</span>
-      <span class="chip high">offen</span>
+      <span class="st ok">geprüft</span>
+      <span class="st sek">Sekundärbeleg</span>
+      <span class="st own">eigene Setzung</span>
+      <span class="st open">offen</span>
     </div>
   </header>
 
@@ -84,7 +86,7 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Forschungsdesign</h3><span class="en">research design</span>
+        <h3 id="forschungsdesign">Forschungsdesign</h3><span class="en">research design</span>
         <span class="st ok">geprüft</span>
       </div>
       <div class="def">Die <b>Gesamtanlage</b> der Arbeit: der logische Zusammenhang aus Erkenntnisinteresse, Fragestellung, theoretischer Fundierung, methodischem Zugang und Ergebnisverwertung. Beantwortet, <i>warum</i> so vorgegangen wird.</div>
@@ -94,7 +96,7 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Untersuchungsdesign</h3><span class="en">study design</span>
+        <h3 id="untersuchungsdesign">Untersuchungsdesign</h3><span class="en">study design</span>
         <span class="st ok">geprüft</span>
       </div>
       <div class="def">Die <b>konkrete Erhebungsarchitektur</b> innerhalb der Gesamtanlage: Fall und Setting, beteiligte Rollen, Erhebungsformen, Zeitpunkte, Auswertungsverfahren. Beantwortet, <i>wie</i> die Daten gewonnen und bearbeitet werden.</div>
@@ -104,7 +106,7 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Qualitative Inhaltsanalyse</h3><span class="en">qualitative content analysis</span>
+        <h3 id="inhaltsanalyse">Qualitative Inhaltsanalyse</h3><span class="en">qualitative content analysis</span>
         <span class="st ok">geprüft</span>
       </div>
       <div class="def">Eine <b>Analysemethode</b> zur regelgeleiteten, kategorienbasierten Auswertung qualitativer Daten – ausdrücklich kein Forschungsstil, keine Methodologie und kein Paradigma, nach dem Designs konzipiert werden.</div>
@@ -114,7 +116,7 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Kategorie, Code, Thema</h3>
+        <h3 id="kategorie">Kategorie, Code, Thema</h3>
         <span class="st ok">geprüft</span>
       </div>
       <div class="def">Drei Begriffe für teils dasselbe. Kuckartz und Rädiker halten fest, dass sich Kategorienarten wechselseitig überlappen und auf unterschiedlichen Abstraktionsebenen liegen – eine trennscharfe Abgrenzung erscheint ihnen <b>„sehr schwierig und eigentlich wenig aussichtsreich"</b>. <i>Thema</i> und <i>Kategorie</i> verwenden sie als Synonyme, sofern es sich um thematische Kategorien handelt.</div>
@@ -130,7 +132,7 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Aneignung</h3><span class="en">appropriation</span>
+        <h3 id="aneignung">Aneignung</h3><span class="en">appropriation</span>
         <span class="st ok">geprüft</span>
       </div>
       <div class="def">Der Prozess, in dem Nutzende eine Technologie übernehmen, an ihre Praxis anpassen und dabei <b>umdeuten</b>– die gelebte Nutzung weicht von der intendierten Funktionslogik ab.</div>
@@ -142,27 +144,27 @@
 
       <div class="term card">
       <div class="term-head">
-        <h3>Elternbeteiligung: <i>Involvement</i> vs. <i>Engagement</i></h3>
+        <h3 id="involvement-engagement">Elternbeteiligung: <i>Involvement</i> vs. <i>Engagement</i></h3>
         <span class="st ok">geprüft</span>
       </div>
       <div class="def"><b>Involvement</b> meint die von der Schule ausgehende, meist periphere Teilnahme – Elternabende, Schulveranstaltungen, Hilfe bei Hausaufgaben. <b>Engagement</b> meint demgegenüber ein Partnerschaftsmodell, in dem Eltern an Entscheidungen über das Lernen ihres Kindes beteiligt sind. Kent et al. zeigen, dass Bildungspolitik und Schulen <i>Engagement</i> als Ziel benennen, in der Praxis aber am <i>Involvement</i>-Verständnis festhalten.</div>
-      <div class="row2"><span class="rk2">Quelle</span><span class="rv3">Kent, du Boulay &amp; Cukurova (2022), <i>Education Sciences</i>– kritisches Review. Ergänzend Jones, Banerjee &amp; Jackson (2025) zur widersprüchlichen Begriffsverwendung in der englischen Bildungspolitik.</span></div>
+      <div class="row2"><span class="rk2">Quelle</span><span class="rv3"><b>Goodall &amp; Montgomery (2014)</b>, <i>Educational Review</i>, als Primärquelle des Kontinuums: Die Handlungsmacht liegt am Ende nicht bei der Schule, „but rather with the parent" (S. 401). Kent, du Boulay &amp; Cukurova (2022), <i>Education Sciences</i>, als kritisches Review. Ergänzend Jones, Banerjee &amp; Jackson (2025) zur widersprüchlichen Begriffsverwendung in der englischen Bildungspolitik.</span></div>
       <div class="row2"><span class="rk2">Hier</span><span class="rv3">Die Unterscheidung ist der <b>Prüfstein für Unterfrage 2</b>: Ermöglicht die App bloße Information – also Involvement – oder tatsächliche Mitgestaltung? Beide Begriffe werden im Deutschen mit „Beteiligung" übersetzt; wo die Unterscheidung trägt, werden die englischen Termini beibehalten.</span></div>
     </div>
 
     <div class="term card">
       <div class="term-head">
-        <h3>Digitales Kapital</h3><span class="en">digital capital</span>
-        <span class="st sek">Sekundärbeleg</span>
+        <h3 id="digitales-kapital">Digitales Kapital</h3><span class="en">digital capital</span>
+        <span class="st ok">geprüft</span>
       </div>
       <div class="def">Ein <b>Set von Dispositionen</b>, das Personen für den Umgang mit digitalen Technologien entwickeln – bestehend aus zwei Komponenten: <b>digital means</b> (Besitz und Zugang zu digitalen Ressourcen) und <b>digital competency</b> (die Fähigkeit, sie zu nutzen: suchen, filtern, prüfen, einordnen).</div>
-      <div class="row2"><span class="rk2">Quelle</span><span class="rv3">Addi-Raccah (2024), S. 4 – dort referiert. ⚠️ Geprägt wurde der Begriff von <b>Park (2017)</b>, <b>Ragnedda (2018)</b> und <b>Calderón-Gómez (2019)</b>; diese Primärquellen liegen noch nicht im Bestand und gehören in Ordner 08.</span></div>
+      <div class="row2"><span class="rk2">Quelle</span><span class="rv3"><b>Ragnedda (2018)</b>, <i>Telematics and Informatics</i>, S. 2367: digitales Kapital als „accumulation of digital competencies […] and digital technology". Seit 03.11.2026 im Bestand (Ordner 08). Angewandt bei Addi-Raccah (2024), S. 4. Park (2017) und Calderón-Gómez (2019) liegen nicht vor und werden nicht gebraucht.</span></div>
       <div class="row2"><span class="rk2">Hier</span><span class="rv3">Der Begriff trägt die Frage, ob eine niederschwellige App Teilhabe erleichtert <b>oder bestehende Ungleichheit reproduziert</b>. Er ist damit die theoretische Klammer um das Risikofeld „digitaler Kapitalgap".</span></div>
     </div>
 
     <div class="term card">
       <div class="term-head">
-        <h3>Sozioökonomischer Status</h3><span class="en">socioeconomic status, SES</span>
+        <h3 id="ses">Sozioökonomischer Status</h3><span class="en">socioeconomic status, SES</span>
         <span class="st sek">Sekundärbeleg</span>
       </div>
       <div class="def">Sammelbegriff für die soziale und ökonomische Position eines Haushalts, üblicherweise über Bildung, Beruf und Einkommen bestimmt. In der herangezogenen Literatur wird SES als <b>Gruppierungsmerkmal</b> verwendet, nicht als eigenständig definiertes Konstrukt.</div>
@@ -178,21 +180,21 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Engagement und Disengagement</h3>
+        <h3 id="engagement">Engagement und Disengagement</h3>
         <span class="st ok">geprüft</span>
       </div>
       <div class="def">Engagement wird häufig als das <b>sichtbare und messbare Ergebnis von Motivation</b> beschrieben. Es ist kontextabhängig: Digitale Technologien verändern Klassenführung, Unterrichtsgestaltung und damit das Engagement selbst. <b>Disengagement</b> ist nicht bloß dessen Abwesenheit, sondern ein eigenes Phänomen – beide können <b>gleichzeitig</b> auftreten.</div>
-      <div class="row2"><span class="rk2">Quelle</span><span class="rv3">Bergdahl &amp; Bond (2021), S. 1–2, <i>Education and Information Technologies</i>; dort referiert auf Boekaerts (2016) sowie Fredricks &amp; McColskey (2012). Ergänzend Bergdahl (2022) zur Lehrpersonenperspektive.</span></div>
+      <div class="row2"><span class="rk2">Quelle</span><span class="rv3">Bergdahl &amp; Bond (2021), S. 1–2, <i>Education and Information Technologies</i>; dort referiert auf Boekaerts (2016) sowie Fredricks &amp; McColskey (2012). Primärquelle der Dreiteilung in verhaltensbezogenes, emotionales und kognitives Engagement: <b>Fredricks, Blumenfeld &amp; Paris (2004)</b>, <i>Review of Educational Research</i>, S. 60. Ergänzend Bergdahl (2022) zur Lehrpersonenperspektive. ⚠️ Gemeint ist das Engagement der Schüler*innen, nicht das der Eltern im Sinn von Goodall &amp; Montgomery.</span></div>
       <div class="row2"><span class="rk2">Hier</span><span class="rv3">Wichtig für die Ergebnisinterpretation: Aus sichtbarer Nutzung folgt <b>kein</b> Rückschluss auf Motivation, und aus Nicht-Nutzung folgt kein Disengagement. Die Arbeit bleibt auf der Ebene dessen, was die Beteiligten berichten.</span></div>
     </div>
 
     <div class="term card">
       <div class="term-head">
-        <h3>Autonomie, Kompetenz, Zugehörigkeit</h3><span class="en">self-determination theory</span>
-        <span class="st sek">Sekundärbeleg</span>
+        <h3 id="sdt">Autonomie, Kompetenz, Zugehörigkeit</h3><span class="en">self-determination theory</span>
+        <span class="st ok">geprüft</span>
       </div>
       <div class="def">Die drei psychologischen Grundbedürfnisse der Selbstbestimmungstheorie: <b>Kompetenz</b> als Gefühl, eine Herausforderung zu meistern; <b>Autonomie</b> als Freiwilligkeit im Ausführen einer Tätigkeit; <b>Zugehörigkeit</b> als Gefühl der Verbundenheit mit anderen.</div>
-      <div class="row2"><span class="rk2">Quelle</span><span class="rv3">Li, Hew &amp; Du (2024), S. 2 – dort referiert. ⚠️ Primärquelle ist <b>Ryan &amp; Deci</b> (2000, 2002); sie fehlt im Bestand und gehört in Ordner 08.</span></div>
+      <div class="row2"><span class="rk2">Quelle</span><span class="rv3"><b>Ryan &amp; Deci (2000)</b>, <i>Contemporary Educational Psychology</i>, S. 57: „the innate needs for competence, autonomy, and relatedness". Im Bestand seit 03.08.2026 (Ordner 08). Die Übertragung auf Gamification nach Li, Hew &amp; Du (2024), S. 2. Zum Untergrabungseffekt erwarteter Belohnungen Deci, Koestner &amp; Ryan (1999).</span></div>
       <div class="row2"><span class="rk2">Hier</span><span class="rv3">Tragend für die Designbegründung: Die Meta-Analyse von Li et al. zeigt, dass Gamification Autonomie und Zugehörigkeit stärkt, das Kompetenzerleben dagegen kaum. Die Eltern-Bestätigung des Streaks adressiert damit <b>Zugehörigkeit</b>, nicht Kompetenz – eine theoriegeleitete Begründung statt einer nachträglichen Deutung.</span></div>
     </div>
 
@@ -209,11 +211,11 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Gamification</h3>
-        <span class="st sek">Sekundärbeleg</span>
+        <h3 id="gamification">Gamification</h3>
+        <span class="st ok">geprüft</span>
       </div>
       <div class="def">Der Einsatz spieltypischer Elemente in nicht-spielerischen Kontexten. Nach der <i>theory of gamified learning</i> wirkt Gamification nicht unmittelbar auf das Lernen, sondern <b>vermittelt</b>– über Verhaltensweisen und Einstellungen, die ihrerseits lernrelevant sein müssen.</div>
-      <div class="row2"><span class="rk2">Quelle</span><span class="rv3">Sailer &amp; Homner (2019), <i>Educational Psychology Review</i>, S. 6, mit Bezug auf Landers (2014). ⚠️ Landers liegt nicht im Bestand; für eine wörtliche Definition ist die Primärquelle zu beschaffen.</span></div>
+      <div class="row2"><span class="rk2">Quelle</span><span class="rv3"><b>Landers (2014)</b>, <i>Simulation &amp; Gaming</i>, S. 752: Gamification als „the use of game attributes […] outside the context of a game with the purpose of affecting learning-related behaviors or attitudes". Die Vermittlungsannahme ebenda. Im Bestand seit August 2026 (Ordner 02). Aufgegriffen bei Sailer &amp; Homner (2019), <i>Educational Psychology Review</i>, S. 6.</span></div>
       <div class="row2"><span class="rk2">Hier</span><span class="rv3">Die Vermittlungsannahme ist der Grund, warum die Arbeit <b>keine Wirkungsaussagen</b> zu Streaks trifft: Selbst die Theorie hinter Gamification behauptet keinen direkten Effekt. Der Begriff deckt zwei Seiten ab, die auseinanderzuhalten sind: die <b>Mechanik</b> (Streaks, Meilensteine, Bestätigung) und die <b>Fiktion</b>– dafür siehe <a href="#game-fiction">Game fiction</a> weiter oben.</span></div>
     </div>
   </section>
@@ -225,7 +227,7 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Verbindlichkeit</h3>
+        <h3 id="verbindlichkeit">Verbindlichkeit</h3>
         <span class="st own">eigene Setzung</span>
       </div>
       <div class="def">Das Ausmaß, in dem schulische Absprachen als <b>gegenseitig geltend</b> erlebt werden – dass Informationen ankommen, gelesen und als verpflichtend behandelt werden.</div>
@@ -235,7 +237,7 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Schulintern entwickelt</h3>
+        <h3 id="schulintern">Schulintern entwickelt</h3>
         <span class="st own">eigene Setzung</span>
       </div>
       <div class="def">Ein System, das <b>nicht zugekauft</b>, sondern innerhalb der Schule von einer dort tätigen Person entwickelt wurde – Entwicklung und Anwendung fallen zusammen. Anlass war ein von der <b>Schulleitung</b> geäußerter Organisationsbedarf; die Umsetzung erfolgte ohne externen Anbieter und <b>ohne formalen Entwicklungsauftrag</b>. Der Begriff benennt damit eine Konstellation, keine Qualität – einschließlich des Umstands, dass Zuständigkeit und Fortbestand des Systems organisational nicht geregelt sind.</div>
@@ -251,33 +253,33 @@
 
     <div class="term card">
       <div class="term-head">
-        <h3>Datafizierung und Performativitätskultur</h3><span class="en">datafication</span>
-        <span class="st open">offen</span>
+        <h3 id="datafizierung">Datafizierung und Performativitätskultur</h3><span class="en">datafication</span>
+        <span class="st ok">geprüft</span>
       </div>
       <div class="def">Die Umwandlung schulischen Verhaltens in sichtbare, vergleichbare Daten – und die daraus folgende Kultur, in der Verhalten auf seine Darstellbarkeit hin ausgerichtet wird.</div>
-      <div class="row2"><span class="rk2">Zu beschaffen</span><span class="rv3">Corser, Manolev &amp; Danby (2025) sowie Manolev, Sullivan &amp; Slee (2019), beide <i>Learning, Media and Technology</i>. Ordner 06.</span></div>
-      <div class="row2"><span class="rk2">Warum dringend</span><span class="rv3">Sichtbare Streaks mit Eltern-Bestätigung sind strukturell dasselbe Muster wie ClassDojo-Punkte. Ohne diese Begriffe kann Unterfrage 2 unerwünschte Nebenwirkungen nicht benennen.</span></div>
+      <div class="row2"><span class="rk2">Quelle</span><span class="rv3"><b>Corser, Manolev &amp; Danby (2025)</b>, <i>Learning, Media and Technology</i>: ClassDojo liefere „a datafied form of behaviour judgement that is context free and technology reliant" (Abstract). Im Bestand seit August 2026 (Ordner 06). Die Vorarbeit Manolev, Sullivan &amp; Slee (2019) liegt nicht vor; Corser et al. fassen sie zusammen.</span></div>
+      <div class="row2"><span class="rk2">Warum wichtig</span><span class="rv3">Sichtbare Streaks mit Eltern-Bestätigung sind strukturell dasselbe Muster wie ClassDojo-Punkte. Ohne diese Begriffe kann Unterfrage 2 unerwünschte Nebenwirkungen nicht benennen.</span></div>
     </div>
 
     <div class="term card">
       <div class="term-head">
-        <h3>Sättigung</h3><span class="en">saturation</span>
-        <span class="st open">offen</span>
+        <h3 id="saettigung">Sättigung</h3><span class="en">saturation</span>
+        <span class="st ok">geprüft</span>
       </div>
       <div class="def">Das Kriterium, ab dem weitere Fälle keine neuen Erkenntnisse mehr erbringen – in qualitativen Designs an die Stelle einer Fallzahlberechnung tretend.</div>
-      <div class="row2"><span class="rk2">Zu beschaffen</span><span class="rv3">Methodenliteratur aus Ordner 10; Kuckartz &amp; Rädiker behandeln den Begriff nicht eigenständig.</span></div>
-      <div class="row2"><span class="rk2">Warum dringend</span><span class="rv3">Er ist die Antwort auf die Leitfrage nach dem nötigen Stichprobenumfang – derzeit eine der offenen Fragen der <a href="gespraechsvorbereitung.html">Gesprächsvorbereitung</a>.</span></div>
+      <div class="row2"><span class="rk2">Quelle</span><span class="rv3"><b>Malterud, Siersma &amp; Guassora (2016)</b>, <i>Qualitative Health Research</i>, S. 1753: Der Begriff stammt aus der Grounded Theory (Glaser &amp; Strauss) und ist an deren Vorgehen gebunden. Im Bestand seit 05.08.2026 (Ordner 10).</span></div>
+      <div class="row2"><span class="rk2">Hier</span><span class="rv3">Die Arbeit beansprucht <b>keine</b> Sättigung. Die Stichprobengröße wird stattdessen über die <i>information power</i> der Fälle begründet. So ist es im Exposé formuliert, und so beantwortet es die Frage aus der <a href="gespraechsvorbereitung.html">Gesprächsvorbereitung</a>.</span></div>
     </div>
   </section>
 
   <div class="note" style="margin-top:26px">
     <h4><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg> Einordnung</h4>
-    <p>Von den sechzehn Begriffen sind sieben am Volltext geprüft, vier über eine Quelle im Bestand belegt, die den Begriff referiert statt prägt, zwei sind ausgewiesene eigene Setzungen und drei noch unbelegt. Die vier Sekundärbelege verweisen alle auf dieselbe Lücke: <b>Ryan &amp; Deci, Ragnedda und Landers</b> gehören in <a href="2026-07-literaturverzeichnis.html#primaerquellen">Kategorie 08</a> und sind der Grund, warum diese Kategorie überhaupt angelegt wurde.</p>
+    <p>Stand 03.11.2026: Von den sechzehn Begriffen sind dreizehn am Volltext geprüft, einer ist über eine Quelle belegt, die ihn referiert statt prägt (sozioökonomischer Status), und zwei sind ausgewiesene eigene Setzungen. Unbelegt ist keiner mehr. Die früheren Sekundärbelege haben ihre Primärquellen in <a href="2026-07-literaturverzeichnis.html#primaerquellen">Kategorie 08</a> bekommen: Ryan &amp; Deci, Ragnedda, Fredricks et al., Goodall &amp; Montgomery. Wie die Begriffe in den Kapiteln zusammenhängen, zeigt die <a href="2026-11-theorielandkarte.html">Theorie-Landkarte</a>.</p>
     <p style="margin-top:9px">Diese Seite ist ein Arbeitsglossar, kein Kapitelentwurf. Im Theorieteil werden die Begriffe nicht als Liste, sondern im Argumentationszusammenhang entwickelt – hier stehen sie, damit über die Kapitel hinweg dieselbe Bedeutung gilt.</p>
   </div>
 
   <div class="foot">
-    <span>Master-Thesis · KlassenHub – Begriffsdefinitionen (Arbeitsglossar, Stand 31.07.2026)</span>
+    <span>Master-Thesis · KlassenHub – Begriffsdefinitionen (Arbeitsglossar, Stand 03.11.2026)</span>
     <span><a href="2026-07-literaturverzeichnis.html">Zum Literaturverzeichnis →</a></span>
   </div>
 </div>

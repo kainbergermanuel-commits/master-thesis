@@ -86,6 +86,11 @@
   .kcard ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-soft); }
   .kcard li { margin: 3px 0; }
   .kcard li.p { color: var(--ink); font-weight: 700; }
+  .kgo { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line-soft); }
+  .kgo a { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; text-decoration: none; color: var(--ink-soft);
+    padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--card-2); transition: border-color .15s, color .15s; }
+  .kgo a:hover, .kgo a:focus-visible { color: var(--k); border-color: var(--k); outline: none; }
+  .kgo a svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
   .upills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
   .upill { font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 999px; color: var(--k); background: color-mix(in srgb, var(--k) 14%, transparent); }
 
@@ -159,7 +164,7 @@
 
   <section id="kapitel">
     <div class="sec-head"><span class="sec-num">02</span><h2>Die sieben Unterkapitel</h2></div>
-    <p class="sec-sub">Jede Karte nennt, was das Kapitel klärt, welche Quellen es tragen und welche Unterfragen es bedient. Methodenliteratur (Kategorien 09 und 10) gehört zum Methodenteil und steht deshalb nicht auf der Karte.</p>
+    <p class="sec-sub">Jede Karte nennt, was das Kapitel klärt, welche Quellen es tragen und welche Unterfragen es bedient. Unten führen Links zur Bewertung der Quellen im Literaturverzeichnis und zu den Begriffen im Glossar. Methodenliteratur (Kategorien 09 und 10) gehört zum Methodenteil und steht deshalb nicht auf der Karte.</p>
     <div class="kgrid" id="kgrid"></div>
   </section>
 
@@ -193,37 +198,37 @@
 <script>
 /* Inhalt der Karte. P = Primärquelle. u = Unterfragen: 2 = trägt Begriffe, 1 = Kontext. */
 const K = [
-  { id: 'k1', n: '2.1', t: 'Elternbeteiligung', long: 'Schulische Kommunikation zwischen Lehrpersonen, Eltern und Lernenden',
+  { id: 'k1', vz: [['teilhabe','04 Elternbeteiligung'],['primaerquellen','08 Primärquellen']], gl: ['involvement-engagement','verbindlichkeit'], n: '2.1', t: 'Elternbeteiligung', long: 'Schulische Kommunikation zwischen Lehrpersonen, Eltern und Lernenden',
     what: 'Was Elternbeteiligung heißt, warum der Begriff uneinheitlich ist, und wie sich Beteiligung beim Übertritt in die Sekundarstufe verändert.',
     map: ['P:Goodall & Montgomery 2014', 'Hill & Tyson 2009', 'Adams & Christenson 2000'],
     src: ['P:Goodall & Montgomery (2014)', 'Kent et al. (2022)', 'Jones et al. (2025)', 'Hill & Tyson (2009)', 'Gonida & Cortina (2014)', 'Adams & Christenson (2000)', 'Beilmann et al. (2023)', 'Nakambale & Shikalepo (2025)'],
     u: [2, 2, 0, 1], x: 500, y: 95 },
-  { id: 'k2', n: '2.2', t: 'Digitale Kommunikation', long: 'Digitalisierung schulischer Kommunikation: Befundlage und kritische Einwände',
+  { id: 'k2', vz: [['engagement','01 Engagement & Sek'],['platformisierung','06 Platformisierung']], gl: ['aneignung','datafizierung'], n: '2.2', t: 'Digitale Kommunikation', long: 'Digitalisierung schulischer Kommunikation: Befundlage und kritische Einwände',
     what: 'Was über digitale Plattformen zwischen Schule und Zuhause bekannt ist, einschließlich der kritischen Lesart der Plattformisierung.',
     map: ['Grant 2011', 'Gouseti & Shaw 2026', 'Corser et al. 2025'],
     src: ['Grant (2011)', 'Gouseti & Shaw (2026)', 'Corser et al. (2025)', 'Hangartner et al. (2024)', 'See et al. (2021)', 'Khoo et al. (2024)', 'Dou & Chen (2025)', 'Osorio-Saez et al. (2021)', 'Basatha et al. (2025)'],
     u: [2, 2, 1, 0], x: 790, y: 205 },
-  { id: 'k3', n: '2.3', t: 'Teilhabe & Ungleichheit', long: 'Digitale Teilhabe und Ungleichheit',
+  { id: 'k3', vz: [['teilhabe','04 Teilhabe']], gl: ['digitales-kapital','ses'], n: '2.3', t: 'Teilhabe & Ungleichheit', long: 'Digitale Teilhabe und Ungleichheit',
     what: 'Ob niederschwellige Werkzeuge Teilhabe erleichtern oder bestehende Ungleichheit fortschreiben. Begründet zugleich die Auswahl der Eltern.',
     map: ['P:Ragnedda 2018', 'Addi-Raccah 2024', 'Pöntinen et al. 2023'],
     src: ['P:Ragnedda (2018)', 'Addi-Raccah (2024)', 'Pöntinen et al. (2023)', 'Osorio-Saez et al. (2021)'],
     u: [1, 2, 0, 1], x: 845, y: 455 },
-  { id: 'k4', n: '2.4', t: 'Motivation & Engagement', long: 'Selbstbestimmungstheorie, Engagement und Gamification',
+  { id: 'k4', vz: [['gamification','02 Gamification'],['primaerquellen','08 Primärquellen']], gl: ['sdt','engagement','gamification','game-fiction'], n: '2.4', t: 'Motivation & Engagement', long: 'Selbstbestimmungstheorie, Engagement und Gamification',
     what: 'Das theoretische Rückgrat: Grundbedürfnisse, Engagement der Schüler*innen, Belohnung und Spielfiktion als zwei getrennte Designteile.',
     map: ['P:Ryan & Deci 2000', 'P:Deci et al. 1999', 'P:Fredricks et al. 2004'],
     src: ['P:Ryan & Deci (2000)', 'P:Deci, Koestner & Ryan (1999)', 'P:Fredricks et al. (2004)', 'P:Schultz et al. (2007)', 'P:Sparkman & Walton (2017)', 'Li et al. (2024)', 'Sailer & Homner (2019)', 'Landers (2014)', 'Hanus & Fox (2015)', 'Kurnaz & Koçtürk (2025)', 'Chiu (2021a, 2021b)', 'Bergdahl & Bond (2021)'],
     u: [2, 2, 0, 0], x: 655, y: 645 },
-  { id: 'k5', n: '2.5', t: 'Akzeptanz bei Lehrpersonen', long: 'Akzeptanz digitaler Werkzeuge bei Lehrpersonen',
+  { id: 'k5', vz: [['akzeptanz','03 Akzeptanz'],['primaerquellen','08 Primärquellen']], gl: [], n: '2.5', t: 'Akzeptanz bei Lehrpersonen', long: 'Akzeptanz digitaler Werkzeuge bei Lehrpersonen',
     what: 'Technologieakzeptanz als Prozess, Nützlichkeit vor Bedienbarkeit, und die Frage nach Mehrbelastung und Erreichbarkeit.',
     map: ['P:Davis 1989', 'Wohlfart & Wagner 2025', 'Yang et al. 2025'],
     src: ['P:Davis (1989)', 'Wohlfart & Wagner (2025)', 'Yang et al. (2025)', 'Bauwens et al. (2020)', 'Antonietti et al. (2022)', 'Maier (2024)'],
     u: [1, 1, 2, 1], x: 345, y: 645 },
-  { id: 'k6', n: '2.6', t: 'Digital Leadership', long: 'Digitale Schulentwicklung als Leadership-Aufgabe',
+  { id: 'k6', vz: [['leadership','05 Leadership']], gl: ['schulintern'], n: '2.6', t: 'Digital Leadership', long: 'Digitale Schulentwicklung als Leadership-Aufgabe',
     what: 'Die Rückbindung an den Lehrgang: wie Schulen digitalen Wandel führen, und warum ein von einer Lehrperson ausgehendes System ein Sonderfall ist.',
     map: ['Ruloff & Petko 2021', 'Wollscheid et al. 2025', 'Reis-Andersson 2024'],
     src: ['Ruloff & Petko (2021)', 'Wollscheid et al. (2025)', 'Reis-Andersson (2024)', 'Antony-Newman (2024)', 'Wang et al. (2024)'],
     u: [0, 0, 1, 2], x: 155, y: 455 },
-  { id: 'k7', n: '2.7', t: 'Forschungslücke', long: 'Forschungslücke und Ableitung der Fragestellung',
+  { id: 'k7', vz: [['dach','07 DACH-Kontext']], gl: ['schulintern','aneignung'], n: '2.7', t: 'Forschungslücke', long: 'Forschungslücke und Ableitung der Fragestellung',
     what: 'Was die Literatur offenlässt: Aneignung eines schulintern entwickelten Systems, aus drei Perspektiven, im österreichischen Kontext.',
     map: ['Grant 2011', 'Gouseti & Shaw 2026', 'Yang et al. 2023'],
     src: ['Grant (2011)', 'Gouseti & Shaw (2026)', 'Yang et al. (2023)', 'Hangartner et al. (2024)'],
@@ -337,6 +342,9 @@ ubar.querySelectorAll('.ubtn').forEach(b => {
   b.addEventListener('click', () => { uLock = uLock === i ? null : i; if (uLock != null) focusOn(null); showU(uLock); });
 });
 
+const ICO_LIST = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>';
+const ICO_BOOK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>';
+const GLN = { 'involvement-engagement': 'Involvement vs. Engagement', verbindlichkeit: 'Verbindlichkeit', aneignung: 'Aneignung', datafizierung: 'Datafizierung', 'digitales-kapital': 'Digitales Kapital', ses: 'SES', sdt: 'Selbstbestimmungstheorie', engagement: 'Engagement', gamification: 'Gamification', 'game-fiction': 'Game fiction', schulintern: 'Schulintern entwickelt' };
 // Kartei
 document.getElementById('kgrid').innerHTML = K.map(k => `
   <div class="card kcard ${k.id}" id="c-${k.id}">
@@ -345,6 +353,7 @@ document.getElementById('kgrid').innerHTML = K.map(k => `
     <p>${esc(k.what)}</p>
     <ul>${k.src.map(s => s.startsWith('P:') ? `<li class="p">${esc(s.slice(2))}</li>` : `<li>${esc(s)}</li>`).join('')}</ul>
     <div class="upills">${k.u.map((v, i) => v === 2 ? `<span class="upill">U${i + 1}</span>` : '').join('')}</div>
+    <div class="kgo">${k.vz.map(([id, t]) => `<a href="2026-07-literaturverzeichnis.html#${id}">${ICO_LIST}${esc(t)}</a>`).join('')}${k.gl.map(id => `<a href="2026-07-begriffsdefinitionen.html#${id}">${ICO_BOOK}${esc(GLN[id] || id)}</a>`).join('')}</div>
   </div>`).join('');
 
 // Verbindungen

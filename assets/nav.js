@@ -12,6 +12,11 @@
    5. Umschalter für die Darstellung: Hell (Standard), Dunkel, Automatisch.
       Gespeichert in localStorage "mt-theme"; ein kleines Skript im <head> jeder
       Seite setzt die Wahl vor dem ersten Zeichnen.
+   6. Begriffs-Erklärungen: Das erste Vorkommen eines Glossarbegriffs auf einer
+      Seite wird gepunktet unterstrichen; Darüberfahren oder Antippen zeigt die
+      Definition mit Belegstatus. Quelle ist allein die Seite
+      Begriffsdefinitionen, sie wird beim Laden gelesen. Neue Begriffe dort
+      anlegen (h3 mit id) und unten in GLOSSAR ein Suchmuster eintragen.
 
    Neue Dokumente werden nur in SITE eingetragen, in der Reihenfolge der
    Startseite. Die Gruppen spiegeln die Ebenen und Untergruppen der Startseite.
@@ -25,6 +30,7 @@
         ['2026-07-forschungsdesign.html', 'Forschungsdesign & Untersuchungsdesign'],
         ['2026-07-begriffsdefinitionen.html', 'Begriffsdefinitionen'] ] },
       { name: 'Theorie & Literatur', items: [
+        ['2026-11-theorielandkarte.html', 'Theorie-Landkarte'],
         ['2026-07-literaturkarte.html', 'Literaturkarte'],
         ['2026-07-literaturverzeichnis.html', 'Literaturverzeichnis'],
         ['2026-08-suchstrategie.html', 'Suchstrategie & Literaturauswahl'],
@@ -439,4 +445,124 @@
       ticking = false;
     });
   }, { passive: true });
+
+  // ---- 6 Begriffs-Erklärungen -------------------------------------------------
+  // Suchmuster je Glossar-Anker. Nur das erste Vorkommen pro Seite wird markiert.
+  var GLOSSAR = [
+    ['aneignung', /\bAneignung\b/],
+    ['involvement-engagement', /\bInvolvement\b/],
+    ['digitales-kapital', /\bdigitale[sn]? Kapitals?\b/i],
+    ['sdt', /\bSelbstbestimmungstheorie\b/],
+    ['game-fiction', /\b[Gg]ame[ -]fiction\b/],
+    ['gamification', /\bGamification\b/],
+    ['verbindlichkeit', /\bVerbindlichkeit\b/],
+    ['schulintern', /\bschulintern entwickelte[mnrs]?\b/i],
+    ['datafizierung', /\bDatafizierung\b/],
+    ['saettigung', /\bSättigung\b/],
+    ['inhaltsanalyse', /\b[Qq]ualitative[nr]? Inhaltsanalyse\b/],
+    ['ses', /\bsozioökonomische[nmrs]? Status\b/i]
+  ];
+  var GLOSS_FILE = '2026-07-begriffsdefinitionen.html';
+  var ICON_BOOK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>';
+  if (file !== GLOSS_FILE && window.fetch && window.DOMParser) {
+    var gst = document.createElement('style'); gst.id = 'gl-css'; gst.textContent = ([
+      '.gl-t{text-decoration:underline dotted color-mix(in srgb,var(--nv-teal) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:3px;transition:background .15s}',
+      '.gl-t:hover,.gl-t:focus-visible,.gl-t.on{background:color-mix(in srgb,var(--nv-teal) 12%,transparent);outline:none}',
+      '.gl-tip{position:fixed;z-index:60;width:min(340px,calc(100vw - 24px));padding:14px 16px 12px;border-radius:16px;',
+      'border:1px solid color-mix(in srgb,var(--nv-teal) 28%,var(--nv-line));color:var(--nv-ink);font-family:var(--body,system-ui,sans-serif);',
+      'background:linear-gradient(150deg,color-mix(in srgb,var(--nv-teal) 10%,var(--nv-card)) 0%,var(--nv-card) 55%,color-mix(in srgb,var(--amber,#B8721E) 6%,var(--nv-card)) 100%);',
+      'box-shadow:0 22px 50px -24px rgba(0,0,0,.5),0 2px 8px -4px rgba(0,0,0,.15);opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .16s,transform .16s}',
+      '.gl-tip.on{opacity:1;transform:none;pointer-events:auto}',
+      '.gl-tip .gh{display:flex;align-items:center;gap:9px;margin-bottom:7px}',
+      '.gl-tip .gi{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;flex:none;background:color-mix(in srgb,var(--nv-teal) 15%,transparent)}',
+      '.gl-tip .gi svg{width:14px;height:14px;stroke:var(--nv-teal);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}',
+      '.gl-tip .gn{font-family:var(--nv-display);font-weight:700;font-size:14.5px;line-height:1.25;flex:1;min-width:0}',
+      '.gl-tip .gs{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}',
+      '.gl-tip .gs.ok{color:var(--good,#2E9C6E);background:color-mix(in srgb,var(--good,#2E9C6E) 15%,transparent)}',
+      '.gl-tip .gs.sek{color:var(--amber,#B8721E);background:color-mix(in srgb,var(--amber,#B8721E) 15%,transparent)}',
+      '.gl-tip .gs.own{color:var(--violet,#5965B8);background:color-mix(in srgb,var(--violet,#5965B8) 15%,transparent)}',
+      '.gl-tip .gs.open{color:var(--nv-muted);border:1px dashed var(--nv-line)}',
+      '.gl-tip .gd{font-size:13px;line-height:1.55;color:var(--ink-soft,var(--nv-ink));display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}',
+      '.gl-tip .gf{display:flex;justify-content:flex-end;margin-top:10px;padding-top:9px;border-top:1px solid var(--nv-line)}',
+      '.gl-tip .gf a{font-size:12px;font-weight:700;color:var(--nv-teal);text-decoration:none}',
+      '.gl-tip .gf a:hover{text-decoration:underline}',
+      '@media (prefers-reduced-motion:reduce){.gl-tip{transition:none}}'
+    ].join('')); document.head.appendChild(gst);
+    fetch(docHref(GLOSS_FILE)).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+      if (!html) return;
+      var g = new DOMParser().parseFromString(html, 'text/html'), data = {};
+      Array.prototype.forEach.call(g.querySelectorAll('.term h3[id]'), function (h) {
+        var term = h.closest('.term'), st = term.querySelector('.st'), def = term.querySelector('.def');
+        data[h.id] = { name: h.textContent.trim(), st: st ? st.className.replace('st', '').trim() : '', stl: st ? st.textContent.trim() : '', def: def ? def.textContent.replace(/\s+/g, ' ').trim() : '' };
+      });
+      markTerms(data);
+    }).catch(function () {});
+  }
+  function markTerms(data) {
+    var root = Array.prototype.filter.call(document.querySelectorAll('.wrap'), function (n) { return !n.closest('.topbar'); });
+    if (!root.length) return;
+    var SKIP = 'a,h1,h2,h3,h4,code,pre,button,svg,script,style,.ref,.chip,.topbar,.foot,.nv-next,.gl-t,.meta,.ksrc,.lede-skip,[data-no-gloss]';
+    var done = {};
+    root.forEach(function (r) {
+      var walker = document.createTreeWalker(r, NodeFilter.SHOW_TEXT, { acceptNode: function (n) {
+        if (!n.nodeValue || n.nodeValue.length < 4) return NodeFilter.FILTER_REJECT;
+        var p = n.parentElement;
+        return p && !p.closest(SKIP) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      } });
+      var nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(function (n) {
+        GLOSSAR.forEach(function (gp) {
+          var id = gp[0]; if (done[id] || !data[id] || !n.parentNode) return;
+          // Nicht in Wortzusammensetzungen wie „Gamification-Prinzipien" markieren
+          var re = new RegExp(gp[1].source + '(?![-\u2011\u00AD])', gp[1].flags);
+          var m = re.exec(n.nodeValue); if (!m) return;
+          var after = n.splitText(m.index); after.splitText(m[0].length);
+          var span = el('span', 'gl-t', m[0]);
+          span.tabIndex = 0; span.setAttribute('role', 'button'); span.setAttribute('aria-describedby', 'gl-tip');
+          span.dataset.gl = id;
+          after.parentNode.replaceChild(span, after);
+          done[id] = true;
+          n = span.nextSibling && span.nextSibling.nodeType === 3 ? span.nextSibling : n;
+        });
+      });
+    });
+    if (Object.keys(done).length) wireTips(data);
+  }
+  function wireTips(data) {
+    var tip = el('div', 'gl-tip'); tip.id = 'gl-tip'; tip.setAttribute('role', 'tooltip');
+    document.body.appendChild(tip);
+    var cur = null, hideT = null;
+    function show(t) {
+      clearTimeout(hideT);
+      var d = data[t.dataset.gl]; if (!d) return;
+      if (cur && cur !== t) cur.classList.remove('on');
+      cur = t; t.classList.add('on');
+      tip.innerHTML = '<div class="gh"><span class="gi">' + ICON_BOOK + '</span><span class="gn"></span>' + (d.stl ? '<span class="gs ' + d.st + '"></span>' : '') + '</div><div class="gd"></div><div class="gf"><a>Im Glossar nachlesen →</a></div>';
+      tip.querySelector('.gn').textContent = d.name;
+      if (d.stl) tip.querySelector('.gs').textContent = d.stl;
+      tip.querySelector('.gd').textContent = d.def;
+      tip.querySelector('a').href = docHref(GLOSS_FILE) + '#' + t.dataset.gl;
+      var r = t.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight, vw = innerWidth, vh = innerHeight;
+      var x = Math.max(12, Math.min(r.left + r.width / 2 - w / 2, vw - w - 12));
+      var y = r.bottom + 10; if (y + h > vh - 12 && r.top - h - 10 > 12) y = r.top - h - 10;
+      tip.style.left = x + 'px'; tip.style.top = y + 'px';
+      tip.classList.add('on');
+    }
+    function hide(delay) {
+      clearTimeout(hideT);
+      hideT = setTimeout(function () { tip.classList.remove('on'); if (cur) cur.classList.remove('on'); cur = null; }, delay || 0);
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('.gl-t'), function (t) {
+      t.addEventListener('mouseenter', function () { show(t); });
+      t.addEventListener('mouseleave', function () { hide(180); });
+      t.addEventListener('focus', function () { show(t); });
+      t.addEventListener('blur', function () { hide(180); });
+      t.addEventListener('click', function (e) { e.stopPropagation(); if (cur === t && tip.classList.contains('on')) hide(); else show(t); });
+      t.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+    });
+    tip.addEventListener('mouseenter', function () { clearTimeout(hideT); });
+    tip.addEventListener('mouseleave', function () { hide(180); });
+    document.addEventListener('click', function (e) { if (!tip.contains(e.target)) hide(); });
+    window.addEventListener('scroll', function () { if (tip.classList.contains('on')) hide(); }, { passive: true });
+  }
 })();

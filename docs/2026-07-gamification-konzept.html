@@ -198,12 +198,15 @@
   .who.auto { color: var(--teal); } .who.teach { color: var(--violet); }
 
   .vault { margin-top: 18px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; }
+  /* Rasterspalten dürfen schmaler werden als ihr längstes Wort, sonst sprengen sie auf dem Handy die Seite. */
+  .vault > *, .persp > *, .layers > *, .decisions > *, .scene-wrap > *, .pipe > * { min-width: 0; }
   @media (max-width: 760px) { .vault { grid-template-columns: 1fr; } }
   .vault .card { padding: 18px; }
   .vault h4 { font-family: var(--display); font-size: 16px; display: flex; align-items: center; gap: 8px; }
   .vault ul { margin: 12px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
-  .vault li { font-size: 13.5px; color: var(--ink-soft); display: flex; gap: 9px; align-items: flex-start; }
-  .vault li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 8px; flex: none; }
+  /* Kein Flex im Listenpunkt: sonst wird jedes fette Wort ein eigener Block, und die Zeile kann nicht umbrechen. */
+  .vault li { font-size: 13.5px; color: var(--ink-soft); position: relative; padding-left: 15px; }
+  .vault li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
 
   /* ---- nudge table ---- */
   .nudge-row td:first-child { font-weight: 700; color: var(--ink); }
