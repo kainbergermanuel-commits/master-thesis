@@ -19,7 +19,6 @@
   .term h3 { font-family: var(--display); font-size: 17px; margin: 0; line-height: 1.3; min-width: 0; }
   .term h3[id] { scroll-margin-top: 90px; }
   .term .en { font-size: 12.5px; color: var(--muted); font-style: italic; }
-  .legend3 .st { margin-left: 0; }
   .term .st, .legend3 .st { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .06em;
     text-transform: uppercase; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
   .st.ok   { color: var(--good);   background: color-mix(in srgb, var(--good) 15%, transparent); }
@@ -34,6 +33,8 @@
   .term .rv3 b { color: var(--ink); font-weight: 700; }
   .term .rv3 i { font-style: italic; }
   .legend3 { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+  /* Steht bewusst nach der gemeinsamen .st-Regel: deren margin-left:auto schiebt die Marke im Begriffskopf nach rechts, in der Legende würde es die Pillen auseinanderziehen. */
+  .legend3 .st { margin-left: 0; }
   /* .delim wie auf der Forschungsdesign-Seite: dort lokal definiert, hier gespiegelt,
      damit beide Seiten Hinweisblöcke gleich darstellen. */
   .delim { margin-top: 22px; padding: 18px 20px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--amber) 35%, var(--line)); background: color-mix(in srgb, var(--amber) 7%, var(--card)); }
