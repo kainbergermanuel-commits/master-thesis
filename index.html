@@ -47,8 +47,19 @@
   .frage blockquote { margin: 8px 0 0; font-family: var(--display); font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.4; letter-spacing: -.01em; color: var(--ink); text-wrap: pretty; }
   .ufr { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
   @media (max-width: 760px) { .ufr { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .ufr div { padding: 10px 12px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-soft); font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; }
+  .ufr button { font: inherit; text-align: left; cursor: pointer; padding: 10px 12px; border-radius: 12px; background: var(--card-2);
+    border: 1px solid var(--line-soft); font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; transition: border-color .15s, background .15s, color .15s; }
+  .ufr button:hover, .ufr button:focus-visible { border-color: color-mix(in srgb, var(--teal) 45%, var(--line)); color: var(--ink); outline: none; }
+  .ufr button[aria-pressed="true"] { border-color: var(--teal); background: color-mix(in srgb, var(--teal) 10%, var(--card)); color: var(--ink); }
   .ufr b { display: block; font-size: 11px; font-weight: 800; color: var(--teal); letter-spacing: .05em; margin-bottom: 2px; }
+  /* Wortlaut der gewählten Unterfrage. Eigenes Feld statt Tooltip, damit es auch am Handy und mit der Tastatur erreichbar ist. */
+  .ufr-q { margin-top: 8px; min-height: 48px; padding: 12px 14px; border-radius: 12px; font-size: 14px; line-height: 1.55; color: var(--ink);
+    background: linear-gradient(150deg, color-mix(in srgb, var(--teal) 9%, var(--card)), var(--card) 70%); border: 1px dashed color-mix(in srgb, var(--teal) 30%, var(--line)); }
+  .ufr-q.on { border-style: solid; }
+  .ufr-q .hint { font-size: 12.5px; color: var(--muted); }
+  .ufr-q .ql { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--teal); margin-right: 6px; }
+  .ufr-q .qx { display: block; margin-top: 4px; font-size: 11.5px; color: var(--muted); }
+  .ufr-q .qx a { color: var(--teal); font-weight: 700; text-decoration: none; }
   .frage details { margin-top: 14px; }
   /* Aufklapper: Plus und Minus als Flächen gezeichnet, nicht als Schriftzeichen,
      damit sie unabhängig von der Schrift exakt mittig im Kästchen sitzen. */
@@ -188,11 +199,14 @@
     <div class="card frage">
       <div class="fk">Forschungsfrage · mit der Betreuung abgestimmt am 17.08.2026</div>
       <blockquote>Wie eignen sich Lehrpersonen, Schüler*innen und Eltern eine schulintern entwickelte Kommunikations- und Organisations-App im Rahmen einer Erprobung in der Sekundarstufe I an, welche Bedeutung schreiben sie ihr für schulische Informations- und Beteiligungsprozesse zu, und welche Folgerungen ergeben sich daraus für schulische Leitungs- und Entwicklungsarbeit?</blockquote>
-      <div class="ufr">
-        <div><b>U1</b>Nutzung und Aneignung</div>
-        <div><b>U2</b>Zugeschriebene Wirkung, auch Grenzen und Belastungen</div>
-        <div><b>U3</b>Vergleich mit bisherigen Systemen und Akzeptanz</div>
-        <div><b>U4</b>Folgerungen für Leitung und Entwicklung</div>
+      <div class="ufr" role="group" aria-label="Unterfragen">
+        <button type="button" data-u="0" aria-pressed="false" aria-controls="ufr-q"><b>U1</b>Nutzung und Aneignung</button>
+        <button type="button" data-u="1" aria-pressed="false" aria-controls="ufr-q"><b>U2</b>Zugeschriebene Wirkung, auch Grenzen und Belastungen</button>
+        <button type="button" data-u="2" aria-pressed="false" aria-controls="ufr-q"><b>U3</b>Vergleich mit bisherigen Systemen und Akzeptanz</button>
+        <button type="button" data-u="3" aria-pressed="false" aria-controls="ufr-q"><b>U4</b>Folgerungen für Leitung und Entwicklung</button>
+      </div>
+      <div class="ufr-q" id="ufr-q" aria-live="polite">
+        <span class="hint">Eine Unterfrage antippen oder darüberfahren, um sie im Wortlaut zu lesen.</span>
       </div>
       <details>
         <summary>Was untersucht wird, und was nicht</summary>
@@ -328,5 +342,38 @@
   </div>
 </div>
 
+<script>
+  /* Unterfragen im Wortlaut des Forschungsdesigns. Darüberfahren zeigt, Klick hält fest. */
+  (() => {
+    const Q = [
+      'Wie nutzen die drei Gruppen die App im schulischen Alltag – und wo weicht die gelebte Nutzung von der intendierten Funktionslogik ab?',
+      'Welche Veränderungen in Informationsfluss, Verbindlichkeit und Beteiligung schreiben die Beteiligten der App zu – und welche Grenzen, Belastungen und unerwünschten Nebenwirkungen benennen sie?',
+      'Welche Vergleiche ziehen die Beteiligten zu bereits genutzten Systemen (z. B. SchoolFox) – und woran machen sie Unterschiede in Akzeptanz und Aneignung fest?',
+      'Welche Anforderungen an schulische Leitungs- und Entwicklungsarbeit lassen sich aus den Befunden ableiten?'
+    ];
+    const NOTE = ['', '', '', 'Anders als U1 bis U3 keine Erhebungs-, sondern eine Ableitungsfrage. '];
+    const box = document.getElementById('ufr-q');
+    const btns = [...document.querySelectorAll('.ufr button')];
+    if (!box || btns.length !== 4) return;
+    const hint = box.innerHTML;
+    let lock = null;
+    const show = (i) => {
+      if (i == null) { box.innerHTML = hint; box.classList.remove('on'); }
+      else {
+        box.innerHTML = '<span class="ql">U' + (i + 1) + '</span>' + Q[i] +
+          '<span class="qx">' + NOTE[i] + 'Wortlaut und Herleitung im <a href="docs/2026-07-forschungsdesign.html">Forschungsdesign</a>.</span>';
+        box.classList.add('on');
+      }
+      btns.forEach((b, j) => b.setAttribute('aria-pressed', String(lock === j)));
+    };
+    btns.forEach((b, i) => {
+      b.addEventListener('mouseenter', () => show(i));
+      b.addEventListener('mouseleave', () => show(lock));
+      b.addEventListener('focus', () => show(i));
+      b.addEventListener('blur', () => show(lock));
+      b.addEventListener('click', () => { lock = lock === i ? null : i; show(lock ?? i); });
+    });
+  })();
+</script>
 </body>
 </html>
