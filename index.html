@@ -5,99 +5,93 @@
 <script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Master-Thesis · Digitale Schulkommunikation (ClassHaven) · Arbeitsdokumentation</title>
-<meta name="description" content="Laufende Arbeitsdokumentation der Master-Thesis (PH NÖ, Schulmanagement & Leadership): qualitative Untersuchung zur Erprobung der selbst entwickelten App KlassenHub im Schulkontext.">
+<meta name="description" content="Laufende Arbeitsdokumentation der Master-Thesis (PH NÖ, Schulmanagement & Leadership): qualitative Untersuchung zur Aneignung der schulintern entwickelten App ClassHaven in der Sekundarstufe I.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
-  /* Seiten-spezifisch: nur für index.html, nicht Teil des geteilten Systems */
-  .hero .work-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-top: 10px; }
-  .hero .name-note { margin-top: 14px; font-size: 13px; line-height: 1.55; color: var(--ink-soft);
-    padding: 10px 14px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
-  .hero .name-note b { color: var(--ink); }
-  /* Hervorgehobene Zeile im Stand-Block: der eine Ort, an dem gerade gearbeitet wird. */
-  .now { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; margin-top: 16px;
-    padding: 13px 16px; border-radius: 12px; text-decoration: none; color: var(--ink);
-    background: color-mix(in srgb, var(--teal) 9%, var(--card-2));
-    border: 1px solid color-mix(in srgb, var(--teal) 35%, var(--line)); transition: border-color .15s; }
-  .now:hover { border-color: var(--teal); }
-  .now-l { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fff;
-    background: var(--teal); padding: 3px 9px; border-radius: 999px; }
-  .now-t { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
-  .now-t b { color: var(--ink); }
-  .now-a { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--teal); white-space: nowrap; }
-  @media (max-width: 640px) { .now { grid-template-columns: 1fr; gap: 8px; } .now-l { justify-self: start; } }
-  /* Stand-Block: erste Orientierung beim Oeffnen. Bewusst kurz – er veraltet als
-     Erstes und muss bei jeder inhaltlichen Aenderung mitgezogen werden. */
-  .stand { margin-top: 26px; padding: 22px 24px; border-left: 4px solid var(--teal); }
+  /* Seiten-spezifisch: nur für index.html, nicht Teil des geteilten Systems.
+     Aufbau seit 04.11.2026: ein ruhiger Einstieg mit drei Wegen, dann Frage,
+     Stand und das Verzeichnis aller Dokumente als kompakte Liste. */
+  .hero { padding-bottom: 8px; }
+  .hero .work-title { font-size: 15px; font-weight: 600; color: var(--ink-soft); margin-top: 14px; max-width: 62ch; line-height: 1.5; }
+  .hero .lede { margin-top: 12px; }
+
+  /* ---- Drei Einstiege ---- */
+  .ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
+  @media (max-width: 820px) { .ways { grid-template-columns: minmax(0, 1fr); } }
+  .way { --w: var(--teal); position: relative; display: flex; flex-direction: column; gap: 8px; padding: 20px 20px 18px; border-radius: 20px;
+    text-decoration: none; color: inherit; overflow: hidden; isolation: isolate;
+    background: linear-gradient(155deg, color-mix(in srgb, var(--w) 11%, var(--card)), var(--card) 62%);
+    border: 1px solid color-mix(in srgb, var(--w) 26%, var(--line)); box-shadow: var(--shadow-sm);
+    transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s, border-color .2s; }
+  .way:hover, .way:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--w); outline: none; }
+  .way.w-theo { --w: var(--violet); } .way.w-now { --w: var(--amber); }
+  .way .wi { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--w) 16%, transparent); }
+  .way .wi svg { width: 19px; height: 19px; stroke: var(--w); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .way .wk { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--w); margin-top: 4px; }
+  .way h2 { font-size: 21px; line-height: 1.2; }
+  .way p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+  .way .wl { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: auto; padding-top: 10px; font-size: 12.5px; font-weight: 700; color: var(--w); }
+  .way .live { position: absolute; top: 18px; right: 18px; display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 800;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--w); }
+  .way .live i { width: 7px; height: 7px; border-radius: 50%; background: var(--w); box-shadow: 0 0 0 0 color-mix(in srgb, var(--w) 60%, transparent); animation: pl 2s infinite; }
+  @keyframes pl { 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  @media (prefers-reduced-motion: reduce) { .way { transition: none; } .way:hover { transform: none; } .way .live i { animation: none; } }
+
+  /* ---- Forschungsfrage ---- */
+  .frage { margin-top: 18px; padding: 22px 24px; border-left: 4px solid var(--teal); }
+  .frage .fk { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+  .frage blockquote { margin: 8px 0 0; font-family: var(--display); font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.4; letter-spacing: -.01em; color: var(--ink); text-wrap: pretty; }
+  .ufr { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+  @media (max-width: 760px) { .ufr { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .ufr div { padding: 10px 12px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-soft); font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; }
+  .ufr b { display: block; font-size: 11px; font-weight: 800; color: var(--teal); letter-spacing: .05em; margin-bottom: 2px; }
+  .frage details { margin-top: 14px; }
+  .frage summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--teal); list-style: none; display: inline-flex; align-items: center; gap: 6px; }
+  .frage summary::-webkit-details-marker { display: none; }
+  .frage summary::before { content: "+"; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 6px; font-size: 13px;
+    background: color-mix(in srgb, var(--teal) 13%, transparent); transition: transform .2s; }
+  .frage details[open] summary::before { content: "–"; }
+  .frage details p { margin-top: 10px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; max-width: 72ch; }
+
+  /* ---- Stand ---- */
+  .stand { margin-top: 18px; padding: 22px 24px; }
   .stand-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  .stand-head h2 { font-family: var(--display); font-size: 18px; margin: 0; }
-  .stand-head .datum { margin-left: auto; font-family: var(--mono); font-size: 11px;
-    color: var(--muted); font-weight: 700; letter-spacing: .04em; }
-  .stand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
-  @media (max-width: 800px) { .stand-grid { grid-template-columns: 1fr; } }
-  .sb { padding: 15px 16px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
-  .sb .sbh { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
-    display: flex; align-items: center; gap: 7px; }
+  .stand-head h2 { font-family: var(--display); font-size: 20px; margin: 0; }
+  .stand-head .datum { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: .04em; }
+  /* Phasenleiste: ersetzt die frühere Zeitleiste, der Jetzt-Punkt ist hervorgehoben. */
+  .phasen { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 16px; counter-reset: ph; }
+  @media (max-width: 760px) { .phasen { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+  .ph { position: relative; padding: 10px 11px 10px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-soft); }
+  .ph .pw { font-size: 10.5px; font-weight: 800; letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
+  .ph .pt { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); line-height: 1.35; margin-top: 2px; }
+  .ph.done .pw::before { content: "✓ "; color: var(--good); }
+  .ph.done .pt { color: var(--muted); }
+  .ph.now { background: color-mix(in srgb, var(--amber) 13%, var(--card)); border-color: color-mix(in srgb, var(--amber) 50%, var(--line)); }
+  .ph.now .pw { color: var(--amber); }
+  .ph.now .pt { color: var(--ink); }
+  .stand-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+  @media (max-width: 800px) { .stand-grid { grid-template-columns: minmax(0, 1fr); } }
+  .sb { padding: 14px 16px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line); }
+  .sb .sbh { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; display: flex; align-items: center; gap: 7px; }
   .sb.gruen .sbh { color: var(--good); }
   .sb.blau  .sbh { color: var(--teal); }
   .sb.offen { border-style: dashed; border-color: color-mix(in srgb, var(--amber) 45%, var(--line)); }
   .sb.offen .sbh { color: var(--amber); }
-  .sb ul { margin: 9px 0 0 15px; }
-  .sb li { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 4px; }
+  .sb ul { margin: 8px 0 0 15px; padding: 0; }
+  .sb li { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 4px; }
   .sb li b { color: var(--ink); font-weight: 700; }
-  .sprung { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .sprung a { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
-    padding: 7px 13px; border-radius: 999px; text-decoration: none;
-    background: color-mix(in srgb, var(--teal) 12%, var(--card-2));
-    border: 1px solid color-mix(in srgb, var(--teal) 35%, var(--line)); color: var(--teal); }
-  .sprung a:hover { background: color-mix(in srgb, var(--teal) 20%, var(--card-2)); }
-  .quiet-note { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
-  /* Gruppierung innerhalb von Ebene 1. Die Ebenen-Logik (Arbeit / Gegenstand /
-     Entstehung) bleibt; hier wird nur die groesste Ebene binnendifferenziert,
-     damit neue Dokumente eine eindeutige Heimat haben. */
-  /* Sticky Pillen-Navigation. Klebt bewusst NUR innerhalb von section#dokumente:
-     position:sticky endet am Elternelement, die Leiste verschwindet also wieder,
-     sobald man die Dokumente verlassen hat – kein Dauerbalken. --tb = Hoehe der
-     globalen Topbar, darunter dockt sie an. */
-  :root { --tb: 52px; }
-  .grp-nav { position: sticky; top: calc(var(--tb) + 8px); z-index: 12;
-    display: flex; gap: 7px; margin-top: 18px; padding: 7px;
-    border-radius: 999px; overflow-x: auto; scrollbar-width: none;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
-    backdrop-filter: blur(10px); border: 1px solid var(--line);
-    box-shadow: 0 6px 22px -12px rgba(0,0,0,.55); }
-  .grp-nav::-webkit-scrollbar { display: none; }
-  .grp-nav a { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
-    font-size: 12.5px; font-weight: 700; padding: 7px 14px; border-radius: 999px;
-    text-decoration: none; color: var(--ink-soft); border: 1px solid transparent;
-    transition: background .15s, color .15s, border-color .15s; }
-  .grp-nav a:hover { background: var(--card-2); color: var(--ink); }
-  .grp-nav a b { font-family: var(--mono); font-size: 11px; color: var(--muted);
-    transition: color .15s; }
-  .grp-nav a.is-active { color: var(--teal);
-    background: color-mix(in srgb, var(--teal) 13%, transparent);
-    border-color: color-mix(in srgb, var(--teal) 38%, var(--line)); }
-  .grp-nav a.is-active b { color: var(--teal); }
-  @media (max-width: 560px) { .grp-nav a { padding: 7px 11px; font-size: 12px; } }
-  /* Sprungziel muss unter Topbar UND Pillenleiste landen, sonst verdeckt sie es. */
-  .doc-group { margin-top: 30px; padding-top: 4px;
-    scroll-margin-top: calc(var(--tb) + 74px); }
-  .grp-head { display: flex; align-items: baseline; gap: 10px; }
-  .grp-head h4 { font-family: var(--display); font-size: 16px; margin: 0; }
-  .grp-n { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal);
-    padding: 2px 8px; border-radius: 999px;
-    background: color-mix(in srgb, var(--teal) 12%, transparent); }
-  .grp-sub { font-size: 12.5px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
-  .doc-group + .doc-grid { margin-top: 12px; }
-  /* Die Pillenleiste fuehrt auch zu Ebene 2 bis 4; deren Sprungziele muessen ebenfalls
-     unter Topbar und Leiste landen. */
-  #dokumente .doc-level { scroll-margin-top: calc(var(--tb) + 74px); }
-  .grp-sep { flex: none; width: 1px; align-self: stretch; margin: 6px 3px; background: var(--line); }
-  /* Abschnitts-Logik: jede Gruppe trägt einen eigenen, gedämpften Ton. Er erscheint
-     nur am Gruppenkopf, an der Kartenkante, am Pfeil und im Hover, nie als Fläche. */
+
+  .ablauf { margin-top: 10px; }
+  .ablauf summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--teal); }
+  .ablauf dl { margin: 10px 0 0; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 6px 14px; font-size: 13px; }
+  @media (max-width: 640px) { .ablauf dl { grid-template-columns: minmax(0, 1fr); } .ablauf dd { margin-bottom: 6px; } }
+  .ablauf dt { font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  .ablauf dd { margin: 0; color: var(--ink-soft); line-height: 1.5; }
+  /* ---- Verzeichnis der Dokumente ---- */
   .acc-design  { --acc: var(--teal); }
   .acc-theorie { --acc: var(--violet); }
   .acc-feld    { --acc: var(--rose); }
@@ -105,21 +99,32 @@
   .acc-e2      { --acc: var(--good); }
   .acc-e3      { --acc: color-mix(in srgb, var(--muted) 70%, var(--teal)); }
   .acc-e4      { --acc: color-mix(in srgb, var(--teal) 55%, var(--good)); }
-  .doc-grid[class*="acc-"] .doc-card { --acc: inherit; }
-  .grp-head h4 { display: flex; align-items: center; gap: 9px; }
-  .grp-head h4::before { content: ""; width: 4px; height: 15px; border-radius: 2px; background: var(--acc, var(--teal)); }
-  .doc-group[class*="acc-"] .grp-n { color: var(--acc); background: color-mix(in srgb, var(--acc) 12%, transparent); }
-  .doc-level[class*="acc-"] .lv { color: var(--acc); background: color-mix(in srgb, var(--acc) 12%, transparent); }
-  .grp-nav a[class*="acc-"] b { color: var(--acc); }
-  .grp-nav a[class*="acc-"].is-active { color: var(--acc); background: color-mix(in srgb, var(--acc) 13%, transparent);
-    border-color: color-mix(in srgb, var(--acc) 38%, var(--line)); }
-  /* Die Jetzt-Zeile bekommt denselben sanften Schimmer wie die Karten. */
-  .now { position: relative; isolation: isolate; overflow: hidden; }
-  .now::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .35s ease; pointer-events: none;
-    background: linear-gradient(100deg, color-mix(in srgb, var(--teal) 14%, transparent), transparent 70%); }
-  .now:hover::before { opacity: 1; }
-  .now-a svg { transition: transform .18s; }
-  .now:hover .now-a svg { transform: translate(2px,-2px); }
+  .lvl { display: flex; align-items: baseline; gap: 10px; margin-top: 26px; scroll-margin-top: 80px; }
+  .lvl .lv { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--teal); padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, var(--teal) 12%, transparent); }
+  .lvl h3 { font-size: 18px; }
+  .lvl-sub { font-size: 13px; color: var(--muted); margin-top: 4px; max-width: 70ch; }
+  .dir { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 12px; align-items: start; }
+  @media (max-width: 820px) { .dir { grid-template-columns: minmax(0, 1fr); } }
+  /* Ebene 1 fließt in Spalten, damit kurze Gruppen keine Lücke neben langen lassen. */
+  .dir.flow { display: block; columns: 2; column-gap: 14px; }
+  .dir.flow > .grp { break-inside: avoid; margin-bottom: 14px; }
+  @media (max-width: 820px) { .dir.flow { columns: 1; } }
+  .grp { padding: 14px 8px 8px; scroll-margin-top: 80px; }
+  .grp-h { display: flex; align-items: center; gap: 9px; padding: 0 10px 6px; }
+  .grp-h::before { content: ""; width: 4px; height: 15px; border-radius: 2px; background: var(--acc); }
+  .grp-h h4 { font-family: var(--display); font-size: 15px; margin: 0; }
+  .grp-h .n { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--acc); padding: 1px 7px; border-radius: 999px; background: color-mix(in srgb, var(--acc) 12%, transparent); }
+  .row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; padding: 9px 10px; border-radius: 10px;
+    text-decoration: none; color: inherit; transition: background .15s; }
+  .row + .row { border-top: 1px solid var(--line-soft); }
+  .row:hover, .row:focus-visible { background: color-mix(in srgb, var(--acc) 9%, transparent); outline: none; }
+  .row:hover + .row, .row:focus-visible + .row { border-top-color: transparent; }
+  .row .rt { font-weight: 700; font-size: 14px; color: var(--ink); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .row .rd { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+  .row .rdt { font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+  .row .kern { font-size: 9.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--acc); padding: 1px 7px; border-radius: 999px; background: color-mix(in srgb, var(--acc) 13%, transparent); }
+  .row .arch { font-size: 9.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 1px 7px; border-radius: 999px; border: 1px solid var(--line); }
+  .row:hover .rt { color: var(--acc); }
 </style>
 <script src="assets/nav.js" defer></script>
 </head>
@@ -143,29 +148,78 @@
     <div class="eyebrow">Master-Thesis · Schulmanagement &amp; Leadership · PH NÖ</div>
     <h1>Digitale Schulkommunikation<br>als Entwicklungsfeld schulischer Leadership.</h1>
     <p class="work-title">Eine qualitative Erprobungsstudie zur Aneignung einer schulintern entwickelten Kommunikations- und Organisations-App in der Sekundarstufe I</p>
-    <p class="lede">Diese Seite begleitet die Entstehung der Arbeit: Forschungsdesign, Literatur, die Entwicklung der App und die empirische Erprobung. Die App ist zugleich Untersuchungsgegenstand der Studie. Gedacht in erster Linie für die Vorbereitung der Betreuungsgespräche.</p>
-    <p class="name-note"><b>Zum Namen:</b> Die App heißt seit September 2026 <b>ClassHaven</b>. Bis dahin hieß sie <b>KlassenHub</b>; die älteren Dokumente auf dieser Seite verwenden noch diesen Namen. Gemeint ist dieselbe App.</p>
-    <div class="thesis">
-      <strong>Forschungsfrage (mit der Betreuung abgestimmt am 17.08.2026):</strong> Wie eignen sich Lehrpersonen, Schüler*innen und Eltern eine schulintern entwickelte Kommunikations- und Organisations-App im Rahmen einer Erprobung in der Sekundarstufe I an, welche Bedeutung schreiben sie ihr für schulische Informations- und Beteiligungsprozesse zu, und welche Folgerungen ergeben sich daraus für schulische Leitungs- und Entwicklungsarbeit? Vier Unterfragen falten sie auf: (1) Nutzung &amp; Aneignung, (2) zugeschriebene Wirkung inkl. Grenzen, Belastungen und unerwünschter Nebenwirkungen, (3) Vergleichshorizont &amp; Akzeptanz gegenüber bereits genutzten Systemen (z. B. SchoolFox), (4) Folgerungen für schulische Leitungs- und Entwicklungsarbeit. Untersucht wird <strong>nicht</strong> Lernertrag und auch nicht Wirkung im kausalen Sinn, sondern Aneignung und Bedeutungszuschreibung. Erhoben wird qualitativ über Interviews, Gruppeninterviews und offene Fragebögen mit allen drei Nutzergruppen.
-    </div>
+
+    <nav class="ways" aria-label="Einstiege">
+      <a class="way" href="docs/2026-07-forschungsdesign.html">
+        <span class="wi"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+        <span class="wk">Die Studie</span>
+        <h2>Was untersucht wird und wie</h2>
+        <p>Forschungsfrage, Untersuchungsdesign mit drei Perspektiven, Begriffe und Forschungsethik.</p>
+        <span class="wl">Forschungsdesign →</span>
+      </a>
+      <a class="way w-theo" href="docs/2026-11-theoretische-anker.html">
+        <span class="wi"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><path d="M12 7.5V21M5 13a7 7 0 0 0 14 0"/></svg></span>
+        <span class="wk">Die Theorie</span>
+        <h2>Worauf ClassHaven gebaut ist</h2>
+        <p>Zwanzig am Volltext geprüfte Kernbefunde, der Theorieteil als Landkarte und 63 bewertete Quellen.</p>
+        <span class="wl">Theoretische Anker →</span>
+      </a>
+      <a class="way w-now" href="docs/2026-11-erhebung-1.html">
+        <span class="live"><i></i>Jetzt</span>
+        <span class="wi"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+        <span class="wk">Der Stand</span>
+        <h2>Erhebung 1 läuft</h2>
+        <p>Instrumente gebaut und geprüft, Durchführung in KW 47 und 48. Fahrplan, Entscheidungen und Änderungsprotokoll.</p>
+        <span class="wl">Zur Dokumentation →</span>
+      </a>
+    </nav>
   </header>
 
+  <!-- ===================== FORSCHUNGSFRAGE ===================== -->
+  <section id="frage">
+    <div class="card frage">
+      <div class="fk">Forschungsfrage · mit der Betreuung abgestimmt am 17.08.2026</div>
+      <blockquote>Wie eignen sich Lehrpersonen, Schüler*innen und Eltern eine schulintern entwickelte Kommunikations- und Organisations-App im Rahmen einer Erprobung in der Sekundarstufe I an, welche Bedeutung schreiben sie ihr für schulische Informations- und Beteiligungsprozesse zu, und welche Folgerungen ergeben sich daraus für schulische Leitungs- und Entwicklungsarbeit?</blockquote>
+      <div class="ufr">
+        <div><b>U1</b>Nutzung und Aneignung</div>
+        <div><b>U2</b>Zugeschriebene Wirkung, auch Grenzen und Belastungen</div>
+        <div><b>U3</b>Vergleich mit bisherigen Systemen und Akzeptanz</div>
+        <div><b>U4</b>Folgerungen für Leitung und Entwicklung</div>
+      </div>
+      <details>
+        <summary>Was untersucht wird, und was nicht</summary>
+        <p>Untersucht werden Aneignung und Bedeutungszuschreibung, nicht Lernertrag und nicht Wirkung im kausalen Sinn. Das Design ist qualitativ, hermeneutisch, theoriegeleitet und explorativ. Erhoben wird aus drei Perspektiven, über ein volles Schuljahr mit zwei Erhebungszeitpunkten: Interviews mit Lehrpersonen, Gruppeninterviews mit Schüler*innen und offene Fragebögen für Eltern. Die erste Welle läuft in einer fünften Schulstufe, wie ein zweites, kontrastierendes Setting einbezogen wird, wird mit der Betreuung geklärt. Ausgewertet wird mit der inhaltlich strukturierenden qualitativen Inhaltsanalyse nach Kuckartz und Rädiker. U4 ist eine Ableitungsfrage und wird nicht eigens erhoben.</p>
+      </details>
+    </div>
+  </section>
 
-  <!-- ===================== WO DIE ARBEIT STEHT ===================== -->
+  <!-- ===================== STAND ===================== -->
   <section id="stand">
-    <div class="stand card">
+    <div class="card stand">
       <div class="stand-head">
         <h2>Wo die Arbeit steht</h2>
-        <span class="datum">AKTUALISIERT 02.11.2026</span>
+        <span class="datum">AKTUALISIERT 04.11.2026</span>
       </div>
 
-      <a class="now" href="docs/2026-11-erhebung-1.html">
-        <span class="now-l">Jetzt</span>
-        <span class="now-t"><b>Erhebung 1</b> ist vorbereitet und geprüft; Durchführung im November. Stand, Instrumente, Entscheidungen und Änderungsprotokoll an einer Stelle.</span>
-        <span class="now-a">Zur Dokumentation <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-      </a>
-
-      <p class="sec-sub" style="margin-top:14px">Untersucht wird qualitativ, hermeneutisch und explorativ, aus <b>drei Perspektiven</b> (Lehrpersonen, Schüler*innen, Eltern) über ein volles Schuljahr mit zwei Erhebungszeitpunkten. Die erste Welle läuft in einer fünften Schulstufe; wie ein zweites, kontrastierendes Setting einbezogen wird, wird mit der Betreuung geklärt. Ausgewertet wird mit der inhaltlich strukturierenden qualitativen Inhaltsanalyse nach Kuckartz und Rädiker.</p>
+      <div class="phasen" id="ablauf" aria-label="Ablauf der Arbeit">
+        <div class="ph done"><div class="pw">Jul–Aug 26</div><div class="pt">Design, Literatur, Exposé</div></div>
+        <div class="ph done"><div class="pw">Aug–Okt 26</div><div class="pt">Feldvorbereitung und Einführung</div></div>
+        <div class="ph now"><div class="pw">Okt–Nov 26 · jetzt</div><div class="pt">Erhebung 1</div></div>
+        <div class="ph"><div class="pw">Dez 26–Jän 27</div><div class="pt">Transkription, erste Auswertung</div></div>
+        <div class="ph"><div class="pw">Frühsommer 27</div><div class="pt">Erhebung 2</div></div>
+        <div class="ph"><div class="pw">danach</div><div class="pt">Auswertung, Abgabe, Defensio</div></div>
+      </div>
+      <details class="ablauf">
+        <summary>Ablauf im Detail</summary>
+        <dl>
+          <dt>Juli bis August 2026 · erledigt</dt><dd>Forschungsfrage dreimal präzisiert, Literaturbestand aufgebaut und bewertet, erstes Fachgespräch am 03.08., Exposé am 17.08. mit der Betreuung besprochen.</dd>
+          <dt>August bis Oktober 2026 · erledigt</dt><dd>Genehmigungen, gestaffelte Einführung der App zum Schulbeginn, getrennt davon die Information zur Forschung und die Einwilligungen über eine neutrale Stelle.</dd>
+          <dt>Oktober bis November 2026 · läuft</dt><dd>Instrumente gebaut und geprüft; Durchführung in KW 47 und 48: vier Interviews mit Lehrpersonen, zwei Gruppeninterviews, offene Fragebögen für Eltern.</dd>
+          <dt>Dezember 2026 bis Jänner 2027</dt><dd>Transkription nach festgelegten Regeln, Kategorienhandbuch mit ersten Ankerbeispielen, Vorstellung erster Befunde in einer Lehrveranstaltung im Jänner.</dd>
+          <dt>Frühsommer 2027</dt><dd>Zweiter Erhebungszeitpunkt gegen Schuljahresende, um Neuheitseffekt und Veränderung der Nutzung sichtbar zu machen.</dd>
+          <dt>danach</dt><dd>Qualitative Inhaltsanalyse über beide Zeitpunkte, Einordnung in den Forschungsstand, Abgabe der Masterarbeit und Defensio.</dd>
+        </dl>
+      </details>
 
       <div class="stand-grid">
         <div class="sb gruen">
@@ -173,17 +227,17 @@
           <ul>
             <li><b>Exposé</b> am 17.08. mit der Betreuung besprochen, inhaltlich ohne Einwände</li>
             <li><b>Genehmigungen und Einwilligungen</b> eingeholt</li>
-            <li><b>App im Einsatz</b> seit Schulbeginn, gestaffelt eingeführt; jede Änderung im <a href="docs/2026-11-versionsprotokoll.html">Versionsprotokoll</a></li>
+            <li><b>App im Einsatz</b> seit Schulbeginn, jede Änderung im <a href="docs/2026-11-versionsprotokoll.html">Versionsprotokoll</a></li>
             <li><b>Drei Instrumente</b> nach Helfferich gebaut, gegen Literatur und Design geprüft</li>
-            <li><b>63 Quellen</b> einzeln bewertet, in zehn Kategorien geordnet, auf einer <a href="docs/2026-11-theorielandkarte.html">Theorie-Landkarte</a> verbunden</li>
+            <li><b>Literatur</b>: Lückenanalyse abgeschlossen (<a href="docs/2026-08-suchstrategie.html#protokoll">Suchprotokoll</a>), elf von zwölf Titeln am 03.11. beschafft</li>
+            <li><b>63 Quellen</b> bewertet, auf der <a href="docs/2026-11-theorielandkarte.html">Theorie-Landkarte</a> verbunden, zwanzig davon als <a href="docs/2026-11-theoretische-anker.html">Anker</a> des Designs</li>
           </ul>
         </div>
         <div class="sb blau">
           <div class="sbh"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>In Arbeit</div>
           <ul>
             <li><b>Erhebung 1</b>: Probeinterview und Pretest, dann Durchführung in KW 47 und 48</li>
-            <li><b>Literatur</b>: Lückenanalyse für den Theorieteil abgeschlossen (<a href="docs/2026-08-suchstrategie.html#protokoll">Suchprotokoll</a>), elf von zwölf Titeln am 03.11. beschafft, bewertet und eingeordnet</li>
-            <li><b>Theoriekapitel</b>: <a href="docs/2026-07-literaturkarte.html#theoriebezug">Gliederung</a> liegt vor, als Entwurf und umbaubar, noch kein Fließtext</li>
+            <li><b>Theoriekapitel</b>: <a href="docs/2026-07-literaturkarte.html#theoriebezug">Gliederung</a> als Entwurf, umbaubar, noch kein Fließtext</li>
           </ul>
         </div>
         <div class="sb offen">
@@ -196,332 +250,75 @@
           </ul>
         </div>
       </div>
-
-      <div class="sprung">
-        <a href="docs/2026-11-erhebung-1.html">Erhebung 1 <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-        <a href="docs/2026-07-forschungsdesign.html">Forschungsdesign <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-        <a href="docs/2026-07-begriffsdefinitionen.html">Begriffe <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-        <a href="docs/2026-07-forschungsethik.html">Ethik &amp; Einwilligung <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-        <a href="docs/2026-07-literaturverzeichnis.html">Literatur <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-        <a href="#ablauf">Zeitleiste <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== ABLAUF ===================== -->
-  <section id="ablauf">
-    <div class="sec-head"><span class="sec-num">01</span><h2>Ablauf der Arbeit</h2></div>
-    <p class="sec-sub">Vom Design über das Exposé und die Feldvorbereitung zur ersten Erhebung. Die App wird parallel weiterentwickelt, ihr forschungsrelevanter Stand ist für die Erhebungen aber versioniert.</p>
-
-    <div class="tl">
-      <div class="tl-item">
-        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <div>
-          <div class="tw">Juli bis August 2026 · erledigt</div>
-          <h4>Forschungsdesign, Literatur und Exposé</h4>
-          <p>Forschungsfrage dreimal präzisiert, Literaturbestand aufgebaut und bewertet, erstes Fachgespräch am 03.08., Exposé am 17.08. mit der Betreuung besprochen.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <div>
-          <div class="tw">August bis Oktober 2026 · erledigt</div>
-          <h4>Feldvorbereitung und Einführung</h4>
-          <p>Genehmigungen, Einführung der App zum Schulbeginn, getrennt davon die Information zur Forschung und die Einwilligungen über eine neutrale Stelle.</p>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
-        <div>
-          <div class="tw">Oktober bis November 2026 · läuft</div>
-          <h4>Erhebung 1</h4>
-          <p>Instrumente gebaut und geprüft; Durchführung in KW 47 und 48: vier Interviews mit Lehrpersonen, zwei Gruppeninterviews, offene Fragebögen für Eltern. <a href="docs/2026-11-erhebung-1.html">Zur Dokumentation</a></p>
-        </div>
-      </div>
-      <div class="tl-item future">
-        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></div>
-        <div>
-          <div class="tw">Dezember 2026 bis Jänner 2027</div>
-          <h4>Transkription und erste Auswertung</h4>
-          <p>Transkription nach festgelegten Regeln, Kategorienhandbuch mit ersten Ankerbeispielen, Vorstellung erster Befunde in einer Lehrveranstaltung im Jänner.</p>
-        </div>
-      </div>
-      <div class="tl-item future">
-        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <div>
-          <div class="tw">Frühsommer 2027</div>
-          <h4>Erhebung 2</h4>
-          <p>Zweiter Erhebungszeitpunkt gegen Schuljahresende, um Neuheitseffekt und Veränderung der Nutzung sichtbar zu machen.</p>
-        </div>
-      </div>
-      <div class="tl-item future">
-        <div class="tn"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-        <div>
-          <div class="tw">danach</div>
-          <h4>Auswertung und Verschriftlichung</h4>
-          <p>Qualitative Inhaltsanalyse über beide Zeitpunkte, Einordnung in den Forschungsstand, Abgabe der Masterarbeit und Defensio.</p>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- ===================== DOKUMENTE ===================== -->
   <section id="dokumente">
-    <div class="sec-head"><span class="sec-num">02</span><h2>Dokumente</h2></div>
-    <p class="sec-sub">Jedes Dokument ist eigenständig lesbar und versioniert – die Git-Historie dieses Repos ist zugleich der Fortschritts-Nachweis für die Betreuungsgespräche.</p>
+    <div class="sec-head"><span class="sec-num">01</span><h2>Alle Dokumente</h2></div>
+    <p class="sec-sub">In vier Ebenen, vom Argument der Arbeit bis zum Material der Durchführung. Mit „Kern" markiert sind die Dokumente, mit denen der Einstieg am besten gelingt. Schneller geht es über die Navigation oben rechts.</p>
 
-    <div class="doc-level" id="ebene-1"><span class="lv">Ebene 1</span><h3>Die Arbeit</h3></div>
-    <p class="doc-level-sub">Forschungsfrage, Design, Theorie und kritische Einordnung – das, worauf die Betreuungsgespräche zielen.</p>
-        <div class="grp-nav">
-      <a class="acc-design" href="#g-design"><b>2</b> Forschungsdesign</a>
-      <a class="acc-theorie" href="#g-theorie"><b>4</b> Theorie &amp; Literatur</a>
-      <a class="acc-feld" href="#g-feld"><b>3</b> Feldzugang &amp; Ethik</a>
-      <a class="acc-rahmen" href="#g-rahmen"><b>2</b> Rahmen &amp; Betreuung</a>
-      <span class="grp-sep" aria-hidden="true"></span>
-      <a class="acc-e2" href="#ebene-2"><b>E2</b> Gegenstand</a>
-      <a class="acc-e3" href="#ebene-3"><b>E3</b> Entwicklung</a>
-      <a class="acc-e4" href="#ebene-4"><b>E4</b> Umsetzung</a>
-    </div>
-
-    <div class="doc-group acc-design" id="g-design">
-      <div class="grp-head"><h4>Forschungsdesign</h4><span class="grp-n">2</span></div>
-      <p class="grp-sub">Fragestellung, Design und die Begriffe, mit denen gearbeitet wird.</p>
-    </div>
-    <div class="doc-grid acc-design">
-      <a class="doc-card card reveal" href="docs/2026-07-forschungsdesign.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">12.07.2026 · Kern-Dokument</div>
-        <h3>Forschungsdesign &amp; Untersuchungsdesign</h3>
-        <p>Forschungsfrage, vier theoretische Phasen, sechs empirische Schritte, Forscherrolle &amp; -ethik.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-begriffsdefinitionen.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">31.07.2026 · Arbeitsglossar</div>
-        <h3>Begriffsdefinitionen</h3>
-        <p>Siebzehn zentrale Begriffe – Engagement, digitales Kapital, Neuheitseffekt, SES, Involvement vs. Engagement, Selbstbestimmungstheorie, Game fiction – jeweils mit Quelle, Verwendung in dieser Arbeit und ausgewiesenem Belegstatus.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Begriffsverständnis</span></div>
-      </a>
+    <div class="lvl" id="ebene-1"><span class="lv">Ebene 1</span><h3>Die Arbeit</h3></div>
+    <p class="lvl-sub">Forschungsfrage, Design, Theorie und kritische Einordnung: das, worauf die Betreuungsgespräche zielen.</p>
+    <div class="dir flow">
+      <div class="card grp acc-design" id="g-design">
+        <div class="grp-h"><h4>Forschungsdesign</h4><span class="n">2</span></div>
+        <a class="row" href="docs/2026-07-forschungsdesign.html"><span class="rt">Forschungsdesign &amp; Untersuchungsdesign <span class="kern">Kern</span></span><span class="rdt">12.07.</span><span class="rd">Forschungsfrage, vier theoretische Phasen, sechs empirische Schritte, Forscherrolle und Ethik</span></a>
+        <a class="row" href="docs/2026-07-begriffsdefinitionen.html"><span class="rt">Begriffsdefinitionen</span><span class="rdt">04.11.</span><span class="rd">Siebzehn Begriffe mit Quelle, Verwendung und Belegstatus</span></a>
+      </div>
+      <div class="card grp acc-theorie" id="g-theorie">
+        <div class="grp-h"><h4>Theorie &amp; Literatur</h4><span class="n">6</span></div>
+        <a class="row" href="docs/2026-11-theoretische-anker.html"><span class="rt">Theoretische Anker <span class="kern">Kern</span></span><span class="rdt">04.11.</span><span class="rd">Zwanzig am Volltext geprüfte Kernbefunde, je mit Beleg, Antwort der App und Grenze, dazu drei Gegenbefunde</span></a>
+        <a class="row" href="docs/2026-11-theorielandkarte.html"><span class="rt">Theorie-Landkarte <span class="kern">Kern</span></span><span class="rdt">03.11.</span><span class="rd">Der Theorieteil als Bild: sieben Kapitel, tragende Quellen, Querverbindungen, Unterfragen</span></a>
+        <a class="row" href="docs/2026-07-literaturverzeichnis.html"><span class="rt">Literaturverzeichnis</span><span class="rdt">03.11.</span><span class="rd">63 Quellen, Qualität und Relevanz getrennt bewertet, dazu drei begründet aussortierte Titel</span></a>
+        <a class="row" href="docs/2026-07-literaturkarte.html"><span class="rt">Literaturkarte</span><span class="rdt">03.11.</span><span class="rd">Alle Quellen mit Beitrag und Leerstellen, filterbar, dazu der Gliederungsentwurf des Theoriekapitels</span></a>
+        <a class="row" href="docs/2026-08-suchstrategie.html"><span class="rt">Suchstrategie &amp; Literaturauswahl</span><span class="rdt">03.11.</span><span class="rd">Zugänge, Ein- und Ausschlusskriterien, dreistufige Qualitätsprüfung, Umgang mit KI-Werkzeugen, Suchprotokoll</span></a>
+        <a class="row" href="docs/2026-07-risiken-gamifizierung.html"><span class="rt">Risiken &amp; Grenzen der Gamifizierung</span><span class="rdt">12.07.</span><span class="rd">Die kritische Gegenperspektive: Neuheitseffekt, Mehrbelastung, digitale Gaps, Learning Analytics</span></a>
+      </div>
+      <div class="card grp acc-feld" id="g-feld">
+        <div class="grp-h"><h4>Feldzugang &amp; Ethik</h4><span class="n">3</span></div>
+        <a class="row" href="docs/2026-07-forschungsethik.html"><span class="rt">Forschungsethik &amp; Einwilligung</span><span class="rdt">31.07.</span><span class="rd">Freiwilligkeit im Abhängigkeitsverhältnis, Einwilligung Minderjähriger, Anonymität im Kleinfeld, Nutzungsdaten</span></a>
+        <a class="row" href="docs/2026-08-datenschutz.html"><span class="rt">Datenschutz &amp; Feldzugang</span><span class="rdt">06.08.</span><span class="rd">Verpflichtende Nutzung und freiwillige Teilnahme strikt getrennt, extern geprüfte Zugriffskontrolle, Löschkonzept</span></a>
+        <a class="row" href="docs/2026-08-feldeinfuehrung.html"><span class="rt">Feldeinführung &amp; Erhebungsstart</span><span class="rdt">20.08.</span><span class="rd">Die sechs Wochen bis zum ersten Interview, Freiwilligkeit als fünfschrittiges Verfahren</span></a>
+      </div>
+      <div class="card grp acc-rahmen" id="g-rahmen">
+        <div class="grp-h"><h4>Rahmen &amp; Betreuung</h4><span class="n">2</span></div>
+        <a class="row" href="docs/2026-07-rahmenbedingungen.html"><span class="rt">Rahmenbedingungen &amp; Fahrplan</span><span class="rdt">12.07.</span><span class="rd">Umfang, Zitierstil, Kapitel, Notenschema und Fristen der PH NÖ</span></a>
+        <a class="row" href="docs/gespraechsvorbereitung.html"><span class="rt">Vorbereitung erstes Fachgespräch <span class="arch">Archiv</span></span><span class="rdt">02.08.</span><span class="rd">Offene Entscheidungen und Antworten zum Gesprächsleitfaden, erledigt am 03.08.</span></a>
+      </div>
     </div>
 
-    <div class="doc-group acc-theorie" id="g-theorie">
-      <div class="grp-head"><h4>Theorie &amp; Literatur</h4><span class="grp-n">6</span></div>
-      <p class="grp-sub">Der Forschungsstand: was im Bestand liegt, wozu es dient, wie er entstanden ist – und die kritische Gegenperspektive.</p>
+    <div class="dir" style="margin-top:22px">
+      <div>
+        <div class="lvl" id="ebene-2" style="margin-top:0"><span class="lv">Ebene 2</span><h3>Der Gegenstand</h3></div>
+        <p class="lvl-sub">Was ClassHaven ist, code-basiert belegt, ohne Aussagen über Wirkung.</p>
+        <div class="card grp acc-e2" style="margin-top:10px">
+          <a class="row" href="docs/2026-07-app-systemueberblick.html"><span class="rt">App-Systemüberblick <span class="kern">Kern</span></span><span class="rdt">03.08.</span><span class="rd">Aufbau, Rollen, Berechtigungen und alle Funktionsmodule, belegt und interpretiert getrennt</span></a>
+        </div>
+        <div class="lvl" id="ebene-3"><span class="lv">Ebene 3</span><h3>Entwicklung</h3></div>
+        <p class="lvl-sub">Wie die App entstanden ist. Belegt den Prozess, trägt nicht das Argument.</p>
+        <div class="card grp acc-e3" style="margin-top:10px">
+          <a class="row" href="docs/entwicklungsdokumentation.html"><span class="rt">Entwicklungsdokumentation</span><span class="rdt">10 Dok.</span><span class="rd">Umsetzungsberichte, Design-Rationale und der technische Plan</span></a>
+        </div>
+      </div>
+      <div>
+        <div class="lvl" id="ebene-4" style="margin-top:0"><span class="lv">Ebene 4</span><h3>Die Umsetzung</h3></div>
+        <p class="lvl-sub">Was zwischen Plan und Feld liegt. Belegt die Durchführbarkeit.</p>
+        <div class="card grp acc-e4" style="margin-top:10px">
+          <a class="row" href="docs/2026-11-erhebung-1.html"><span class="rt">Erhebung 1 · Dokumentation <span class="kern">Kern</span></span><span class="rdt">laufend</span><span class="rd">Fahrplan, drei Instrumente, Entscheidungen, Änderungsprotokoll</span></a>
+          <a class="row" href="docs/2026-11-versionsprotokoll.html"><span class="rt">Versionsprotokoll der App</span><span class="rdt">laufend</span><span class="rd">Startstand und Änderungspakete nach Art, gemessen an der Versionierungszusage des Exposés</span></a>
+          <a class="row" href="docs/2026-08-schulstart-timeline.html"><span class="rt">Ausgabe-Timeline Schulstart</span><span class="rdt">20.08.</span><span class="rd">Wann welches Dokument an wen ging</span></a>
+          <a class="row" href="docs/2026-08-schulstart-mappe.html"><span class="rt">Dokumentenmappe Schulstart</span><span class="rdt">58 Dok.</span><span class="rd">Alle Unterlagen zum Schulstart in elf Ordnern, als Entwurf</span></a>
+        </div>
+      </div>
     </div>
-    <div class="doc-grid acc-theorie">
-      <a class="doc-card card reveal" href="docs/2026-11-theoretische-anker.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">04.11.2026 · am Volltext geprüft</div>
-        <h3>Theoretische Anker</h3>
-        <p>Die zwanzig Kernbefunde, auf denen ClassHaven gebaut ist: je Befund der Beleg mit Zahlen, die Antwort der App und die Grenze des Befunds. Dazu, was die App bewusst nicht hat, und drei Gegenbefunde.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Design-Rationale</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-11-theorielandkarte.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">03.11.2026 · Überblick</div>
-        <h3>Theorie-Landkarte</h3>
-        <p>Der Theorieteil auf einen Blick: die Forschungsfrage in der Mitte, die sieben Unterkapitel mit ihren tragenden Quellen, sechs Querverbindungen und welche Unterfrage jedes Kapitel bedient.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Entwurf</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-literaturkarte.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">01.08.2026</div>
-        <h3>Literaturkarte</h3>
-        <p>Gesamttabelle aller 63 aktiven Quellen – Beitrag und Leerstellen je Quelle, filterbar. Dazu sieben nummerierte Kategorien in derselben Ordnung wie Ablage und Literaturverzeichnis, die verbliebene Lücke und ein Gliederungsentwurf für das Theoriekapitel.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Gap-Vorarbeit</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-literaturverzeichnis.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">30.07.2026 · bewertet</div>
-        <h3>Literaturverzeichnis</h3>
-        <p>63 aktive Quellen nach Themenfeld kategorisiert, mit Qualitäts-/Relevanzbewertung und Einschätzung je Kategorie. Dazu drei begründet aussortierte Titel.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-08-suchstrategie.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">04.08.2026</div>
-        <h3>Suchstrategie &amp; Literaturauswahl</h3>
-        <p>Wie der Bestand entstanden ist: genutzte Zugänge, Vorgehen in drei Schritten, Ein- und Ausschlusskriterien, dreistufige Qualitätsprüfung mit den drei begründeten Ausschlüssen, Umgang mit KI-Werkzeugen und sechs benannte Grenzen des Bestandes.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Methodenteil</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-07-risiken-gamifizierung.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">12.07.2026</div>
-        <h3>Risiken &amp; Grenzen der Gamifizierung</h3>
-        <p>Kritische Gegenperspektive: Neuheitseffekt, Lehrkräfte-Mehrbelastung, digitale Gaps, Learning-Analytics-Risiken.</p>
-        <div class="dc-tags"><span class="chip high">Kritische Perspektive</span></div>
-      </a>
-    </div>
-
-    <div class="doc-group acc-feld" id="g-feld">
-      <div class="grp-head"><h4>Feldzugang &amp; Ethik</h4><span class="grp-n">3</span></div>
-      <p class="grp-sub">Was vor der ersten Erhebung geklärt sein muss – forschungsethisch und rechtlich.</p>
-    </div>
-    <div class="doc-grid acc-feld">
-      <a class="doc-card card reveal" href="docs/2026-07-forschungsethik.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">31.07.2026 · Entwurf</div>
-        <h3>Forschungsethik &amp; Einwilligung</h3>
-        <p>Vier ethische Problemlagen mit je einem Vorschlag: Freiwilligkeit im Abhängigkeitsverhältnis, Einwilligung Minderjähriger, Anonymität im Kleinfeld und der Umgang mit den Nutzungsdaten der App. Dazu eine Übersicht, wer worin einwilligt.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip high">offene Punkte</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-08-datenschutz.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">06.08.2026</div>
-        <h3>Datenschutz &amp; Feldzugang</h3>
-        <p>Die rechtliche Voraussetzung der Erprobung: strikte Trennung von verpflichtender App-Nutzung und freiwilliger Forschungsteilnahme, extern geprüfte Zugriffskontrolle über alle Tabellen, Datenkategorien, Löschkonzept und die offen benannten Entscheidungen der Bildungsdirektion.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Voraussetzung</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-08-feldeinfuehrung.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">20.08.2026</div>
-        <h3>Feldeinf&#252;hrung &amp; Erhebungsstart</h3>
-        <p>Die sechs Wochen zwischen Freigabe und erstem Interview: die Trennung von Nutzung und Forschung im Kalender, die Einf&#252;hrung als Methodenentscheidung gegen&#252;ber dem Vergleichshorizont, Freiwilligkeit als f&#252;nfschrittiges Verfahren statt als Zusicherung, und vier Protokolle, die ab dem ersten Schultag mitlaufen.</p>
-        <div class="dc-tags"><span class="chip reuse">Forschung</span><span class="chip mid">Planung</span></div>
-      </a>
-    </div>
-
-    <div class="doc-group acc-rahmen" id="g-rahmen">
-      <div class="grp-head"><h4>Rahmen &amp; Betreuung</h4><span class="grp-n">2</span></div>
-      <p class="grp-sub">Formale Vorgaben des Lehrgangs und die Vorbereitung der Fachgespräche.</p>
-    </div>
-    <div class="doc-grid acc-rahmen">
-      <a class="doc-card card reveal" href="docs/2026-07-rahmenbedingungen.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">12.07.2026</div>
-        <h3>Rahmenbedingungen &amp; Fahrplan</h3>
-        <p>Umfang, Zitierstil, Kapitelstruktur, Notenschema, Fristen – PH-NÖ-Guideline.</p>
-        <div class="dc-tags"><span class="chip phase">Formalia</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/gespraechsvorbereitung.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">02.08.2026 · Archiv</div>
-        <h3>Vorbereitung erstes Fachgespräch</h3>
-        <p>Vier offene Entscheidungen, die im Gespräch geklärt werden sollen – dazu die 19 Beispielfragen der „Dimension Zukunft" aus dem MA-Gesprächsleitfaden, zu 17 Blöcken zusammengefasst, jede mit Antwortstand und Belegverweis. Neu: die Forschungsfrage Wort für Wort hergeleitet, dazu die Herleitung, warum die Arbeit keine Hypothese formuliert.</p>
-        <div class="dc-tags"><span class="chip done">erledigt 03.08.2026</span><span class="chip reuse">Forschung</span><span class="chip mid">Explikation · 10 %</span></div>
-      </a>
-    </div>
-
-    <div class="doc-level acc-e2" id="ebene-2"><span class="lv">Ebene 2</span><h3>Der Gegenstand</h3></div>
-    <p class="doc-level-sub">Was KlassenHub ist. Grundlage für das Kapitel „Beschreibung der App" – code-basiert belegbar, aber ohne Aussagen über Wirkung oder Akzeptanz.</p>
-    <div class="doc-grid acc-e2">
-      <a class="doc-card card reveal" href="docs/2026-07-app-systemueberblick.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">12.07.–03.08.2026 · laufend aktualisiert</div>
-        <h3>App-Systemüberblick</h3>
-        <p>Code-basierte Analyse: Aufbau, Rollenmodell, Berechtigungskonzept und alle sechzehn Funktionsmodule – belegt vs. interpretiert sauber getrennt. Vollständig erhoben am 03.08.2026.</p>
-        <div class="dc-tags"><span class="chip reuse">App-Beschreibung</span></div>
-      </a>
-    </div>
-
-    <div class="doc-level acc-e3" id="ebene-3"><span class="lv">Ebene 3</span><h3>Entwicklungsdokumentation</h3></div>
-    <p class="doc-level-sub">Zehn Dokumente zum Entstehungsprozess der App – Umsetzungsberichte, Design-Rationale, technische Pläne. Bewusst nachgeordnet: Sie belegen den Prozess, tragen aber nicht die Forschungsargumentation.</p>
-    <div class="doc-grid acc-e3 single">
-      <a class="doc-card card reveal" href="docs/entwicklungsdokumentation.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">12.07.–03.08.2026 · 10 Dokumente</div>
-        <h3>Zur Entwicklungsdokumentation →</h3>
-        <p>Umsetzungsberichte (Anwesenheit, Organisation, Gamification), Design-Rationale (Prinzipien, soziale Normen, Story-Welten, Balance) und der technische Umsetzungsplan.</p>
-        <div class="dc-tags"><span class="chip phase">Sammelseite</span></div>
-      </a>
-    </div>
-
-    <div class="doc-level acc-e4" id="ebene-4"><span class="lv">Ebene 4</span><h3>Die Umsetzung</h3></div>
-    <p class="doc-level-sub">Was zwischen Plan und Feld liegt: Termine, Ausgabewege und die Unterlagen selbst. Praxismaterial, kein Argumentationsteil; es belegt die Durchf&#252;hrbarkeit, nicht die Fragestellung.</p>
-    <div class="doc-grid acc-e4">
-      <a class="doc-card card reveal" href="docs/2026-11-erhebung-1.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">02.11.2026 &#183; laufend</div>
-        <h3>Erhebung 1 &#183; Dokumentation</h3>
-        <p>Laufende Dokumentation der ersten Erhebungswelle: Fahrplan, Aufbau der drei Instrumente, Entscheidungen mit Begr&#252;ndung, Qualit&#228;tssicherung und &#196;nderungsprotokoll.</p>
-        <div class="dc-tags"><span class="chip phase">Empirie</span><span class="chip mid">laufend</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-11-versionsprotokoll.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">02.11.2026 &#183; laufend</div>
-        <h3>Versionsprotokoll der App</h3>
-        <p>Was sich an der App seit dem Start der Erprobung ver&#228;ndert hat: Startstand, 21 &#196;nderungspakete nach Art, Einordnung gegen&#252;ber der Versionierungszusage des Expos&#233;s.</p>
-        <div class="dc-tags"><span class="chip reuse">Empirie</span><span class="chip mid">laufend</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-08-schulstart-timeline.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">20.08.2026</div>
-        <h3>Ausgabe-Timeline Schulstart</h3>
-        <p>Wann welches Dokument fertig sein muss, an wen es geht und in welcher Form: Phasenplan vom 20.&#160;August bis zur ersten Erhebung, Druckmengen, Materialbedarf, Packlisten f&#252;r die zwei einmaligen Termine, dazu die Gestaltungsregel, die verpflichtende Nutzung und freiwillige Teilnahme auch optisch trennt.</p>
-        <div class="dc-tags"><span class="chip phase">Umsetzung</span><span class="chip mid">Termine</span></div>
-      </a>
-      <a class="doc-card card reveal" href="docs/2026-08-schulstart-mappe.html">
-        <span class="dc-arrow"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-        <div class="dc-date">20.08.2026 &#183; 58 Dokumente</div>
-        <h3>Dokumentenmappe Schulstart</h3>
-        <p>Die vollst&#228;ndige Sammlung in elf Ordnern: Anleitungen, Elternschreiben, Onboarding-Skripte, Informations- und Einwilligungsunterlagen, Register und Verfahren, dazu die Unterlagen der Klassenf&#252;hrung. Durchgehend Entwurf, geordnet nach drei Grenzen statt nach Themen.</p>
-        <div class="dc-tags"><span class="chip phase">Umsetzung</span><span class="chip high">Entwurf</span></div>
-      </a>
-    </div>
-
-    <p class="quiet-note">Neue Dokumente werden der passenden Ebene zugeordnet: Forschungsargumentation nach Ebene 1, Beschreibung des Gegenstands nach Ebene 2, alles zum Entstehungsprozess der App nach Ebene 3, Praxismaterial der Durchf&#252;hrung nach Ebene 4 – siehe README für den Ablauf.</p>
   </section>
 
   <div class="foot">
-    <span>Master-Thesis · ClassHaven (bis September 2026: KlassenHub) · Arbeitsdokumentation für Betreuungsgespräche</span>
+    <span>Master-Thesis · ClassHaven (bis September 2026: KlassenHub; ältere Dokumente verwenden noch diesen Namen) · Arbeitsdokumentation für die Betreuungsgespräche</span>
     <span>Zuletzt aktualisiert: 04.11.2026</span>
   </div>
 </div>
 
-<script>
-  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-    const io = new IntersectionObserver((es) => {
-      es.forEach((e) => { if (e.isIntersecting) { e.target.style.animationDelay = '0ms'; io.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-  }
-
-  /* Scrollspy fuer die Pillen-Navigation: markiert die Gruppe, die gerade unter
-     der Leiste steht. Bewusst ohne IntersectionObserver – die Gruppen sind
-     unterschiedlich hoch, hier zaehlt allein, welche zuletzt passiert wurde. */
-  (() => {
-    const nav = document.querySelector('.grp-nav');
-    if (!nav) return;
-    /* Die Topbar bricht auf schmalen Viewports um und wird dann deutlich hoeher.
-       Ein fester Wert wuerde die Pillenleiste dort teilweise verdecken, also wird
-       die tatsaechliche Hoehe gemessen und als --tb gesetzt. */
-    const topbar = document.querySelector('.topbar');
-    const messen = () => {
-      if (!topbar) return;
-      document.documentElement.style.setProperty(
-        '--tb', Math.round(topbar.getBoundingClientRect().height) + 'px');
-    };
-    messen();
-    /* ResizeObserver statt nur resize-Event: Die Topbar-Hoehe aendert sich auch
-       ohne Fensteraenderung, etwa wenn die Webfonts nachladen. */
-    if (topbar && 'ResizeObserver' in window) new ResizeObserver(messen).observe(topbar);
-    else addEventListener('resize', messen, { passive: true });
-    const links = [...nav.querySelectorAll('a')];
-    const ziele = links.map((a) => document.querySelector(a.getAttribute('href')))
-                       .filter(Boolean);
-    if (ziele.length !== links.length) return;
-    let warten = false;
-    const setzen = () => {
-      warten = false;
-      const grenze = nav.getBoundingClientRect().bottom + 24;
-      let aktiv = 0;
-      ziele.forEach((z, i) => { if (z.getBoundingClientRect().top <= grenze) aktiv = i; });
-      links.forEach((a, i) => a.classList.toggle('is-active', i === aktiv));
-      /* Auf schmalen Bildschirmen scrollt die Leiste seitlich mit, damit die aktive
-         Pille sichtbar bleibt. */
-      const on = links[aktiv];
-      if (on && nav.scrollWidth > nav.clientWidth) {
-        const l = on.offsetLeft - 12, r = on.offsetLeft + on.offsetWidth + 12;
-        if (l < nav.scrollLeft) nav.scrollLeft = l;
-        else if (r > nav.scrollLeft + nav.clientWidth) nav.scrollLeft = r - nav.clientWidth;
-      }
-    };
-    addEventListener('scroll', () => {
-      if (!warten) { warten = true; requestAnimationFrame(setzen); }
-    }, { passive: true });
-    addEventListener('resize', setzen, { passive: true });
-    setzen();
-  })();
-</script>
 </body>
 </html>
