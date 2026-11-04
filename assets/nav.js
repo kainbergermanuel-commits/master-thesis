@@ -31,6 +31,7 @@
         ['2026-07-begriffsdefinitionen.html', 'Begriffsdefinitionen'] ] },
       { name: 'Theorie & Literatur', items: [
         ['2026-11-theorielandkarte.html', 'Theorie-Landkarte'],
+        ['2026-11-theoretische-anker.html', 'Theoretische Anker'],
         ['2026-07-literaturkarte.html', 'Literaturkarte'],
         ['2026-07-literaturverzeichnis.html', 'Literaturverzeichnis'],
         ['2026-08-suchstrategie.html', 'Suchstrategie & Literaturauswahl'],
@@ -460,6 +461,7 @@
     ['datafizierung', /\bDatafizierung\b/],
     ['saettigung', /\bSättigung\b/],
     ['inhaltsanalyse', /\b[Qq]ualitative[nr]? Inhaltsanalyse\b/],
+    ['neuheitseffekt', /\b[Nn]euheitseffekt\b|\b[Nn]ovelty-Effekt\b/],
     ['ses', /\bsozioökonomische[nmrs]? Status\b/i]
   ];
   var GLOSS_FILE = '2026-07-begriffsdefinitionen.html';

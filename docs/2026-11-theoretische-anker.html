@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theoretische Anker · Master-Thesis KlassenHub</title>
+<meta name="description" content="Die zwanzig Kernbefunde aus dem Literaturbestand, auf denen ClassHaven gebaut ist: je Befund der geprüfte Beleg, die Antwort der App, die Grenze des Befunds und der Ort auf der Theorie-Landkarte. Dazu drei Gegenbefunde. Stand 04.11.2026.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<script src="../assets/toc.js" defer></script>
+<script src="../assets/nav.js" defer></script>
+<style>
+  /* Kennzeichnung: wie die Entscheidung zum Befund steht. Gleiche Töne in Filter, Karte und Kennzahlen. */
+  .t-abg { --m: var(--teal); } .t-ges { --m: var(--violet); } .t-pruef { --m: var(--amber); }
+  /* Themenblöcke */
+  .b-mot { --b: var(--rose); } .b-norm { --b: var(--violet); } .b-lp { --b: var(--good); }
+  .b-eltern { --b: var(--amber); } .b-plat { --b: var(--teal); }
+
+  .kpis4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+  @media (max-width: 720px) { .kpis4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .kp { padding: 14px 16px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+  .kp .kv { font-family: var(--display); font-size: 30px; font-weight: 800; line-height: 1; color: var(--m, var(--ink)); }
+  .kp .kl { font-size: 12.5px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+  /* Lesehilfe */
+  .how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+  @media (max-width: 760px) { .how { grid-template-columns: minmax(0, 1fr); } }
+  .how .card { padding: 14px 16px; border-top: 3px solid var(--m); }
+  .how h4 { margin: 0 0 4px; font-size: 14.5px; display: flex; align-items: center; gap: 8px; }
+  .how p { font-size: 13px; color: var(--ink-soft); }
+  .rubric { margin-top: 14px; padding: 14px 16px; font-size: 13.5px; color: var(--ink-soft); }
+  .rubric b { color: var(--ink); }
+  .dots { display: inline-flex; gap: 3px; vertical-align: middle; }
+  .dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+  .dots i.on { background: var(--ink-soft); }
+
+  /* Bewusst nicht gebaut */
+  .nots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+  @media (max-width: 860px) { .nots { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .nots { grid-template-columns: minmax(0, 1fr); } }
+  .not { position: relative; display: block; padding: 16px; border-radius: 16px; text-decoration: none; color: inherit; overflow: hidden;
+    background: linear-gradient(150deg, color-mix(in srgb, var(--rose) 9%, var(--card)), var(--card) 60%); border: 1px solid color-mix(in srgb, var(--rose) 25%, var(--line));
+    transition: border-color .2s, box-shadow .2s, transform .2s; }
+  .not:hover, .not:focus-visible { border-color: var(--rose); box-shadow: var(--shadow-sm); transform: translateY(-2px); outline: none; }
+  .not .x { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: color-mix(in srgb, var(--rose) 15%, transparent); margin-bottom: 10px; }
+  .not .x svg { width: 15px; height: 15px; stroke: var(--rose); stroke-width: 2.4; fill: none; stroke-linecap: round; }
+  .not h4 { margin: 0 0 4px; font-size: 15px; text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--rose) 60%, transparent); text-decoration-thickness: 2px; }
+  .not p { font-size: 12.5px; color: var(--ink-soft); }
+  .not .to { display: block; margin-top: 8px; font-size: 11.5px; font-weight: 800; color: var(--rose); }
+  @media (prefers-reduced-motion: reduce) { .not { transition: none; } .not:hover { transform: none; } }
+
+  /* Filter */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; align-items: center; }
+  .filters .fl { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+  .fb { font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 999px; color: var(--ink-soft);
+    border: 1px solid var(--line); background: var(--card); transition: border-color .15s, color .15s, background .15s; }
+  .fb:hover, .fb:focus-visible { border-color: var(--m, var(--teal)); color: var(--m, var(--teal)); outline: none; }
+  .fb[aria-pressed="true"] { color: var(--ink); border-color: var(--m, var(--teal)); background: color-mix(in srgb, var(--m, var(--teal)) 12%, var(--card)); }
+  .fcount { font-size: 12.5px; color: var(--muted); margin-left: auto; }
+
+  /* Anker-Karten */
+  .blk { margin-top: 26px; }
+  .blk-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+  .blk-h h3 { font-size: 19px; }
+  .blk-h .bar { width: 22px; height: 4px; border-radius: 2px; background: var(--b); align-self: center; }
+  .blk-sub { font-size: 13.5px; color: var(--muted); margin-bottom: 12px; }
+  .ank { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 0 16px; padding: 18px 20px 16px; margin-top: 12px; scroll-margin-top: 90px;
+    border-left: 4px solid var(--b); transition: box-shadow .25s; }
+  .ank.flash { box-shadow: 0 0 0 3px color-mix(in srgb, var(--b) 35%, transparent); }
+  .ank[hidden] { display: none; }
+  .ank .rk { font-family: var(--display); font-size: 34px; font-weight: 800; line-height: 1; color: var(--b); letter-spacing: -.03em; }
+  .ank .rk small { display: block; font-family: var(--body); font-size: 10px; font-weight: 800; letter-spacing: .08em; color: var(--muted); margin-top: 6px; text-transform: uppercase; }
+  .ank .top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin-bottom: 6px; }
+  .tag { font-size: 10.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px;
+    color: var(--m); background: color-mix(in srgb, var(--m) 14%, transparent); white-space: nowrap; }
+  .ank .score { font-size: 11.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+  .ank h4 { font-family: var(--display); font-size: 18px; line-height: 1.3; margin: 0 0 8px; letter-spacing: -.01em; }
+  .ank .beleg { font-size: 13px; color: var(--ink-soft); padding: 9px 12px; border-radius: 10px; background: var(--card-2); border: 1px solid var(--line-soft); }
+  .ank .beleg b { color: var(--ink); }
+  .ank .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-top: 10px; }
+  @media (max-width: 680px) { .ank .two { grid-template-columns: minmax(0, 1fr); } .ank { grid-template-columns: minmax(0, 1fr); } .ank .rk { margin-bottom: 8px; } .ank .rk small { display: inline; margin-left: 8px; } }
+  .ank .col h5 { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+  .ank .col h5 svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ank .col.app h5 { color: var(--teal); }
+  .ank .col.lim h5 { color: var(--amber); }
+  .ank .col p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+  .ank .links { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line-soft); }
+  .ank .links a { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; text-decoration: none; color: var(--ink-soft);
+    padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--card-2); transition: border-color .15s, color .15s; }
+  .ank .links a:hover, .ank .links a:focus-visible { color: var(--b); border-color: var(--b); outline: none; }
+  .ank .links a svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ank .links .u { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 999px; color: var(--teal); background: color-mix(in srgb, var(--teal) 12%, transparent); }
+
+  /* Gegenbefunde */
+  .contra { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+  @media (max-width: 860px) { .contra { grid-template-columns: minmax(0, 1fr); } }
+  .contra .card { padding: 16px 18px; background: linear-gradient(160deg, color-mix(in srgb, var(--amber) 8%, var(--card)), var(--card) 65%); border: 1px dashed color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .contra h4 { font-size: 15.5px; margin: 0 0 6px; }
+  .contra .src { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .contra p { font-size: 13.5px; color: var(--ink-soft); }
+  .contra .so { margin-top: 8px; font-size: 13px; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="../index.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Übersicht
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><path d="M12 7.5V21M5 13a7 7 0 0 0 14 0M8 11H5v2M16 11h3v2"/></svg></span>
+      Theoretische Anker
+    </div>
+    <div class="legend">
+      <span class="chip reuse">am Volltext geprüft</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Theoretischer Rahmen · Vom Befund zur Gestaltung</div>
+    <h1>Zwanzig Befunde,<br>auf denen ClassHaven steht.</h1>
+    <p class="lede">ClassHaven ist nicht neben der Literatur entstanden, sondern an ihr entlang. Diese Seite zeigt die zwanzig Kernbefunde aus dem Bestand, die das Design am stärksten geprägt haben. Zu jedem Befund stehen der geprüfte Beleg, die Antwort der App und die Grenze, über die der Befund nicht hinausträgt. Wo ein Befund auf der <a href="2026-11-theorielandkarte.html">Theorie-Landkarte</a> liegt, steht jeweils dabei.</p>
+    <div class="thesis">
+      <strong>Was diese Seite behauptet, und was nicht:</strong> Sie zeigt, dass ClassHaven an belegten Befunden <em>ausgerichtet</em> ist. Dass die App deshalb <em>wirkt</em>, behauptet sie nicht. Die Arbeit fragt danach, wie die Beteiligten sich die App aneignen und welche Bedeutung sie ihr zuschreiben. Jeder Befund ist deshalb ehrlich gekennzeichnet: Er hat eine Entscheidung angestoßen, er stützt sie im Nachhinein, oder er benennt eine Spannung, auf die die Auswertung achtet.
+    </div>
+    <div class="kpis4">
+      <div class="kp"><div class="kv">20</div><div class="kl">Kernbefunde, jeder am Volltext nachgelesen</div></div>
+      <div class="kp t-abg"><div class="kv" id="n-abg">8</div><div class="kl">aus dem Befund abgeleitet</div></div>
+      <div class="kp t-ges"><div class="kv" id="n-ges">4</div><div class="kl">nachträglich gestützt</div></div>
+      <div class="kp t-pruef"><div class="kv" id="n-pruef">8</div><div class="kl">Prüffragen für die Auswertung</div></div>
+    </div>
+  </header>
+
+  <section id="lesen">
+    <div class="sec-head"><span class="sec-num">01</span><h2>So ist die Liste zu lesen</h2></div>
+    <p class="sec-sub">Drei Kennzeichnungen sagen, wie die Entscheidung in der App zum Befund steht. Maßgeblich ist, wann die Entscheidung fiel und wann die Quelle im Bestand lag. Beides ist im Repo datiert.</p>
+    <div class="how">
+      <div class="card t-abg"><h4><span class="tag">abgeleitet</span></h4><p>Die Entscheidung folgte dem Befund. Die Konzeptseiten vom Juli 2026 nennen ihn als Grund, etwa beim Entfernen der Rangliste.</p></div>
+      <div class="card t-ges"><h4><span class="tag">gestützt</span></h4><p>Die Entscheidung lag schon vor, der Befund kam später in den Bestand und stützt sie. Er wird nicht als ihr Anlass ausgegeben.</p></div>
+      <div class="card t-pruef"><h4><span class="tag">Prüffrage</span></h4><p>Der Befund benennt eine Spannung, die die App nicht auflöst. Die Auswertung von Erhebung 1 achtet darauf, ob sie sich in den Aussagen der Beteiligten zeigt.</p></div>
+    </div>
+    <div class="card rubric">
+      <b>Wie die Rangfolge entsteht.</b> Jeder Befund bekommt zwei Werte von eins bis drei. <b>Belegstärke</b>: drei für Meta-Analysen und sehr große Stichproben, zwei für Experimente, systematische Reviews und Strukturgleichungsmodelle mit mehr als 250 Personen, eins für qualitative Studien und Theoriebeiträge. <b>Designfolge</b>: drei, wenn der Befund ein Kernmodul trägt oder verändert hat, zwei für ein Detail, eins für eine reine Prüffrage. Der Rang ergibt sich aus dem Produkt. Er misst also, wie stark ein Befund das Design prägt, nicht wie wichtig er für die Arbeit ist. Deshalb steht etwa Aneignung, der Leitbegriff der Hauptfrage, erst auf Platz 18: Er prägt das Studiendesign, kaum die App.
+    </div>
+  </section>
+
+  <section id="dagegen">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Was ClassHaven bewusst nicht hat</h2></div>
+    <p class="sec-sub">Am deutlichsten zeigt sich die Fundierung dort, wo etwas fehlt, das man ohne die Literatur gebaut hätte. Ein Klick führt zum Befund.</p>
+    <div class="nots" id="nots"></div>
+  </section>
+
+  <section id="anker">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Die zwanzig Anker</h2></div>
+    <p class="sec-sub">In fünf Themenblöcken, die Nummer ist der Rang. Fachbegriffe sind beim ersten Vorkommen unterlegt und erklären sich beim Darüberfahren.</p>
+    <div class="filters" role="group" aria-label="Nach Kennzeichnung filtern">
+      <span class="fl">Zeigen</span>
+      <button class="fb" type="button" data-f="all" aria-pressed="true">Alle</button>
+      <button class="fb t-abg" type="button" data-f="abg" aria-pressed="false">abgeleitet</button>
+      <button class="fb t-ges" type="button" data-f="ges" aria-pressed="false">gestützt</button>
+      <button class="fb t-pruef" type="button" data-f="pruef" aria-pressed="false">Prüffrage</button>
+      <span class="fcount" id="fcount" aria-live="polite"></span>
+    </div>
+    <div id="blocks"></div>
+  </section>
+
+  <section id="gegenbefunde">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Was gegen zu große Erwartungen spricht</h2></div>
+    <p class="sec-sub">Drei Befunde aus demselben Bestand, die bremsen. Sie stehen hier, weil eine Arbeit, die nur stützende Befunde zeigt, mehr verspricht, als die Forschung hergibt.</p>
+    <div class="contra" id="contra"></div>
+  </section>
+
+  <section id="landkarte">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Wo die Anker auf der Landkarte liegen</h2></div>
+    <p class="sec-sub">Die meisten Anker liegen in Kapitel 2.4, Motivation und Engagement. Das spiegelt den Aufwand, der in das Abenteuer-System geflossen ist. U3, der Vergleich mit bisherigen Systemen, hängt an einem einzigen Anker, Nummer 14 zur Akzeptanz. Das deckt sich mit dem Befund der <a href="2026-11-theorielandkarte.html#unterfragen">Landkarte</a>, dass U3 die schmalste Theoriestelle ist.</p>
+    <div class="card tablewrap" style="padding:6px 10px;overflow-x:auto;margin-top:14px">
+      <table class="um" id="lk" style="width:100%;border-collapse:collapse;font-size:13px"></table>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Theoretische Anker · Stand 04.11.2026 · alle Zahlen am Volltext geprüft</span>
+    <span><a href="2026-11-theorielandkarte.html">Zur Theorie-Landkarte →</a></span>
+  </div>
+</div>
+
+<script>
+/* Inhalt. t = Kennzeichnung (abg | ges | pruef), b = Themenblock, s = [Belegstärke, Designfolge],
+   lk = Kapitel der Theorie-Landkarte, vz = Abschnitt im Literaturverzeichnis, docs = [Datei, Titel]. */
+const BLOCKS = [
+  { id: 'mot', t: 'Motivation und Spiel', sub: 'Was die Forschung über Gamification, Belohnung und Spielfiktion sagt, und wie das Abenteuer-System darauf antwortet.' },
+  { id: 'norm', t: 'Soziale Normen', sub: 'Wie Angaben über andere Verhalten lenken, und warum ein gut gemeinter Prozentbalken schaden kann.' },
+  { id: 'lp', t: 'Lehrpersonen', sub: 'Was digitale Kommunikation für die Arbeit der Lehrpersonen bedeutet, im Guten wie im Belastenden.' },
+  { id: 'eltern', t: 'Eltern und Teilhabe', sub: 'Welche Art von Elternbeteiligung trägt, und wer an ihr überhaupt teilhaben kann.' },
+  { id: 'plat', t: 'Plattform und Schule', sub: 'Was mit Schule passiert, wenn ein System in sie hineinkommt, und wer es anstößt.' },
+];
+const A = [
+  { n: 1, b: 'mot', t: 'abg', s: [3, 3], lk: '2.4', u: ['U1', 'U2'], vz: 'gamification',
+    h: 'Ranglisten bringen weniger als ihr Ruf, und über ein Semester können sie schaden.',
+    beleg: '<b>Huang et al. (2020)</b>, Meta-Analyse, 30 Studien, N = 3.083: Studien ohne Rangliste g = .771 (k = 8), mit Rangliste g = .358 (k = 23), Tab. 2. <b>Hanus &amp; Fox (2015)</b>, 16 Wochen, N = 80: In der Kursvariante mit Rangliste und Abzeichen sanken intrinsische Motivation, Zufriedenheit und Empowerment über die Zeit.',
+    app: 'Die Rangliste wurde im Juli 2026 entfernt. Streaks zeigen eigenes Wachstum statt eines Platzes, die Schülerkarte bezieht sich auf die Klasse, ohne zu ranken.',
+    lim: 'Der Unterschied zwischen den beiden Gruppen bei Huang et al. ist statistisch nicht signifikant (p = .138), und auf der Seite ohne Rangliste stehen nur acht Studien. Hanus &amp; Fox untersuchten Studierende. Der Befund begründet die Vorsicht, er beweist keinen Schaden.',
+    docs: [['2026-07-gamification-prinzipien.html', 'Gamification-Prinzipien'], ['2026-07-gamification-umsetzung.html', 'Umsetzung']] },
+  { n: 2, b: 'mot', t: 'ges', s: [3, 3], lk: '2.4', u: ['U1', 'U2'], vz: 'primaerquellen',
+    h: 'Erwartete Belohnungen für Erledigtes untergraben die intrinsische Motivation, positive Rückmeldung stärkt sie.',
+    beleg: '<b>Deci, Koestner &amp; Ryan (1999)</b>, Meta-Analyse über 128 Experimente: Belohnungen, die an Beschäftigung, Erledigung oder Leistung geknüpft sind, senken die freiwillige Weiterbeschäftigung (d = −0,40, −0,36, −0,28). Positives Feedback hebt sie (d = 0,33). Bei Kindern schaden materielle Belohnungen stärker als bei Studierenden.',
+    app: 'Belohnungen in ClassHaven sind symbolisch und feiern die Klasse, statt das Kind zu steuern. Eine geplante Klassen-Basis mit freischaltbarer Deko und Sammel-Items wurde gestrichen, weil sie im Kern ein Belohnungsapparat gewesen wäre.',
+    lim: 'Streaks sind trotzdem erwartete, an Erledigung geknüpfte Anerkennung, also genau die Klasse, die hier untergräbt. Sie sind nur nicht materiell. Die Experimente sind kurz und laborhaft. Die Auswertung achtet darauf, ob Kinder die Streaks als Rückmeldung oder als Kontrolle beschreiben.',
+    docs: [['2026-07-gamification-prinzipien.html', 'Gamification-Prinzipien'], ['2026-07-gamification-balance.html', 'Balance & Vertrauen']] },
+  { n: 3, b: 'mot', t: 'abg', s: [3, 3], lk: '2.4', u: ['U1', 'U2'], vz: 'gamification',
+    h: 'Wettbewerb wirkt am besten, wenn er mit Zusammenarbeit verbunden ist.',
+    beleg: '<b>Sailer &amp; Homner (2019)</b>, Meta-Analyse: Soziale Interaktion ist ein signifikanter Moderator für Verhaltensergebnisse. Die Kombination von Wettbewerb und Kollaboration war dabei besonders wirksam, in einer Teilanalyse auch für motivationale Ergebnisse (Abstract).',
+    app: 'Die Klasse arbeitet auf ein gemeinsames Ziel hin, ein kollektiver Sammelwert ersetzt den Einzelvergleich. Wettbewerb gibt es nur als gemeinsame Herausforderung der Klasse, nicht zwischen Kindern.',
+    lim: 'Sailer &amp; Homner meinen die Kombination. ClassHaven setzt bewusst nur auf die kooperative Hälfte und weicht damit vom wirksamsten Muster ab. Die Gilden waren im Juli zudem noch eine Summe von Einzelleistungen, keine echte Zusammenarbeit.',
+    docs: [['2026-07-soziale-normen.html', 'Soziale Normen'], ['2026-07-gamification-balance.html', 'Balance & Vertrauen']] },
+  { n: 4, b: 'mot', t: 'abg', s: [3, 3], lk: '2.4', u: ['U1'], vz: 'gamification',
+    h: 'Eine erzählerische Rahmung ist einer der beiden Faktoren, die Gamification wirksamer machen.',
+    beleg: '<b>Sailer &amp; Homner (2019)</b>: Game fiction ist neben sozialer Interaktion ein signifikanter Moderator für Verhaltensergebnisse (Abstract). <b>Landers (2014)</b> liefert die Theorie dazu: Gamification wirkt vermittelt, über Verhalten und Einstellungen.',
+    app: 'Das Abenteuer-System hüllt Hausübungen und Dienste in elf Story-Welten mit Begleitfiguren, Kapiteln und Wahlpfaden. Es ist der aufwendigste Teil des Designs und steht auf diesem einen Moderator-Befund.',
+    lim: 'Der Unterschied zeigt sich nur bei Verhalten, für kognitive und motivationale Ergebnisse fanden Sailer &amp; Homner keinen, und sie nennen die Lage selbst „mixed“. Ein Moderator in einer Meta-Analyse sagt zudem nichts darüber, ob gerade diese Welten tragen. Armstrong &amp; Landers (2017) zeigen außerdem, dass eine Erzählung die Zufriedenheit heben und zugleich das Lernen kosten kann (siehe Gegenbefunde).',
+    docs: [['2026-07-story-welten.html', 'Story-Welten'], ['2026-07-gamification-konzept.html', 'Gamification-Konzept']] },
+  { n: 5, b: 'mot', t: 'abg', s: [3, 3], lk: '2.4', u: ['U1', 'U2'], vz: 'gamification',
+    h: 'Gamification stärkt Autonomie und Zugehörigkeit, das Kompetenzerleben kaum.',
+    beleg: '<b>Li, Hew &amp; Du (2024)</b>, Meta-Analyse, 35 Interventionen, N = 2.500: Autonomie g = 0,638, Zugehörigkeit g = 1,776, Kompetenz g = 0,277 (Abstract). Theoretischer Rahmen ist die Selbstbestimmungstheorie nach <b>Ryan &amp; Deci (2000)</b>.',
+    app: 'Jedes Element soll auf ein Grundbedürfnis einzahlen: Wahlpfade auf Autonomie, die Eltern-Bestätigung und das gemeinsame Klassenziel auf Zugehörigkeit, sichtbares eigenes Wachstum statt eines Rangs auf Kompetenz.',
+    lim: 'Gerade beim Kompetenzerleben ist der Effekt minimal. Dass das Design hier etwas leistet, ist eine Absicht, kein Befund. Die Auswertung achtet darauf, ob Kinder überhaupt von eigenem Können sprechen.',
+    docs: [['2026-07-gamification-konzept.html', 'Gamification-Konzept'], ['2026-07-gamification-prinzipien.html', 'Gamification-Prinzipien']] },
+  { n: 6, b: 'mot', t: 'abg', s: [2, 3], lk: '2.4', u: ['U1', 'U2'], vz: 'gamification',
+    h: 'Der Reiz des Neuen verfliegt: Gamification motiviert anfangs stark und lässt dann nach.',
+    beleg: '<b>Ratinho &amp; Martins (2023)</b>, systematisches Review nach PRISMA, 40 Studien: Ein Neuheitseffekt und extrinsische Belohnungen führen kurzfristig zu mehr Motivation, gefolgt von einem Abfall bei längerer Nutzung (Abstract).',
+    app: 'Ein wechselnder Wochen-Fokus und neue Welten sollen dem Abnutzen entgegenwirken. Die Studie hat zwei Erhebungszeitpunkte mit bewusstem Abstand zur Einführung, damit der Effekt überhaupt sichtbar werden kann.',
+    lim: 'Das Review beschreibt das Muster, es belegt kein Gegenmittel. Ob Abwechslung den Abfall bremst, ist offen. Was in Erhebung 1 berichtet wird, kann noch Neuheit sein und ist so zu lesen.',
+    docs: [['2026-07-gamification-balance.html', 'Balance & Vertrauen'], ['2026-08-feldeinfuehrung.html', 'Feldeinführung']] },
+  { n: 7, b: 'mot', t: 'ges', s: [3, 2], lk: '2.4', u: ['U1'], vz: 'gamification',
+    h: 'In der Sekundarstufe I wirkt Gamification am stärksten, auf extrinsische Motivation mehr als auf intrinsische.',
+    beleg: '<b>Kurnaz &amp; Koçtürk (2025)</b>, Meta-Analyse K-12, 31 Studien, k = 41: Sekundarstufe g = 1,015, Oberstufe g = 0,821, Volksschule g = 0,309. Extrinsische Motivation g = 0,713, intrinsische g = 0,638 (Abstract).',
+    app: 'ClassHaven ist für die Sekundarstufe I gebaut, also für die Altersgruppe mit der größten Empfänglichkeit. Die Balance-Seite legt fest, dass Belohnungen feiern und nicht steuern.',
+    lim: 'Die Altersgruppe stand fest, bevor die Meta-Analyse im Bestand lag. Dass die extrinsische Seite stärker anspricht, ist eher Warnung als Rückenwind. Die einbezogenen Studien sind Experimente mit kurzer Dauer.',
+    docs: [['2026-07-gamification-balance.html', 'Balance & Vertrauen']] },
+  { n: 8, b: 'norm', t: 'abg', s: [2, 3], lk: '2.4', u: ['U2'], vz: 'primaerquellen',
+    h: 'Eine Angabe darüber, was „die meisten" tun, kann ins Gegenteil kippen.',
+    beleg: '<b>Schultz et al. (2007)</b>, Feldexperiment zum Energiesparen: Eine Durchschnittsangabe über die Nachbarschaft senkte den Verbrauch bei Vielverbrauchenden, erhöhte ihn aber bei Wenigverbrauchenden, der Bumerang-Effekt. Eine zusätzliche Botschaft der Anerkennung hob ihn auf.',
+    app: 'Ein statischer Prozentbalken („so viele haben schon …") wurde ersetzt. Bei niedrigem Stand hätte er gerade den Engagierten signalisiert, dass sich kaum jemand beteiligt.',
+    lim: 'Energiesparen in Haushalten ist nicht Hausübung in einer Klasse. Die Übertragung ist eine begründete Analogie, kein Nachweis für Schule.',
+    docs: [['2026-07-soziale-normen.html', 'Soziale Normen']] },
+  { n: 9, b: 'norm', t: 'abg', s: [2, 3], lk: '2.4', u: ['U2'], vz: 'primaerquellen',
+    h: 'Wer zeigt, dass sich etwas bewegt, motiviert auch dann, wenn der Stand noch niedrig ist.',
+    beleg: '<b>Sparkman &amp; Walton (2017)</b>, drei Online- und zwei Feldexperimente: Dynamische Normen, also Angaben darüber, wie sich Verhalten verändert, motivierten Veränderung auch gegen die herrschende statische Norm. In einem Café verdoppelten sich die fleischlosen Bestellungen (Abstract).',
+    app: 'An die Stelle des Prozentbalkens trat ein Wochen-Puls. Er zeigt, dass Bewegung in die Klasse kommt, statt einen Stand mit Nenner auszuweisen.',
+    lim: 'Auch hier ist der Weg von Fleischkonsum und Wasserverbrauch zur Schulklasse eine Analogie. Ob der Puls als Bewegung gelesen wird, kann nur die Erhebung zeigen.',
+    docs: [['2026-07-soziale-normen.html', 'Soziale Normen']] },
+  { n: 10, b: 'lp', t: 'pruef', s: [3, 2], lk: '2.5', u: ['U2'], vz: 'akzeptanz',
+    h: 'Elternkommunikation stärkt die Selbstwirksamkeit der Lehrpersonen und erhöht zugleich ihren Stress.',
+    beleg: '<b>Yang, Jeon &amp; Choi (2025)</b>, TALIS 2018, 122.584 Lehrpersonen: Eine Stunde Kommunikation mit Eltern geht mit höherer Selbstwirksamkeit und mit mehr elternbezogenem Stress einher. Fortbildung zur Zusammenarbeit mit Eltern mildert den Stress (Abstract).',
+    app: 'Antworten von Eltern gehen nur an die Lehrperson, die zuletzt im Heft geschrieben hat, nicht an alle Beteiligten. Benachrichtigungen lassen sich pro Gerät abschalten. Der Leitfaden für die Lehrpersonen fragt nach Zeitaufwand und eigener Erreichbarkeit.',
+    lim: 'Querschnittsdaten, kein Kausalbefund. Gemessen wurde Zeit, nicht der Kanal. Ob ClassHaven den Stress verschiebt, verringert oder erhöht, ist eine offene Frage der Erhebung.',
+    docs: [['2026-11-e1-leitfaden-lehrpersonen.html', 'Leitfaden Lehrpersonen']] },
+  { n: 11, b: 'eltern', t: 'ges', s: [2, 3], lk: '2.3', u: ['U2'], vz: 'teilhabe',
+    h: 'Gleicher Zugang heißt nicht gleicher Ertrag: Digitales Kapital entscheidet, wer von digitaler Schulkommunikation profitiert.',
+    beleg: '<b>Addi-Raccah (2024)</b>, n = 600 Eltern, Strukturgleichungsmodell: Digitales Kapital hängt direkt mit Elternbeteiligung zusammen und vermittelt den Vorteil von Eltern mit hohem sozioökonomischem Status. Begriff nach <b>Ragnedda (2018)</b>: Ungleichheit beim Zugang, bei der Nutzung und beim Ertrag.',
+    app: 'ClassHaven lässt sich ohne App-Store installieren, und der Fragebogen für die Erziehungsberechtigten läuft auf Papier. Das Untersuchungsdesign sieht vor, die Eltern nach digitalem Kapital kontrastierend auszuwählen.',
+    lim: 'Ein niedriger Einstieg löst nur die erste Ebene. Ob alle Eltern aus derselben Nachricht dasselbe gewinnen, ist die dritte Ebene, und die kann die App nicht garantieren. Die Studie stammt aus Israel, Volksschule, Pandemiezeit.',
+    docs: [['2026-11-e1-fragebogen-eltern.html', 'Fragebogen Eltern'], ['2026-07-forschungsdesign.html', 'Forschungsdesign']] },
+  { n: 12, b: 'eltern', t: 'pruef', s: [3, 2], lk: '2.1', u: ['U1', 'U2'], vz: 'teilhabe',
+    h: 'Hilfe bei der Hausübung hängt in der Sekundarstufe I nicht positiv mit Leistung zusammen, Autonomieunterstützung schon.',
+    beleg: '<b>Hill &amp; Tyson (2009)</b>, Meta-Analyse, 50 Studien: Elternbeteiligung insgesamt r = .18, am stärksten die akademische Sozialisation, Hilfe bei der Hausübung als einzige Form ohne positiven Zusammenhang. <b>Gonida &amp; Cortina (2014)</b>, n = 282: Autonomieunterstützung am günstigsten, Einmischung am ungünstigsten.',
+    app: 'Eltern bestätigen die erledigte Hausübung, sie helfen nicht inhaltlich. Die Bestätigung liegt damit näher an der Kontrolle als an der Hilfe.',
+    lim: 'Ob die Bestätigung als Unterstützung oder als Kontrolle erlebt wird, ist genau die Spannung, auf die die Auswertung achtet. Beide Studien sind korrelativ.',
+    docs: [['2026-07-app-systemueberblick.html', 'App-Systemüberblick']] },
+  { n: 13, b: 'lp', t: 'pruef', s: [2, 2], lk: '2.5', u: ['U2'], vz: 'akzeptanz',
+    h: 'Arbeit am Gerät nach Dienstschluss schmälert die Work-Life-Balance der Lehrpersonen.',
+    beleg: '<b>Bauwens et al. (2020)</b>, 288 Lehrpersonen der Sekundarstufe, Strukturgleichungsmodell: Sozialer Druck senkt über die Nutzung außerhalb der Dienstzeit die Work-Life-Balance. Wahrgenommener Nutzen der Plattform geht mit besserer Balance einher (Abstract).',
+    app: 'Ruhezeiten gibt es in ClassHaven nicht. Benachrichtigungen lassen sich pro Gerät abschalten, mehr nicht. Der Leitfaden fragt ausdrücklich nach Abend, Wochenende und Benachrichtigungen.',
+    lim: 'Untersucht wurden Lernplattformen in Flandern, nicht ein Mitteilungsheft. Der Befund ist hier vor allem ein ehrlicher Hinweis auf eine Lücke im Design.',
+    docs: [['2026-11-e1-leitfaden-lehrpersonen.html', 'Leitfaden Lehrpersonen']] },
+  { n: 14, b: 'lp', t: 'pruef', s: [2, 2], lk: '2.5', u: ['U3'], vz: 'akzeptanz',
+    h: 'Lehrpersonen nehmen ein Werkzeug an, wenn es nützt, und ihre Akzeptanz verläuft in Zyklen.',
+    beleg: '<b>Davis (1989)</b>: Wahrgenommene Nützlichkeit hängt stärker mit der Nutzung zusammen als wahrgenommene Bedienbarkeit. <b>Wohlfart &amp; Wagner (2025)</b>, 13 Lehrpersonen über zwei Jahre: Akzeptanz verläuft zyklisch, von schneller Anpassung über Reflexion zu stabiler Nutzung oder Neubewertung (Abstract).',
+    app: 'Die zwei Erhebungszeitpunkte erfassen Akzeptanz als Verlauf statt als Zustand. Der Leitfaden fragt nach dem Zeitaufwand im Alltag, wo die App mehr und wo sie weniger verlangt.',
+    lim: 'TAM ist ein quantitatives Messmodell. In einer qualitativen Studie dient es als sensibilisierendes Konzept, nicht als Modell, das geprüft wird.',
+    docs: [['2026-07-forschungsdesign.html', 'Forschungsdesign']] },
+  { n: 15, b: 'eltern', t: 'pruef', s: [2, 2], lk: '2.1', u: ['U2'], vz: 'teilhabe',
+    h: 'Vertrauen zwischen Elternhaus und Schule hängt an der Qualität des Kontakts, nicht an seiner Häufigkeit.',
+    beleg: '<b>Adams &amp; Christenson (2000)</b>, 1.234 Eltern und 209 Lehrpersonen: Die wahrgenommene Qualität der Interaktion sagt Vertrauen besser vorher als die Kontakthäufigkeit. Das Vertrauen der Eltern sinkt beim Übertritt in die Sekundarstufe (Abstract).',
+    app: 'Das Mitteilungsheft ist ein eigenes Heft pro Elternteil, auch Sammelnachrichten landen als Einzelgespräch. Lesebestätigungen machen sichtbar, was angekommen ist.',
+    lim: 'Eine App erhöht zuerst die Häufigkeit. Ob sich auch die Qualität ändert, ist eine Frage an die Beteiligten, nicht an die Funktion. Die Daten sind deskriptiv und 26 Jahre alt.',
+    docs: [['2026-07-app-systemueberblick.html', 'App-Systemüberblick']] },
+  { n: 16, b: 'eltern', t: 'pruef', s: [1, 3], lk: '2.1', u: ['U2'], vz: 'primaerquellen',
+    h: 'Elternbeteiligung reicht von der Information durch die Schule bis zur Mitgestaltung des Lernens.',
+    beleg: '<b>Goodall &amp; Montgomery (2014)</b>, Theoriebeitrag: ein Kontinuum von involvement mit der Schule zu engagement mit dem Lernen des Kindes. Am Ende liegt die Handlungsmacht „with the parent" (S. 401).',
+    app: 'Das Kontinuum ist das Analyseraster für die App: Das Mitteilungsheft liegt am Anfang, bei der Information. Die Bestätigung der Hausübung findet zu Hause statt, bleibt aber von der Schule gesteuert.',
+    lim: 'Ein Kontinuum, kein Stufenweg, und ohne Technikbezug. Die Übertragung auf digitale Kanäle ist eigene Leistung der Arbeit und als solche auszuweisen.',
+    docs: [['2026-07-begriffsdefinitionen.html', 'Begriffsdefinitionen']] },
+  { n: 17, b: 'plat', t: 'pruef', s: [1, 3], lk: '2.2', u: ['U2'], vz: 'platformisierung',
+    h: 'Schulplattformen machen Verhalten zu Daten und können Überwachung normalisieren.',
+    beleg: '<b>Corser, Manolev &amp; Danby (2025)</b>: ClassDojo liefert „a datafied form of behaviour judgement" (Abstract). <b>Gouseti &amp; Shaw (2026)</b>, Schulleitungen, Lehrpersonen, Schüler*innen und Eltern zweier Sekundarschulen: Plattformen werden geschätzt, normalisieren aber Überwachung und belasten das digitale Wohlbefinden der Lehrpersonen.',
+    app: 'Es gibt keine öffentliche Punkteliste, und Namen offener Hausübungen erscheinen erst nach einem bewussten Klick. Die Lehrer-Ansicht des Abenteuers zeigt aber eine Matrix je Kind. Genau dort liegt die Spannung.',
+    lim: 'Streaks mit Eltern-Bestätigung sind strukturell nahe an ClassDojo-Punkten. Diese Nähe ist keine Behauptung der Kritik, sondern eine Tatsache des Designs, und die Arbeit muss sie benennen.',
+    docs: [['2026-07-risiken-gamifizierung.html', 'Risiken & Grenzen']] },
+  { n: 18, b: 'plat', t: 'abg', s: [1, 3], lk: 'Mitte', u: ['U1'], vz: 'primaerquellen',
+    h: 'Wie ein System genutzt wird, weicht von dem ab, wofür es gebaut wurde.',
+    beleg: '<b>Dourish (2003)</b>: Aneignung ist „the process by which people adopt and adapt technologies, fitting them into their working practices". <b>Hangartner et al. (2024)</b>, Fallstudien in Schweizer Sekundarschulen: Lehrpersonen nutzen Plattformen entlang ihrer pädagogischen Werte, nicht entlang der Funktionslogik.',
+    app: 'Statt eines harten Feature-Freeze führt das Repo ein Versionsprotokoll. Änderungswünsche der Beteiligten werden nicht umgesetzt, sondern als Material gesammelt. So bleibt sichtbar, worauf sich die Aussagen beziehen.',
+    lim: 'Dieser Anker prägt das Studiendesign, nicht die App. Was gelebte Nutzung ist, zeigt erst die Erhebung.',
+    docs: [['2026-11-versionsprotokoll.html', 'Versionsprotokoll']] },
+  { n: 19, b: 'plat', t: 'pruef', s: [1, 2], lk: '2.2', u: ['U1', 'U2'], vz: 'teilhabe',
+    h: 'Bei digitaler Kommunikation zwischen Eltern und Lehrpersonen werden die Kinder leicht übergangen.',
+    beleg: '<b>Grant (2011)</b>, qualitative Studie mit Kindern, Eltern und Lehrpersonen zweier Sekundarschulen: Die Kinder befürchteten, aus dem digitalen Gespräch ausgeschlossen zu werden, und Lehrpersonen neigten dazu, die Agenda der Schule ins Zuhause zu verlängern (Conclusion).',
+    app: 'Im Mitteilungsheft haben Schüler*innen keinen Zugriff, es läuft zwischen Lehrperson und Eltern. Grant warnt genau davor. Das Gruppeninterview fragt die Kinder, wie Nachrichten nach Hause früher liefen und wie jetzt.',
+    lim: 'Grant befragte Schulen vor der Einführung eines Systems, also Erwartungen. Das schließt auch die Forschungslücke nicht: Die Aneignung eines eingeführten Systems bleibt offen.',
+    docs: [['2026-11-e1-leitfaden-gruppeninterview.html', 'Leitfaden Gruppeninterview']] },
+  { n: 20, b: 'plat', t: 'ges', s: [1, 2], lk: '2.6', u: ['U4'], vz: 'leadership',
+    h: 'Digitaler Wandel gelingt eher, wenn er von pädagogischen Zielen ausgeht als von Werkzeugen.',
+    beleg: '<b>Ruloff &amp; Petko (2021)</b>, alle neun Gymnasial-Schulleitungen der Zentralschweiz: Werkzeuggetriebene, transaktional geführte Schulen veränderten sich langsamer als die eine zielgetrieben und transformational geführte Schule (Discussion).',
+    app: 'Anlass von ClassHaven war ein von der Schulleitung geäußerter Organisationsbedarf, die Umsetzung kam von einer Lehrperson der Schule. Das Werkzeug folgte dem Bedarf, nicht umgekehrt.',
+    lim: 'Die Studie setzt bei Schulleitungen an, ClassHaven geht von einer Lehrperson aus. Dieser Unterschied ist für U4 aufschlussreich, er ist aber kein Beleg für einen Erfolg.',
+    docs: [['2026-07-begriffsdefinitionen.html#schulintern', 'Schulintern entwickelt']] },
+];
+const NOTS = [
+  { h: 'Rangliste', p: 'Keine Platzierung der Kinder untereinander.', a: 1 },
+  { h: 'Prozentbalken', p: 'Keine Anzeige, wie viele schon erledigt haben.', a: 8 },
+  { h: 'Sammel-Belohnungen', p: 'Keine freischaltbare Deko, kein Einzel-Loot.', a: 2 },
+  { h: 'Wettbewerb zwischen Kindern', p: 'Herausforderungen nur gemeinsam als Klasse.', a: 3 },
+];
+const CONTRA = [
+  { h: 'Für Online-Plattformen fehlt bisher die Wirkungsevidenz.', src: 'See et al. (2021), systematisches Review, 29 Studien', p: 'Vielversprechend ist Kommunikation per Telefon, SMS oder Mail, und nur, wenn sie zweiseitig, persönlich und positiv ist. Für digitale Plattformen gibt es bisher keinen Nachweis besserer Schulergebnisse, und die Forschungslage gilt als schwach.', so: 'Deshalb fragt die Arbeit nach zugeschriebener Bedeutung, nicht nach Wirkung.' },
+  { h: 'Beim Verhalten ist der Effekt am kleinsten und am wenigsten stabil.', src: 'Sailer & Homner (2019), Meta-Analyse', p: 'Auf kognitive Ergebnisse wirkt Gamification mit g = .49, auf motivationale mit g = .36, auf Verhalten mit g = .25 (k = 9). Nur der kognitive Effekt hielt der Prüfung mit methodisch strengen Studien stand.', so: 'Ausgerechnet Verhalten, das Erledigen der Hausübung, ist das Kernfeld von ClassHaven.' },
+  { h: 'Eine Erzählung kann die Zufriedenheit heben und das Lernen kosten.', src: 'Armstrong & Landers (2017), Experiment, n = 273', p: 'Mit Spielfiktion waren die Teilnehmenden deutlich zufriedener (d = 0,65), wussten aber nicht mehr, und beim prozeduralen Wissen schnitten sie schlechter ab (d = −0,40).', so: 'Das Abenteuer-System muss sich an mehr messen lassen als daran, dass es gefällt.' },
+];
+
+const ICO = {
+  app: '<svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg>',
+  lim: '<svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>',
+  list: '<svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  map: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="19" r="2"/><path d="M6 6.5 9.5 10M18 17.5 14.5 14"/></svg>',
+  doc: '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
+  x: '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+};
+const TL = { abg: 'abgeleitet', ges: 'gestützt', pruef: 'Prüffrage' };
+const LKID = { '2.1': 'k1', '2.2': 'k2', '2.3': 'k3', '2.4': 'k4', '2.5': 'k5', '2.6': 'k6', '2.7': 'k7' };
+const dots = (v) => `<span class="dots" aria-hidden="true">${[1, 2, 3].map(i => `<i class="${i <= v ? 'on' : ''}"></i>`).join('')}</span>`;
+
+document.getElementById('blocks').innerHTML = BLOCKS.map(bk => `
+  <div class="blk b-${bk.id}" data-blk="${bk.id}">
+    <div class="blk-h"><span class="bar"></span><h3>${bk.t}</h3></div>
+    <p class="blk-sub">${bk.sub}</p>
+    ${A.filter(a => a.b === bk.id).map(a => `
+    <article class="card ank b-${a.b} t-${a.t}" id="a${a.n}" data-t="${a.t}">
+      <div class="rk">${a.n}<small>Rang</small></div>
+      <div>
+        <div class="top"><span class="tag">${TL[a.t]}</span><span class="score" title="Belegstärke × Designfolge">Beleg ${dots(a.s[0])} · Design ${dots(a.s[1])}</span></div>
+        <h4>${a.h}</h4>
+        <div class="beleg">${a.beleg}</div>
+        <div class="two">
+          <div class="col app"><h5>${ICO.app}So antwortet ClassHaven</h5><p>${a.app}</p></div>
+          <div class="col lim"><h5>${ICO.lim}Was der Befund nicht erlaubt</h5><p>${a.lim}</p></div>
+        </div>
+        <div class="links">
+          ${a.u.map(u => `<span class="u">${u}</span>`).join('')}
+          <a href="2026-11-theorielandkarte.html${LKID[a.lk] ? '#c-' + LKID[a.lk] : '#karte'}">${ICO.map}Landkarte ${a.lk}</a>
+          <a href="2026-07-literaturverzeichnis.html#${a.vz}">${ICO.list}Quelle im Verzeichnis</a>
+          ${a.docs.map(([f, t]) => `<a href="${f}">${ICO.doc}${t}</a>`).join('')}
+        </div>
+      </div>
+    </article>`).join('')}
+  </div>`).join('');
+
+document.getElementById('nots').innerHTML = NOTS.map(x => `
+  <a class="not" href="#a${x.a}" data-jump="${x.a}"><span class="x">${ICO.x}</span><h4>${x.h}</h4><p>${x.p}</p><span class="to">Anker ${x.a} →</span></a>`).join('');
+
+document.getElementById('contra').innerHTML = CONTRA.map(c => `
+  <div class="card"><h4>${c.h}</h4><div class="src">${c.src.replace(/&/g, '&amp;')}</div><p>${c.p}</p><p class="so">${c.so}</p></div>`).join('');
+
+// Landkarten-Tabelle: welche Anker in welchem Kapitel
+const CH = [['2.1', 'Elternbeteiligung'], ['2.2', 'Digitale Kommunikation'], ['2.3', 'Teilhabe & Ungleichheit'], ['2.4', 'Motivation & Engagement'], ['2.5', 'Akzeptanz bei Lehrpersonen'], ['2.6', 'Digital Leadership'], ['Mitte', 'Forschungsfrage (Aneignung)']];
+document.getElementById('lk').innerHTML = '<thead><tr><th style="text-align:left;padding:9px 10px">Kapitel</th><th style="text-align:left;padding:9px 10px">Anker</th></tr></thead><tbody>' +
+  CH.map(([k, t]) => { const list = A.filter(a => a.lk === k); return `<tr><td style="padding:9px 10px;border-top:1px solid var(--line-soft);font-weight:700;white-space:nowrap">${k} ${t}</td><td style="padding:9px 10px;border-top:1px solid var(--line-soft)">${list.length ? list.map(a => `<a href="#a${a.n}" style="text-decoration:none;font-weight:700;margin-right:10px">${a.n}</a>`).join('') : '<span style="color:var(--muted)">keiner</span>'}</td></tr>`; }).join('') + '</tbody>';
+
+// Kennzahlen aus den Daten, damit sie nie von der Liste abweichen
+['abg', 'ges', 'pruef'].forEach(t => document.getElementById('n-' + t).textContent = A.filter(a => a.t === t).length);
+
+// Filter
+const cnt = document.getElementById('fcount');
+function filt(f) {
+  document.querySelectorAll('.fb').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.f === f)));
+  let n = 0;
+  document.querySelectorAll('.ank').forEach(c => { const on = f === 'all' || c.dataset.t === f; c.hidden = !on; if (on) n++; });
+  document.querySelectorAll('.blk').forEach(b => b.hidden = !b.querySelector('.ank:not([hidden])'));
+  cnt.textContent = n + ' von 20';
+}
+document.querySelectorAll('.fb').forEach(b => b.addEventListener('click', () => filt(b.dataset.f)));
+filt('all');
+
+// Sprung aus „Bewusst nicht" hebt die Karte kurz hervor
+function flash(id) { const c = document.getElementById(id); if (!c) return; if (c.hidden) filt('all'); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1500); }
+document.querySelectorAll('[data-jump]').forEach(a => a.addEventListener('click', () => flash('a' + a.dataset.jump)));
+if (/^#a\d+$/.test(location.hash)) flash(location.hash.slice(1));
+</script>
+</body>
+</html>
