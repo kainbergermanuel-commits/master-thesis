@@ -50,11 +50,20 @@
   .ufr div { padding: 10px 12px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-soft); font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; }
   .ufr b { display: block; font-size: 11px; font-weight: 800; color: var(--teal); letter-spacing: .05em; margin-bottom: 2px; }
   .frage details { margin-top: 14px; }
-  .frage summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--teal); list-style: none; display: inline-flex; align-items: center; gap: 6px; }
-  .frage summary::-webkit-details-marker { display: none; }
-  .frage summary::before { content: "+"; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 6px; font-size: 13px;
-    background: color-mix(in srgb, var(--teal) 13%, transparent); transition: transform .2s; }
-  .frage details[open] summary::before { content: "–"; }
+  /* Aufklapper: Plus und Minus als Flächen gezeichnet, nicht als Schriftzeichen,
+     damit sie unabhängig von der Schrift exakt mittig im Kästchen sitzen. */
+  .frage summary, .ablauf summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--teal); list-style: none;
+    display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; }
+  .frage summary::-webkit-details-marker, .ablauf summary::-webkit-details-marker { display: none; }
+  .frage summary::before, .ablauf summary::before { content: ""; flex: none; width: 20px; height: 20px; border-radius: 6px;
+    background:
+      linear-gradient(var(--teal), var(--teal)) center / 9px 2px no-repeat,
+      linear-gradient(var(--teal), var(--teal)) center / 2px 9px no-repeat,
+      color-mix(in srgb, var(--teal) 13%, transparent);
+    transition: background-size .2s; }
+  .frage details[open] summary::before, .ablauf[open] summary::before { background-size: 9px 2px, 2px 0, auto; }
+  .frage summary:hover::before, .ablauf summary:hover::before { background-color: color-mix(in srgb, var(--teal) 22%, transparent); }
+  .frage summary:focus-visible, .ablauf summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
   .frage details p { margin-top: 10px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; max-width: 72ch; }
 
   /* ---- Stand ---- */
@@ -86,7 +95,6 @@
   .sb li b { color: var(--ink); font-weight: 700; }
 
   .ablauf { margin-top: 10px; }
-  .ablauf summary { cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--teal); }
   .ablauf dl { margin: 10px 0 0; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 6px 14px; font-size: 13px; }
   @media (max-width: 640px) { .ablauf dl { grid-template-columns: minmax(0, 1fr); } .ablauf dd { margin-bottom: 6px; } }
   .ablauf dt { font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
