@@ -73,7 +73,8 @@
         ['2026-11-e1-kurzfragebogen-lehrpersonen.html', 'Kurzfragebogen Lehrpersonen'],
         ['2026-11-e1-leitfaden-gruppeninterview.html', 'Leitfaden Gruppeninterview'],
         ['2026-11-e1-kartenaufgabe.html', 'Kartenaufgabe'],
-        ['2026-11-e1-fragebogen-eltern.html', 'Fragebogen Erziehungsberechtigte'] ] } ] }
+        ['2026-11-e1-fragebogen-eltern.html', 'Fragebogen Eltern · 5. Schulstufe'],
+        ['2026-11-e1-fragebogen-eltern-4a.html', 'Fragebogen Eltern · 8. Schulstufe'] ] } ] }
   ];
 
   // ---- Pfade ---------------------------------------------------------------

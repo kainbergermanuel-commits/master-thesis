@@ -14,12 +14,12 @@ Bewusst kuratiert: Rohnotizen, Quellenbewertungen und private Vorbereitungen
 liegen separat im lokalen Arbeitsordner und werden nicht 1:1 hierher
 übernommen – hier stehen nur präsentable, abgeschlossene Inhalte.
 
-## Stand (02.11.2026)
+## Stand (09.11.2026)
 
 | | |
 |---|---|
-| **Phase** | Feldphase: Erhebung 1 vorbereitet, Durchführung im November 2026 |
-| **Seiten** | 33 (Startseite, 27 Dokumente, 5 Instrumentenseiten unter `docs/`) |
+| **Phase** | Feldphase: Erhebung 1 in beiden Settings, Einwilligungsrunde läuft, Interviews ab 17.11., Gruppeninterviews am 02. und 09.12.2026 |
+| **Seiten** | 36 (Startseite, 29 Dokumente, 6 Instrumentenseiten unter `docs/`) |
 | **Mappe** | 58 Entwurfsdokumente als Markdown unter `mappe/` |
 | **Literaturbestand** | 52 aktive Quellen, einzeln bewertet, in zehn Kategorien; Lückenanalyse für den Theorieteil abgeschlossen |
 | **Forschungsfrage** | dreimal präzisiert, am 17.08.2026 mit der Betreuung abgestimmt |
