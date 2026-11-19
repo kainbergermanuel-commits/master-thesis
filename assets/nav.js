@@ -70,11 +70,13 @@
         ['2026-08-schulstart-mappe.html', 'Dokumentenmappe Schulstart'] ] },
       { name: 'Instrumente Erhebung 1', items: [
         ['2026-11-e1-leitfaden-lehrpersonen.html', 'Leitfaden Lehrpersonen'],
+        ['2026-11-e1-probeinterview-lehrpersonen.html', 'Probeinterview Lehrpersonen'],
         ['2026-11-e1-kurzfragebogen-lehrpersonen.html', 'Kurzfragebogen Lehrpersonen'],
         ['2026-11-e1-leitfaden-gruppeninterview.html', 'Leitfaden Gruppeninterview'],
         ['2026-11-e1-kartenaufgabe.html', 'Kartenaufgabe'],
         ['2026-11-e1-fragebogen-eltern.html', 'Fragebogen Eltern · 5. Schulstufe'],
-        ['2026-11-e1-fragebogen-eltern-4a.html', 'Fragebogen Eltern · 8. Schulstufe'] ] } ] }
+        ['2026-11-e1-fragebogen-eltern-4a.html', 'Fragebogen Eltern · 8. Schulstufe'],
+        ['2026-11-e1-kategorienhandbuch.html', 'Kategorienhandbuch'] ] } ] }
   ];
 
   // ---- Pfade ---------------------------------------------------------------

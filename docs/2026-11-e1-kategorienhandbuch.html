@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<script>/* Darstellung vor dem ersten Zeichnen setzen, sonst blitzt die falsche Fassung auf. Standard: hell. */try{var t=localStorage.getItem("mt-theme");if(t==="dark"||t==="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kategorienhandbuch · Erhebung 1 · Master-Thesis ClassHaven</title>
+<meta name="description" content="Kategorienhandbuch der Erhebung 1: fünf deduktive Hauptkategorien aus den Leitfäden, Codierregeln, Codierhilfen und die Zuordnung jeder Frage über drei Perspektiven.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesque:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/instrument.css">
+<style>
+  /* Zweispaltige Steckbrief-Tabellen: keine Mindestbreite, damit sie auf dem Handy nicht seitlich scrollen. */
+  .doc table.kv { min-width: 0; }
+  .doc table.kv td:first-child { width: 150px; }
+  /* Auf dem Handy stapeln: Bezeichnung über dem Inhalt statt zweier schmaler Spalten. */
+  @media (max-width: 560px) {
+    .doc table.kv tr { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .doc table.kv td { display: block; width: auto !important; padding: 2px 0; border: 0; }
+  }
+  .doc section { scroll-margin-top: 80px; }
+  .doc h2.ih { font-size: 19px; margin-top: 38px; }
+  .doc section:first-of-type h2.ih { margin-top: 18px; }
+  .doc .kid { font-family: var(--mono, ui-monospace, monospace); font-size: 12px; }
+</style>
+<script src="../assets/nav.js" defer></script>
+<script src="../assets/toc.js" defer></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a href="2026-11-erhebung-1.html" class="backlink">
+      <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Erhebung 1
+    </a>
+    <div class="brand">
+      <span class="glyph"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16M4 12h10M4 19h7"/><circle cx="18" cy="17" r="3"/></svg></span>
+      Kategorienhandbuch
+    </div>
+    <div class="legend"><span class="chip mid">v0.6 · 19.11.2026</span></div>
+  </div>
+</div>
+
+<div class="wrap wrap-wide">
+  <header class="hero">
+    <div class="eyebrow">Erhebung 1 · Auswertung</div>
+    <h1>Kategorienhandbuch</h1>
+    <p class="lede">Wie die Antworten aus drei Perspektiven codiert werden · fünf Hauptkategorien, ihre Regeln und die Zuordnung jeder Frage</p>
+  </header>
+
+  <article class="doc">
+<p class="im">Stand v0.6 vom 19.11.2026, abgestimmt auf den <a href="2026-11-e1-leitfaden-lehrpersonen.html">Leitfaden Lehrpersonen v0.7</a>. Gerüst vor der Erhebung: Definitionen, Abgrenzungen und Codierhilfen stehen, Ankerbeispiele folgen nach der ersten Welle. Die Seite bildet die Arbeitsfassung im privaten Ordner ab; Verweise auf interne Dateien sind durch Links ersetzt.</p>
+
+<div class="box">
+<p class="il">Auf einen Blick</p>
+<p><span class="pk">·  </span><strong>Verfahren:</strong> inhaltlich strukturierende qualitative Inhaltsanalyse nach Kuckartz und Rädiker (2022).</p>
+<p><span class="pk">·  </span><strong>Hauptkategorien deduktiv</strong> aus den Blöcken der Leitfäden (ebd., S. 137), <strong>Subkategorien induktiv</strong> am Material.</p>
+<p><span class="pk">·  </span><strong>Kern-IDs</strong> verbinden jede Frage mit ihrer Unterfrage, ihrer Kategorie und den passenden Fragen der anderen beiden Perspektiven.</p>
+<p><span class="pk">·  </span>Codiert wird, was die Befragten <strong>der App zuschreiben</strong>, nicht, was die App bewirkt.</p>
+</div>
+
+<section id="zuordnung">
+<h2 class="ih">1 · Von der Forschungsfrage zu den Kategorien</h2>
+<p>Die <a href="2026-07-forschungsdesign.html">Forschungsfrage</a> hat vier Unterfragen. U1 bis U3 werden erhoben, U4 ist eine Ableitungsfrage. Jede Unterfrage hat in allen drei Instrumenten einen eigenen Block. Aus jedem Block ist eine Hauptkategorie hergeleitet: Ändert sich ein Block, ändert sich die Kategorie mit.</p>
+<div class="tw"><table class="it">
+<tr><th><p>Unterfrage</p></th><th><p>Hauptkategorie</p></th><th><p>Lehrpersonen</p></th><th><p>Schüler*innen</p></th><th><p>Eltern</p></th></tr>
+<tr><td><p><strong>U1</strong> Nutzung und Aneignung</p></td><td><p><a href="#k1">K1</a> Nutzungspraxis und Aneignung</p></td><td><p>Block 1</p></td><td><p>Block 1 mit Kartenaufgabe</p></td><td><p>F-Neues, F-Eigenweg</p></td></tr>
+<tr><td><p><strong>U2</strong> zugeschriebene Wirkung</p></td><td><p><a href="#k2">K2</a> zugeschriebene Veränderungen<br><a href="#k3">K3</a> Grenzen, Belastungen, Nebenwirkungen</p></td><td><p>Block 2</p></td><td><p>Block 2</p></td><td><p>F-Kontakt, F-Hausübung, F-Bescheid, F-Misslingen, F-Gelingen</p></td></tr>
+<tr><td><p><strong>U3</strong> Vergleichshorizont und Akzeptanz</p></td><td><p><a href="#k4">K4</a> Vergleichshorizont und Akzeptanz</p></td><td><p>Block 3</p></td><td><p>Block 3</p></td><td><p>F-Vergleich, F-Rat</p></td></tr>
+<tr><td><p><strong>U4</strong> Folgerungen für Leitung und Entwicklung <em>(Ableitung)</em></p></td><td><p><a href="#k5">K5</a> Bedingungen von Zuständigkeit und Fortbestand</p></td><td><p>Schlussteil</p></td><td><p>Schluss</p></td><td><p>F-Ändern</p></td></tr>
+</table></div>
+<p>Die Instrumente im Wortlaut: <a href="2026-11-e1-leitfaden-lehrpersonen.html">Leitfaden Lehrpersonen</a> (mit der vollständigen Kern-ID-Tabelle), <a href="2026-11-e1-leitfaden-gruppeninterview.html">Leitfaden Gruppeninterview</a>, <a href="2026-11-e1-fragebogen-eltern.html">Elternbogen 5. Schulstufe</a> und <a href="2026-11-e1-fragebogen-eltern-4a.html">8. Schulstufe</a>.</p>
+</section>
+
+<section id="regeln">
+<h2 class="ih">2 · Regeln für das Codieren</h2>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Material</strong></p></td><td><p>Transkripte der vier Lehrpersonen-Interviews (LP01 bis LP04) und der zwei Gruppeninterviews (G5-1, G8-1); abgetippte Elternbögen</p></td></tr>
+<tr><td><p><strong>Analyseeinheit</strong></p></td><td><p>das Interview je Lehrperson, die <strong>Gruppe</strong> je Gruppeninterview, der Bogen je Kennung</p></td></tr>
+<tr><td><p><strong>Codiereinheit</strong></p></td><td><p>eine Sinneinheit: mindestens ein vollständiger Gedanke, ohne Umfeld verständlich. Bei Gruppen gehört die Aushandlung dazu, wenn sie Teil des Gedankens ist</p></td></tr>
+<tr><td><p><strong>Mehrfach&shy;codierung</strong></p></td><td><p>erlaubt, wenn eine Stelle zwei Hauptkategorien trägt (typisch K2 und K3)</p></td></tr>
+<tr><td><p><strong>Kern-ID</strong></p></td><td><p>Pflicht: Jede codierte Stelle trägt die ID ihrer Frage (L-, G-, F-). Darüber werden die drei Perspektiven nebeneinandergelegt</p></td></tr>
+<tr><td><p><strong>Nicht codiert</strong></p></td><td><p>Interviewerfragen, ausgeschlossene Stellen, Forschungstagebuch, Abdeckungsprotokoll und das <a href="2026-11-e1-probeinterview-lehrpersonen.html">Probeinterview</a>. Das Probeinterview liefert auch keine Ankerbeispiele</p></td></tr>
+</table></div>
+
+<p class="il">Vier Grundregeln</p>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Zuschreibung statt Wirkung</strong></p></td><td><p>„Seit der App sind die Hausübungen vollständiger“ wird als <em>zugeschriebene</em> Veränderung codiert (K2), nicht als Befund über Hausübungen.</p></td></tr>
+<tr><td><p><strong>Valenz: K2 oder K3</strong></p></td><td><p>Es entscheidet die Bewertung <strong>der Person</strong>, nicht die der Codierenden. „Es kommen mehr Nachrichten“ ohne Bewertung → K2.1 mit Memo „Valenz offen“; mit Ärger oder Last → K3.3.</p></td></tr>
+<tr><td><p><strong>Restkategorien</strong></p></td><td><p>Jede Hauptkategorie hat „Sonstiges“ (K1.0 bis K5.0), dazu K0 für Stellen ohne Hauptkategorie. Hier taucht Neues zuerst auf (Kuckartz &amp; Rädiker, 2022, S. 63, 80).</p></td></tr>
+<tr><td><p><strong>Leere Kategorien</strong></p></td><td><p>Bleibt eine Kategorie in einer Perspektive leer, ist das ein Befund und wird so berichtet, nicht durch Hineinlesen gefüllt.</p></td></tr>
+</table></div>
+
+<p class="il">Fallvariablen</p>
+<p>Jede Stelle wird zugeordnet nach Perspektive (Lehrperson, Gruppe, Eltern), <strong>Klasse</strong> (1b, 4a, beide, unklar) und Durchgang (1 oder 2). Bei Lehrpersonen zusätzlich: in beiden Klassen ja oder nein.</p>
+<p>Bei Eltern kommen sechs Kurzangaben dazu: Form (Papier, online), Gerät, Häufigkeit, Benachrichtigung, Sicherheit im Umgang und Zuständigkeit in der Familie. Sie bilden digitales Kapital nach Ragnedda (2018) ab, Zugang und Nutzung; den Ertrag zeigen erst die offenen Antworten (<a href="2026-11-theoretische-anker.html#a11">Anker 11</a>). Berichtet werden sie nie als Häufigkeit.</p>
+</section>
+
+<section id="k1">
+<h2 class="ih">K1 · Nutzungspraxis und Aneignung <span class="chip phase">U1</span></h2>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Definition</strong></p></td><td><p>Wie die App im Alltag verwendet wird: welche Bereiche, wann, wo, auf welchem Gerät, von wem. Routinen, eigene Umwege, Nichtnutzung, Parallelwege, Einstieg.</p></td></tr>
+<tr><td><p><strong>Abgrenzung</strong></p></td><td><p>Bewertungen der Nutzung → K3 oder K4. Zugeschriebene Veränderungen → K2. Vergleich mit früheren Systemen → K4.</p></td></tr>
+<tr><td><p><strong>Subkategorien</strong></p></td><td><p>K1.1 genutzte Bereiche · K1.2 Nichtnutzung · K1.3 Routinen · K1.4 eigene Umwege · K1.5 Parallelwege · K1.6 Einstieg · K1.7 Weg der Information in der Familie</p></td></tr>
+<tr><td><p><strong>Material</strong></p></td><td><p><span class="kid">L‑Alltag, L‑1a, L‑1c, L‑Kinderweg</span> · <span class="kid">G‑Nutzung, G‑Tricks</span>, Kartenaufgabe · <span class="kid">F‑Neues, F‑Eigenweg</span></p></td></tr>
+</table></div>
+<p class="il">Codierhilfen</p>
+<ul>
+<li><strong>K1.4 und K1.5, Abweichung von der Funktionslogik:</strong> Den Vergleich zieht die Auswertung, nicht die Befragten. Grundlage ist der <a href="2026-07-app-systemueberblick.html">Systemüberblick der App</a> im Stand, den das <a href="2026-11-versionsprotokoll.html">Versionsprotokoll</a> für den Erhebungszeitpunkt ausweist.</li>
+<li><strong>K1.7 aus Sicht der Kinder:</strong> Im Gruppeninterview wird danach nicht gefragt (Schutzregel Mitteilungsheft). Codiert wird nur, was Kinder von sich aus ansprechen, ohne Inhalte aus dem Heft. Die Kinderseite kommt aus Eltern- und Lehrpersonensicht (Grant, 2011, S. 297).</li>
+<li><strong>Kartenaufgabe:</strong> Die Aushandlung wird codiert, das Foto der gelegten Karten nicht.</li>
+</ul>
+<p class="im">Ankerbeispiel: nach Erhebung 1</p>
+</section>
+
+<section id="k2">
+<h2 class="ih">K2 · Zugeschriebene Veränderungen <span class="chip phase">U2</span></h2>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Definition</strong></p></td><td><p>Veränderungen in <strong>Information, Absprachen oder Beteiligung</strong>, die die Befragten der App zuschreiben, positiv oder neutral.</p></td></tr>
+<tr><td><p><strong>Abgrenzung</strong></p></td><td><p>Negative Zuschreibungen und Belastungen → K3. Beschreibung ohne zugeschriebene Veränderung → K1.</p></td></tr>
+<tr><td><p><strong>Subkategorien</strong></p></td><td><p>K2.1 Information · K2.2 Absprachen und Fristen (Verbindlichkeit) · K2.3 Beteiligung · K2.4 Rollen zuhause</p></td></tr>
+<tr><td><p><strong>Material</strong></p></td><td><p><span class="kid">L‑Info, L‑2a+, L‑2b, L‑Selbst</span> · <span class="kid">G‑Hausübung, G‑Beteiligung, G‑2b</span> · <span class="kid">F‑Kontakt, F‑Bescheid, F‑Hausübung, F‑Gelingen</span></p></td></tr>
+</table></div>
+<p class="il">Codierhilfen</p>
+<ul>
+<li><strong>K2.1 Information:</strong> Menge und Art getrennt halten. „Mehr Nachrichten“ ist nicht „besserer Kontakt“ (Adams &amp; Christenson, 2000, S. 477; <a href="2026-11-theoretische-anker.html#a15">Anker 15</a>).</li>
+<li><strong>K2.2 Verbindlichkeit:</strong> Der Begriff steht in keiner Frage, dient aber dem Codieren. Anlass im Elternbogen: die Hilfe „Absprachen und Fristen“ in F-Kontakt, dazu F-Hausübung und F-Bescheid.</li>
+<li><strong>K2.3 Beteiligung:</strong> Wo eine Stelle auf dem Kontinuum nach Goodall und Montgomery (2014, S. 401–405) liegt, steht im Memo, nicht im Code: Information empfangen, auf Anlass der Schule handeln, das Lernen aus eigenem Antrieb mitgestalten.</li>
+<li><strong>K2.3 bei den Gruppen:</strong> Mitgestaltung über Rollen in der App und Mitreden darüber, was hineinkommt. Engagement nach Fredricks et al. (2004) ist eine Lesart im Memo, kein Code.</li>
+<li><strong>K2.4 Rollen zuhause:</strong> Autonomieunterstützung, Kontrolle, Einmischung und kognitive Beteiligung nach Gonida und Cortina (2014) sind ein Suchraster. Bestätigen und Abhaken gelten nicht von vornherein als Kontrolle.</li>
+</ul>
+<div class="box calm">
+<p class="il">Codierregel K2.4 · seit v0.6 mit Selbstständigkeit</p>
+<p>K2.4 nur, wenn die Person ihre <strong>eigene</strong> Rolle beschreibt. Was Lehrpersonen über Familien sagen, ist Fremdbeschreibung → K2.3 mit Memo „Fremdbeschreibung, Rolle“. Ihre eigene Rolle bei Absprachen (wer kontrolliert, wer erinnert) → K2.2. Wird das Verhältnis als Last beschrieben, etwa weil Eltern übernehmen, was die Kinder selbst tun sollten → K3, vorerst K3.0. <a href="2026-11-theoretische-anker.html#a12">Anker 12</a> sensibilisiert, gibt aber keine Kategorie vor.</p>
+</div>
+<ul>
+<li><strong>L-2b, wichtiger Kontakt (seit v0.6):</strong> Die Frage lässt den Weg offen. Kontakt außerhalb der App → K1.5, im Vergleich mit der App → K4.2, Anlass und Qualität → K2.1.</li>
+</ul>
+<p class="im">Ankerbeispiel: nach Erhebung 1</p>
+</section>
+
+<section id="k3">
+<h2 class="ih">K3 · Grenzen, Belastungen, Nebenwirkungen <span class="chip phase">U2</span></h2>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Definition</strong></p></td><td><p>Schwierigkeiten, Mehraufwand, Druck, Ärger, Erreichbarkeit, Überforderung, Ausschluss, technische Grenzen und unerwünschte Folgen, die der App zugeschrieben werden.</p></td></tr>
+<tr><td><p><strong>Abgrenzung</strong></p></td><td><p>Kritik an Schule oder Hausübungen ohne App-Bezug → nicht codieren. Änderungswünsche → K4.5.</p></td></tr>
+<tr><td><p><strong>Subkategorien</strong></p></td><td><p>K3.1 Mehraufwand · K3.2 Druck und Vergleich (Flammen, Abenteuer) · K3.3 Erreichbarkeit · K3.4 Teilhabe und Ausschluss · K3.5 Technik · K3.6 Sichtbarkeit</p></td></tr>
+<tr><td><p><strong>Material</strong></p></td><td><p><span class="kid">L‑2a, L‑2c, L‑Sicht, L‑S2</span> · <span class="kid">G‑2a, G‑Dauerärger</span>, Check „wer was sieht“ · <span class="kid">F‑Misslingen</span></p></td></tr>
+</table></div>
+<p class="il">Codierhilfen</p>
+<ul>
+<li><strong>K3.3 Erreichbarkeit (seit v0.6, aus L-2c):</strong> Codiert werden erlebte Nachrichten und die Erwartungen, die die Person dahinter vermutet, mit Memo, von wem sie kommen: Eltern, Kollegium, Schule, sie selbst. Sensibilisiert durch <a href="2026-11-theoretische-anker.html#a10">Anker 10</a> (Yang et al., 2025) und <a href="2026-11-theoretische-anker.html#a13">Anker 13</a> (Bauwens et al., 2020).</li>
+<li><strong>K3.3, wenn nichts belastet:</strong> Ein Moment ohne Last („da war nichts“) und eine gesetzte Grenze („ich schalte ab“) → K1.3, die Grenze mit Memo „Grenze“. Wer eine Regelung durch die Schule verlangt → zusätzlich K5.</li>
+<li><strong>K3.4 Teilhabe (seit v0.6, aus L-S2):</strong> Zugang, Nutzung und Ertrag nach Ragnedda (2018, nach Addi-Raccah, 2024) stehen als Dimension im Memo, nicht als Subkategorie. Merkmale, die eine Familie erkennbar machen, werden schon beim Transkribieren entfernt.</li>
+<li><strong>K3.6 Sichtbarkeit:</strong> wer was sieht, sich beobachtet fühlen, zu viel oder zu wenig Einblick (Corser et al., 2025; Gouseti &amp; Shaw, 2026). Abgrenzung: K3.2 ist Druck durch Vergleich, K3.6 ist Einsicht. Anlass nur als Check (Gruppen, L-Sicht); im Elternbogen nur spontane Nennungen.</li>
+</ul>
+<p class="im">Ankerbeispiel: nach Erhebung 1</p>
+</section>
+
+<section id="k4">
+<h2 class="ih">K4 · Vergleichshorizont und Akzeptanz <span class="chip phase">U3</span></h2>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Definition</strong></p></td><td><p>Vergleiche mit früheren oder parallelen Wegen (Volksschule, SchoolFox, WebUntis, Papier, Messenger), Bewertungen und Empfehlungen, Bedingungen für Weiternutzung oder Abbruch, Änderungswünsche.</p></td></tr>
+<tr><td><p><strong>Abgrenzung</strong></p></td><td><p>Nutzung eines Parallelwegs ohne Vergleich → K1.5. Bedingungen auf Ebene der Schule statt der eigenen Haltung → K5.</p></td></tr>
+<tr><td><p><strong>Subkategorien</strong></p></td><td><p>K4.1 frühere Wege · K4.2 parallele Wege (vor allem 4a) · K4.3 Empfehlung und Bewertung · K4.4 Bedingungen des Dabeibleibens · K4.5 Änderungswünsche</p></td></tr>
+<tr><td><p><strong>Material</strong></p></td><td><p><span class="kid">L‑Früher, L‑3a, L‑3b, L‑S1b</span> · <span class="kid">G‑Früher, G‑3a, G‑S1</span> · <span class="kid">F‑Vergleich, F‑Rat, F‑Ändern</span></p></td></tr>
+</table></div>
+<p class="il">Codierhilfen</p>
+<ul>
+<li><strong>K4.4 Maßstäbe:</strong> Was den Befragten wichtig ist, wird hier codiert (Nützlichkeit, Bedienbarkeit, persönlicher Kontakt, Übersicht, Aufwand). Davis (1989) sensibilisiert nur: Ob Nützlichkeit schwerer wiegt als Bedienbarkeit, wird beobachtet, nicht geprüft.</li>
+<li><strong>K4.5 Änderungswünsche:</strong> gehen zusätzlich in die Wunschliste beim <a href="2026-11-versionsprotokoll.html">Versionsprotokoll</a>. Sie bleiben Material, eine Umsetzung ist nicht zugesagt.</li>
+<li><strong>Zwei Klassen (3b):</strong> Aussagen zu beiden Klassen → K4.1 oder K4.2 und Fallvariable „beide“. Für Ursachen eines Unterschieds gibt es keinen Code.</li>
+</ul>
+<p class="im">Ankerbeispiel: nach Erhebung 1</p>
+</section>
+
+<section id="k5">
+<h2 class="ih">K5 · Bedingungen von Zuständigkeit und Fortbestand <span class="chip phase">Material für U4</span></h2>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Definition</strong></p></td><td><p>Was an der Schule geregelt sein müsste, wer zuständig ist, was Fortbestand, Ausweitung oder ein geordnetes Ende braucht, was die Schule für alle Familien beachten sollte.</p></td></tr>
+<tr><td><p><strong>Abgrenzung</strong></p></td><td><p>Persönliche Bedingungen → K4.4. K5 betrifft die <strong>Organisation</strong>. Die Beschreibung der Familien aus S2 → K3.4; nach K5 nur, was die Person daraus für die Schule ableitet.</p></td></tr>
+<tr><td><p><strong>Subkategorien</strong></p></td><td><p>induktiv, keine Vorgabe</p></td></tr>
+<tr><td><p><strong>Material</strong></p></td><td><p><span class="kid">L‑S1, L‑Intern, L‑Ziel, L‑S1b</span> · <span class="kid">G‑S1</span> · <span class="kid">F‑Ändern</span>, jeweils wo es den Einsatz durch die Schule betrifft</p></td></tr>
+</table></div>
+<div class="box calm">
+<p class="il">Codierregel Personenbindung · seit v0.6</p>
+<p>Antworten, die den Fortbestand an den Entwickler binden („du machst das eh“), werden K5 codiert, mit Memo „Personenbindung“. Sie sind kein Ausfall, sondern Material: Sie zeigen die ungeregelte Zuständigkeit, mit der das Exposé die Lücke begründet. Zugleich können sie Informant Bias sein (Mercer, 2007). Im Memo steht deshalb, ob die Person nach der Wiederholung des Szenarios S1 zu Bedingungen kam.</p>
+</div>
+<ul>
+<li><strong>L-Ziel:</strong> wofür die App da sein soll, sensibilisiert durch Ruloff und Petko (2021): ziel- statt werkzeuggetriebene Digitalisierung.</li>
+<li><strong>U4 ist eine Ableitungsfrage.</strong> K5 liefert Material; die Folgerungen zieht die Arbeit, nicht die Befragten.</li>
+</ul>
+<p class="im">Ankerbeispiel: nach Erhebung 1</p>
+</section>
+
+<section id="induktiv">
+<h2 class="ih">Induktive Kategorienbildung</h2>
+<div class="tw"><table class="it kv">
+<tr><td><p><strong>Wann</strong></p></td><td><p>im ersten Codierdurchgang im Jänner, nachdem alle Stellen den Hauptkategorien zugeordnet sind</p></td></tr>
+<tr><td><p><strong>Wie</strong></p></td><td><p>nach den sechs Stationen der Guideline für induktive Kategorienbildung (Kuckartz &amp; Rädiker, 2022, Kap. 3), begonnen an einer Teilmenge aus <strong>beiden</strong> Klassen und <strong>allen</strong> drei Perspektiven</p></td></tr>
+<tr><td><p><strong>Was zu erwarten ist</strong></p></td><td><p>vor allem neue Subkategorien und Dimensionen, kaum neue Hauptkategorien</p></td></tr>
+<tr><td><p><strong>Elternbögen</strong></p></td><td><p>nicht allein: Wegen kleiner Fallzahl und kurzer Antworten werden Subkategorien aus den Bögen an den Interviews geprüft (information power, Malterud et al., 2016)</p></td></tr>
+<tr><td><p><strong>Dokumentation</strong></p></td><td><p>jede neue Subkategorie mit Memo: Datum, Ankerstelle, Abgrenzung, Perspektive. Im Mai wird geprüft, ob sie tragen</p></td></tr>
+</table></div>
+<p><strong>Kandidaten aus dem <a href="2026-11-e1-probeinterview-lehrpersonen.html#nachtrag">Probeinterview</a>:</strong> Selbstständigkeit gegen Kontrolle (seit v0.7 als Check im Leitfaden) und sozialer Druck (an K3.2 zu prüfen). Beide sind sensibilisierende Konzepte, keine vorgegebenen Subkategorien; ob sie tragen, entscheidet das Material.</p>
+</section>
+
+<section id="absicherung">
+<h2 class="ih">Absicherung</h2>
+<ul>
+<li><strong>Intracoder-Durchgang</strong> nach drei bis vier Wochen, ohne Sicht auf die erste Codierung. Kuckartz und Rädiker (2024, S. 50) halten eine zweite codierende Person für verzichtbar, wenn die Hauptkategorien nahezu eins zu eins aus dem Leitfaden stammen.</li>
+<li><strong>Konsensdurchgang mit der Betreuung</strong> an ausgewählten Stellen der Feincodierung, also bei den Subkategorien. Dort empfehlen dieselben Autoren Teamarbeit (S. 70 f.).</li>
+<li>Jede Änderung am Handbuch mit Datum und Grund im Protokoll unten.</li>
+</ul>
+<p class="im">Die Methodenliteratur steht im <a href="2026-07-literaturverzeichnis.html#methodik-analyse">Literaturverzeichnis, Kategorie 10</a>.</p>
+</section>
+
+<section id="aenderungen">
+<h2 class="ih">Änderungen</h2>
+<div class="tw"><table class="it">
+<tr><th><p>Datum</p></th><th><p>Fassung und Änderung</p></th><th><p>Anlass</p></th></tr>
+<tr><td><p>19.11.2026</p></td><td><p><strong>v0.6:</strong> Codierhilfen zu Selbstständigkeit (K2.2, K2.3, Valenz K3), zu L-2b, zu K3.3 aus L-2c und zu K3.4 aus L-S2; K5 an das Szenario S1 angepasst, Codierregel Personenbindung; Material je Kategorie; Probeinterview wird nicht codiert</p></td><td><p><a href="2026-11-e1-probeinterview-lehrpersonen.html">Probeinterview</a>, Leitfaden Lehrpersonen v0.7</p></td></tr>
+<tr><td><p>09.11.2026</p></td><td><p><strong>v0.5 und v0.5a:</strong> K3.6 mit Anlass auch bei Lehrpersonen (L-Sicht), K1.7 über L-Kinderweg, K5-Material aus L-S1, L-Intern, L-Ziel und L-S1b</p></td><td><p>Prüfung Leitfaden Lehrpersonen v0.6</p></td></tr>
+<tr><td><p>09.11.2026</p></td><td><p><strong>v0.4:</strong> Kern-IDs als Codierpflicht, Codierhilfe K1.7 aus Sicht der Kinder, Codierhilfe K2.3 für Gruppen</p></td><td><p>Prüfung Leitfaden Gruppeninterview v0.6</p></td></tr>
+<tr><td><p>09.11.2026</p></td><td><p><strong>v0.3:</strong> Restkategorien, Regel für leere Kategorien, Valenzregel K2/K3, Codierhilfe K1.4/K1.5, induktives Vorgehen</p></td><td><p>Prüfung Elternbogen v1.0</p></td></tr>
+<tr><td><p>09.11.2026</p></td><td><p><strong>v0.2:</strong> Fallvariablen der Eltern (digitales Kapital), K1.7, K3.6, Codierhilfen K2.1, K2.3, K2.4, K4.4</p></td><td><p>Neukonzeption Elternbogen v1.0</p></td></tr>
+<tr><td><p>05.11.2026</p></td><td><p><strong>v0:</strong> angelegt</p></td><td><p>Vorbereitung Erhebung 1</p></td></tr>
+</table></div>
+<p class="im">Alle Änderungen an den Instrumenten stehen im <a href="2026-11-erhebung-1.html#protokoll">Änderungsprotokoll der Erhebung 1</a>.</p>
+</section>
+  </article>
+
+  <div class="foot">
+    <span>Kategorienhandbuch · v0.6 · 19.11.2026 · Erhebung 1</span>
+    <span>Master-Thesis ClassHaven · PH Niederösterreich</span>
+  </div>
+</div>
+
+</body>
+</html>
